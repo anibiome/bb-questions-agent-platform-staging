@@ -1,0 +1,661 @@
+[
+  {
+    "id": "q_aaq",
+    "version": "1",
+    "name": "AAQ",
+    "domains": [
+      "flexibility"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_affect_balance_scale",
+    "version": "1",
+    "name": "Affect Balance Scale",
+    "domains": [
+      "mood"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_authenticity_scale",
+    "version": "1",
+    "name": "Authenticity Scale",
+    "domains": [
+      "authenticity"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_bif2",
+    "version": "1",
+    "name": "BIF2",
+    "domains": [
+      "personality"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_bis",
+    "version": "1",
+    "name": "BIS",
+    "domains": [
+      "sleep"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_bpnsnf",
+    "version": "1",
+    "name": "BPNSNF",
+    "domains": [
+      "needs_satisfaction"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_brs",
+    "version": "1",
+    "name": "BRS",
+    "domains": [
+      "resilience"
+    ],
+    "license": "open_access",
+    "source": "Smith BW et al. Int J Behav Med. 2008;15(3):194-200"
+  },
+  {
+    "id": "q_boundaries_assessment",
+    "version": "1",
+    "name": "Boundaries Assessment",
+    "domains": [
+      "boundaries"
+    ],
+    "license": "internal",
+    "source": null
+  },
+  {
+    "id": "q_cams_r",
+    "version": "1",
+    "name": "CAMS-R",
+    "domains": [
+      "mindfulness"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_cfq",
+    "version": "1",
+    "name": "CFQ",
+    "domains": [
+      "cognitive_failures"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_cfs",
+    "version": "1",
+    "name": "CFS",
+    "domains": [
+      "fatigue"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_cope_inventory",
+    "version": "1",
+    "name": "Cope Inventory",
+    "domains": [
+      "coping"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_coping_self_efficacy_scale",
+    "version": "1",
+    "name": "Coping Self-Efficacy Scale",
+    "domains": [
+      "coping"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_dass_21_depression",
+    "version": "1",
+    "name": "DASS-21-depression",
+    "domains": [
+      "depression"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_dass_21_stress",
+    "version": "1",
+    "name": "DASS-21-stress",
+    "domains": [
+      "stress",
+      "anxiety"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_dqlq",
+    "version": "1",
+    "name": "DQLQ",
+    "domains": [
+      "gi_quality_of_life"
+    ],
+    "license": "academic",
+    "source": null
+  },
+  {
+    "id": "q_ds_14",
+    "version": "1",
+    "name": "DS-14",
+    "domains": [
+      "type_d_personality"
+    ],
+    "license": "academic",
+    "source": null
+  },
+  {
+    "id": "q_day_to_day_experiences",
+    "version": "1",
+    "name": "Day-to-Day Experiences",
+    "domains": [
+      "mindfulness"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_erq",
+    "version": "1",
+    "name": "ERQ",
+    "domains": [
+      "emotion_regulation"
+    ],
+    "license": "open_access",
+    "source": "Gross JQ, John OP. J Pers Soc Psychol. 2003;85(2):348-62"
+  },
+  {
+    "id": "q_escq",
+    "version": "1",
+    "name": "ESCQ",
+    "domains": [
+      "emotional_competence"
+    ],
+    "license": "academic",
+    "source": null
+  },
+  {
+    "id": "q_fmi",
+    "version": "1",
+    "name": "FMI",
+    "domains": [
+      "mindfulness"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_gad_7",
+    "version": "1",
+    "name": "GAD-7",
+    "domains": [
+      "anxiety"
+    ],
+    "license": "open_access",
+    "source": "Spitzer RL et al. Arch Intern Med. 2006;166(10):1092-7"
+  },
+  {
+    "id": "q_gse",
+    "version": "1",
+    "name": "GSE",
+    "domains": [
+      "self_efficacy"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_gsrs_ibs",
+    "version": "1",
+    "name": "GSRS-IBS",
+    "domains": [
+      "gi_symptoms"
+    ],
+    "license": "academic",
+    "source": null
+  },
+  {
+    "id": "q_hads",
+    "version": "1",
+    "name": "HADS",
+    "domains": [
+      "anxiety",
+      "depression"
+    ],
+    "license": "commercial",
+    "source": null
+  },
+  {
+    "id": "q_harrill_self_esteem_inventory",
+    "version": "1",
+    "name": "Harrill Self-Esteem Inventory",
+    "domains": [
+      "self_esteem"
+    ],
+    "license": "internal",
+    "source": null
+  },
+  {
+    "id": "q_ibdq",
+    "version": "1",
+    "name": "IBDQ",
+    "domains": [
+      "ibd_quality_of_life"
+    ],
+    "license": "academic",
+    "source": null
+  },
+  {
+    "id": "q_ibs",
+    "version": "1",
+    "name": "IBS",
+    "domains": [
+      "gi_symptoms"
+    ],
+    "license": "academic",
+    "source": null
+  },
+  {
+    "id": "q_initial_scan",
+    "version": "1",
+    "name": "Initial Scan",
+    "domains": [
+      "screening"
+    ],
+    "license": "internal",
+    "source": null
+  },
+  {
+    "id": "q_mhc",
+    "version": "1",
+    "name": "MHC",
+    "domains": [
+      "positive_emotions"
+    ],
+    "license": "public_domain",
+    "source": null
+  },
+  {
+    "id": "q_mspss",
+    "version": "1",
+    "name": "MSPSS",
+    "domains": [
+      "social_support"
+    ],
+    "license": "open_access",
+    "source": "Zimet GD et al. J Pers Assess. 1988;52(1):30-41"
+  },
+  {
+    "id": "q_mind_age",
+    "version": "1",
+    "name": "Mind Age",
+    "domains": [
+      "cognition",
+      "growth"
+    ],
+    "license": "internal",
+    "source": null
+  },
+  {
+    "id": "q_multifactorial_memory_questionnaire",
+    "version": "1",
+    "name": "Multifactorial memory questionnaire",
+    "domains": [
+      "memory"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_panas_sf_negative",
+    "version": "1",
+    "name": "PANAS-SF-negative",
+    "domains": [
+      "negative_affect"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_panas_sf_positive",
+    "version": "1",
+    "name": "PANAS-SF-positive",
+    "domains": [
+      "positive_affect"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_paq",
+    "version": "1",
+    "name": "PAQ",
+    "domains": [
+      "alexithymia"
+    ],
+    "license": "academic",
+    "source": null
+  },
+  {
+    "id": "q_pgis",
+    "version": "1",
+    "name": "PGIS",
+    "domains": [
+      "personal_growth"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_pss",
+    "version": "1",
+    "name": "PSS",
+    "domains": [
+      "perceived_stress"
+    ],
+    "license": "open_access",
+    "source": "Cohen S et al. J Health Soc Behav. 1983;24(4):385-96"
+  },
+  {
+    "id": "q_qols_flanagan",
+    "version": "1",
+    "name": "QOLS Flanagan",
+    "domains": [
+      "quality_of_life"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_rs",
+    "version": "1",
+    "name": "RS",
+    "domains": [
+      "resilience"
+    ],
+    "license": "academic",
+    "source": null
+  },
+  {
+    "id": "q_rses",
+    "version": "1",
+    "name": "RSES",
+    "domains": [
+      "self_esteem"
+    ],
+    "license": "open_access",
+    "source": "Rosenberg M. Society and the adolescent self-image. 1965"
+  },
+  {
+    "id": "q_rumination",
+    "version": "1",
+    "name": "Rumination",
+    "domains": [
+      "rumination"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_ryff",
+    "version": "1",
+    "name": "Ryff",
+    "domains": [
+      "psychological_wellbeing"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_scl",
+    "version": "1",
+    "name": "SCL",
+    "domains": [
+      "somatization"
+    ],
+    "license": "academic",
+    "source": null
+  },
+  {
+    "id": "q_sias",
+    "version": "1",
+    "name": "SIAS",
+    "domains": [
+      "social_anxiety"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_sris",
+    "version": "1",
+    "name": "SRIS",
+    "domains": [
+      "self_reflection"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_ssq___isel",
+    "version": "1",
+    "name": "SSQ - ISEL",
+    "domains": [
+      "social_support"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_ucla_loneliness_scale",
+    "version": "1",
+    "name": "UCLA Loneliness scale",
+    "domains": [
+      "loneliness"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "id": "q_visceral_sensitivity_index",
+    "version": "1",
+    "name": "Visceral Sensitivity Index",
+    "domains": [
+      "visceral_sensitivity"
+    ],
+    "license": "open_access",
+    "source": null
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "alcohol"
+    ],
+    "id": "q_cardio_auditc",
+    "license": "free_validated",
+    "name": "AUDIT-C (Cardiometabolic Core)",
+    "source": "AUDIT-C",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "cardiovascular"
+    ],
+    "id": "q_cardio_ez_cvd",
+    "license": "free_validated",
+    "name": "EZ-CVD (Cardiometabolic Core)",
+    "source": "EZ-CVD public screener",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "diabetes"
+    ],
+    "id": "q_cardio_findrisc",
+    "license": "free_validated",
+    "name": "FINDRISC (Cardiometabolic Core)",
+    "source": "FINDRISC public screener",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "activity"
+    ],
+    "id": "q_cardio_ipaq",
+    "license": "free_validated",
+    "name": "IPAQ-SF (Cardiometabolic Core)",
+    "source": "IPAQ-SF",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "liver"
+    ],
+    "id": "q_cardio_lee_nafld",
+    "license": "free_validated",
+    "name": "Lee NAFLD (Cardiometabolic Core)",
+    "source": "Lee NAFLD screener",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "kidney"
+    ],
+    "id": "q_cardio_scored",
+    "license": "free_validated",
+    "name": "SCORED (Cardiometabolic Core)",
+    "source": "SCORED CKD screener",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "anxiety"
+    ],
+    "id": "q_demo_anxiety",
+    "license": "internal_demo",
+    "name": "Anxiety (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "energy"
+    ],
+    "id": "q_demo_energy",
+    "license": "internal_demo",
+    "name": "Energy (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "gi"
+    ],
+    "id": "q_demo_gi",
+    "license": "internal_demo",
+    "name": "GI Symptoms (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "mood"
+    ],
+    "id": "q_demo_mood",
+    "license": "internal_demo",
+    "name": "Mood (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "nutrition"
+    ],
+    "id": "q_demo_nutrition",
+    "license": "internal_demo",
+    "name": "Nutrition QoL (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "pain"
+    ],
+    "id": "q_demo_pain",
+    "license": "internal_demo",
+    "name": "Pain (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "resilience"
+    ],
+    "id": "q_demo_resilience",
+    "license": "internal_demo",
+    "name": "Resilience (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "sleep"
+    ],
+    "id": "q_demo_sleep",
+    "license": "internal_demo",
+    "name": "Sleep (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "social"
+    ],
+    "id": "q_demo_social",
+    "license": "internal_demo",
+    "name": "Social (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "stress"
+    ],
+    "id": "q_demo_stress",
+    "license": "internal_demo",
+    "name": "Stress (Demo)",
+    "source": null,
+    "version": "1"
+  }
+]

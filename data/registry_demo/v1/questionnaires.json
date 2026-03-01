@@ -1,0 +1,127 @@
+[
+  {
+    "domains": [
+      "mood"
+    ],
+    "id": "q_demo_mood",
+    "license": "internal_demo",
+    "name": "Mood (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "anxiety"
+    ],
+    "id": "q_demo_anxiety",
+    "license": "internal_demo",
+    "name": "Anxiety (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "sleep"
+    ],
+    "id": "q_demo_sleep",
+    "license": "internal_demo",
+    "name": "Sleep (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "energy"
+    ],
+    "id": "q_demo_energy",
+    "license": "internal_demo",
+    "name": "Energy (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "gi"
+    ],
+    "id": "q_demo_gi",
+    "license": "internal_demo",
+    "name": "GI Symptoms (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "pain"
+    ],
+    "id": "q_demo_pain",
+    "license": "internal_demo",
+    "name": "Pain (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "stress"
+    ],
+    "id": "q_demo_stress",
+    "license": "internal_demo",
+    "name": "Stress (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "social"
+    ],
+    "id": "q_demo_social",
+    "license": "internal_demo",
+    "name": "Social (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "nutrition"
+    ],
+    "id": "q_demo_nutrition",
+    "license": "internal_demo",
+    "name": "Nutrition QoL (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "resilience"
+    ],
+    "id": "q_demo_resilience",
+    "license": "internal_demo",
+    "name": "Resilience (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": ["vitality", "wellbeing"],
+    "id": "q_vit_who5",
+    "license": "open_access",
+    "name": "WHO-5 Well-Being Index",
+    "source": "WHO Collaborating Centre, Psychiatric Research Unit, Hillerod, Denmark",
+    "version": "1"
+  },
+  {
+    "domains": ["vitality", "energy"],
+    "id": "q_vit_sf36_vt",
+    "license": "public_domain",
+    "name": "SF-36 Vitality (RAND-36)",
+    "source": "Ware & Sherbourne, 1992; RAND Corporation",
+    "version": "1"
+  },
+  {
+    "domains": ["vitality", "fatigue"],
+    "id": "q_vit_promis_fatigue_7a",
+    "license": "open_access",
+    "name": "PROMIS Fatigue Short Form 7a",
+    "source": "HealthMeasures / Northwestern University",
+    "version": "1"
+  }
+]
+

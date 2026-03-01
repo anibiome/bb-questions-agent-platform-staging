@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# SQLite databases
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+
+# Demo / generated output
+output/
+!output/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Patent/IP (confidential)
+*PATENT*
+*patent*
+*COFOUNDER*
+*cofounder*

@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: questions_agent
+      POSTGRES_USER: qa_user
+      POSTGRES_PASSWORD: qa_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - qa_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U qa_user -d questions_agent"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  api:
+    build:
+      context: ..
+      dockerfile: prod/Dockerfile
+    env_file:
+      - .env.example
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ../data/registry_demo/v1:/app/registry/versions/v1:ro
+      - ../data/registry_demo/v2:/app/registry/versions/v2:ro
+      - ../data/registry_production/v3:/app/registry/versions/v3:ro
+      - ../data/policy_demo:/app/policy
+    restart: unless-stopped
+
+volumes:
+  qa_pg_data:

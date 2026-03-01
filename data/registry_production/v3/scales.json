@@ -1,0 +1,6329 @@
+[
+  {
+    "id": "scale_aaq",
+    "questionnaire_id": "q_aaq",
+    "version": "1",
+    "name": "AAQ",
+    "response_type": "likert_freq_1_7",
+    "min_items_required": 5,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "flexibility",
+      "audit:superseded"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 7.0,
+      "normalize_max": 49.0
+    },
+    "items": [
+      {
+        "item_id": "fw309p79y2V3oF57zt",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "G3Q0PoYbo4g95l0uW9",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "B0iINS9MMnEwfiTQGK",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oVt4D6F7zIKSTwjV02",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "FyhEv2k4549KfUeC47",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4F7XrntUEV02i1z6HH",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "aRro543TQD4WdnEgow",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_affect_balance_scale",
+    "questionnaire_id": "q_affect_balance_scale",
+    "version": "1",
+    "name": "Affect Balance Scale",
+    "response_type": "freq_0_4",
+    "min_items_required": 7,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "mood"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 10.0
+    },
+    "items": [
+      {
+        "item_id": "eHWq7qUy1AzRJRc77Cih",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "lKsocCnF1Wo53eycaIdj",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NHzpbURXCkcE9xcVM4dP",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "xfhanuJPLwB2YRN8WgBe",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ITaz5cQQpX8XBVDwVg6e",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "fOkmMIbcfzI1SHRjANnw",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "b8M8iCcS87e0wXFcdnsG",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "pfuZF4bGLLf9OAzm9QGV",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "pObZW4bsXAyrof0oDqEq",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ahGVgQT6khUZtLV9Ut5i",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_authenticity_scale",
+    "questionnaire_id": "q_authenticity_scale",
+    "version": "1",
+    "name": "Authenticity Scale",
+    "response_type": "likert_agree_0_4",
+    "min_items_required": 33,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "authenticity"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 4.0
+    },
+    "items": [
+      {
+        "item_id": "dAP8UTD3t11QMehCOn",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "m7Vt0XwEVCzfeUxq7CnX",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "RVOE0eVe0FmQgqojL9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kzC8a458W8Yrzkj4tc",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ET7d3gf6B5L0KT1F2b",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "KGvgB7RsY9vtT7jcAi",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "jvMdC19i26CkjC1vnW",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "q160OClzIOB132MP83",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qOCstFFX3Iejp09tWf",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "dn2Zzv7znW2dbO5B0k",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "57oHmrT93ySa43ibnr",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "08nM5igjQueb7O2ycb",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oH8m6fPLv9486MVM77",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oC694963jUaRDo4jbl",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "z2c2UC16Y7yZ1A53V2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "RWJ9yxahf7A2MVNqB3",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3ynOXf4Qmn2ge6300y",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "HVM8nNVR6gH7xZP68b",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1Utx6f1VzSnAYdhYk0",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "17sA5jz0MIqnuiw7EA",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2TfgyYA9Yn7mC9T4bJ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "z5c74cDoegXkYsZ691",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "lnp1Q48IkRNi5N373N",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "P1NL97iG9p3I33BO2P",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ifhsX2137X0HBdZt6Y",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8bho6L2O1tCGVuk586",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "r6fAtLSZfC7IP1tc3k",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "xSCpDKq7j4j866jHys",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Ny0D31G2z9fQBgQBH2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "57T3Wn7KyjDO3RA5Sn",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "IR71g3Eu7J813g5qs6",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4xU7c4prMMWd4nC253",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "rIFydBXvGMvu220H5g",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2ui2b50m6zW975we55",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "yB0oMxibVVGLd24Rcb",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "g92jQ9gEyJ27AmUILT",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "P32780WGJ913C40SYw",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Vo2iFcu5LLt2YttH5q",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4QKwG3kZRC04j8zYVm",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "W6qc1iRJ6ek80KOvsh",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "t9s9p6w725ET43Qd2b",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "49NE5hxeh0W9Y8I8rA",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "z5cQL49GjLTFpTB8b4",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kQgP7FBn0c4ABvDnPt",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "hFr77c5z4KPt81kteC",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_bif2",
+    "questionnaire_id": "q_bif2",
+    "version": "1",
+    "name": "BIF2",
+    "response_type": "likert_bfi_0_4",
+    "min_items_required": 45,
+    "unlock_window_days": 0,
+    "retest_interval_days": 180,
+    "tags": [
+      "affective",
+      "personality"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 4.0
+    },
+    "items": [
+      {
+        "item_id": "7I3nxPFdlkdW9kOw07",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "hagV4DBH3KRBnAF5PN",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1VLnbI1KWdW29dP4Cz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wqxUhRQ5eDrJqgiaVm",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5p07sBBuG8s35WZfQh",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "sPaElg8P3dDkdQr9M0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "KuH6k5ka38km8RTh21",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "P9wvD6r2e90LcUCiY4",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tgqF12ce10Ed3HiKE1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "b2Ut038gVsyLw3TA81",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kWI4jKR4GJp3k0Q4Ug",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tiD53U6Nbp0wVm8614",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "n52Tg76lV4q064Pdq2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "DOCRxI1MVksY7E223g",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0rQgM6rsh8R2j994q0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "879nAinwtNU63bW500",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Lzhqu95XZ5ex9a3C5J",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9dvrblgaQX0dzWou1W",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7Q2bgMkBgF4bbG3JsH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Nviwf254Lg9zXx6812",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "osG1a54pHA2m2wcj1r",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "jo925B0Ncs50Y5fJ83",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "J958gb8JfhdGLQV4vx",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "s053W53jlb9xJC8hjU",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9ecPAlQCv15XBxC8jr",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8vFczINlyz72j4fX4w",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Iq4n07X16BNx6IwvB6",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "17H220k8biItjhM5hO",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0nt0obM9WU73Low786",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "I7MQG9AKLRMajs5vBD",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7dA5BgtVz0W58SL316",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Rl72o1gcdV673vube8",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3hJYaNX32d3ozX7S52",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7AS2OUf6vr99zE4PpJ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "h6KWOaG794Z3Axtw3E",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "s6ulCMpRl3k9v5QvU3",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ggdkLtH10V33IG9rE0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "jv915Ey4z8HUwkvl59",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3nvj3UBXnYsEny98AM",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "imqc94MX8u8cQ8DSd5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tpfIa24rAOS5y808Fk",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "hycl2t38a0XwMT11AS",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "52oAOun2WOTNO331zX",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "80Mn8II7o9umgTw1Yt",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Oik1NIcjsGOD6PIPFZ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "yadM635Og43o43NB6g",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "11F2eD5dnt449WZNpY",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0TIWiLZ5534o17GjyN",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "asnL8Kt7ccG23T1Len",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7fkRo44Q8Kv6l4G9Q3",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "84S0Zv3BP3rcg7I5F5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "i6e79o53Uo6Wg6WLA1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "fxr3KekgQ6nIf17tgx",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vbYWlPI7o6an9XXrvK",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Y0O5RuhR5C9C65LQ8l",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0z2DuTH8d43QQeRQGF",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Qm4Q515B57xp5fl12U",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6fmt0ib2D310z91v8r",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "EFKVw69UONEFn8o0ZW",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1kO0RB66d9Yjx2C2Mx",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_bis",
+    "questionnaire_id": "q_bis",
+    "version": "1",
+    "name": "BIS",
+    "response_type": "days_0_7",
+    "min_items_required": 4,
+    "unlock_window_days": 0,
+    "retest_interval_days": 30,
+    "tags": [
+      "autonomic",
+      "sleep"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 42.0
+    },
+    "items": [
+      {
+        "item_id": "jnBOi54sO8B15IK4Ukjl",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cOLF6KnsK4oDY7vJm9a0",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "yv65k4XVGmp6X45C19JX",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9V2gQty3jXNhzqN6KFuu",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "IpgKcEMv6G59VZ9LzHbG",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "xwjvTQd7sPlmCFtWNEbq",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_bpnsnf",
+    "questionnaire_id": "q_bpnsnf",
+    "version": "1",
+    "name": "BPNSNF",
+    "response_type": "truth_0_3",
+    "min_items_required": 18,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "needs_satisfaction"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 3.0
+    },
+    "items": [
+      {
+        "item_id": "VD9uts9IPca9UrtF6Z",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tUcet2h34U2Pz8IBnO",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qp3Yw2V3E2N3p8q3W3",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "P3000foSy2HOuYgV06",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2B400W2bZ451qmZ20O",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "VjUkP5U2j8J23zTon9",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "GZkDKu06Gpl2gMKQ2O",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "A0Yngv1Qk5k0h6B2p2",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "147g438l8Re570f9Kg",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "61MwZ04QU0o7A248ql",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "z9WcceLef5lQFOVVd0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "904544u1Sp0M19NTej",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "25h58c99ReEF2dAlLf",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Eb7D8EivY7Os1lz4b1",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "rW9cp0eP10C114wcsI",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6dlq1312h2KoidUJMN",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "yIIZ34W8o47VbRvqZ2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "GQ4jQRIZ6CN7xh7LaI",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "421yV69p7IbSJubMO4",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "SrllJAM5VgEYmG1yJv",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "rywD1CfVhf3Bd5YDFZ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "857cy0Xdm4QO80PCoi",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Vhn6SiCLw9HG1jA2Rl",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8MPMpYiSivI8c5oTm9",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_brs",
+    "questionnaire_id": "q_brs",
+    "version": "1",
+    "name": "BRS",
+    "response_type": "agree_brs_0_4",
+    "min_items_required": 4,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "resilience"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 4.0
+    },
+    "items": [
+      {
+        "item_id": "fq3G4k4LlOlBlUmy4i",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "FT7L3h5mG5o8CnNgwH",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "UWTa6XQsjzBxuMhI9a",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Tjn6PgRcPVUUkZ1dyc",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kcWarVjMsjln64aWCO",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3d0FDagXF06WPwv7R8",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": "Smith BW et al. Int J Behav Med. 2008;15(3):194-200"
+  },
+  {
+    "id": "scale_boundaries_assessment",
+    "questionnaire_id": "q_boundaries_assessment",
+    "version": "1",
+    "name": "Boundaries Assessment",
+    "response_type": "freq_never_almost_0_4",
+    "min_items_required": 14,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "boundaries"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 76.0
+    },
+    "items": [
+      {
+        "item_id": "SBY20nRBbwI5U9nlNDCQ",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3fbZL6676Z7v5ISXjt",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "xp54B3u8c8CGbNL6uW",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gpIFn3rQ4y34xayi3M",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "J9N694sCRaJVpVG7U1",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "75D0LcdAApKSXlkHM7",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "uR8135W0e8of9l8oaW",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "M5r43EZZlIP8qg5DY9",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "liNzHadi1l89An98kM",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "w0U6mKx0qbK4hUhMhz",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "BP8H94f70xarFsN4p5",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "lGpBA58H2LzFhmIPp6",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2sfh75u4NQy7rcLhPG",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "fcf3h40ARdKz46VD20",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tRly4MCAuFFdV468oC",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "27C3DG96Rg2Vm87s9E",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6G2Nh9hd020Zh63J59",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "l0KC4f2544gQawg62v",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "u37NfH3vZeW7jHLap8",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_cams_r",
+    "questionnaire_id": "q_cams_r",
+    "version": "1",
+    "name": "CAMS-R",
+    "response_type": "camsr_0_3",
+    "min_items_required": 7,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "autonomic",
+      "affective",
+      "mindfulness"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 30.0
+    },
+    "items": [
+      {
+        "item_id": "9Te5Y2j47sUWrMh30u",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9SVSIfADBzvEEKb66Wz7",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "EsRREm0KfmFVAaQPvYgh",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "dvvXmNlCjkgp3EIbzA3E",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "184lCY4PqJzBnGCqjt",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "VXGo9RgY0D3KfG407p",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "myRKhqhEU7mTyQsYuRwf",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7VVt8Yd2f0tBUk4b3H",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "42IuCj4If42q34H7uQ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NHY9yQTWhBpM7E2j65",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_cfq",
+    "questionnaire_id": "q_cfq",
+    "version": "1",
+    "name": "CFQ",
+    "response_type": "cfq_0_4",
+    "min_items_required": 11,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "autonomic",
+      "affective",
+      "cognitive_failures",
+      "audit:dated_consider_promis"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 60.0
+    },
+    "items": [
+      {
+        "item_id": "VYrzg1F0o1IcwMHP9wK7",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "S3MvktxosWFtwKNFYRGj",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "fpcPYFMZEs5NkzqacvpL",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "A5bIbqg52UATctZkmDRi",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "EnibezhIlhvsJW3pUThk",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "RhoZANGqMNgYq0VODYlQ",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gaabMhFSsjYfmBYr0al6",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "glq140RxdUnLgMqA5r47",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "StPimCfT9Yb8HpEKeu5n",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "h8iZVQoKsexPiFUncXCk",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mD7JT2hjBArmlUlZoijG",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "dWWj81JfyTETxGmwqWW4",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wTRq0MpB6uEbssdtsNf6",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "zOvZBXSGqdnht9w3LRJY",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "sXSIjDzEO2ZZHGnp5GIf",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_cfs",
+    "questionnaire_id": "q_cfs",
+    "version": "1",
+    "name": "CFS",
+    "response_type": "fatigue_0_3",
+    "min_items_required": 10,
+    "unlock_window_days": 0,
+    "retest_interval_days": 30,
+    "tags": [
+      "autonomic",
+      "fatigue"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 42.0
+    },
+    "items": [
+      {
+        "item_id": "TUNN5VNXHyEH0uxWnp29",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "FDonLL50hJ7bvrMZsLmU",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2EMl9AhSMSUooXsDbIIt",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0d9cVLMQ5Jr88oEkv9q9",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "dMAkltNGXmuUPgGwvgAj",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "lQfwJrhMoorkmRZm3gYh",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ScLDnUcqMcPWI1qtwgNP",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3urhFBZK7OZ8AbX7fPTT",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "lZ8j8OxfzqzY0A8Uc8od",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ECbsG3bMAFoVtiDK6wxg",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "yY1igLjJW9soLTq47FL4",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1ddNwmWC2VAFZwj2wafp",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tRQCyK80TinVr0SiuzFO",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NPKhKnNS2OArfufBlyC9",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_cope_inventory",
+    "questionnaire_id": "q_cope_inventory",
+    "version": "1",
+    "name": "Cope Inventory",
+    "response_type": "cope_0_3",
+    "min_items_required": 45,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "coping"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 3.0
+    },
+    "items": [
+      {
+        "item_id": "dAWaG9m47Iw246LfVX",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oT0N48Vzqvi2MBdZTo",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "nnTFvKa6M30NXBcODi",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "h3hq3G90q3VenUge8E",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3grxH9Z18C5X9t7178",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "D4xOR7iB6oM6nLFpWr",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "T20Y4wL8PRpn88r7t9",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "854Gk9D76zI1aOM36B",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3990Zzz7wiap669Pn3",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "h753QYtEELv9wH90Q1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "BE5srsy308zMvfe1tY",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "M0ST412zh4nf2o91ST",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "80KRuG3i3gd3Nz3V6K",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5FI6cP927rPA87gNRz",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0bA6784Xa02Bc0Md1o",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "dWRKO9hRnOA9YMtfnP",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0qZ7K75EZ3rC292IFt",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "LZP3k84rurfogXRyow",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3NzePu65X99X4PXBOA",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vv0LN7i4LBNa9l9YXK",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Z35828IibAT7Bu94ji",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "FWKiOH9uVnNtY1aww1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3708plZ3sY996TaMb0",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5qO9FxCUSBiGTPBzeb",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4M4zQKTVJiaO5g38u7",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "A8SmKb4ctH7jX1P8W8",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Qa5doJBxvlkaavOzF4",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Kh1QDTnIpC7vAbEo8W",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7btnn4rS3V1q017jIU",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4962v5dI3x978p1PFt",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Ce386amh0oq1X43390",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "QSU2xKa054I070Tyb1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1rQ829aZIfbWvcYA72",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "B8BKA0xoVa64M8Y5De",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0Y429vv8oFIZqjP3Xx",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Zy540K2Ekbatm2y3ir",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "zM6n21D08PP2WjkOzp",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "M3B47Y01TLS24nH9As",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "XXm8rUKT81b67wpcSi",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "t71sJ2nKx15m04vG09",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NOOwZGoXH9w80b2Ucj",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "60AyacpEmny94y85aa",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "W9OLc1gyHsjf2SlSc8",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2w1b116bkw3Roo39lZ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gBqd8oeRA312cndq9t",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "c76fduRr9An74z8UK5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "88p22U37bh8uuP8v86",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "GObWGFcohe7x5Ps1HR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gs19Q3L9aXdGI86Coj",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vP05o70o183lb2gT6P",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "E180g44WTj6Y66PBZ5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ia6C1FiXSlP4P2qH81",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "zK7Uc42miF1LrM1S1f",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "73jqlu1kD9Lz4hbbO6",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8H7m13LTzML370e5Pj",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "lThy2l5LMzYGLk38WK",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7Y4dCFuTh27be7HDXM",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6636f67rWA6VGnFHzt",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4lk3S6PT9640x88uw2",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oCeXBl3OqgfVZEG8lt",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_coping_self_efficacy_scale",
+    "questionnaire_id": "q_coping_self_efficacy_scale",
+    "version": "1",
+    "name": "Coping Self-Efficacy Scale",
+    "response_type": "coping_efficacy_0_4",
+    "min_items_required": 19,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "coping"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 130.0
+    },
+    "items": [
+      {
+        "item_id": "As7f43W6e11hOJOuc3",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "RoUR9XO5Y4dV5L0yK9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2nzRbt4Gc0y8Uwou6W",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "nKGo62Qf8wj5xJ2HBj",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "fuk3Ga72Ky3blgDfju",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "sqP6WZbKdh1R6zg46N",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "FQYmIepfFcqRbHh8K5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "A0w4jP94Wj5fnOZn1s",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "608JtKvYN7z5Ris24s",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "KWocS857x3TSVQ7XIa",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "LU1XPzQ56H5CoFW81n",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "l70baLI7Z9WJJkpT0k",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "iXo2k840Pg7Hp51Wdo",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kc4RKi3AQZRPNPsik4",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "eKH7Uy67oX4z8uJohh",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "539s5Bf1XPNsVA1N02",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8PWf3V7U62f85eMN5m",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "jTURy9G4D4eFElF64V",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "bf56eI8r9IK00a8HTG",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2S7PTMJFnhWAqbd2jC",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "o9L4jl9fJ11f5MDr57",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gJs5MA261Mkxmi5Q3n",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "YCI0KpSG07A6QGWw8b",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "AOvf6AE91pbIJs278e",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3ipkvosP0j93k0uATM",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Irw1FJcT5XE7xRQZV7",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_dass_21_depression",
+    "questionnaire_id": "q_dass_21_depression",
+    "version": "1",
+    "name": "DASS-21-depression",
+    "response_type": "dass_0_3",
+    "min_items_required": 6,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "depression"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 42.0
+    },
+    "items": [
+      {
+        "item_id": "rcYVmIbME1QUvckzZAsY",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oZNKR94nNNwf1KXMf8nT",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vcNz4PCfIqKwm9dtZt6o",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9hg9RQFLkQut7gvb7rmR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "YutmKQXnKwaUb3SEPTBJ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "RV9n50RHfGtZ7UHmHSL1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Tp38NAGpCSPCwughO18d",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Wn4Bw57txjtO7fVDf3V2",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_dass_21_stress",
+    "questionnaire_id": "q_dass_21_stress",
+    "version": "1",
+    "name": "DASS-21-stress",
+    "response_type": "dass_0_3",
+    "min_items_required": 9,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "stress",
+      "anxiety"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 42.0
+    },
+    "items": [
+      {
+        "item_id": "PGaqker94RsJz0cFcaxE",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "JBQjX9iLMpTOAq4nCN2i",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3ZPZiFNPb3mhJNQq27bU",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "voEQZ7RwH6t9LpZJtA0u",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1iq1WHdy2oWts0JBejmg",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2riUqiZtnjkGdLzZs57s",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0dS9tJQI7WVxIckhaMOl",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "dyNG3Hp0xpg8doIRnpAx",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cnanRXftRlKwzo558Ulz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ElRyPGcUGDKHNJpacT2K",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Hzk2hTyeL00rKnmyZXfp",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "FOw2EEZNXCdkAatijcoG",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CEF1P5WGnr7ZK5Y9aPp1",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_dqlq",
+    "questionnaire_id": "q_dqlq",
+    "version": "1",
+    "name": "DQLQ",
+    "response_type": "freq_dqlq_0_5",
+    "min_items_required": 6,
+    "unlock_window_days": 0,
+    "retest_interval_days": 30,
+    "tags": [
+      "immune",
+      "metabolic",
+      "gi_quality_of_life"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 45.0
+    },
+    "items": [
+      {
+        "item_id": "a1AWVTJZVgTHAhbebVLO",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cWh2onvcwH6PMLhPlE3d",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qAM0uSH3jLhTptH3WeK9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Zvyy7Rrvd9Rf2z2nKoKi",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "nSlofPfORFPWQUA7mfvz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9zRFvADxsYojFNkQ8z9s",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ly9EevB4zR2Bmeoz8pOL",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NKg9fV3CsctEdWPM0Uc8",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qRfsgpTcNP0IMIHpEJ7u",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_ds_14",
+    "questionnaire_id": "q_ds_14",
+    "version": "1",
+    "name": "DS-14",
+    "response_type": "ds14_0_5",
+    "min_items_required": 10,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "type_d_personality"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 56.0
+    },
+    "items": [
+      {
+        "item_id": "xLISOoypWke2sTfDJ4rP",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kbyQGSGZJEPM96NNbC10",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "nPil3pF6LIlbLIvSWDo1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2GHqVplJxmcFVONN1P3X",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "hhVJGKs1Shn7s7ZNsoq9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tpcOLBa6jugDopVGHi93",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "s8oYTszQa6ogEhUDB5Oz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "M1ZJhWyDNbi5U7IcjQ0O",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5ktjPI8aiNRdtQdAG8bS",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gWZwyTbgiaMJzE761Fyt",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "nN1pvT3msViM0tYIXJyQ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "GjzqyL2wQLWzrtwxOTiR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "L7S0Sg06vhSrwN5Gkwht",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "u3sxYEdVUpWkbG7IwldX",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_day_to_day_experiences",
+    "questionnaire_id": "q_day_to_day_experiences",
+    "version": "1",
+    "name": "Day-to-Day Experiences",
+    "response_type": "mindful_freq_0_5",
+    "min_items_required": 11,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "autonomic",
+      "affective",
+      "mindfulness"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 5.0
+    },
+    "items": [
+      {
+        "item_id": "bq29v53jym04dc0y34",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "EWRg08B4g79r1HO5R5",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "r1CRIg9K2R1eLNPI1g",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "pvsFVCr5cwYZ8Hi6C0",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "B7Wonoyx4sZb9g3i14",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "jYIieIF4uDR4H02wZo",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vl1JIGe30XJhA4pd4u",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "JOpg3znYALA4igEvK8",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "378w51tphTu3XakyTG",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "84ZSTp5i7TBw0LdezY",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CfhG36KyQP15V290kt",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kh21Rrs3X82OjC7w1L",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "A2cs70SwIOUp8feCI5",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "HgjQ1z4z4uFX5SL8a6",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Lp31FzeAcI35A3v1UE",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_erq",
+    "questionnaire_id": "q_erq",
+    "version": "1",
+    "name": "ERQ",
+    "response_type": "erq_0_4",
+    "min_items_required": 7,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "emotion_regulation"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 4.0
+    },
+    "items": [
+      {
+        "item_id": "6xWP7HGndTE2pSiGs8",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7zohWgz51rSA7pTBD2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "PWzpPN9B1KCr5p3kvy",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3Cl6nqQlFSpTs54q72",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9PF9ORUoPD27F7F3Z0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Z4iB2JRqyE097jEy6l",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1MM07Wq086G07IaEN9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qJE75Cv85G7H7BbxfL",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "BXbvGhRZ9Fv16205Bw",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qo1CmmCBHVl8VfNHRQ2O",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": "Gross JQ, John OP. J Pers Soc Psychol. 2003;85(2):348-62"
+  },
+  {
+    "id": "scale_escq",
+    "questionnaire_id": "q_escq",
+    "version": "1",
+    "name": "ESCQ",
+    "response_type": "freq_never_always_0_4",
+    "min_items_required": 33,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "emotional_competence"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 4.0
+    },
+    "items": [
+      {
+        "item_id": "dcDaQ2Kzdc38WCZaFb",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2tm3E2kGKYW11lLI61",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "IA5TEQ1lPf2E7yVb15",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "fg1rc4b3x9bfbUH9s6",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1vV96ye9N66f4y4Y51",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9OtI6rg7iqDXnzy94i",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "hnLDr4XvcO7R9f9f3i",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "P5P4A502VH4c3Cm4kT",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3Knddys3O40687LB64",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CZ4HDYy06Z5ST8w0rC",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "YnfqEfDoEf05uU3wGH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0e48b28FyQVgZ8mhlo",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "C8VSS0Ot3VwjL786jc",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9M1V88J7AS4VvbY6Kg",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "08BpHV4p92bYbZABEw",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "WP5NQQMRKBo869PGAx",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Y0v462T04n2L79L10h",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "sI47Z7mFzMHUd2TRlZ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tjn1jyl9Zar73G48nR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CWm6v5LY3CmtYMM0D1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cL7jH3m9UpT5SpGdQ7",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "90YLD56j54a1aTEw1l",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ML49T1r4QW0NX3dF5w",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Cjk4X14Sa1q622B8vH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "S1Fd0paL6yje5Duyb1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "f37h34RUviWd4120sH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Kc61mlCyCexqHoz9yw",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "H1tG2JVCCJl9UtW8Lu",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "H76nZOVcVL57M9v7fW",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "b78CH1pK1J9Pl312y2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "12inp748K77FAX6D1a",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "G0y708f2aQs6163Ts5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "z6Jj8GqqWf78p7F69G",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mcU6qgpnoKvi3GP85z",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "xjCMwZvnG1CBl1t66V",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4D5R78Al5kkPxNI6vL",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4WjZewEG191kUsa0uJ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "XWea7935ZjweoVXsd2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "td7rLVzE51E4S9bjc3",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "h0WbyhOpfe4ox1JgN0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9yp75DmQkfUb5sQtDO",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "sKJ087Mc9oKMPzNIlM",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "LtV2o6o7pCVnP2p92T",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7KiuHRj4jgavy8G0wT",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "UYY3COdQWN3JN82VkU",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_fmi",
+    "questionnaire_id": "q_fmi",
+    "version": "1",
+    "name": "FMI",
+    "response_type": "fmi_0_3",
+    "min_items_required": 10,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "autonomic",
+      "affective",
+      "mindfulness"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 42.0
+    },
+    "items": [
+      {
+        "item_id": "66wbA7Fe9YQ5CW57Q0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CpSkv5z63cDAO64VvT9y",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "s1Y1Wxr9u5G601Kx1A",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0Oktr2ay4F70suBp63",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "p3QsF7BPGtmN5UGSTb",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ddWM8f7wP3i3Q4FEyn",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "s8w54laJVaX04H82IZ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "I7P7Olury0U793Piw2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Qf2t16qL39KjN083jC",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9Nbl7S7U8a9wLbY6Z3",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "t82UElRpFCi08QNTvD",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1734W6l428vEN6s3Bm",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gyVT91fH7hVIMusr6r",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CaYr9h9AM7C6Fr67hm",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_gad_7",
+    "questionnaire_id": "q_gad_7",
+    "version": "1",
+    "name": "GAD-7",
+    "response_type": "likert_0_3",
+    "min_items_required": 5,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "anxiety"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 21.0
+    },
+    "items": [
+      {
+        "item_id": "BShzEMGiN2bg9IZcfs3N",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "sZiGP0ixQdI5EmSIfmDE",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4B9CPUv7OyYw99rkZjFN",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "KDWWDHYRc5jm55WaIr6e",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "evQZLAslBcoaPGT00IfI",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9OrDJP5yKyvQST6dFSBz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qhwGWkjw6sszpa6sTamw",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": "Spitzer RL et al. Arch Intern Med. 2006;166(10):1092-7"
+  },
+  {
+    "id": "scale_gse",
+    "questionnaire_id": "q_gse",
+    "version": "1",
+    "name": "GSE",
+    "response_type": "truth_gse_0_3",
+    "min_items_required": 7,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "self_efficacy"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 10.0,
+      "normalize_max": 40.0
+    },
+    "items": [
+      {
+        "item_id": "3K2Qypf7Skn95I96Pt",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5bdx9yum7L5guwk8XX",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1yV9R65Wiy4mBNMSek",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "HJyAKbU003WNQ46nYc",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2h4h4H27y0sP9QS6m2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "KbJ8xfP5TtE1nofFEZ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "E0eL7CYdjfj8BlfIgA",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9EWEvjV5zm4mL82L1p",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mOH0XUjm7IMTRkOswl",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Q20ZEJ51b1OqoQ0R6m",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_gsrs_ibs",
+    "questionnaire_id": "q_gsrs_ibs",
+    "version": "1",
+    "name": "GSRS-IBS",
+    "response_type": "discomfort_0_6",
+    "min_items_required": 9,
+    "unlock_window_days": 0,
+    "retest_interval_days": 30,
+    "tags": [
+      "immune",
+      "metabolic",
+      "gi_symptoms"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 6.0
+    },
+    "items": [
+      {
+        "item_id": "H9le53m8AZWEgdR7iB",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Tz7SPcek03f5oUCLGO",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "PomWn8LoT9GROAyBhN",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "f28ObzKJ6E1wGbcnFi",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "I8mQ6KqUkoXTITZyGjGA",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "hx9Jex5vm6zk7RNluVWU",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1J138x92t2z65g2NTI",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "W66jt7m9tXyHHuDK0f",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Rv4YyPuqcexLw8tQ90",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9AW9h71Y1uWW9Ld4gF",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8uAda856R5N2G1rqge",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8osvCc771Wf2z9RQ9r",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Hp4Zdkg8qk91zksEeB",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_hads",
+    "questionnaire_id": "q_hads",
+    "version": "1",
+    "name": "HADS",
+    "response_type": "hads_0_3",
+    "min_items_required": 10,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "anxiety",
+      "depression"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 42.0
+    },
+    "items": [
+      {
+        "item_id": "iiycjndiOEXUCikjjfs9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0fBikARrVd4dYIuy2ljn",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "C6avOfLlVEgvMoRyHzC9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "rsLOcLPp23pn1Mpl4kvL",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "r2PudpzcP2TYtA6E2Vho",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Ik4cak4w0Q6IigaHqUHf",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "TadNizNUGdyK2ly5I7z9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "a3EisPuxLyqQ6q78oFix",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "URBqxctSbnsyqMxdlKFH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "U9OQEmyRARnYkxDSVxDN",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7C72ohTUd3NTV8o2y1yW",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "GS4hQIXBBFpIxb4S9eUI",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kFvif8asAxRVBmbt5sQs",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "M7kM7LSwj8VOhUjqTp5O",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_harrill_self_esteem_inventory",
+    "questionnaire_id": "q_harrill_self_esteem_inventory",
+    "version": "1",
+    "name": "Harrill Self-Esteem Inventory",
+    "response_type": "harrill_0_4",
+    "min_items_required": 4,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "self_esteem"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 24.0
+    },
+    "items": [
+      {
+        "item_id": "tiKTS0bGr108GG4xqA",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "jGM0AMM3lHmWY5yaDNvb",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "eHFce2yp4DsktZAOZg",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "79Ux67LmV2X4vDg6Ef",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "C2inaLOeXoW7JS35mD",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "W1Ph95smjDYB7A1jeC",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_ibdq",
+    "questionnaire_id": "q_ibdq",
+    "version": "1",
+    "name": "IBDQ",
+    "response_type": "discomfort_0_6",
+    "min_items_required": 24,
+    "unlock_window_days": 0,
+    "retest_interval_days": 30,
+    "tags": [
+      "immune",
+      "metabolic",
+      "ibd_quality_of_life"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 32.0,
+      "normalize_max": 224.0
+    },
+    "items": [
+      {
+        "item_id": "6nCbNJmbnU465mPw6cgk",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2caVNIDkA1hj3NKyDprx",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "H6BMjQa0wbfXe8ooXweu",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "uxCxgiJRhVXw3uftOyPK",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "hEjCCN7xXAOouk0of0ZX",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CdXV05zok7Q6qgwuSNHg",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "LoTjNV9XJ5XK3U1bMcS4",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "q3SztNsPxvXnhWDsnZAe",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ksI144BmMaIwm0QHazK5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "AjNNll0OW7A3A8EyArgx",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Y7s0cUZhOOhhOGx9XPpF",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ZQ0qw3l66sM3HULB65ew",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "TZDPClnf4M4xovpCmhjm",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tBV0CaYHgvzAx9xklCLM",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "rjiH6W26TUUSt0FDgi0S",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "SKHDicZ7AIR3luga98BX",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mlvN7yR0cZCzDTT7xsBz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "eKOP4TSGiDpfoLI8vYxP",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "IN1YUXFz02Si3RROOKh1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8orgkwKYheksDBCEdfYm",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NqbUMDIz1x03ohgZOTEd",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "75iQTvI4NnH6nM38vd21",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "QqYOrJZ8Gw9joaNGvAh5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ywjgZ6RhQi8cPn0ZPPg7",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "OAhw8Pc63pNgpx6VV9gj",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "EktUjDWyxhsG6nM6YwLF",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "W6J9mrw5mcBWR9kvsbQ4",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1qZEfh1S4BApB5MZGjS6",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "EwUlFiB3j2RkLMmgQfzg",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "l341lhSY6R9tIZE1AK04",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "rjqT7LjHKY0fEIUEfI1A",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "r9ZTeJwNmZpngF8Fl25N",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_ibs",
+    "questionnaire_id": "q_ibs",
+    "version": "1",
+    "name": "IBS",
+    "response_type": "freq_ibs_0_3",
+    "min_items_required": 6,
+    "unlock_window_days": 0,
+    "retest_interval_days": 30,
+    "tags": [
+      "immune",
+      "metabolic",
+      "gi_symptoms"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 27.0
+    },
+    "items": [
+      {
+        "item_id": "rx64x80VyQkM7PNErIqQ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mQOAUjANIc75N3UkNWgY",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Ifeqj5dATlOjN1RtURdB",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "PiTo7r6rafngYcXgYRxJ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "r9U6j2EhdPmv1yNBnHhK",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "bYvhWYiKtcdWRx3PhjLI",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "hizQtOwv8HJ35rQzzvsI",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "jROZSiLkXmTclhtE9PDq",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "WTWPh4jyBFMaACt5MBkw",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_initial_scan",
+    "questionnaire_id": "q_initial_scan",
+    "version": "1",
+    "name": "Initial Scan",
+    "response_type": "likert_agree_0_4",
+    "min_items_required": 10,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "screening"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 4.0
+    },
+    "items": [
+      {
+        "item_id": "TuTH1Z69rwlYsRR3ceux",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qY6J9bYMBrBo22NEbPhS",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ZZxmjBYqGi4uBBZALUNn",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "eUiMJOyXLUQB7doZlugL",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cOMBhqss0cuWwfvBcbe1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wruFTObsfmnKBUyBcs3w",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1PFQTQM9cuJi2BhYYjyc",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "39Z14KtYKtI6w9SPDjks",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Zt1xbgjSBlf1UmCJvy13",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "EQoopLVf7xXA2zDpD2Iw",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tNspDZ1uxXfDJleeq3hJ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wNt1axLhfdnM5AY60uaR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Bp6lv4ANam93sraELGaK",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "SC7ZuD3GPeEYDdnT6tVK",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_mhc",
+    "questionnaire_id": "q_mhc",
+    "version": "1",
+    "name": "MHC",
+    "response_type": "freq_mhc_0_4",
+    "min_items_required": 4,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "positive_emotions"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 4.0
+    },
+    "items": [
+      {
+        "item_id": "WelEOyhfHFJabGco5cxJ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "itc9d1aSeEw6VDginMho",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CIVYb9YyRLRryAxdPhlq",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vgsZllvEJ18YSxW9Fdjh",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "RcyqmtrOY0n4yaHi1Y3b",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "74R46BPUGwIlCAZlXiUp",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_mspss",
+    "questionnaire_id": "q_mspss",
+    "version": "1",
+    "name": "MSPSS",
+    "response_type": "mspss_1_6",
+    "min_items_required": 9,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "social_support"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 5.0
+    },
+    "items": [
+      {
+        "item_id": "Iar5qnyyX12k9z4Ja6",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Eo3ED66aDkAE6DT08f",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4EBm8N6g4Sekqw57Aq",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "463V0DwZOlD4e6ON1W",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "l28fB7Ja635OWEg1Yz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "fgyZiC47R6m6fOxwuj",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "875B25A3Qi53Y1jW2a",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "z1KV06F2MSX48m3KRm",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wypAVRya2tl82g6N66",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "X1Br1ID66wq61H56w9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Ut9zbbG4cjyRoll0vc",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8fHX68u7eJNqA9cA20",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": "Zimet GD et al. J Pers Assess. 1988;52(1):30-41"
+  },
+  {
+    "id": "scale_mind_age",
+    "questionnaire_id": "q_mind_age",
+    "version": "1",
+    "name": "Mind Age",
+    "response_type": "likert_agree_0_6",
+    "min_items_required": 18,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "autonomic",
+      "cognition",
+      "growth"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 6.0
+    },
+    "items": [
+      {
+        "item_id": "GuqyU9esJ5slhQBFDDxf",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "EIRRXyAOlSbU0QLFJaP1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1lb5UB4cctCk2CJ8noxb",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "64cUWgy8f5rtwq7oNmS2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "onvg710k63lkX3igVwdL",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "H9zLLVx2oWxOYcXrZmKU",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "IR5NJyX7gAlAA4EJL6Rd",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "86179E5QwwPIIDNqoy",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wOMJmJctt076OPKeEZNN",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "UIjvjfkK5Dzws8RsYays",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wY3bzFU3b04lqyvthbCU",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "69C10MklS7Q16qfk7A",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "RFczg46w6XTq687H01",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "r7Dd4vQYAzx8012G4n",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "I9ad3AZw5k1Uon22u0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "f3d1dBpb3STKZql0Y1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mgVpt99H2462C0I26V",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "734hxGzElG97WP64y8",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "z710fT9mhlKhaeBW1r",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6vyIwO9FMkG8wbnk1pON",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vd6jbmSla853PQvEa4",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "633IKbqP6ad1yz0fW7",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "shclz235Tygh8bAQVz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "00muJBSvoPDKd94M1a",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_multifactorial_memory_questionnaire",
+    "questionnaire_id": "q_multifactorial_memory_questionnaire",
+    "version": "1",
+    "name": "Multifactorial memory questionnaire",
+    "response_type": "memory_freq_0_4",
+    "min_items_required": 15,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "autonomic",
+      "affective",
+      "memory"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 80.0
+    },
+    "items": [
+      {
+        "item_id": "62hdJzl1jfjzCsVs5Gft",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "MDQE8R5lOlyNyRE6p9Fo",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "T7Ea3pYPy2pWlfCItT7x",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "BzrcvINFXfXQNk9AZjkJ",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gMi1u4BF5i7LT6xz0WHd",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "iRPC28PiKi7isXSBMFeB",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "41GxyiIWX6n1ACJHSVfe",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "HqhFtMF1hJYc17FzprlA",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vexVDFF4c3A5D6U7unhM",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "aGf72OQnXps0ogQGBgbw",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "keMxyLaSrV1pKakBanY9",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "HWLHiyv0qhBH0WYNcbVp",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "PCcQlD2MZnvfsDDhFuT2",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "KOGLg7xQXzHSJk68bI3Z",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gCeLlM3w2WhFwmYRgrtl",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "XlihG1ECWQdtRTMHziuL",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "k0coZxWlcvfcvOHbg0hl",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "TaaBeGfE8wenoGlwbc9m",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oMvRzuFs862O0DnlmJeH",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "k6rY5YcSbxCSuTF1BRM7",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_panas_sf_negative",
+    "questionnaire_id": "q_panas_sf_negative",
+    "version": "1",
+    "name": "PANAS-SF-negative",
+    "response_type": "affect_0_4",
+    "min_items_required": 7,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "negative_affect"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 10.0,
+      "normalize_max": 50.0
+    },
+    "items": [
+      {
+        "item_id": "ZEZPyAoDDyPfiG5Lvyd5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Lb8TENxJjNo0rtNfRMLY",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "bPtXXxSAd2UqV9x0aBl5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "WJu10kXwRYN2zs95dX18",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "VzDzzSgC4edVnlKDrp9u",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "C2JthSJAFUkv4SJdU7aE",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "96U6NtApcRZqLpRKzDSP",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "UGGyzCi9CActMcbagGBD",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Xf2qA4YeWPILWvd7iPDs",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "GHTV0DmwmzZ3WiFjZ8yk",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_panas_sf_positive",
+    "questionnaire_id": "q_panas_sf_positive",
+    "version": "1",
+    "name": "PANAS-SF-positive",
+    "response_type": "affect_0_4",
+    "min_items_required": 6,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "positive_affect"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 9.0,
+      "normalize_max": 45.0
+    },
+    "items": [
+      {
+        "item_id": "MQ5EGFjtVkjOy7AfO3S7",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9Fyt5Y8ojWwrp7ZGkokU",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4yVsFEMT2DiBjSjMJBGw",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3AucAUovO5sXVn1tE9cn",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "N54Olq2lnEmd6kZQpsrP",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "h35lpTBKdkrIYRZC5ZOk",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Mk5XiUQ02rxPUDru7NB8",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "VG7m5nhfxvz624lj2pUi",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NpDAt7wOJVH7KxFYP2zK",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_paq",
+    "questionnaire_id": "q_paq",
+    "version": "1",
+    "name": "PAQ",
+    "response_type": "likert_paq_0_6",
+    "min_items_required": 18,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "alexithymia"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 6.0
+    },
+    "items": [
+      {
+        "item_id": "GBgF9SW3eC1UnjbAeV11",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "SRsYkhynZRtIyt79yPIY",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "KkVXTo87HnvQhrj2Q27z",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CjlsWIph8f2pWPBj0UFS",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "TFJ3cECiMPRORwJ3KtEn",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "zLzcvi0VQ3vE2o2cWGZU",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "zTVevdlvcaXZRUmccwNA",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "RaCTjEPxijsic9Yh7ESK",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3fmfWYp6s1sKKaKbEmqO",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "LtnFfXOGAzWM4QsWgyKT",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "aue3DUKQ9jLRMluWVgqQ",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "MBR6JIxFAONKEY3FGLuJ",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mO6oVUBpZ98KyfMrl1hu",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "IGJTuMKlaxLeNpJ8gCUL",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "uwyfhmnhUbTVoLncpajC",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7kNH0SxX9hYh5Nwjb8mq",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "GoRahQuvfPvemM62DD8r",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "AoaWXFH9XG4jtfZFv5JC",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "HnMsifWc4CoERRFglIYx",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Foo38MNSRxEHE3pmxzKc",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "i8N5SIwYAGDWWohk7Oxg",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "rAFMUYpkr8824QJKJ1Dp",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "OimQqQ3bZPRfyf7hs67Q",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ETT4h17fBYDzUlzEiEMr",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_pgis",
+    "questionnaire_id": "q_pgis",
+    "version": "1",
+    "name": "PGIS",
+    "response_type": "agree_0_5",
+    "min_items_required": 6,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "personal_growth"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 5.0
+    },
+    "items": [
+      {
+        "item_id": "X4Uq6I7kqvufg2Z6OQ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "DCGVEcjjK1GcRsw7sG",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "QTh9e6r2o7vTK8huKE",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "385R6PmX16XjL62PU8",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5zG153404s9v2mg0h2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "78f3rQ0Zb4A19PIQTd",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "861C2QxwbOXl6vK0W6",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "hel9XhlrZ9G7vOd86B",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "S06L271i94lccEAHuc",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_pss",
+    "questionnaire_id": "q_pss",
+    "version": "1",
+    "name": "PSS",
+    "response_type": "pss_0_4",
+    "min_items_required": 7,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "perceived_stress"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 40.0
+    },
+    "items": [
+      {
+        "item_id": "ZUHOsouRl1WcZOsHSeOq",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "SWWomU6KvjxZmLwFifTA",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "JyXmIaJ3NElANo79CElx",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "nSyyUEEEKRyH04HfIjNL",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Szx9TPHmff7nivTNWa9N",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2ZXcH7JbjAXV82Ftb7kM",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Yl7OZWgMTdsbGDV6k3pF",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "YceP4xz7lqwby2VdUCuD",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "lQ5S5vRpbnYvgjb5fGR9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "SJ6dnrIgvteLGRhbpXMl",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": "Cohen S et al. J Health Soc Behav. 1983;24(4):385-96"
+  },
+  {
+    "id": "scale_qols_flanagan",
+    "questionnaire_id": "q_qols_flanagan",
+    "version": "1",
+    "name": "QOLS Flanagan",
+    "response_type": "satisfaction_0_6",
+    "min_items_required": 11,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 15.0,
+      "normalize_max": 105.0
+    },
+    "items": [
+      {
+        "item_id": "okc6TrMrl1g9I7TMJ5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "etYFpI7MmHq0ZqZiJsNi",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "75ojj6RldXs2ZrO3S0aT",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9VWJR9ElBbeL1TB6FZrs",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "zCasZtikuFZ275fGWJbE",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "T63JX3L7QJyA5S0DAf",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "28S7Me19kzObV2EgJb",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "J8yD8egwl2h04t5fPY",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mBJIJ4n2fGSw4lA5SK",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "uhkL1j5aCVn0Pj6nhuFQ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "53K9Qpjnl42B2g4g01",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "s3oHa9b8Fqs3nVDTs2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "c494Lr8y3PCn8g687X",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "y366kUu2lGkknI0t66",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8H2t2qOP2F7z6Yb1Itft",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_rs",
+    "questionnaire_id": "q_rs",
+    "version": "1",
+    "name": "RS",
+    "response_type": "agree_rs_0_4",
+    "min_items_required": 8,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "resilience",
+      "audit:redundant_with_cdrisc"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 14.0,
+      "normalize_max": 98.0
+    },
+    "items": [
+      {
+        "item_id": "yTa5kIM74472j86h5F",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "f6f3z6M26GzexUSt1e",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Pae48Awbw4N31wgHFy",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "t6PBvTZRb10kPWSE3C",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Z8oK6j6W85AqEs9Jfj",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "u939uDZaNSD99SH37S",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "v66GW0m2Gwoy1cnc2l",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wlPl833qSz9w09218f",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8l7WyK2g5E0VeMAk99",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "FpxNT0EN75kn2JB46c",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Uh9SuOE3F9Jf33dgxo",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_rses",
+    "questionnaire_id": "q_rses",
+    "version": "1",
+    "name": "RSES",
+    "response_type": "agree_rses_0_3",
+    "min_items_required": 7,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "self_esteem"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 30.0
+    },
+    "items": [
+      {
+        "item_id": "Jw26w1U70QF1F5X0LH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6N48WHyoAL3QVslBTL",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "fjyKD8N7TV2LSkgk4B",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "56yNfe7549p1B2V56v",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "273mY6a3PJunyaAne6",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "608nw5y45Y9KN0NrN6",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "paem8LXF787Lsgda7M",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "DcDR1f63E10E4FGQC9",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "w61lCNNDAZeJIgAh2W",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "64okxNdGW46E86in0a",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": "Rosenberg M. Society and the adolescent self-image. 1965"
+  },
+  {
+    "id": "scale_rumination",
+    "questionnaire_id": "q_rumination",
+    "version": "1",
+    "name": "Rumination",
+    "response_type": "rumination_0_3",
+    "min_items_required": 16,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "rumination"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 22.0,
+      "normalize_max": 88.0
+    },
+    "items": [
+      {
+        "item_id": "39t0L85XPO5q50y8C3",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Iy52Mw343QPQ851ZgR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "k7ngT3cFRTPnodLmYTQu",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9P8vvr40GraSK2n0oH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "auSzuJ7NTy7BJ1U8mDvP",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wpdad5JaKqEWW7LA16SF",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "swCKkPo54wPJb6HSPw",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "LdVvsm42huw6lNE59n",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "QZS55l2Ngtm35Sq4QH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ez80yrYXLoaGJvI5I1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5RMaf0k3KsHgI0ym4l",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "rTXx23IpYu9AEy0dhx",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "pKkidvXNV0VRI14F1D",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "47UT03QbVP1zFNYk4R",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "x022kTl5815C1CfJrx",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "1Bcu2LqDvl60UMdLyc",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "2vNvHum00mMpM8C6iB",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "muonFgf981beTDmpk8",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "q2l99bjS1XAhkrr1iG",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "V8IhZE1D0rMRXgf869",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "xgAB5Upoe15nNcjORq",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "MD90o76jx5Jx7nZdt4",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_ryff",
+    "questionnaire_id": "q_ryff",
+    "version": "1",
+    "name": "Ryff",
+    "response_type": "likert_agree_0_6",
+    "min_items_required": 31,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "psychological_wellbeing",
+      "audit:poor_psychometrics_short"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 6.0
+    },
+    "items": [
+      {
+        "item_id": "le8Ep3efHBJmTYBQwYcs",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "55gajCHX1wU1SmPO86IR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "x5YRUTEAEGUt2xnCuM9f",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "bDak0gbq5pCPvJyF0Dx3",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "An50wFKWFGnQ4iCYSrBu",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0nfqvfxlYtNsaSrywn7y",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "W4eclonPQVQ4Nljz0OmE",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "XMWZxxnyg0j8kOOhjqGD",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "DJ1PXZy2jtUbXOg6FfBG",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "JHHR8VRNbssISWhFDk8k",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "JCvTA0PQcJ2zNb0uYRxS",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "bSF3AMawIfSS3ez67rIo",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "aQFrzGet5roDPHYo25PP",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "519nJTrSy5tWkIbTAr2r",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0OWbBkuBacvgTepEs6H3",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "j5rY4gvX7bgwYDHdTr5j",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6MVdJP4y3smQcn4dDIaW",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "SorEQO2SBiEcMfwGrXp8",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4FPtjKxD9nJJY4zkG4gl",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "VuB0cRw5wU7ZjZJ3FpDy",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NMY0AuaKqkEPByrJpoW7",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "reev2lPSRGWYUUTLBLob",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "TJ6FaSa1rddMY4SH2zb8",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "tSQOXykCoB3SzOWUC9BR",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "lTqCvKOBHfE57rCVgXNO",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "JUcHQnUSOp5ShXCtU46u",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mJ4w9iHp76FVEXrcPXVO",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "W7qexhd7f77T9sLOQeKH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "j9A699xt0Fldx0r2mcnE",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "o1WEfteHppY9Bkb3tZZI",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "q9BsQBn3X54UJf8ORuUM",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9FVrsAltsvycI0hSEMqN",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "n7Y0DHQ5Hr1pJN4OOzw0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "eeifta6JXb2gWkMbQWXz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "w6WqaC9UhwRdkGMxNQvM",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "W6rkAshuaz25wTJ7p1f3",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "P6SoIeDkbqKMB7oK1sSh",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9iL7RG3b0ep2NlG5TJQU",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "QoTD0RBevFdzGyPF3quE",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "mCTrsZOwRe3vddi4SJZ4",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cF7JwqnEfZttr9AlZgr9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "bZ7oF1TGZbnB2WcVmZaJ",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_scl",
+    "questionnaire_id": "q_scl",
+    "version": "1",
+    "name": "SCL",
+    "response_type": "scl_0_4",
+    "min_items_required": 9,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "somatization"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 48.0
+    },
+    "items": [
+      {
+        "item_id": "7IURKRzafWiBEAdVH6bw",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "IZjNlgEIABphiWg81lK9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gHZ4Jx3N65IIDcfRYGNs",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Ayos4IRmRPjHfQPZhecM",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wKifZrOrVBCr0YdTWJRQ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "wKifZrOrVBCr0YdTWJRQ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kFPLe0cbXuw03gicqLCB",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "UidTECJMZkuwlB0p1F0b",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "j7MSKUUDYdpw8cEUSTm7",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "OBvhqdiY0H1ij3wxyx08",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CUALngzJQONdOpAr804M",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "r3m6YueqCYLCKdgQoSj6",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_sias",
+    "questionnaire_id": "q_sias",
+    "version": "1",
+    "name": "SIAS",
+    "response_type": "sias_0_4",
+    "min_items_required": 15,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "social_anxiety"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 80.0
+    },
+    "items": [
+      {
+        "item_id": "cO6XZ612IJV5y5DcWs",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5lwzsGQ4PFwEgF0c5W",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "VPf61zIwNym6gT25k1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "63o1DOGgWfn6F8otrs",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "iq9nH3Z8931SMhcO5b",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ua3R0yQ5iBT12r39v7",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "IizNMVTbYXya66rQ8v",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oB689HYZ8S94198Yi6",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8B84MR01kZ492oMR1I",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Y0vo6v2Bd8rT8239lc",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4KKGecEBhuFt37mO0Y",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "38vBoOjHOpqs2XxiSA",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "K9PgVS3OQgYJ6Ub4Px",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "N25aKY0Q0cn7M00BZk",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "umRMNyu5HZSs8P7KOH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9RWV6MG154h5RiW6dD",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6MhMtXbT7gm0o0P33J",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6001NL10EcqvEqsYQu",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "B41M477o4BiM4mTouO",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ee6PYfGEt9j068MoPO",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_sris",
+    "questionnaire_id": "q_sris",
+    "version": "1",
+    "name": "SRIS",
+    "response_type": "likert_agree_0_4",
+    "min_items_required": 15,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "self_reflection"
+    ],
+    "scoring": {
+      "method": "mean",
+      "normalize_min": 0.0,
+      "normalize_max": 4.0
+    },
+    "items": [
+      {
+        "item_id": "4928W1DGImFcVNaaxEpj",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "PmgSXEkwzlHWi5RWU0q1",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vFuCoc1yv9VjtozAnb8F",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oH3N6u2QUnLqcMvcXDpA",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "QEqwjAi8cO6M20Icjced",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ApBJdeFmvaQ5Xj5d1GtR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "QAjnGthJUJjgH2viSWBZ",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "VdJMbff8PLaNbnh4EeY7",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "7RBPQlTxwXiXW7E5eHrO",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "jujSWBUOPrTIsl0xdRBS",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "vAtdwX2kA9IYLxS7YVNf",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "OMd5E4jBkyNi8ufVqPZ5",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "r9npsq4Cyv09MgV8GuVP",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kKTkZsEh1Mvjz2HHoMOO",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "auGe5Oq0VpSL8FANuAWt",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gaDeIiIaZTH1rGu3Xesv",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "g4SbjPlDGCK5lwIIU21i",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "REL67Ieyk7VvawF40TLZ",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Wnz7hhbuXCAuZXzdo7Y7",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "GRkVzrJu49EMo5fYtJKB",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_ssq___isel",
+    "questionnaire_id": "q_ssq___isel",
+    "version": "1",
+    "name": "SSQ - ISEL",
+    "response_type": "truth_ssq_0_3",
+    "min_items_required": 30,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "social_support"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 120.0
+    },
+    "items": [
+      {
+        "item_id": "38Hs3Qhv2lazyQl0uG",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "HBPkQ20555H7BTV49Q",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "uB0WEuJz624ET91v16",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4x0ZkQvm1U7vi9knv0",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "m4b8h8Doz0j0y5G0ou",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5F8k3a2A486v5uhrc6",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "U88fVmhGbiv79qFUVG",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Wh33ZJ9wf2YO56d95K",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "8SbI57Zhy5Hy0To68h",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Yidvd3r8TBO09h4vov",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "gUyMw7iBfp84JDw1m6",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "RflQSH5n3Q96N0aP9P",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "k7Tw4kXV5rsBZ8L8JF",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qfU7x663mjzd4C3D0V",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0BGmH1y1ZYSj3iF2X4",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "L04d31uB1RndnVdlI1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4i0VeM5ikhXEyf8ad1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "k6uinW2QYTtuH1Op5k",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "IWLa612M4e9bpANqU9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "0OVC3deGmI00jJumzc",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "86QBJvg60Din87y9jJ",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Y4WgT40UV7O64Ld0N3",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5Gq01j2eRNPzsj6Du3",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CiEJgx5mzrYdi4W90Z",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "9NT7SI3FlCcnSgW2N3",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "P9yDAIGcV4eD6PL0DB",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "jv4S899z9m1GFJKLD9",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "4U54p9ws67E91uD9bB",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "T49542tZ2If2tqO498",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "5hP6wGGXNRidR88rty",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "ZSh0r19MD9B3lOX3B7",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "b83yNWo79OC7umF9xF",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "d4ekK3ED9eK51RjC8R",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "51Iaa9ODaAjAEU2J19",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "XYTdG90t1H3W4Enuko",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qFxKAV153qiXQnKvvt",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "xZ012GRXyu8h1l0HF8",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "TwnA283AUN6gqt20oQ",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "6wpd4h4vyKxD52zI1s",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "D52AtvG2yA039T41An",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_ucla_loneliness_scale",
+    "questionnaire_id": "q_ucla_loneliness_scale",
+    "version": "1",
+    "name": "UCLA Loneliness scale",
+    "response_type": "ucla_0_3",
+    "min_items_required": 14,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "loneliness"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 57.0
+    },
+    "items": [
+      {
+        "item_id": "bKyk7gseSJZkkYuPeGgy",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "kruCtsht26Xgdt5Unt5E",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "Pe9XZW70TOeEpzC8oCc1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NcuVRcSIotQy5k5RGa0B",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3gpFF4lppQslArD9A0z2",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "32TOhhYagVKFUnkkblOo",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qYW0nRqv1P5Abpn2SraR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "628Bqaklmkz6cto6349u",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "qHvg9bETAwsXslaI7dmy",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "yCxTabphEdjnelAlp6Jz",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "QU6ojkK1iFnR7C0VtU65",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "xhIoNbByqhG87XMqsC2d",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "PoNd9VxMLoS5eXZjiSQh",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oYqFYNWliHBLWDg7T2JE",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "WyyAHUbIuhT3yamEOonD",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "laJmmXP9logHrE9412MW",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "LTuq0fZnjwoYJY0eUHc1",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "QwnnePosSBADKbFi1trW",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "rAHofFKoN0RwpY3Yl9tY",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "id": "scale_visceral_sensitivity_index",
+    "questionnaire_id": "q_visceral_sensitivity_index",
+    "version": "1",
+    "name": "Visceral Sensitivity Index",
+    "response_type": "visceral_0_5",
+    "min_items_required": 11,
+    "unlock_window_days": 0,
+    "retest_interval_days": 30,
+    "tags": [
+      "immune",
+      "metabolic",
+      "visceral_sensitivity"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 75.0
+    },
+    "items": [
+      {
+        "item_id": "bHqk9Nt51fFFRZ5LLNyv",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "oklknoSSFI0lQZITypXg",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "fqyG2EHVMy7qrSLRmARR",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "zyg3QVh2glSXGoLfw22t",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "CqsHAIpKd7gQNEgLreNW",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "BuVoTct7jOOOsmPkcszM",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cI6ZdcJSOn1rphHUdguq",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "LjCfVm7VTcSHYEYDIRmw",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "HYpzXDYdmMBlsKWK3qIv",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "NptP2vOTEErcU5WDuEeU",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "YmdyAKehdsyUC8LeuH1c",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "iNn0rHfeoKoIZAjuyRMH",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "pdbPxop5pl86KVV36d8X",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "3EuILYEm7nfFJjTW1WQS",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "FYtnpHLd3LIf9WTe5E0A",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
+  },
+  {
+    "citation": "AUDIT-C: Bush et al., 1998, Arch Intern Med 158:1789-1795, DOI:10.1001/archinte.158.16.1789. Validated for electronic administration (Simon et al., 2024, Alcohol Clin Exp Res).",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_audit_c",
+    "items": [
+      {
+        "item_id": "cm_alcohol_intake_frequency",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_audit_typical_drinks",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_audit_binge_frequency",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_sex_at_birth",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 3,
+    "name": "AUDIT-C alcohol risk",
+    "questionnaire_id": "q_cardio_auditc",
+    "response_type": "audit_frequency_0_4",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "instrument_audit_c",
+      "normalize_max": 12.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "alcohol"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "Simplified CVD risk based on Framingham variables. See D Agostino et al., 2008, Circulation 117:743-753, DOI:10.1161/CIRCULATIONAHA.107.699579.",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_ez_cvd",
+    "items": [
+      {
+        "item_id": "cm_age_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_sex_at_birth",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_smoking_current",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_high_glucose_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bp_medication",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_family_mi_history",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 6,
+    "name": "EZ-CVD cardiovascular risk",
+    "questionnaire_id": "q_cardio_ez_cvd",
+    "response_type": "bool_0_1",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "instrument_ez_cvd",
+      "normalize_max": 6.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "cardiovascular"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "FINDRISC: Lindstrom & Tuomilehto, 2003, Diabetes Care 26:725-731, DOI:10.2337/diacare.26.3.725. Population-specific cutoffs needed for non-Finnish populations.",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_findrisc",
+    "items": [
+      {
+        "item_id": "cm_age_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bmi_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_waist_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_activity_daily",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_fruit_veg_daily",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bp_medication",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_high_glucose_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_family_diabetes_history",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 8,
+    "name": "FINDRISC diabetes risk",
+    "questionnaire_id": "q_cardio_findrisc",
+    "response_type": "bool_0_1",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "instrument_findrisc",
+      "normalize_max": 26.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "diabetes"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "IPAQ-SF: Craig et al., 2003, Med Sci Sports Exerc 35:1381-1395, DOI:10.1249/01.MSS.0000078924.61453.FB. Known to overestimate PA by 36-173% vs accelerometry; use as categorical classifier (low/moderate/high).",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_ipaq_sf",
+    "items": [
+      {
+        "item_id": "cm_ipaq_vig_days",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_vig_minutes",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_mod_days",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_mod_minutes",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_walk_days",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_walk_minutes",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_sit_minutes",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 7,
+    "name": "IPAQ activity level",
+    "questionnaire_id": "q_cardio_ipaq",
+    "response_type": "days_0_7",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "instrument_ipaq_sf",
+      "normalize_max": 6000.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "activity"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "Lee NAFLD Index: Lee et al., 2012, Hepatology 55:1103-1111, DOI:10.1002/hep.24768.",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_lee_nafld",
+    "items": [
+      {
+        "item_id": "cm_age_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_sex_at_birth",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_waist_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bmi_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_high_glucose_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_dyslipidemia_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_alcohol_intake_frequency",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_activity_daily",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 8,
+    "name": "Lee NAFLD liver risk",
+    "questionnaire_id": "q_cardio_lee_nafld",
+    "response_type": "bool_0_1",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "instrument_lee_nafld",
+      "normalize_max": 15.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "liver"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "SCORED: Bansal et al., 2007, Arch Intern Med 167:374-381, DOI:10.1001/archinte.167.4.374.",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_scored",
+    "items": [
+      {
+        "item_id": "cm_age_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_sex_at_birth",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_anemia_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bp_medication",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_high_glucose_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_cvd_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_chf_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_pvd_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_proteinuria_history",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 9,
+    "name": "SCORED kidney risk",
+    "questionnaire_id": "q_cardio_scored",
+    "response_type": "bool_0_1",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "instrument_scored",
+      "normalize_max": 12.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "kidney"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from GAD-7 (Spitzer et al., 2006, Arch Intern Med 166:1092-1097). Demo items; use validated GAD-7 for clinical deployment.",
+    "ewma_alpha": 0.3,
+    "id": "scale_demo_anxiety",
+    "items": [
+      {
+        "item_id": "item_worry_often",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_restless",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_panic_like",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_tension",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_concentration_hard",
+        "reverse": false,
+        "weight": 0.5
+      }
+    ],
+    "min_items_required": 4,
+    "name": "Anxiety severity (Demo)",
+    "questionnaire_id": "q_demo_anxiety",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "anxiety"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PROMIS Fatigue SF (Cella et al., 2010, J Clin Epidemiol 63:1179-1194). Demo items.",
+    "ewma_alpha": 0.25,
+    "id": "scale_demo_energy",
+    "items": [
+      {
+        "item_id": "item_energy_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_fatigue",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_not_rested",
+        "reverse": false,
+        "weight": 0.7
+      },
+      {
+        "item_id": "item_concentration_hard",
+        "reverse": false,
+        "weight": 0.5
+      }
+    ],
+    "min_items_required": 3,
+    "name": "Low energy (Demo)",
+    "questionnaire_id": "q_demo_energy",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "energy"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from GSRS (Svedlund et al., 1988, Dig Dis Sci 33:129-134). Demo items.",
+    "ewma_alpha": 0.2,
+    "id": "scale_demo_gi",
+    "items": [
+      {
+        "item_id": "item_gi_pain",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_gi_bloating",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_gi_bowel_change",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_gi_urgency",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_nutrition_appetite_low",
+        "reverse": false,
+        "weight": 0.7
+      }
+    ],
+    "min_items_required": 4,
+    "name": "GI symptom burden (Demo)",
+    "questionnaire_id": "q_demo_gi",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "gi"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PHQ-9 (Kroenke et al., 2001, J Gen Intern Med 16:606-613). Demo items; use validated PHQ-9 for clinical deployment.",
+    "ewma_alpha": 0.3,
+    "id": "scale_demo_mood",
+    "items": [
+      {
+        "item_id": "item_interest_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_mood_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_fatigue",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_concentration_hard",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_social_isolated",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 4,
+    "name": "Mood severity (Demo)",
+    "questionnaire_id": "q_demo_mood",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "mood"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Custom composite. Items adapted from SNAQ (Wilson et al., 2005, Am J Clin Nutr 82:1074-1081).",
+    "ewma_alpha": 0.15,
+    "id": "scale_demo_nutrition",
+    "items": [
+      {
+        "item_id": "item_nutrition_regular_meals",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_nutrition_appetite_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_gi_bloating",
+        "reverse": false,
+        "weight": 0.3
+      }
+    ],
+    "min_items_required": 2,
+    "name": "Nutrition QoL friction (Demo)",
+    "questionnaire_id": "q_demo_nutrition",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "nutrition"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PROMIS Pain Interference SF (Amtmann et al., 2010, J Pain 11:1109-1119). Demo items.",
+    "ewma_alpha": 0.2,
+    "id": "scale_demo_pain",
+    "items": [
+      {
+        "item_id": "item_pain_level",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_pain_interference",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 2,
+    "name": "Pain impact (Demo)",
+    "questionnaire_id": "q_demo_pain",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "pain"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from BRS (Smith et al., 2008, Int J Behav Med 15:194-200). Demo items.",
+    "ewma_alpha": 0.15,
+    "id": "scale_demo_resilience",
+    "items": [
+      {
+        "item_id": "item_resilience_bounce_back",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_resilience_self_efficacy",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_stress_overwhelmed",
+        "reverse": false,
+        "weight": 0.5
+      }
+    ],
+    "min_items_required": 2,
+    "name": "Low resilience signal (Demo)",
+    "questionnaire_id": "q_demo_resilience",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "resilience"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PSQI (Buysse et al., 1989, Psychiatry Res 28:193-213). Demo items.",
+    "ewma_alpha": 0.25,
+    "id": "scale_demo_sleep",
+    "items": [
+      {
+        "item_id": "item_sleep_fall_asleep",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_stay_asleep",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_early_wake",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_quality",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_not_rested",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 4,
+    "name": "Sleep problems (Demo)",
+    "questionnaire_id": "q_demo_sleep",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "sleep"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from UCLA Loneliness Scale (Russell, 1996, J Pers Assess 66:20-40). Demo items.",
+    "ewma_alpha": 0.2,
+    "id": "scale_demo_social",
+    "items": [
+      {
+        "item_id": "item_social_connected",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_social_isolated",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 2,
+    "name": "Social disconnection (Demo)",
+    "questionnaire_id": "q_demo_social",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "social"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PSS-4 (Cohen et al., 1983, J Health Soc Behav 24:385-396). Demo items.",
+    "ewma_alpha": 0.3,
+    "id": "scale_demo_stress",
+    "items": [
+      {
+        "item_id": "item_stress_overwhelmed",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_stress_control_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_tension",
+        "reverse": false,
+        "weight": 0.7
+      },
+      {
+        "item_id": "item_irritable",
+        "reverse": false,
+        "weight": 0.5
+      }
+    ],
+    "min_items_required": 3,
+    "name": "Stress load (Demo)",
+    "questionnaire_id": "q_demo_stress",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "stress"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  }
+]

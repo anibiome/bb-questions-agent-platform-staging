@@ -1,0 +1,1210 @@
+[
+  {
+    "id": "affect_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Very slightly or not at all"
+      ],
+      [
+        1,
+        "A little"
+      ],
+      [
+        2,
+        "Moderate"
+      ],
+      [
+        3,
+        "Quite a bit"
+      ],
+      [
+        4,
+        "Extremely"
+      ]
+    ]
+  },
+  {
+    "id": "agree_0_5",
+    "min_value": 0.0,
+    "max_value": 5.0,
+    "options": [
+      [
+        0,
+        "Definitely disagree"
+      ],
+      [
+        1,
+        "Mostly disagree"
+      ],
+      [
+        2,
+        "Somewhat disagree"
+      ],
+      [
+        3,
+        "Somewhat agree"
+      ],
+      [
+        4,
+        "Mostly agree"
+      ],
+      [
+        5,
+        "Definitely agree"
+      ]
+    ]
+  },
+  {
+    "id": "agree_brs_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Strongly disagree"
+      ],
+      [
+        1,
+        "Disagree"
+      ],
+      [
+        2,
+        "Neither agree or disagree"
+      ],
+      [
+        3,
+        "Agree"
+      ],
+      [
+        4,
+        "Strongly agree"
+      ]
+    ]
+  },
+  {
+    "id": "agree_rs_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Strongly disagree"
+      ],
+      [
+        1,
+        "Disagree"
+      ],
+      [
+        2,
+        "Neither agree nor disagree"
+      ],
+      [
+        3,
+        "Agree"
+      ],
+      [
+        4,
+        "Strongly agree"
+      ]
+    ]
+  },
+  {
+    "id": "agree_rses_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Strongly Disagree"
+      ],
+      [
+        1,
+        "Disagree"
+      ],
+      [
+        2,
+        "Agree"
+      ],
+      [
+        3,
+        "Strongly Agree"
+      ]
+    ]
+  },
+  {
+    "id": "camsr_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Not at all"
+      ],
+      [
+        1,
+        "Sometimes"
+      ],
+      [
+        2,
+        "Often"
+      ],
+      [
+        3,
+        "Almost always"
+      ]
+    ]
+  },
+  {
+    "id": "cfq_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Never"
+      ],
+      [
+        1,
+        "Very rarely"
+      ],
+      [
+        2,
+        "Occasionally"
+      ],
+      [
+        3,
+        "Quite often"
+      ],
+      [
+        4,
+        "Very often"
+      ]
+    ]
+  },
+  {
+    "id": "cope_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "I usually don't do this at all"
+      ],
+      [
+        1,
+        "I usually do this a little bit"
+      ],
+      [
+        2,
+        "I usually do this a medium amount"
+      ],
+      [
+        3,
+        "I usually do this a lot"
+      ]
+    ]
+  },
+  {
+    "id": "coping_efficacy_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Cannot do at all"
+      ],
+      [
+        1,
+        "Cannot do most of the time"
+      ],
+      [
+        2,
+        "Can do sometimes"
+      ],
+      [
+        3,
+        "Moderately certain can do"
+      ],
+      [
+        4,
+        "Certain can do"
+      ]
+    ]
+  },
+  {
+    "id": "creativity_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Much less creative"
+      ],
+      [
+        1,
+        "Less creative"
+      ],
+      [
+        2,
+        "Neither more or less creative"
+      ],
+      [
+        3,
+        "More creative"
+      ],
+      [
+        4,
+        "Much more creative"
+      ]
+    ]
+  },
+  {
+    "id": "dass_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Did not apply to me at all"
+      ],
+      [
+        1,
+        "Applied to me to some of the time"
+      ],
+      [
+        2,
+        "Applied to me a good part of the time"
+      ],
+      [
+        3,
+        "Applied to me most of the time"
+      ]
+    ]
+  },
+  {
+    "id": "days_0_7",
+    "min_value": 0.0,
+    "max_value": 7.0,
+    "options": [
+      [
+        0,
+        "0 days"
+      ],
+      [
+        1,
+        "1 day"
+      ],
+      [
+        2,
+        "2 days"
+      ],
+      [
+        3,
+        "3 days"
+      ],
+      [
+        4,
+        "4 days"
+      ],
+      [
+        5,
+        "5 days"
+      ],
+      [
+        6,
+        "6 days"
+      ],
+      [
+        7,
+        "7 days"
+      ]
+    ]
+  },
+  {
+    "id": "discomfort_0_6",
+    "min_value": 0.0,
+    "max_value": 6.0,
+    "options": [
+      [
+        0,
+        "No discomfort at all"
+      ],
+      [
+        1,
+        "Minor discomfort"
+      ],
+      [
+        2,
+        "Mild discomfort"
+      ],
+      [
+        3,
+        "Moderate discomfort"
+      ],
+      [
+        4,
+        "Moderately severe discomfort"
+      ],
+      [
+        5,
+        "Severe discomfort"
+      ],
+      [
+        6,
+        "Very severe discomfort"
+      ]
+    ]
+  },
+  {
+    "id": "ds14_0_5",
+    "min_value": 0.0,
+    "max_value": 5.0,
+    "options": [
+      [
+        0,
+        "Strongly disagree"
+      ],
+      [
+        1,
+        "Somewhat disagree"
+      ],
+      [
+        2,
+        "A little disagree"
+      ],
+      [
+        3,
+        "Neither agree or disagree"
+      ],
+      [
+        4,
+        "A little agree"
+      ],
+      [
+        5,
+        "Somewhat agree"
+      ]
+    ]
+  },
+  {
+    "id": "erq_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Strongly disagree"
+      ],
+      [
+        1,
+        "Disagree a little"
+      ],
+      [
+        2,
+        "Neutral, no opinion"
+      ],
+      [
+        3,
+        "Agree a little"
+      ],
+      [
+        4,
+        "Totally agree"
+      ]
+    ]
+  },
+  {
+    "id": "fatigue_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Not at all"
+      ],
+      [
+        1,
+        "Less than usual"
+      ],
+      [
+        2,
+        "No more than usual"
+      ],
+      [
+        3,
+        "More than usual"
+      ]
+    ]
+  },
+  {
+    "id": "fmi_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Rarely"
+      ],
+      [
+        1,
+        "Occasionally"
+      ],
+      [
+        2,
+        "Fairly often"
+      ],
+      [
+        3,
+        "Almost always"
+      ]
+    ]
+  },
+  {
+    "id": "freq_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "None of the time"
+      ],
+      [
+        1,
+        "A little of the time"
+      ],
+      [
+        2,
+        "Some of the time"
+      ],
+      [
+        3,
+        "A good bit of the time"
+      ],
+      [
+        4,
+        "All of the time"
+      ]
+    ]
+  },
+  {
+    "id": "freq_dqlq_0_5",
+    "min_value": 0.0,
+    "max_value": 5.0,
+    "options": [
+      [
+        0,
+        "Never"
+      ],
+      [
+        1,
+        "Rarely"
+      ],
+      [
+        2,
+        "Occasionally"
+      ],
+      [
+        3,
+        "Sometimes"
+      ],
+      [
+        4,
+        "Frequently"
+      ],
+      [
+        5,
+        "Usually"
+      ]
+    ]
+  },
+  {
+    "id": "freq_ibs_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Never"
+      ],
+      [
+        1,
+        "Some of the time"
+      ],
+      [
+        2,
+        "Most of the time"
+      ],
+      [
+        3,
+        "Always"
+      ]
+    ]
+  },
+  {
+    "id": "freq_mhc_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "None of the time"
+      ],
+      [
+        1,
+        "A little of the time"
+      ],
+      [
+        2,
+        "Some of the time"
+      ],
+      [
+        3,
+        "Most of the time"
+      ],
+      [
+        4,
+        "All the time"
+      ]
+    ]
+  },
+  {
+    "id": "freq_never_almost_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Never"
+      ],
+      [
+        1,
+        "Rarely"
+      ],
+      [
+        2,
+        "Sometimes"
+      ],
+      [
+        3,
+        "Often"
+      ],
+      [
+        4,
+        "Almost always"
+      ]
+    ]
+  },
+  {
+    "id": "freq_never_always_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Never"
+      ],
+      [
+        1,
+        "Seldom"
+      ],
+      [
+        2,
+        "Occasionally"
+      ],
+      [
+        3,
+        "Usually"
+      ],
+      [
+        4,
+        "Always"
+      ]
+    ]
+  },
+  {
+    "id": "hads_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Not at all"
+      ],
+      [
+        1,
+        "Not often"
+      ],
+      [
+        2,
+        "Sometimes"
+      ],
+      [
+        3,
+        "Most of the time"
+      ]
+    ]
+  },
+  {
+    "id": "harrill_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "I never think, feel or behave this way"
+      ],
+      [
+        1,
+        "I do less than half the time"
+      ],
+      [
+        2,
+        "I do 50% of the time."
+      ],
+      [
+        3,
+        "I do more than half the time"
+      ],
+      [
+        4,
+        "I always think, feel or behave this way"
+      ]
+    ]
+  },
+  {
+    "id": "likert_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Not At All"
+      ],
+      [
+        1,
+        "Several Days"
+      ],
+      [
+        2,
+        "More than half of days"
+      ],
+      [
+        3,
+        "Nearly every day"
+      ]
+    ]
+  },
+  {
+    "id": "likert_agree_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Strongly disagree"
+      ],
+      [
+        1,
+        "Disagree"
+      ],
+      [
+        2,
+        "Neither agree nor disagree"
+      ],
+      [
+        3,
+        "Agree"
+      ],
+      [
+        4,
+        "Strongly agree"
+      ]
+    ]
+  },
+  {
+    "id": "likert_agree_0_6",
+    "min_value": 0.0,
+    "max_value": 6.0,
+    "options": [
+      [
+        0,
+        "Strongly disagree"
+      ],
+      [
+        1,
+        "Somewhat disagree"
+      ],
+      [
+        2,
+        "A little disagree"
+      ],
+      [
+        3,
+        "Neither agree or disagree"
+      ],
+      [
+        4,
+        "A little agree"
+      ],
+      [
+        5,
+        "Somewhat agree"
+      ],
+      [
+        6,
+        "Strongly agree"
+      ]
+    ]
+  },
+  {
+    "id": "likert_bfi_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Disagree strongly"
+      ],
+      [
+        1,
+        "Disagree a little"
+      ],
+      [
+        2,
+        "Neutral, no opinion"
+      ],
+      [
+        3,
+        "Agree a little"
+      ],
+      [
+        4,
+        "Agree strongly"
+      ]
+    ]
+  },
+  {
+    "id": "likert_freq_1_7",
+    "min_value": 1.0,
+    "max_value": 7.0,
+    "options": [
+      [
+        1,
+        "Never true"
+      ],
+      [
+        2,
+        "Very rarely true"
+      ],
+      [
+        3,
+        "Rarely true"
+      ],
+      [
+        4,
+        "Sometimes true"
+      ],
+      [
+        5,
+        "Frequently true"
+      ],
+      [
+        6,
+        "Almost always true"
+      ],
+      [
+        7,
+        "Always true"
+      ]
+    ]
+  },
+  {
+    "id": "likert_paq_0_6",
+    "min_value": 0.0,
+    "max_value": 6.0,
+    "options": [
+      [
+        0,
+        "Strongly disagree"
+      ],
+      [
+        1,
+        "Somewhat disagree"
+      ],
+      [
+        2,
+        "A little disagree"
+      ],
+      [
+        3,
+        "Neither agree or disagree"
+      ],
+      [
+        4,
+        "A little agree"
+      ],
+      [
+        5,
+        "Somewhat agree"
+      ],
+      [
+        6,
+        "Strongly agree"
+      ]
+    ]
+  },
+  {
+    "id": "memory_freq_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Never"
+      ],
+      [
+        1,
+        "Rarely"
+      ],
+      [
+        2,
+        "Sometimes"
+      ],
+      [
+        3,
+        "Often"
+      ],
+      [
+        4,
+        "All the time"
+      ]
+    ]
+  },
+  {
+    "id": "mindful_freq_0_5",
+    "min_value": 0.0,
+    "max_value": 5.0,
+    "options": [
+      [
+        0,
+        "Almost never"
+      ],
+      [
+        1,
+        "Very infrequently"
+      ],
+      [
+        2,
+        "Somewhat infrequently"
+      ],
+      [
+        3,
+        "Somewhat frequently"
+      ],
+      [
+        4,
+        "Very frequently"
+      ],
+      [
+        5,
+        "Almost always"
+      ]
+    ]
+  },
+  {
+    "id": "mspss_1_6",
+    "min_value": 0.0,
+    "max_value": 5.0,
+    "options": [
+      [
+        0,
+        "Very Strongly Disagree"
+      ],
+      [
+        1,
+        "Strongly disagree"
+      ],
+      [
+        2,
+        "Mildly disagree"
+      ],
+      [
+        3,
+        "Neutral"
+      ],
+      [
+        4,
+        "Mildly agree"
+      ],
+      [
+        5,
+        "Strongly agree"
+      ]
+    ]
+  },
+  {
+    "id": "pss_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Never"
+      ],
+      [
+        1,
+        "Almost never"
+      ],
+      [
+        2,
+        "Sometimes"
+      ],
+      [
+        3,
+        "Fairly often"
+      ],
+      [
+        4,
+        "Very often"
+      ]
+    ]
+  },
+  {
+    "id": "rumination_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Almost never"
+      ],
+      [
+        1,
+        "Sometimes"
+      ],
+      [
+        2,
+        "Often"
+      ],
+      [
+        3,
+        "Almost always"
+      ]
+    ]
+  },
+  {
+    "id": "satisfaction_0_6",
+    "min_value": 0.0,
+    "max_value": 6.0,
+    "options": [
+      [
+        0,
+        "Not satisfied"
+      ],
+      [
+        1,
+        "Unhappy"
+      ],
+      [
+        2,
+        "Mostly dissatisfied"
+      ],
+      [
+        3,
+        "Mixed"
+      ],
+      [
+        4,
+        "Mostly satisfied"
+      ],
+      [
+        5,
+        "Pleased"
+      ],
+      [
+        6,
+        "Delighted"
+      ]
+    ]
+  },
+  {
+    "id": "scl_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Not at all"
+      ],
+      [
+        1,
+        "A little bit"
+      ],
+      [
+        2,
+        "Moderately"
+      ],
+      [
+        3,
+        "Quite a bit"
+      ],
+      [
+        4,
+        "Extremely"
+      ]
+    ]
+  },
+  {
+    "id": "sias_0_4",
+    "min_value": 0.0,
+    "max_value": 4.0,
+    "options": [
+      [
+        0,
+        "Not at all"
+      ],
+      [
+        1,
+        "Slightly"
+      ],
+      [
+        2,
+        "Moderately"
+      ],
+      [
+        3,
+        "Very"
+      ],
+      [
+        4,
+        "Extremely"
+      ]
+    ]
+  },
+  {
+    "id": "truth_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Not true at all"
+      ],
+      [
+        1,
+        "Hardly true"
+      ],
+      [
+        2,
+        "Moderately true"
+      ],
+      [
+        3,
+        "Completely true"
+      ]
+    ]
+  },
+  {
+    "id": "truth_gse_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Not true at all"
+      ],
+      [
+        1,
+        "Hardly true"
+      ],
+      [
+        2,
+        "Moderately true"
+      ],
+      [
+        3,
+        "Exactly true"
+      ]
+    ]
+  },
+  {
+    "id": "truth_ssq_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "Definitely false"
+      ],
+      [
+        1,
+        "Probably false"
+      ],
+      [
+        2,
+        "Probably true"
+      ],
+      [
+        3,
+        "Definitely true"
+      ]
+    ]
+  },
+  {
+    "id": "ucla_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0,
+        "I never feel this way"
+      ],
+      [
+        1,
+        "I rarely feel this way"
+      ],
+      [
+        2,
+        "I sometimes feel this way"
+      ],
+      [
+        3,
+        "I often feel this way"
+      ]
+    ]
+  },
+  {
+    "id": "visceral_0_5",
+    "min_value": 0.0,
+    "max_value": 5.0,
+    "options": [
+      [
+        0,
+        "Strongly disagree"
+      ],
+      [
+        1,
+        "Moderately disagree"
+      ],
+      [
+        2,
+        "Mildly disagree"
+      ],
+      [
+        3,
+        "Mildly agree"
+      ],
+      [
+        4,
+        "Moderately agree"
+      ],
+      [
+        5,
+        "Strongly agree"
+      ]
+    ]
+  }
+]

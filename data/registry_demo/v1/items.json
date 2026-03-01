@@ -1,0 +1,295 @@
+[
+  {
+    "id": "item_interest_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "mood"
+    ],
+    "text": "In the last 24 hours, I felt less interested in things I usually enjoy."
+  },
+  {
+    "id": "item_mood_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "mood"
+    ],
+    "text": "In the last 24 hours, I felt down, sad, or hopeless."
+  },
+  {
+    "id": "item_energy_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "energy"
+    ],
+    "text": "In the last 24 hours, my energy felt low."
+  },
+  {
+    "id": "item_fatigue",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "energy",
+      "sleep",
+      "mood"
+    ],
+    "text": "In the last 24 hours, I felt unusually fatigued."
+  },
+  {
+    "id": "item_concentration_hard",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "cognitive",
+      "mood"
+    ],
+    "text": "In the last 24 hours, it was hard to concentrate."
+  },
+  {
+    "id": "item_irritable",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "mood",
+      "stress"
+    ],
+    "text": "In the last 24 hours, I felt more irritable than usual."
+  },
+  {
+    "id": "item_worry_often",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "anxiety"
+    ],
+    "text": "In the last 24 hours, I worried a lot."
+  },
+  {
+    "id": "item_restless",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "anxiety",
+      "sleep"
+    ],
+    "text": "In the last 24 hours, I felt restless or on edge."
+  },
+  {
+    "id": "item_panic_like",
+    "response_type": "likert_0_4",
+    "sensitivity": "medium",
+    "tags": [
+      "anxiety"
+    ],
+    "text": "In the last 24 hours, I had moments of intense anxiety or panic-like feelings."
+  },
+  {
+    "id": "item_tension",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "anxiety",
+      "stress"
+    ],
+    "text": "In the last 24 hours, I felt tense in my body."
+  },
+  {
+    "id": "item_sleep_fall_asleep",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep"
+    ],
+    "text": "Last night, I had difficulty falling asleep."
+  },
+  {
+    "id": "item_sleep_stay_asleep",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep"
+    ],
+    "text": "Last night, I woke up during the night and had trouble getting back to sleep."
+  },
+  {
+    "id": "item_sleep_early_wake",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep"
+    ],
+    "text": "Last night, I woke up earlier than I wanted."
+  },
+  {
+    "id": "item_sleep_quality",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep"
+    ],
+    "text": "Overall, my sleep quality last night was poor."
+  },
+  {
+    "id": "item_sleep_not_rested",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep",
+      "energy"
+    ],
+    "text": "This morning, I did not feel rested."
+  },
+  {
+    "id": "item_gi_pain",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "gi"
+    ],
+    "text": "In the last 24 hours, I had abdominal discomfort."
+  },
+  {
+    "id": "item_gi_bloating",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "gi"
+    ],
+    "text": "In the last 24 hours, I felt bloated."
+  },
+  {
+    "id": "item_gi_bowel_change",
+    "response_type": "likert_0_4",
+    "sensitivity": "medium",
+    "tags": [
+      "gi"
+    ],
+    "text": "In the last 24 hours, my bowel habits felt different from usual."
+  },
+  {
+    "id": "item_gi_urgency",
+    "response_type": "likert_0_4",
+    "sensitivity": "medium",
+    "tags": [
+      "gi"
+    ],
+    "text": "In the last 24 hours, I had urgency when needing to use the bathroom."
+  },
+  {
+    "id": "item_pain_level",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "pain"
+    ],
+    "text": "In the last 24 hours, I had physical pain."
+  },
+  {
+    "id": "item_pain_interference",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "pain",
+      "function"
+    ],
+    "text": "In the last 24 hours, pain interfered with my daily activities."
+  },
+  {
+    "id": "item_stress_overwhelmed",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "stress"
+    ],
+    "text": "In the last 24 hours, I felt overwhelmed."
+  },
+  {
+    "id": "item_stress_control_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "stress"
+    ],
+    "text": "In the last 24 hours, I felt I had little control over what happened."
+  },
+  {
+    "id": "item_social_connected",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "social"
+    ],
+    "text": "In the last 24 hours, I felt socially connected."
+  },
+  {
+    "id": "item_social_isolated",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "social",
+      "mood"
+    ],
+    "text": "In the last 24 hours, I felt isolated."
+  },
+  {
+    "id": "item_nutrition_regular_meals",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "nutrition"
+    ],
+    "text": "In the last 24 hours, I ate in a way that felt supportive for my body."
+  },
+  {
+    "id": "item_nutrition_appetite_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "nutrition",
+      "gi",
+      "mood"
+    ],
+    "text": "In the last 24 hours, my appetite was low."
+  },
+  {
+    "id": "item_resilience_bounce_back",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "resilience",
+      "stress"
+    ],
+    "text": "In the last 24 hours, I recovered quickly after stress."
+  },
+  {
+    "id": "item_resilience_self_efficacy",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "resilience"
+    ],
+    "text": "In the last 24 hours, I felt capable of handling challenges."
+  },
+
+  {"id": "vit_who5_cheerful", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "mood"], "text": "Over the last two weeks, I have felt cheerful and in good spirits."},
+  {"id": "vit_who5_calm", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "stress"], "text": "Over the last two weeks, I have felt calm and relaxed."},
+  {"id": "vit_who5_active", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "Over the last two weeks, I have felt active and vigorous."},
+  {"id": "vit_who5_rested", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "sleep"], "text": "Over the last two weeks, I woke up feeling fresh and rested."},
+  {"id": "vit_who5_interesting", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "mood"], "text": "Over the last two weeks, my daily life has been filled with things that interest me."},
+
+  {"id": "vit_sf36_pep", "response_type": "sf36_vt_1_6", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "During the past 4 weeks, how much of the time did you feel full of pep?"},
+  {"id": "vit_sf36_energy", "response_type": "sf36_vt_1_6", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "During the past 4 weeks, how much of the time did you have a lot of energy?"},
+  {"id": "vit_sf36_worn_out", "response_type": "sf36_vt_1_6", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "During the past 4 weeks, how much of the time did you feel worn out?"},
+  {"id": "vit_sf36_tired", "response_type": "sf36_vt_1_6", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "During the past 4 weeks, how much of the time did you feel tired?"},
+
+  {"id": "vit_pf7_tired", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "In the past 7 days, how often did you feel tired?"},
+  {"id": "vit_pf7_exhaustion", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "In the past 7 days, how often did you experience extreme exhaustion?"},
+  {"id": "vit_pf7_run_out", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "In the past 7 days, how often did you run out of energy?"},
+  {"id": "vit_pf7_limit_work", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy", "function"], "text": "In the past 7 days, how often did your fatigue limit you at work?"},
+  {"id": "vit_pf7_think", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "cognitive"], "text": "In the past 7 days, how often were you too tired to think clearly?"},
+  {"id": "vit_pf7_bath", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "function"], "text": "In the past 7 days, how often were you too tired to take a bath or shower?"},
+  {"id": "vit_pf7_exercise", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "In the past 7 days, how often did fatigue make it difficult to plan ahead for exercise?"}
+]
+

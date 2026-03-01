@@ -1,0 +1,37 @@
+{
+  "database_path": "questions_agent_platform/output/questions_agent_demo.sqlite",
+  "registry_root": "questions_agent_platform/output/registry",
+  "host": "127.0.0.1",
+  "port": 8088,
+  "dashboard_enabled": true,
+  "timezone": "UTC",
+  "core_questions_per_day": 5,
+  "extra_batch_size": 5,
+  "extra_batches_max_per_day": 3,
+  "item_repeat_cooldown_days": 7,
+  "default_unlock_window_days": 14,
+  "default_retest_interval_days": 90,
+  "max_active_new_domains": 2,
+  "safety_event_lookback_days": 30,
+  "safety_min_questions_override": 3,
+  "emotion_deep_dive_item_count": 10,
+
+  "policy_root": "questions_agent_platform/data/policy_demo",
+  "policy_default_version": "v1",
+  "policy_default_mode": "policy_shadow",
+  "policy_epsilon_explore": 0.05,
+  "policy_log_context_snapshot": true,
+  "policy_log_candidate_set_snapshot": true,
+
+  "policy_store_z_snapshot": false,
+  "policy_store_z_delta": true,
+  "policy_quantize_decimals": 3,
+  "policy_auto_rollback_enabled": true,
+  "policy_rollback_window_days": 14,
+  "policy_rollback_min_outcomes": 40,
+  "policy_rollback_max_safety_violations": 0,
+  "policy_rollback_min_completion_drop": 0.03,
+  "policy_rollback_burden_increase_ratio": 1.1,
+
+  "drift_routing_table_path": null
+}

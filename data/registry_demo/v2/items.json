@@ -1,0 +1,748 @@
+[
+  {
+    "declinable": true,
+    "id": "cm_activity_daily",
+    "intrusiveness": "low",
+    "onboarding_order": 11,
+    "response_type": "bool_0_1",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "activity",
+      "lifestyle"
+    ],
+    "text": "Do you get at least 30 minutes of activity on most days?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_age_band",
+    "intrusiveness": "low",
+    "onboarding_order": 2,
+    "response_type": "age_band_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "demographics"
+    ],
+    "text": "Which age range are you in?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_alcohol_intake_frequency",
+    "intrusiveness": "medium",
+    "onboarding_order": 18,
+    "response_type": "audit_frequency_0_4",
+    "sensitivity": "medium",
+    "tags": [
+      "cardiometabolic",
+      "lifestyle",
+      "alcohol"
+    ],
+    "text": "How often do you drink alcohol?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_anemia_history",
+    "intrusiveness": "medium",
+    "onboarding_order": 12,
+    "response_type": "bool_0_1",
+    "sensitivity": "medium",
+    "tags": [
+      "cardiometabolic",
+      "kidney"
+    ],
+    "text": "Have you been told you have anemia?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_audit_binge_frequency",
+    "intrusiveness": "high",
+    "onboarding_order": 20,
+    "response_type": "audit_binge_0_4",
+    "sensitivity": "high",
+    "tags": [
+      "cardiometabolic",
+      "lifestyle",
+      "alcohol"
+    ],
+    "text": "How often do you have 6 or more drinks on one occasion?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_audit_typical_drinks",
+    "intrusiveness": "medium",
+    "onboarding_order": 19,
+    "response_type": "audit_typical_0_4",
+    "sensitivity": "medium",
+    "tags": [
+      "cardiometabolic",
+      "lifestyle",
+      "alcohol"
+    ],
+    "text": "How many drinks do you typically have on a drinking day?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_bmi_band",
+    "intrusiveness": "low",
+    "onboarding_order": 7,
+    "response_type": "bmi_band_0_3",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "metabolic",
+      "anthropometrics"
+    ],
+    "text": "Which BMI range best matches you right now?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_bp_medication",
+    "intrusiveness": "medium",
+    "onboarding_order": 5,
+    "response_type": "bool_0_1",
+    "sensitivity": "medium",
+    "tags": [
+      "cardiometabolic",
+      "cardiovascular",
+      "hypertension"
+    ],
+    "text": "Do you currently use blood pressure medication?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_chf_history",
+    "intrusiveness": "high",
+    "onboarding_order": 14,
+    "response_type": "bool_0_1",
+    "sensitivity": "high",
+    "tags": [
+      "cardiometabolic",
+      "cardiovascular",
+      "kidney"
+    ],
+    "text": "Have you ever been diagnosed with heart failure?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_cvd_history",
+    "intrusiveness": "high",
+    "onboarding_order": 13,
+    "response_type": "bool_0_1",
+    "sensitivity": "high",
+    "tags": [
+      "cardiometabolic",
+      "cardiovascular"
+    ],
+    "text": "Do you have a history of cardiovascular disease?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_dyslipidemia_history",
+    "intrusiveness": "medium",
+    "onboarding_order": 17,
+    "response_type": "bool_0_1",
+    "sensitivity": "medium",
+    "tags": [
+      "cardiometabolic",
+      "lipids",
+      "metabolic"
+    ],
+    "text": "Have you been diagnosed with high cholesterol or dyslipidemia?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_family_diabetes_history",
+    "intrusiveness": "medium",
+    "onboarding_order": 10,
+    "response_type": "family_diabetes_points_0_5",
+    "sensitivity": "medium",
+    "tags": [
+      "cardiometabolic",
+      "diabetes",
+      "family_history"
+    ],
+    "text": "Family diabetes history level?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_family_mi_history",
+    "intrusiveness": "medium",
+    "onboarding_order": 6,
+    "response_type": "bool_0_1",
+    "sensitivity": "medium",
+    "tags": [
+      "cardiometabolic",
+      "cardiovascular",
+      "family_history"
+    ],
+    "text": "Has a first-degree relative had a heart attack?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_fruit_veg_daily",
+    "intrusiveness": "low",
+    "onboarding_order": 9,
+    "response_type": "bool_0_1",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "nutrition",
+      "lifestyle"
+    ],
+    "text": "Do you usually eat vegetables or fruit daily?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_high_glucose_history",
+    "intrusiveness": "medium",
+    "onboarding_order": 4,
+    "response_type": "bool_0_1",
+    "sensitivity": "medium",
+    "tags": [
+      "cardiometabolic",
+      "metabolic",
+      "diabetes"
+    ],
+    "text": "Have you ever had elevated blood glucose or diabetes?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_ipaq_mod_days",
+    "intrusiveness": "low",
+    "onboarding_order": 23,
+    "response_type": "days_0_7",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "activity",
+      "ipaq"
+    ],
+    "text": "In the last 7 days, on how many days did you do moderate activity?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_ipaq_mod_minutes",
+    "intrusiveness": "low",
+    "onboarding_order": 24,
+    "response_type": "minutes_0_180",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "activity",
+      "ipaq"
+    ],
+    "text": "On a moderate activity day, how many minutes did you usually do?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_ipaq_sit_minutes",
+    "intrusiveness": "low",
+    "onboarding_order": 27,
+    "response_type": "minutes_0_960",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "activity",
+      "ipaq"
+    ],
+    "text": "On a usual weekday, how many minutes do you spend sitting?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_ipaq_vig_days",
+    "intrusiveness": "low",
+    "onboarding_order": 21,
+    "response_type": "days_0_7",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "activity",
+      "ipaq"
+    ],
+    "text": "In the last 7 days, on how many days did you do vigorous activity?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_ipaq_vig_minutes",
+    "intrusiveness": "low",
+    "onboarding_order": 22,
+    "response_type": "minutes_0_180",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "activity",
+      "ipaq"
+    ],
+    "text": "On a vigorous day, how many minutes did you usually do?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_ipaq_walk_days",
+    "intrusiveness": "low",
+    "onboarding_order": 25,
+    "response_type": "days_0_7",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "activity",
+      "ipaq"
+    ],
+    "text": "In the last 7 days, on how many days did you walk at least 10 minutes?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_ipaq_walk_minutes",
+    "intrusiveness": "low",
+    "onboarding_order": 26,
+    "response_type": "minutes_0_180",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "activity",
+      "ipaq"
+    ],
+    "text": "On a walking day, how many minutes did you usually walk?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_proteinuria_history",
+    "intrusiveness": "high",
+    "onboarding_order": 16,
+    "response_type": "bool_0_1",
+    "sensitivity": "high",
+    "tags": [
+      "cardiometabolic",
+      "kidney"
+    ],
+    "text": "Have you had protein in urine on prior testing?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_pvd_history",
+    "intrusiveness": "high",
+    "onboarding_order": 15,
+    "response_type": "bool_0_1",
+    "sensitivity": "high",
+    "tags": [
+      "cardiometabolic",
+      "vascular",
+      "kidney"
+    ],
+    "text": "Have you had peripheral vascular disease?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_sex_at_birth",
+    "intrusiveness": "low",
+    "onboarding_order": 1,
+    "response_type": "sex_female_male",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "demographics"
+    ],
+    "text": "What sex were you assigned at birth?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_smoking_current",
+    "intrusiveness": "medium",
+    "onboarding_order": 3,
+    "response_type": "bool_0_1",
+    "sensitivity": "medium",
+    "tags": [
+      "cardiometabolic",
+      "cardiovascular",
+      "lifestyle"
+    ],
+    "text": "Do you currently smoke tobacco?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "declinable": true,
+    "id": "cm_waist_band",
+    "intrusiveness": "low",
+    "onboarding_order": 8,
+    "response_type": "waist_points_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "cardiometabolic",
+      "metabolic",
+      "anthropometrics"
+    ],
+    "text": "How would you classify your waist risk category?",
+    "timeframes_allowed": [
+      "last_7_days"
+    ]
+  },
+  {
+    "id": "item_concentration_hard",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "cognitive",
+      "mood"
+    ],
+    "text": "In the last 24 hours, it was hard to concentrate."
+  },
+  {
+    "id": "item_energy_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "energy"
+    ],
+    "text": "In the last 24 hours, my energy felt low."
+  },
+  {
+    "id": "item_fatigue",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "energy",
+      "sleep",
+      "mood"
+    ],
+    "text": "In the last 24 hours, I felt unusually fatigued."
+  },
+  {
+    "id": "item_gi_bloating",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "gi"
+    ],
+    "text": "In the last 24 hours, I felt bloated."
+  },
+  {
+    "id": "item_gi_bowel_change",
+    "response_type": "likert_0_4",
+    "sensitivity": "medium",
+    "tags": [
+      "gi"
+    ],
+    "text": "In the last 24 hours, my bowel habits felt different from usual."
+  },
+  {
+    "id": "item_gi_pain",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "gi"
+    ],
+    "text": "In the last 24 hours, I had abdominal discomfort."
+  },
+  {
+    "id": "item_gi_urgency",
+    "response_type": "likert_0_4",
+    "sensitivity": "medium",
+    "tags": [
+      "gi"
+    ],
+    "text": "In the last 24 hours, I had urgency when needing to use the bathroom."
+  },
+  {
+    "id": "item_interest_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "mood"
+    ],
+    "text": "In the last 24 hours, I felt less interested in things I usually enjoy."
+  },
+  {
+    "id": "item_irritable",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "mood",
+      "stress"
+    ],
+    "text": "In the last 24 hours, I felt more irritable than usual."
+  },
+  {
+    "id": "item_mood_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "mood"
+    ],
+    "text": "In the last 24 hours, I felt down, sad, or hopeless."
+  },
+  {
+    "id": "item_nutrition_appetite_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "nutrition",
+      "gi",
+      "mood"
+    ],
+    "text": "In the last 24 hours, my appetite was low."
+  },
+  {
+    "id": "item_nutrition_regular_meals",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "nutrition"
+    ],
+    "text": "In the last 24 hours, I ate in a way that felt supportive for my body."
+  },
+  {
+    "id": "item_pain_interference",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "pain",
+      "function"
+    ],
+    "text": "In the last 24 hours, pain interfered with my daily activities."
+  },
+  {
+    "id": "item_pain_level",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "pain"
+    ],
+    "text": "In the last 24 hours, I had physical pain."
+  },
+  {
+    "id": "item_panic_like",
+    "response_type": "likert_0_4",
+    "sensitivity": "medium",
+    "tags": [
+      "anxiety"
+    ],
+    "text": "In the last 24 hours, I had moments of intense anxiety or panic-like feelings."
+  },
+  {
+    "id": "item_resilience_bounce_back",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "resilience",
+      "stress"
+    ],
+    "text": "In the last 24 hours, I recovered quickly after stress."
+  },
+  {
+    "id": "item_resilience_self_efficacy",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "resilience"
+    ],
+    "text": "In the last 24 hours, I felt capable of handling challenges."
+  },
+  {
+    "id": "item_restless",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "anxiety",
+      "sleep"
+    ],
+    "text": "In the last 24 hours, I felt restless or on edge."
+  },
+  {
+    "id": "item_sleep_early_wake",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep"
+    ],
+    "text": "Last night, I woke up earlier than I wanted."
+  },
+  {
+    "id": "item_sleep_fall_asleep",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep"
+    ],
+    "text": "Last night, I had difficulty falling asleep."
+  },
+  {
+    "id": "item_sleep_not_rested",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep",
+      "energy"
+    ],
+    "text": "This morning, I did not feel rested."
+  },
+  {
+    "id": "item_sleep_quality",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep"
+    ],
+    "text": "Overall, my sleep quality last night was poor."
+  },
+  {
+    "id": "item_sleep_stay_asleep",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "sleep"
+    ],
+    "text": "Last night, I woke up during the night and had trouble getting back to sleep."
+  },
+  {
+    "id": "item_social_connected",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "social"
+    ],
+    "text": "In the last 24 hours, I felt socially connected."
+  },
+  {
+    "id": "item_social_isolated",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "social",
+      "mood"
+    ],
+    "text": "In the last 24 hours, I felt isolated."
+  },
+  {
+    "id": "item_stress_control_low",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "stress"
+    ],
+    "text": "In the last 24 hours, I felt I had little control over what happened."
+  },
+  {
+    "id": "item_stress_overwhelmed",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "stress"
+    ],
+    "text": "In the last 24 hours, I felt overwhelmed."
+  },
+  {
+    "id": "item_tension",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "anxiety",
+      "stress"
+    ],
+    "text": "In the last 24 hours, I felt tense in my body."
+  },
+  {
+    "id": "item_worry_often",
+    "response_type": "likert_0_4",
+    "sensitivity": "low",
+    "tags": [
+      "anxiety"
+    ],
+    "text": "In the last 24 hours, I worried a lot."
+  },
+
+  {"id": "vit_who5_cheerful", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "mood"], "text": "Over the last two weeks, I have felt cheerful and in good spirits."},
+  {"id": "vit_who5_calm", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "stress"], "text": "Over the last two weeks, I have felt calm and relaxed."},
+  {"id": "vit_who5_active", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "Over the last two weeks, I have felt active and vigorous."},
+  {"id": "vit_who5_rested", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "sleep"], "text": "Over the last two weeks, I woke up feeling fresh and rested."},
+  {"id": "vit_who5_interesting", "response_type": "who5_0_5", "sensitivity": "low", "tags": ["vitality", "mood"], "text": "Over the last two weeks, my daily life has been filled with things that interest me."},
+
+  {"id": "vit_sf36_pep", "response_type": "sf36_vt_1_6", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "During the past 4 weeks, how much of the time did you feel full of pep?"},
+  {"id": "vit_sf36_energy", "response_type": "sf36_vt_1_6", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "During the past 4 weeks, how much of the time did you have a lot of energy?"},
+  {"id": "vit_sf36_worn_out", "response_type": "sf36_vt_1_6", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "During the past 4 weeks, how much of the time did you feel worn out?"},
+  {"id": "vit_sf36_tired", "response_type": "sf36_vt_1_6", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "During the past 4 weeks, how much of the time did you feel tired?"},
+
+  {"id": "vit_pf7_tired", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "In the past 7 days, how often did you feel tired?"},
+  {"id": "vit_pf7_exhaustion", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "In the past 7 days, how often did you experience extreme exhaustion?"},
+  {"id": "vit_pf7_run_out", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "In the past 7 days, how often did you run out of energy?"},
+  {"id": "vit_pf7_limit_work", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy", "function"], "text": "In the past 7 days, how often did your fatigue limit you at work?"},
+  {"id": "vit_pf7_think", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "cognitive"], "text": "In the past 7 days, how often were you too tired to think clearly?"},
+  {"id": "vit_pf7_bath", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "function"], "text": "In the past 7 days, how often were you too tired to take a bath or shower?"},
+  {"id": "vit_pf7_exercise", "response_type": "promis_freq_1_5", "sensitivity": "low", "tags": ["vitality", "energy"], "text": "In the past 7 days, how often did fatigue make it difficult to plan ahead for exercise?"}
+]

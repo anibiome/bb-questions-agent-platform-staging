@@ -1,0 +1,192 @@
+[
+  {
+    "domains": [
+      "cardiometabolic",
+      "alcohol"
+    ],
+    "id": "q_cardio_auditc",
+    "license": "free_validated",
+    "name": "AUDIT-C (Cardiometabolic Core)",
+    "source": "AUDIT-C",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "cardiovascular"
+    ],
+    "id": "q_cardio_ez_cvd",
+    "license": "free_validated",
+    "name": "EZ-CVD (Cardiometabolic Core)",
+    "source": "EZ-CVD public screener",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "diabetes"
+    ],
+    "id": "q_cardio_findrisc",
+    "license": "free_validated",
+    "name": "FINDRISC (Cardiometabolic Core)",
+    "source": "FINDRISC public screener",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "activity"
+    ],
+    "id": "q_cardio_ipaq",
+    "license": "free_validated",
+    "name": "IPAQ-SF (Cardiometabolic Core)",
+    "source": "IPAQ-SF",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "liver"
+    ],
+    "id": "q_cardio_lee_nafld",
+    "license": "free_validated",
+    "name": "Lee NAFLD (Cardiometabolic Core)",
+    "source": "Lee NAFLD screener",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "cardiometabolic",
+      "kidney"
+    ],
+    "id": "q_cardio_scored",
+    "license": "free_validated",
+    "name": "SCORED (Cardiometabolic Core)",
+    "source": "SCORED CKD screener",
+    "version": "1"
+  },
+  {
+    "domains": [
+      "anxiety"
+    ],
+    "id": "q_demo_anxiety",
+    "license": "internal_demo",
+    "name": "Anxiety (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "energy"
+    ],
+    "id": "q_demo_energy",
+    "license": "internal_demo",
+    "name": "Energy (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "gi"
+    ],
+    "id": "q_demo_gi",
+    "license": "internal_demo",
+    "name": "GI Symptoms (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "mood"
+    ],
+    "id": "q_demo_mood",
+    "license": "internal_demo",
+    "name": "Mood (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "nutrition"
+    ],
+    "id": "q_demo_nutrition",
+    "license": "internal_demo",
+    "name": "Nutrition QoL (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "pain"
+    ],
+    "id": "q_demo_pain",
+    "license": "internal_demo",
+    "name": "Pain (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "resilience"
+    ],
+    "id": "q_demo_resilience",
+    "license": "internal_demo",
+    "name": "Resilience (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "sleep"
+    ],
+    "id": "q_demo_sleep",
+    "license": "internal_demo",
+    "name": "Sleep (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "social"
+    ],
+    "id": "q_demo_social",
+    "license": "internal_demo",
+    "name": "Social (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "domains": [
+      "stress"
+    ],
+    "id": "q_demo_stress",
+    "license": "internal_demo",
+    "name": "Stress (Demo)",
+    "source": null,
+    "version": "1"
+  },
+  {
+    "id": "q_vit_who5",
+    "name": "WHO-5 Well-Being Index",
+    "domains": ["vitality", "wellbeing"],
+    "license": "open_access",
+    "source": "WHO Collaborating Centre in Mental Health, Psychiatric Research Unit, Frederiksborg General Hospital, DK-3400 Hillerod",
+    "version": "1"
+  },
+  {
+    "id": "q_vit_sf36_vt",
+    "name": "SF-36 Vitality Subscale (RAND-36)",
+    "domains": ["vitality", "energy"],
+    "license": "public_domain",
+    "source": "RAND Corporation — 36-Item Health Survey 1.0 (RAND-36). Public domain.",
+    "version": "1"
+  },
+  {
+    "id": "q_vit_promis_fatigue_7a",
+    "name": "PROMIS Fatigue Short Form 7a",
+    "domains": ["vitality", "fatigue"],
+    "license": "open_access",
+    "source": "PROMIS Health Organization / Northwestern University. Terms: free for non-commercial and commercial use with attribution.",
+    "version": "1"
+  }
+]

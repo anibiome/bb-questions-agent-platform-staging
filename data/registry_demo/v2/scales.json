@@ -1,0 +1,824 @@
+[
+  {
+    "citation": "AUDIT-C: Bush et al., 1998, Arch Intern Med 158:1789-1795, DOI:10.1001/archinte.158.16.1789. Validated for electronic administration (Simon et al., 2024, Alcohol Clin Exp Res).",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_audit_c",
+    "items": [
+      {
+        "item_id": "cm_alcohol_intake_frequency",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_audit_typical_drinks",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_audit_binge_frequency",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_sex_at_birth",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 3,
+    "name": "AUDIT-C alcohol risk",
+    "questionnaire_id": "q_cardio_auditc",
+    "response_type": "audit_frequency_0_4",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "instrument_audit_c",
+      "normalize_max": 12.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "alcohol"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "Simplified CVD risk based on Framingham variables. See D Agostino et al., 2008, Circulation 117:743-753, DOI:10.1161/CIRCULATIONAHA.107.699579.",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_ez_cvd",
+    "items": [
+      {
+        "item_id": "cm_age_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_sex_at_birth",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_smoking_current",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_high_glucose_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bp_medication",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_family_mi_history",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 6,
+    "name": "EZ-CVD cardiovascular risk",
+    "questionnaire_id": "q_cardio_ez_cvd",
+    "response_type": "bool_0_1",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "instrument_ez_cvd",
+      "normalize_max": 6.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "cardiovascular"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "FINDRISC: Lindstrom & Tuomilehto, 2003, Diabetes Care 26:725-731, DOI:10.2337/diacare.26.3.725. Population-specific cutoffs needed for non-Finnish populations.",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_findrisc",
+    "items": [
+      {
+        "item_id": "cm_age_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bmi_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_waist_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_activity_daily",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_fruit_veg_daily",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bp_medication",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_high_glucose_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_family_diabetes_history",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 8,
+    "name": "FINDRISC diabetes risk",
+    "questionnaire_id": "q_cardio_findrisc",
+    "response_type": "bool_0_1",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "instrument_findrisc",
+      "normalize_max": 26.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "diabetes"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "IPAQ-SF: Craig et al., 2003, Med Sci Sports Exerc 35:1381-1395, DOI:10.1249/01.MSS.0000078924.61453.FB. Known to overestimate PA by 36-173% vs accelerometry; use as categorical classifier (low/moderate/high).",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_ipaq_sf",
+    "items": [
+      {
+        "item_id": "cm_ipaq_vig_days",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_vig_minutes",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_mod_days",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_mod_minutes",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_walk_days",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_walk_minutes",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_ipaq_sit_minutes",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 7,
+    "name": "IPAQ activity level",
+    "questionnaire_id": "q_cardio_ipaq",
+    "response_type": "days_0_7",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "instrument_ipaq_sf",
+      "normalize_max": 6000.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "activity"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "Lee NAFLD Index: Lee et al., 2012, Hepatology 55:1103-1111, DOI:10.1002/hep.24768.",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_lee_nafld",
+    "items": [
+      {
+        "item_id": "cm_age_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_sex_at_birth",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_waist_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bmi_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_high_glucose_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_dyslipidemia_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_alcohol_intake_frequency",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_activity_daily",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 8,
+    "name": "Lee NAFLD liver risk",
+    "questionnaire_id": "q_cardio_lee_nafld",
+    "response_type": "bool_0_1",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "instrument_lee_nafld",
+      "normalize_max": 15.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "liver"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "SCORED: Bansal et al., 2007, Arch Intern Med 167:374-381, DOI:10.1001/archinte.167.4.374.",
+    "ewma_alpha": 0.1,
+    "id": "scale_cm_scored",
+    "items": [
+      {
+        "item_id": "cm_age_band",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_sex_at_birth",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_anemia_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_bp_medication",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_high_glucose_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_cvd_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_chf_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_pvd_history",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "cm_proteinuria_history",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 9,
+    "name": "SCORED kidney risk",
+    "questionnaire_id": "q_cardio_scored",
+    "response_type": "bool_0_1",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "instrument_scored",
+      "normalize_max": 12.0,
+      "normalize_min": 0.0
+    },
+    "tags": [
+      "cardiometabolic",
+      "kidney"
+    ],
+    "unlock_window_days": 30,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from GAD-7 (Spitzer et al., 2006, Arch Intern Med 166:1092-1097). Demo items; use validated GAD-7 for clinical deployment.",
+    "ewma_alpha": 0.3,
+    "id": "scale_demo_anxiety",
+    "items": [
+      {
+        "item_id": "item_worry_often",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_restless",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_panic_like",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_tension",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_concentration_hard",
+        "reverse": false,
+        "weight": 0.5
+      }
+    ],
+    "min_items_required": 4,
+    "name": "Anxiety severity (Demo)",
+    "questionnaire_id": "q_demo_anxiety",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "anxiety"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PROMIS Fatigue SF (Cella et al., 2010, J Clin Epidemiol 63:1179-1194). Demo items.",
+    "ewma_alpha": 0.25,
+    "id": "scale_demo_energy",
+    "items": [
+      {
+        "item_id": "item_energy_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_fatigue",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_not_rested",
+        "reverse": false,
+        "weight": 0.7
+      },
+      {
+        "item_id": "item_concentration_hard",
+        "reverse": false,
+        "weight": 0.5
+      }
+    ],
+    "min_items_required": 3,
+    "name": "Low energy (Demo)",
+    "questionnaire_id": "q_demo_energy",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "energy"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from GSRS (Svedlund et al., 1988, Dig Dis Sci 33:129-134). Demo items.",
+    "ewma_alpha": 0.2,
+    "id": "scale_demo_gi",
+    "items": [
+      {
+        "item_id": "item_gi_pain",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_gi_bloating",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_gi_bowel_change",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_gi_urgency",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_nutrition_appetite_low",
+        "reverse": false,
+        "weight": 0.7
+      }
+    ],
+    "min_items_required": 4,
+    "name": "GI symptom burden (Demo)",
+    "questionnaire_id": "q_demo_gi",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "gi"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PHQ-9 (Kroenke et al., 2001, J Gen Intern Med 16:606-613). Demo items; use validated PHQ-9 for clinical deployment.",
+    "ewma_alpha": 0.3,
+    "id": "scale_demo_mood",
+    "items": [
+      {
+        "item_id": "item_interest_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_mood_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_fatigue",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_concentration_hard",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_social_isolated",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 4,
+    "name": "Mood severity (Demo)",
+    "questionnaire_id": "q_demo_mood",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "mood"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Custom composite. Items adapted from SNAQ (Wilson et al., 2005, Am J Clin Nutr 82:1074-1081).",
+    "ewma_alpha": 0.15,
+    "id": "scale_demo_nutrition",
+    "items": [
+      {
+        "item_id": "item_nutrition_regular_meals",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_nutrition_appetite_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_gi_bloating",
+        "reverse": false,
+        "weight": 0.3
+      }
+    ],
+    "min_items_required": 2,
+    "name": "Nutrition QoL friction (Demo)",
+    "questionnaire_id": "q_demo_nutrition",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "nutrition"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PROMIS Pain Interference SF (Amtmann et al., 2010, J Pain 11:1109-1119). Demo items.",
+    "ewma_alpha": 0.2,
+    "id": "scale_demo_pain",
+    "items": [
+      {
+        "item_id": "item_pain_level",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_pain_interference",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 2,
+    "name": "Pain impact (Demo)",
+    "questionnaire_id": "q_demo_pain",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "pain"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from BRS (Smith et al., 2008, Int J Behav Med 15:194-200). Demo items.",
+    "ewma_alpha": 0.15,
+    "id": "scale_demo_resilience",
+    "items": [
+      {
+        "item_id": "item_resilience_bounce_back",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_resilience_self_efficacy",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_stress_overwhelmed",
+        "reverse": false,
+        "weight": 0.5
+      }
+    ],
+    "min_items_required": 2,
+    "name": "Low resilience signal (Demo)",
+    "questionnaire_id": "q_demo_resilience",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "resilience"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PSQI (Buysse et al., 1989, Psychiatry Res 28:193-213). Demo items.",
+    "ewma_alpha": 0.25,
+    "id": "scale_demo_sleep",
+    "items": [
+      {
+        "item_id": "item_sleep_fall_asleep",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_stay_asleep",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_early_wake",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_quality",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_sleep_not_rested",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 4,
+    "name": "Sleep problems (Demo)",
+    "questionnaire_id": "q_demo_sleep",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "sleep"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from UCLA Loneliness Scale (Russell, 1996, J Pers Assess 66:20-40). Demo items.",
+    "ewma_alpha": 0.2,
+    "id": "scale_demo_social",
+    "items": [
+      {
+        "item_id": "item_social_connected",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_social_isolated",
+        "reverse": false,
+        "weight": 1.0
+      }
+    ],
+    "min_items_required": 2,
+    "name": "Social disconnection (Demo)",
+    "questionnaire_id": "q_demo_social",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 90,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "social"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "citation": "Adapted from PSS-4 (Cohen et al., 1983, J Health Soc Behav 24:385-396). Demo items.",
+    "ewma_alpha": 0.3,
+    "id": "scale_demo_stress",
+    "items": [
+      {
+        "item_id": "item_stress_overwhelmed",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_stress_control_low",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_tension",
+        "reverse": false,
+        "weight": 0.7
+      },
+      {
+        "item_id": "item_irritable",
+        "reverse": false,
+        "weight": 0.5
+      }
+    ],
+    "min_items_required": 3,
+    "name": "Stress load (Demo)",
+    "questionnaire_id": "q_demo_stress",
+    "response_type": "likert_0_4",
+    "retest_interval_days": 60,
+    "scoring": {
+      "method": "mean",
+      "normalize_max": 4,
+      "normalize_min": 0
+    },
+    "tags": [
+      "stress"
+    ],
+    "unlock_window_days": 14,
+    "version": "1"
+  },
+  {
+    "id": "scale_vit_who5",
+    "items": [
+      {"item_id": "vit_who5_cheerful", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_who5_calm", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_who5_active", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_who5_rested", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_who5_interesting", "reverse": false, "weight": 1.0}
+    ],
+    "min_items_required": 4,
+    "name": "WHO-5 Well-Being Index",
+    "questionnaire_id": "q_vit_who5",
+    "response_type": "who5_0_5",
+    "retest_interval_days": 14,
+    "scoring": {"method": "instrument_who5", "normalize_max": 100, "normalize_min": 0},
+    "tags": ["vitality", "wellbeing"],
+    "unlock_window_days": 14,
+    "version": "1",
+    "ewma_alpha": 0.25,
+    "citation": "WHO-5 Well-Being Index (WHO, 1998; Topp et al., 2015, Psychother Psychosom 84:167-176, DOI:10.1159/000376585). 5 items, 0-5 scale, sum*4 = 0-100. Cutoffs: <=28 depression screen, <=50 low wellbeing."
+  },
+  {
+    "id": "scale_vit_sf36_vt",
+    "items": [
+      {"item_id": "vit_sf36_pep", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_sf36_energy", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_sf36_worn_out", "reverse": true, "weight": 1.0},
+      {"item_id": "vit_sf36_tired", "reverse": true, "weight": 1.0}
+    ],
+    "min_items_required": 3,
+    "name": "SF-36 Vitality",
+    "questionnaire_id": "q_vit_sf36_vt",
+    "response_type": "sf36_vt_1_6",
+    "retest_interval_days": 30,
+    "scoring": {"method": "instrument_sf36_vt", "normalize_max": 100, "normalize_min": 0},
+    "tags": ["vitality", "energy"],
+    "unlock_window_days": 28,
+    "version": "1",
+    "ewma_alpha": 0.2,
+    "citation": "SF-36 Vitality subscale (RAND-36 v1.0, items 9a/9e/9g/9i). Ware & Sherbourne, 1992, Med Care 30:473-483, DOI:10.1097/00005650-199206000-00002. 4 items, 1-6 scale, recoded to 0-100. Public domain (RAND)."
+  },
+  {
+    "id": "scale_vit_promis_fatigue_7a",
+    "items": [
+      {"item_id": "vit_pf7_tired", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_pf7_exhaustion", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_pf7_run_out", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_pf7_limit_work", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_pf7_think", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_pf7_bath", "reverse": false, "weight": 1.0},
+      {"item_id": "vit_pf7_exercise", "reverse": false, "weight": 1.0}
+    ],
+    "min_items_required": 5,
+    "name": "PROMIS Fatigue 7a",
+    "questionnaire_id": "q_vit_promis_fatigue_7a",
+    "response_type": "promis_freq_1_5",
+    "retest_interval_days": 7,
+    "scoring": {"method": "instrument_promis_fatigue_7a", "normalize_max": 100, "normalize_min": 0},
+    "tags": ["vitality", "fatigue"],
+    "unlock_window_days": 7,
+    "version": "1",
+    "ewma_alpha": 0.3,
+    "citation": "PROMIS Fatigue Short Form 7a (Cella et al., 2010, J Clin Epidemiol 63:1179-1194, DOI:10.1016/j.jclinepi.2010.04.011). 7 items, 1-5 freq scale, sum -> T-score lookup. Higher T = more fatigue."
+  }
+]
