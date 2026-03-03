@@ -1,5 +1,8 @@
 from dataclasses import dataclass
+import logging
 import os
+
+_settings_logger = logging.getLogger("questions_agent.settings")
 
 
 @dataclass(frozen=True)
@@ -71,7 +74,7 @@ def load_settings() -> Settings:
     if migration_mode not in ("auto", "require", "off"):
         raise RuntimeError("DB_MIGRATION_MODE must be one of: auto, require, off")
 
-    return Settings(
+    s = Settings(
         database_url=database_url,
         registry_root=registry_root,
         api_key=api_key,
@@ -116,6 +119,14 @@ def load_settings() -> Settings:
         phi_export_redact_raw_payloads=_bool(os.getenv("PHI_EXPORT_REDACT_RAW_PAYLOADS", "true")),
         phi_export_user_hash_salt=str(os.getenv("PHI_EXPORT_USER_HASH_SALT", "")),
     )
+
+    if not s.phi_export_user_hash_salt:
+        _settings_logger.warning(
+            "PHI_EXPORT_USER_HASH_SALT is empty — user ID hashing in exports will be weak. "
+            "Set a random value in production."
+        )
+
+    return s
 
 
 def _require(key: str) -> str:

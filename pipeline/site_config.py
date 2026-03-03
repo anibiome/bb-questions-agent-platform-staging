@@ -24,6 +24,7 @@ Architecture:
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from typing import Any, Dict, FrozenSet, List, Mapping, Optional, Sequence, Tuple
 
@@ -157,7 +158,7 @@ def config_samd_full() -> SiteConfig:
         score_display_mode="clinical",
         wellness_language=False,
         anifold_enabled=True,       # Only in SaMD!
-        anifold_endpoint="https://api.ani.ai/anifold/v1",
+        anifold_endpoint=os.getenv("ANIFOLD_ENDPOINT", "https://api.ani.ai/anifold/v1"),
         behavioural_metadata_enabled=True,
         anamnesis_enabled=True,
         policy_mode="policy_live",
