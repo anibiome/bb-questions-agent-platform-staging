@@ -1,0 +1,84 @@
+name: Control Plane Gate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: control-plane-gate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout current repo
+        uses: actions/checkout@v4
+        with:
+          path: _system/questions-agent-platform
+
+      - name: Checkout control plane
+        uses: actions/checkout@v4
+        with:
+          repository: anibiome/ani-control-plane
+          ref: main
+          token: ${{ secrets.ANIBIOME_CI_TOKEN || github.token }}
+          path: _control_plane
+
+      - name: Checkout ani-proteomics
+        uses: actions/checkout@v4
+        with:
+          repository: anibiome/ani-proteomics
+          ref: main
+          token: ${{ secrets.ANIBIOME_CI_TOKEN || github.token }}
+          path: _system/ani-proteomics
+
+      - name: Checkout ani-medical-platform
+        uses: actions/checkout@v4
+        with:
+          repository: anibiome/ani-medical-platform
+          ref: main
+          token: ${{ secrets.ANIBIOME_CI_TOKEN || github.token }}
+          path: _system/ani-medical-platform
+
+      - name: Checkout ani-vault
+        uses: actions/checkout@v4
+        with:
+          repository: anibiome/ani-vault
+          ref: main
+          token: ${{ secrets.ANIBIOME_CI_TOKEN || github.token }}
+          path: _system/ani-vault
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: _control_plane/pyproject.toml
+
+      - name: Install control plane
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ./_control_plane
+
+      - name: Run core-chain gate
+        run: |
+          python -m ani_control_plane.cli run-core-chain \
+            --repo-root ./_control_plane \
+            --repos-base ./_system \
+            --report ./_control_plane/output/core_chain_report.json \
+            --run-commands true
+
+      - name: Upload gate report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: control-plane-report
+          path: _control_plane/output/core_chain_report.json
+          if-no-files-found: warn
