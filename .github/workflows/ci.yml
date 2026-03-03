@@ -30,12 +30,26 @@ jobs:
           if [ -f prod/requirements.txt ]; then
             pip install -r prod/requirements.txt
           fi
+          if [ -f requirements-test.txt ]; then
+            pip install -r requirements-test.txt
+          else
+            pip install pytest numpy
+          fi
+
+      - name: Compile check
+        run: |
+          python -m compileall -q pipeline policy prod tools
 
       - name: Run test suite
         env:
           PYTHONPYCACHEPREFIX: /tmp/pycache
         run: |
-          # Test imports expect package path "questions_agent_platform".
-          # Repo slug uses "questions-agent-platform", so provide a stable alias.
-          ln -s "$GITHUB_WORKSPACE" /tmp/questions_agent_platform
-          PYTHONPATH=/tmp python -m unittest -q
+          PYTHONPATH=. python -m unittest -q
+
+      - name: Assert repository remains clean
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git status --short
+            echo "CI run produced repository modifications."
+            exit 1
+          fi
