@@ -28,9 +28,10 @@ from __future__ import annotations
 
 import logging
 import math
+import os
 import random
 from collections import deque
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from typing import Any, Deque, Dict, List, Optional, Sequence, Tuple
 
 import torch
@@ -39,6 +40,15 @@ import torch.nn.functional as F
 import torch.optim as optim
 
 logger = logging.getLogger("questions_agent.rl_item_selection")
+
+_ALLOW_UNSAFE_CHECKPOINT_LOAD_ENV = "QUESTIONS_AGENT_ALLOW_UNSAFE_CHECKPOINT_LOAD"
+
+
+def _env_truthy(name: str) -> bool:
+    raw = os.environ.get(name)
+    if raw is None:
+        return False
+    return str(raw).strip().lower() not in {"", "0", "false", "no", "off"}
 
 
 # ---------------------------------------------------------------------------
@@ -549,22 +559,63 @@ class DeepCATSelector:
         """Save model weights and optimizer state."""
         torch.save(
             {
+                "format_version": 2,
+                "n_items": self.n_items,
                 "policy_net": self.policy_net.state_dict(),
                 "target_net": self.target_net.state_dict(),
                 "optimizer": self.optimizer.state_dict(),
                 "step_count": self.step_count,
-                "config": self.config,
+                # Store pure primitives to avoid pickle-backed object loading.
+                "config": asdict(self.config),
             },
             path,
         )
 
     def load(self, path: str) -> None:
         """Load model weights and optimizer state."""
-        checkpoint = torch.load(path, map_location="cpu", weights_only=False)
+        checkpoint: dict[str, Any]
+        try:
+            raw = torch.load(path, map_location="cpu", weights_only=True)
+        except TypeError as exc:
+            if not _env_truthy(_ALLOW_UNSAFE_CHECKPOINT_LOAD_ENV):
+                raise RuntimeError(
+                    "Refusing unsafe checkpoint load because this torch runtime "
+                    "does not support weights_only=True. "
+                    f"Set {_ALLOW_UNSAFE_CHECKPOINT_LOAD_ENV}=1 only for trusted legacy checkpoints."
+                ) from exc
+            raw = torch.load(path, map_location="cpu", weights_only=False)
+        except Exception as exc:
+            if not _env_truthy(_ALLOW_UNSAFE_CHECKPOINT_LOAD_ENV):
+                raise RuntimeError(
+                    "Checkpoint uses an unsafe legacy format or unsupported payload. "
+                    f"Set {_ALLOW_UNSAFE_CHECKPOINT_LOAD_ENV}=1 only for trusted legacy checkpoints."
+                ) from exc
+            raw = torch.load(path, map_location="cpu", weights_only=False)
+
+        if not isinstance(raw, dict):
+            raise ValueError("Invalid checkpoint payload: expected a dictionary.")
+        checkpoint = raw
+
+        required_keys = {"policy_net", "target_net", "optimizer", "step_count", "config"}
+        missing = required_keys - set(checkpoint.keys())
+        if missing:
+            raise ValueError(f"Invalid checkpoint payload: missing keys {sorted(missing)}")
+
+        ckpt_n_items = int(checkpoint.get("n_items", self.n_items))
+        if ckpt_n_items != self.n_items:
+            raise ValueError(
+                f"Checkpoint n_items={ckpt_n_items} does not match current model n_items={self.n_items}"
+            )
+
+        cfg_raw = checkpoint.get("config")
+        if isinstance(cfg_raw, dict):
+            # Parse for schema validation; runtime architecture remains the current instance.
+            DeepCATConfig(**cfg_raw)
+
         self.policy_net.load_state_dict(checkpoint["policy_net"])
         self.target_net.load_state_dict(checkpoint["target_net"])
         self.optimizer.load_state_dict(checkpoint["optimizer"])
-        self.step_count = checkpoint["step_count"]
+        self.step_count = int(checkpoint["step_count"])
 
 
 # ---------------------------------------------------------------------------

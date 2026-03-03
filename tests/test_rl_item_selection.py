@@ -21,7 +21,9 @@ Validates:
 """
 
 import math
+import os
 import random
+import tempfile
 import unittest
 from collections import Counter
 from typing import Dict
@@ -644,6 +646,40 @@ class TestIntegration(unittest.TestCase):
         self.assertIsInstance(action, int)
         self.assertGreaterEqual(action, 0)
         self.assertLess(action, N_ITEMS)
+
+
+class TestCheckpointSecurity(unittest.TestCase):
+    def test_safe_checkpoint_roundtrip(self):
+        selector = DeepCATSelector(n_items=N_ITEMS)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "selector.pt")
+            selector.save(path)
+            restored = DeepCATSelector(n_items=N_ITEMS)
+            restored.load(path)
+            self.assertEqual(restored.step_count, selector.step_count)
+
+    def test_legacy_checkpoint_requires_explicit_opt_in(self):
+        selector = DeepCATSelector(n_items=N_ITEMS)
+        legacy_payload = {
+            "policy_net": selector.policy_net.state_dict(),
+            "target_net": selector.target_net.state_dict(),
+            "optimizer": selector.optimizer.state_dict(),
+            "step_count": selector.step_count,
+            "config": selector.config,  # legacy object payload (pickle-backed)
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "legacy_selector.pt")
+            torch.save(legacy_payload, path)
+
+            os.environ.pop("QUESTIONS_AGENT_ALLOW_UNSAFE_CHECKPOINT_LOAD", None)
+            with self.assertRaises(RuntimeError):
+                selector.load(path)
+
+            os.environ["QUESTIONS_AGENT_ALLOW_UNSAFE_CHECKPOINT_LOAD"] = "1"
+            try:
+                selector.load(path)
+            finally:
+                os.environ.pop("QUESTIONS_AGENT_ALLOW_UNSAFE_CHECKPOINT_LOAD", None)
 
 
 if __name__ == "__main__":
