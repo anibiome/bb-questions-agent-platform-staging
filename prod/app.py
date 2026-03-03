@@ -177,6 +177,15 @@ def _model_dump(model: Any, **kwargs: Any) -> Dict[str, Any]:
     """Serialize a Pydantic model to dict. Requires Pydantic v2."""
     return model.model_dump(**kwargs)
 
+def _parse_date_query_or_400(value: Optional[str], *, field_name: str = "date") -> date:
+    if value is None or str(value).strip() == "":
+        return date.today()
+    try:
+        return parse_date(str(value))
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=f"invalid {field_name}; expected YYYY-MM-DD") from exc
+
+
 
 @app.get("/health")
 def health():
@@ -408,7 +417,7 @@ def audit_export(
 
 @app.get("/v1/users/{user_id}/daily-questions", response_model=DailyQuestionsOut)
 def daily_questions(user_id: str, date_param: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     with session_scope(SessionLocal) as session:
         ds = get_or_create_daily_session(
             session,
@@ -442,7 +451,7 @@ def daily_questions(user_id: str, date_param: Optional[str] = None, _: None = De
         registry_version = str(ds.registry_version)
         timeframe = str(ds.timeframe or "last_7_days")
         status = str(ds.status or "created")
-        extra_pool_size = min(3, sum(len(b) for b in json.loads(ds.extra_batches_json)))
+        extra_pool_size = min(int(settings.extra_batches_max_per_day), sum(len(b) for b in json.loads(ds.extra_batches_json)))
         used_extras = min(int(ds.extra_batches_used or 0), int(extra_pool_size))
     return DailyQuestionsOut(
         session_id=session_id,
@@ -454,7 +463,7 @@ def daily_questions(user_id: str, date_param: Optional[str] = None, _: None = De
         questions=questions,
         extra={
             "batch_size": 1,
-            "max_batches": 3,
+            "max_batches": int(settings.extra_batches_max_per_day),
             "available_batches": max(0, int(extra_pool_size - used_extras)),
             "used_batches": used_extras,
         },
@@ -465,7 +474,7 @@ def daily_questions(user_id: str, date_param: Optional[str] = None, _: None = De
 
 @app.post("/v1/users/{user_id}/daily-questions/select", response_model=DailyQuestionsOut)
 def daily_questions_select(user_id: str, body: DailyQuestionsSelectIn, _: None = Depends(_auth)):
-    day = parse_date(body.date) if body.date else date.today()
+    day = _parse_date_query_or_400(body.date, field_name="date")
     selection_mode = str(body.selection_mode or "deterministic")
     policy_context = _model_dump(body.context) if body.context is not None else None
     if body.allow_context_batches is not None:
@@ -525,7 +534,7 @@ def daily_questions_select(user_id: str, body: DailyQuestionsSelectIn, _: None =
         registry_version = str(ds.registry_version)
         timeframe = str(ds.timeframe or "last_7_days")
         status = str(ds.status or "created")
-        extra_pool_size = min(3, sum(len(b) for b in json.loads(ds.extra_batches_json)))
+        extra_pool_size = min(int(settings.extra_batches_max_per_day), sum(len(b) for b in json.loads(ds.extra_batches_json)))
         used_extras = min(int(ds.extra_batches_used or 0), int(extra_pool_size))
 
     return DailyQuestionsOut(
@@ -538,7 +547,7 @@ def daily_questions_select(user_id: str, body: DailyQuestionsSelectIn, _: None =
         questions=questions,
         extra={
             "batch_size": 1,
-            "max_batches": 3,
+            "max_batches": int(settings.extra_batches_max_per_day),
             "available_batches": max(0, int(extra_pool_size - used_extras)),
             "used_batches": used_extras,
         },
@@ -664,7 +673,7 @@ def patch_profile(user_id: str, body: UserProfilePatchIn, _: None = Depends(_aut
 
 @app.get("/v1/users/{user_id}/progress")
 def get_progress(user_id: str, date_param: Optional[str] = None, window: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     window_days = _parse_window_days(window, default=30, min_days=1, max_days=365)
     start = day - timedelta(days=window_days - 1)
 
@@ -739,7 +748,7 @@ def get_safety_events(
     status: Optional[str] = None,
     _: None = Depends(_auth),
 ):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     lookback_days = max(1, min(3650, int(days)))
     with session_scope(SessionLocal) as session:
         events = list_safety_events(
@@ -782,7 +791,7 @@ def resolve_safety(
 
 @app.get("/v1/users/{user_id}/emotion/deep_dive")
 def emotion_deep_dive(user_id: str, date_param: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     with session_scope(SessionLocal) as session:
         payload = suggest_emotion_deep_dive(
             session,
@@ -833,7 +842,7 @@ def experiment_results_endpoint(
     date_param: Optional[str] = None,
     _: None = Depends(_auth),
 ):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     try:
         with session_scope(SessionLocal) as session:
             results = compute_experiment_results(
@@ -849,7 +858,7 @@ def experiment_results_endpoint(
 
 @app.get("/v1/users/{user_id}/ani/summary")
 def ani_summary(user_id: str, date_param: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     with session_scope(SessionLocal) as session:
         payload = build_tta_summary(
             session,
@@ -901,7 +910,15 @@ def user_site_config(user_id: str, _: None = Depends(_auth)):
 @app.post("/v1/users/{user_id}/request-more-context")
 def request_more_context(user_id: str, body: RequestMoreContextIn, _: None = Depends(_auth)):
     with session_scope(SessionLocal) as session:
-        batch = take_next_extra_batch(session, body.session_id)
+        try:
+            batch = take_next_extra_batch(
+                session,
+                body.session_id,
+                user_id=user_id,
+                extra_batches_max_per_day=settings.extra_batches_max_per_day,
+            )
+        except PermissionError as exc:
+            raise HTTPException(status_code=403, detail=str(exc)) from exc
         if not batch:
             return {"batch": None, "message": "no more batches"}
         ds = session.get(DailySession, body.session_id)
@@ -918,7 +935,7 @@ def request_more_context(user_id: str, body: RequestMoreContextIn, _: None = Dep
 
 @app.get("/v1/users/{user_id}/scales")
 def user_scales(user_id: str, date_param: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     with session_scope(SessionLocal) as session:
         reg_v = ensure_registry_active(session, settings.registry_root)
         registry = load_registry(settings.registry_root, reg_v)
@@ -935,7 +952,7 @@ def scale_history(user_id: str, scale_id: str, limit: int = 200, _: None = Depen
 
 @app.get("/v1/users/{user_id}/projection/questions")
 def projection_questions(user_id: str, date_param: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     with session_scope(SessionLocal) as session:
         reg_v = ensure_registry_active(session, settings.registry_root)
         payload = build_projection_payload_pg(session, user_id=user_id, registry_version=reg_v, day=day)
@@ -944,7 +961,7 @@ def projection_questions(user_id: str, date_param: Optional[str] = None, _: None
 
 @app.get("/v1/users/{user_id}/state")
 def state_snapshots(user_id: str, date_param: Optional[str] = None, window: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     window_days = _parse_window_days(window, default=30, min_days=1, max_days=365)
     with session_scope(SessionLocal) as session:
         snapshots = get_state_snapshots(
@@ -963,7 +980,7 @@ def state_snapshots(user_id: str, date_param: Optional[str] = None, window: Opti
 
 @app.get("/v1/users/{user_id}/circle")
 def circle_snapshots(user_id: str, date_param: Optional[str] = None, window: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     window_days = _parse_window_days(window, default=30, min_days=1, max_days=365)
     with session_scope(SessionLocal) as session:
         snapshots = get_circle_snapshots(
@@ -982,7 +999,7 @@ def circle_snapshots(user_id: str, date_param: Optional[str] = None, window: Opt
 
 @app.get("/v1/users/{user_id}/ews")
 def ews_features(user_id: str, date_param: Optional[str] = None, window: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     window_days = _parse_window_days(window, default=30, min_days=1, max_days=365)
     with session_scope(SessionLocal) as session:
         rows = get_ews_features(
@@ -1001,7 +1018,7 @@ def ews_features(user_id: str, date_param: Optional[str] = None, window: Optiona
 
 @app.get("/v1/users/{user_id}/drift-events")
 def drift_events(user_id: str, date_param: Optional[str] = None, window: Optional[str] = None, _: None = Depends(_auth)):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     window_days = _parse_window_days(window, default=30, min_days=1, max_days=365)
     with session_scope(SessionLocal) as session:
         rows = get_drift_events(
@@ -1098,7 +1115,7 @@ def compute_cardio_risk_endpoint(
     date_param: Optional[str] = None,
     _: None = Depends(_auth),
 ):
-    day = parse_date(date_param) if date_param else date.today()
+    day = _parse_date_query_or_400(date_param, field_name="date")
     with session_scope(SessionLocal) as session:
         result = compute_and_store_cardio_risk(
             session,

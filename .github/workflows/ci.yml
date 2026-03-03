@@ -7,49 +7,33 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  quality-gates:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.11", "3.12"]
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-          cache: pip
+          fetch-depth: 0
 
-      - name: Install runtime dependencies
+      - name: Run standardized gates in container
         run: |
-          python -m pip install --upgrade pip
-          if [ -f prod/requirements.txt ]; then
-            pip install -r prod/requirements.txt
-          fi
-          if [ -f requirements-test.txt ]; then
-            pip install -r requirements-test.txt
-          else
-            pip install pytest numpy
-          fi
-
-      - name: Compile check
-        run: |
-          python -m compileall -q pipeline policy prod tools
-
-      - name: Run test suite
-        env:
-          PYTHONPYCACHEPREFIX: /tmp/pycache
-        run: |
-          PYTHONPATH=. python -m unittest -q
-
-      - name: Assert repository remains clean
-        run: |
-          if [ -n "$(git status --porcelain)" ]; then
-            git status --short
-            echo "CI run produced repository modifications."
-            exit 1
-          fi
+          docker run --rm \
+            -e GITHUB_BASE_REF="${GITHUB_BASE_REF}" \
+            -e PYTHONPYCACHEPREFIX=/tmp/pycache \
+            -v "${{ github.workspace }}:/workspace" \
+            -w /workspace \
+            python:3.11-slim \
+            bash -lc '
+              set -euo pipefail
+              apt-get update
+              apt-get install -y --no-install-recommends git
+              python -m pip install --upgrade pip
+              pip install -r requirements.lock.txt
+              ./tools/ci_contract.sh lint
+              ./tools/ci_contract.sh type-check
+              ./tools/ci_contract.sh unit
+              ./tools/ci_contract.sh integration-smoke
+              ./tools/ci_contract.sh generated-guard
+              ./tools/ci_contract.sh clean-tree
+            '

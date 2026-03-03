@@ -133,7 +133,12 @@ def run_policy_data_collection(
                 want_extra = rng.random() < (0.55 if near_unlock else 0.2)
                 extra_used = 0
                 while want_extra and extra_used < cfg.extra_batches_max_per_day:
-                    batch = take_next_extra_batch(conn, session.session_id)
+                    batch = take_next_extra_batch(
+                        conn,
+                        session.session_id,
+                        user_id=user_id,
+                        extra_batches_max_per_day=cfg.extra_batches_max_per_day,
+                    )
                     if not batch:
                         break
                     extra_answers = []

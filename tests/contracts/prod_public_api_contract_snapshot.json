@@ -1,0 +1,389 @@
+{
+  "public_paths": {
+    "/v1/admin/audit/export": {
+      "get": {
+        "operation_id": "audit_export_v1_admin_audit_export_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/admin/domains/readiness": {
+      "get": {
+        "operation_id": "domain_readiness_v1_admin_domains_readiness_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/admin/policy/activate/{version}": {
+      "post": {
+        "operation_id": "activate_policy_v1_admin_policy_activate__version__post",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/admin/policy/metrics": {
+      "get": {
+        "operation_id": "policy_metrics_v1_admin_policy_metrics_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/admin/policy/versions": {
+      "get": {
+        "operation_id": "list_policy_versions_v1_admin_policy_versions_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/admin/privacy/retention/run": {
+      "post": {
+        "operation_id": "run_privacy_retention_v1_admin_privacy_retention_run_post",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/admin/registry/activate/{version}": {
+      "post": {
+        "operation_id": "activate_registry_v1_admin_registry_activate__version__post",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/admin/registry/upload": {
+      "post": {
+        "operation_id": "upload_registry_v1_admin_registry_upload_post",
+        "request_schema": {
+          "$ref": "#/components/schemas/RegistryUploadIn"
+        },
+        "response_schema": {}
+      }
+    },
+    "/v1/admin/registry/versions": {
+      "get": {
+        "operation_id": "list_registry_versions_v1_admin_registry_versions_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/admin/site-configs": {
+      "get": {
+        "operation_id": "list_site_configs_endpoint_v1_admin_site_configs_get",
+        "request_schema": {},
+        "response_schema": {
+          "$ref": "#/components/schemas/SiteConfigListOut"
+        }
+      }
+    },
+    "/v1/admin/slo": {
+      "get": {
+        "operation_id": "slo_status_v1_admin_slo_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/coherence/tier-contract": {
+      "get": {
+        "operation_id": "coherence_tier_contract_endpoint_v1_coherence_tier_contract_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/drift-routing-contract": {
+      "get": {
+        "operation_id": "drift_routing_contract_endpoint_v1_drift_routing_contract_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/anamnesis/episodes": {
+      "get": {
+        "operation_id": "anamnesis_episodes_list_endpoint_v1_users__user_id__anamnesis_episodes_get",
+        "request_schema": {},
+        "response_schema": {
+          "$ref": "#/components/schemas/AnamnesisEpisodeListOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/anamnesis/episodes/{episode_id}": {
+      "get": {
+        "operation_id": "anamnesis_episode_get_endpoint_v1_users__user_id__anamnesis_episodes__episode_id__get",
+        "request_schema": {},
+        "response_schema": {
+          "$ref": "#/components/schemas/AnamnesisEpisodeOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/anamnesis/episodes/{episode_id}/resolve": {
+      "post": {
+        "operation_id": "anamnesis_episode_resolve_endpoint_v1_users__user_id__anamnesis_episodes__episode_id__resolve_post",
+        "request_schema": {
+          "type": "object"
+        },
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/ani/summary": {
+      "get": {
+        "operation_id": "ani_summary_v1_users__user_id__ani_summary_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/answers": {
+      "post": {
+        "operation_id": "post_answers_v1_users__user_id__answers_post",
+        "request_schema": {
+          "$ref": "#/components/schemas/SubmitAnswersIn"
+        },
+        "response_schema": {
+          "$ref": "#/components/schemas/SubmitAnswersOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/calibrations": {
+      "get": {
+        "operation_id": "list_calibrations_v1_users__user_id__calibrations_get",
+        "request_schema": {},
+        "response_schema": {
+          "$ref": "#/components/schemas/CalibrationListOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/calibrations/{scale_id}": {
+      "post": {
+        "operation_id": "update_calibration_v1_users__user_id__calibrations__scale_id__post",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/cardio-risk/compute": {
+      "post": {
+        "operation_id": "compute_cardio_risk_endpoint_v1_users__user_id__cardio_risk_compute_post",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/cardio-risk/history": {
+      "get": {
+        "operation_id": "cardio_risk_history_endpoint_v1_users__user_id__cardio_risk_history_get",
+        "request_schema": {},
+        "response_schema": {
+          "$ref": "#/components/schemas/CardioRiskHistoryOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/circle": {
+      "get": {
+        "operation_id": "circle_snapshots_v1_users__user_id__circle_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/coherence/history": {
+      "get": {
+        "operation_id": "coherence_history_endpoint_v1_users__user_id__coherence_history_get",
+        "request_schema": {},
+        "response_schema": {
+          "$ref": "#/components/schemas/CoherenceHistoryOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/daily-questions": {
+      "get": {
+        "operation_id": "daily_questions_v1_users__user_id__daily_questions_get",
+        "request_schema": {},
+        "response_schema": {
+          "$ref": "#/components/schemas/DailyQuestionsOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/daily-questions/select": {
+      "post": {
+        "operation_id": "daily_questions_select_v1_users__user_id__daily_questions_select_post",
+        "request_schema": {
+          "$ref": "#/components/schemas/DailyQuestionsSelectIn"
+        },
+        "response_schema": {
+          "$ref": "#/components/schemas/DailyQuestionsOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/drift-events": {
+      "get": {
+        "operation_id": "drift_events_v1_users__user_id__drift_events_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/emotion/deep_dive": {
+      "get": {
+        "operation_id": "emotion_deep_dive_v1_users__user_id__emotion_deep_dive_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/ews": {
+      "get": {
+        "operation_id": "ews_features_v1_users__user_id__ews_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/experiments": {
+      "get": {
+        "operation_id": "list_experiments_endpoint_v1_users__user_id__experiments_get",
+        "request_schema": {},
+        "response_schema": {}
+      },
+      "post": {
+        "operation_id": "upsert_experiment_endpoint_v1_users__user_id__experiments_post",
+        "request_schema": {
+          "$ref": "#/components/schemas/ExperimentUpsertIn"
+        },
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/experiments/{experiment_id}": {
+      "get": {
+        "operation_id": "get_experiment_endpoint_v1_users__user_id__experiments__experiment_id__get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/experiments/{experiment_id}/results": {
+      "get": {
+        "operation_id": "experiment_results_endpoint_v1_users__user_id__experiments__experiment_id__results_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/follow-up-queue": {
+      "get": {
+        "operation_id": "follow_up_queue_endpoint_v1_users__user_id__follow_up_queue_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/observations": {
+      "post": {
+        "operation_id": "post_observations_v1_users__user_id__observations_post",
+        "request_schema": {
+          "$ref": "#/components/schemas/SubmitObservationsIn"
+        },
+        "response_schema": {
+          "$ref": "#/components/schemas/SubmitObservationsOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/policy/outcomes": {
+      "post": {
+        "operation_id": "policy_outcomes_v1_users__user_id__policy_outcomes_post",
+        "request_schema": {
+          "$ref": "#/components/schemas/PolicyOutcomeUpdateIn"
+        },
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/profile": {
+      "get": {
+        "operation_id": "get_profile_v1_users__user_id__profile_get",
+        "request_schema": {},
+        "response_schema": {}
+      },
+      "patch": {
+        "operation_id": "patch_profile_v1_users__user_id__profile_patch",
+        "request_schema": {
+          "$ref": "#/components/schemas/UserProfilePatchIn"
+        },
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/progress": {
+      "get": {
+        "operation_id": "get_progress_v1_users__user_id__progress_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/projection/questions": {
+      "get": {
+        "operation_id": "projection_questions_v1_users__user_id__projection_questions_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/request-more-context": {
+      "post": {
+        "operation_id": "request_more_context_v1_users__user_id__request_more_context_post",
+        "request_schema": {
+          "$ref": "#/components/schemas/RequestMoreContextIn"
+        },
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/safety-events": {
+      "get": {
+        "operation_id": "get_safety_events_v1_users__user_id__safety_events_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/safety-events/{event_id}/resolve": {
+      "post": {
+        "operation_id": "resolve_safety_v1_users__user_id__safety_events__event_id__resolve_post",
+        "request_schema": {
+          "$ref": "#/components/schemas/SafetyResolveIn"
+        },
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/scales": {
+      "get": {
+        "operation_id": "user_scales_v1_users__user_id__scales_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/scales/{scale_id}/history": {
+      "get": {
+        "operation_id": "scale_history_v1_users__user_id__scales__scale_id__history_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/sessions/{session_id}/coherence": {
+      "get": {
+        "operation_id": "session_coherence_endpoint_v1_users__user_id__sessions__session_id__coherence_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    },
+    "/v1/users/{user_id}/sessions/{session_id}/engagement": {
+      "get": {
+        "operation_id": "session_engagement_endpoint_v1_users__user_id__sessions__session_id__engagement_get",
+        "request_schema": {},
+        "response_schema": {
+          "$ref": "#/components/schemas/SessionUncertaintyProfileOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/site-config": {
+      "get": {
+        "operation_id": "user_site_config_v1_users__user_id__site_config_get",
+        "request_schema": {},
+        "response_schema": {
+          "$ref": "#/components/schemas/SiteConfigOut"
+        }
+      }
+    },
+    "/v1/users/{user_id}/state": {
+      "get": {
+        "operation_id": "state_snapshots_v1_users__user_id__state_get",
+        "request_schema": {},
+        "response_schema": {}
+      }
+    }
+  },
+  "title": "Questions Agent (Prod)",
+  "version": "1.0"
+}

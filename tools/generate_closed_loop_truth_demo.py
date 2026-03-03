@@ -143,7 +143,12 @@ def _run_replay_and_updates(
         want_extra = rng.random() < (0.55 if near_unlock else 0.20)
         batches_used = 0
         while want_extra and batches_used < int(cfg.extra_batches_max_per_day):
-            batch = take_next_extra_batch(conn, session.session_id)
+            batch = take_next_extra_batch(
+                conn,
+                session.session_id,
+                user_id=user_id,
+                extra_batches_max_per_day=cfg.extra_batches_max_per_day,
+            )
             if not batch:
                 break
             extra_answers = []

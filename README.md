@@ -34,6 +34,18 @@ The reference engine uses **SQLite + a minimal Python dependency set**. Current 
 
 ## Quick start (demo)
 
+Engineering quality gate:
+
+```bash
+./tools/quality_gate.sh
+```
+
+Process docs:
+- `CONTRIBUTING.md`
+- `docs/release-process.md`
+- `docs/observability-baseline.md`
+- `docs/adr/0000-template.md`
+
 1) Initialize DB and seed demo registry:
 
 ```bash
