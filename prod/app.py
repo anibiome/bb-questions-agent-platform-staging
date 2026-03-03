@@ -614,7 +614,12 @@ def post_answers(user_id: str, body: SubmitAnswersIn, _: None = Depends(_auth)):
                         details={"error": str(exc)[:500]},
                     )
         except Exception:
-            pass
+            logger.exception(
+                "failed to persist operational metrics for submit_answers failure "
+                "(user_id=%s session_id=%s)",
+                user_id,
+                body.session_id,
+            )
         raise
 
 

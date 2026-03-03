@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_DB: questions_agent
       POSTGRES_USER: qa_user
-      POSTGRES_PASSWORD: qa_pass
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-qa_pass}
     ports:
       - "5432:5432"
     volumes:

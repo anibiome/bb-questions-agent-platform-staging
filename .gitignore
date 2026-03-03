@@ -5,6 +5,10 @@ __pycache__/
 dist/
 build/
 *.egg
+.ruff_cache/
+.mypy_cache/
+.audit_venv*/
+.audit_venv312/
 
 # Environment
 .env
@@ -31,14 +35,22 @@ output/
 .pytest_cache/
 htmlcov/
 .coverage
+.coverage.*
 coverage.xml
 
 # OS
 .DS_Store
 Thumbs.db
 
+# Local duplicate/unpacked copies
+questions_agent_platform/
+
 # Patent/IP (confidential)
 *PATENT*
 *patent*
 *COFOUNDER*
 *cofounder*
+
+# Local audit environments
+.audit_venv/
+.audit_venv312/

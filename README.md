@@ -30,7 +30,7 @@ P1 runtime state loop implemented:
 - explicit coherence tier contract (`/v1/coherence/tier-contract`) and cross-modal observation coupling payloads,
 - state/circle retrieval endpoints in both reference and production APIs.
 
-The implementation intentionally uses **Python standard library + SQLite** only (no external dependencies) so it can run in minimal environments and be easy to port into your production stack.
+The reference engine uses **SQLite + a minimal Python dependency set**. Current runtime requirements are pinned in `prod/requirements.txt` (including `numpy` for the item-efficiency analyzer) to keep behavior reproducible across environments.
 
 ## Quick start (demo)
 
@@ -57,9 +57,7 @@ Open the generated file:
 3) Run unit/integration tests:
 
 ```bash
-rm -rf /tmp/questions_agent_platform
-ln -s "$(pwd)" /tmp/questions_agent_platform
-PYTHONPATH=/tmp PYTHONPYCACHEPREFIX=/tmp/pycache python3 -m unittest -q
+PYTHONPATH=. PYTHONPYCACHEPREFIX=/tmp/pycache python3 -m unittest -q
 ```
 
 4) Generate a policy readiness brief (HTML + JSON):

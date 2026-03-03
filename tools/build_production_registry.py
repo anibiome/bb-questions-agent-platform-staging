@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Build v3 production registry from the ANI BIOME Questions spreadsheet.
 
-Reads:  /Users/brunobalen/Downloads/Questions_Ani_Confidential.xlsx
+Reads:  QUESTIONS_REGISTRY_XLSX env var (or default local path)
 Writes: data/registry_production/v3/{items,scales,questionnaires}.json
 
 Also merges v2 cardiometabolic instruments (FINDRISC, EZ-CVD, SCORED,
 Lee-NAFLD, IPAQ-SF, AUDIT-C) so the final registry is a superset.
 
 Run:
-    PYTHONPATH=/tmp/project_analysis python3 tools/build_production_registry.py
+    export QUESTIONS_REGISTRY_XLSX=/absolute/path/to/Questions_Ani_Confidential.xlsx
+    PYTHONPATH=. python3 tools/build_production_registry.py
 """
 from __future__ import annotations
 
@@ -24,10 +25,10 @@ import openpyxl  # type: ignore
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-XLSX = "/Users/brunobalen/Downloads/Questions_Ani_Confidential.xlsx"
 PROJECT = Path(__file__).resolve().parent.parent
 V2_DIR = PROJECT / "data" / "registry_demo" / "v2"
 OUT_DIR = PROJECT / "data" / "registry_production" / "v3"
+DEFAULT_XLSX = PROJECT / "data" / "registry_source" / "Questions_Ani_Confidential.xlsx"
 
 # ---------------------------------------------------------------------------
 # Response-type mapping: spreadsheet option patterns → registry response_type id
@@ -842,10 +843,21 @@ def compute_multiplex_map(scales: List[dict]) -> Dict[str, List[str]]:
 # Main
 # ---------------------------------------------------------------------------
 def main() -> None:
-    print("Building v3 production registry...")
-    print(f"  Reading: {XLSX}")
+    xlsx_path = Path(
+        os.environ.get("QUESTIONS_REGISTRY_XLSX", str(DEFAULT_XLSX))
+    ).expanduser()
+    if not xlsx_path.exists():
+        print(
+            "ERROR: input spreadsheet not found. "
+            "Set QUESTIONS_REGISTRY_XLSX to an existing file path."
+        )
+        print(f"Resolved path: {xlsx_path}")
+        sys.exit(1)
 
-    wb = openpyxl.load_workbook(XLSX, data_only=True)
+    print("Building v3 production registry...")
+    print(f"  Reading: {xlsx_path}")
+
+    wb = openpyxl.load_workbook(str(xlsx_path), data_only=True)
     ws = wb["Questions"]
 
     # 1. Parse items
