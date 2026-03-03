@@ -1,0 +1,8 @@
+# Default ownership for review routing and accountability.
+* @genius-bb
+
+# Core platform surfaces
+/pipeline/ @genius-bb
+/policy/ @genius-bb
+/prod/ @genius-bb
+/tests/ @genius-bb
