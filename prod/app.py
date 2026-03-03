@@ -5,6 +5,7 @@ import time
 from contextlib import asynccontextmanager
 from datetime import date, timedelta
 from typing import Any, Dict, List, Optional, Sequence
+from uuid import uuid4
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -120,34 +121,39 @@ class ErrorMiddleware(BaseHTTPMiddleware):
     """Catch unhandled exceptions → structured JSON error + log."""
 
     async def dispatch(self, request: Request, call_next):
+        req_id = str(request.headers.get("x-request-id") or "").strip() or f"req_{uuid4().hex[:20]}"
+        request.state.request_id = req_id
         started = time.perf_counter()
         try:
             response = await call_next(request)
             elapsed = (time.perf_counter() - started) * 1000.0
             if response.status_code >= 400:
                 logger.warning(
-                    "req=%s %s status=%d elapsed_ms=%.1f",
-                    request.method, request.url.path, response.status_code, elapsed,
+                    "request_id=%s req=%s %s status=%d elapsed_ms=%.1f",
+                    req_id, request.method, request.url.path, response.status_code, elapsed,
                 )
             else:
                 logger.debug(
-                    "req=%s %s status=%d elapsed_ms=%.1f",
-                    request.method, request.url.path, response.status_code, elapsed,
+                    "request_id=%s req=%s %s status=%d elapsed_ms=%.1f",
+                    req_id, request.method, request.url.path, response.status_code, elapsed,
                 )
+            response.headers["x-request-id"] = req_id
             return response
         except HTTPException:
             raise  # let FastAPI handle these
         except Exception as exc:
             elapsed = (time.perf_counter() - started) * 1000.0
             logger.error(
-                "req=%s %s UNHANDLED error=%s elapsed_ms=%.1f\n%s",
-                request.method, request.url.path, str(exc)[:300], elapsed,
+                "request_id=%s req=%s %s UNHANDLED error=%s elapsed_ms=%.1f\n%s",
+                req_id, request.method, request.url.path, str(exc)[:300], elapsed,
                 traceback.format_exc(),
             )
-            return JSONResponse(
+            response = JSONResponse(
                 status_code=500,
                 content={"detail": "Internal server error", "error_type": type(exc).__name__},
             )
+            response.headers["x-request-id"] = req_id
+            return response
 
 
 @asynccontextmanager
@@ -169,8 +175,11 @@ app = FastAPI(title="Questions Agent (Prod)", version="1.0", lifespan=_lifespan)
 app.add_middleware(ErrorMiddleware)
 
 
-def _auth(x_api_key: Optional[str] = Header(None)):
-    require_api_key(x_api_key, settings.api_key)
+def _auth(
+    x_api_key: Optional[str] = Header(None),
+    authorization: Optional[str] = Header(None),
+):
+    require_api_key(x_api_key, settings.api_key, authorization=authorization)
 
 
 def _model_dump(model: Any, **kwargs: Any) -> Dict[str, Any]:

@@ -181,6 +181,10 @@ Endpoints:
 - Observation events (wearables/voice/imaging/omics): `POST /v1/users/{user_id}/observations`
 - Policy outcomes (attach Z/uncertainty): `POST /v1/users/{user_id}/policy/outcomes`
 
+Auth and tracing headers:
+- API key auth accepts either `x-api-key: <key>` or `Authorization: Bearer <key>`.
+- Optional `x-request-id: <id>` is echoed back in responses for cross-service trace stitching.
+
 Contract spec:
 - `questions_agent_platform/SCHEMA_CONTRACTS_V1.md`
 - Includes canonical versioning, compatibility aliases, strict validation rules, and join-key chain.
