@@ -185,6 +185,20 @@ Auth and tracing headers:
 - API key auth accepts either `x-api-key: <key>` or `Authorization: Bearer <key>`.
 - Optional `x-request-id: <id>` is echoed back in responses for cross-service trace stitching.
 
+## Runtime Bridge
+
+Vault now publishes an event-driven runtime bridge for question selection and follow-up routing:
+
+- Latest bridge payload: `output/runtime_bridge/latest.json`
+- Per-subject bridge payload: `output/runtime_bridge/<person_id>/runtime_question_context.json`
+
+These files are refreshed on vault `runtime_snapshot_ready` and include:
+- top risk + coherence summary
+- unresolved measurements from vault memory
+- anchor signals
+- counterfactual probes
+- recommended follow-up prompts/domains for the question engine
+
 Contract spec:
 - `questions_agent_platform/SCHEMA_CONTRACTS_V1.md`
 - Includes canonical versioning, compatibility aliases, strict validation rules, and join-key chain.

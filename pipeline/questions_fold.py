@@ -167,6 +167,11 @@ class QuestionsFoldResult:
     z_star: Tuple[float, float]             # 2D attractor (personal baseline)
     r: float                                # decoherence radius
     theta: float                            # decoherence angle (radians)
+    theta_defined: bool                     # semantic angle validity
+    semantic_axis_scores: Dict[str, float]  # anchored mode magnitudes
+    semantic_concentration: float           # how directional the drift is
+    attractor_state: Dict[str, float]       # attractor in state space
+    attractor_sigma_diag: Dict[str, float]  # attractor uncertainty
     coherence: float                        # coherence score κ̂ ∈ [0, 1]
     coherence_uncertainty: float            # σ_κ from state uncertainty
 
@@ -215,6 +220,17 @@ class QuestionsFoldResult:
                 "z_star": [round(self.z_star[0], 6), round(self.z_star[1], 6)],
                 "r": round(self.r, 6),
                 "theta": round(self.theta, 6),
+                "theta_defined": self.theta_defined,
+                "semantic_axis_scores": {
+                    k: round(v, 6) for k, v in self.semantic_axis_scores.items()
+                },
+                "semantic_concentration": round(self.semantic_concentration, 6),
+                "attractor_state": {
+                    k: round(v, 6) for k, v in self.attractor_state.items()
+                },
+                "attractor_sigma_diag": {
+                    k: round(v, 6) for k, v in self.attractor_sigma_diag.items()
+                },
                 "coherence": round(self.coherence, 6),
                 "coherence_uncertainty": round(self.coherence_uncertainty, 6),
                 "projection_version": self.circle_projection_version,
@@ -342,8 +358,8 @@ def compute_questions_fold(
         day=today,
     )
 
-    # 4. Coherence score: nonlinear mapping from radius
-    coherence = _coherence_from_radius(circle["r"])
+    # 4. Coherence score: prefer canonical circle score when available
+    coherence = float(circle.get("coherence", _coherence_from_radius(circle["r"])))
 
     # 5. Coherence uncertainty: propagated from state uncertainty
     coherence_unc = _coherence_uncertainty(x_uncertainty, circle)
@@ -382,6 +398,11 @@ def compute_questions_fold(
         z_star=(circle["z_star"][0], circle["z_star"][1]),
         r=circle["r"],
         theta=circle["theta"],
+        theta_defined=bool(circle.get("theta_defined", True)),
+        semantic_axis_scores=dict(circle.get("semantic_axis_scores", {})),
+        semantic_concentration=float(circle.get("semantic_concentration", 0.0)),
+        attractor_state=dict(circle.get("attractor_state", {})),
+        attractor_sigma_diag=dict(circle.get("attractor_sigma_diag", {})),
         coherence=coherence,
         coherence_uncertainty=coherence_unc,
         coverage=cov_info["per_dimension"],
@@ -399,7 +420,7 @@ def compute_questions_fold(
 # ---------------------------------------------------------------------------
 
 def _coherence_from_radius(r: float) -> float:
-    """Convert decoherence radius to coherence score ∈ [0, 1].
+    """Legacy radius-only fallback used when richer circle metadata is absent.
 
     Uses a soft-clipped linear mapping:
         κ̂ = max(0, 1 - r / R₀)
@@ -433,7 +454,12 @@ def _coherence_uncertainty(
     # Circle contribution (already computed in circle snapshot)
     circle_unc_obj = circle.get("uncertainty", {})
     if isinstance(circle_unc_obj, dict):
-        circle_unc = float(circle_unc_obj.get("circle_uncertainty", mean_unc))
+        circle_unc = float(
+            circle_unc_obj.get(
+                "circle_uncertainty",
+                circle_unc_obj.get("coherence_uncertainty", mean_unc),
+            )
+        )
     else:
         circle_unc = float(circle_unc_obj)
 
@@ -608,8 +634,11 @@ def _extract_previous_circle(
         return {
             "z": circle.get("z"),
             "z_star": circle.get("z_star"),
+            "r": float(circle.get("r", 0.0)),
             "velocity": float(circle.get("velocity", 0.0)),
             "date": previous_fold.get("day"),
+            "attractor_state": circle.get("attractor_state"),
+            "attractor_sigma_diag": circle.get("attractor_sigma_diag"),
         }
     # Raw circle snapshot format
     if "z" in previous_fold and "z_star" in previous_fold:

@@ -161,12 +161,22 @@ async def _lifespan(_: FastAPI):
     from questions_agent_platform.prod.migrations import ensure_schema_ready
 
     logger.info("Starting Questions Agent API — migration mode=%s", settings.db_migration_mode)
-    ensure_schema_ready(
+    if settings.db_migration_mode == "auto":
+        logger.warning(
+            "DB_MIGRATION_MODE=auto applies schema changes during startup. "
+            "Prefer `require` in managed environments and run prod.manage upgrade during deploys."
+        )
+    schema_result = ensure_schema_ready(
         database_url=settings.database_url,
         mode=settings.db_migration_mode,
         baseline_existing=settings.db_migration_baseline_existing,
     )
-    logger.info("Questions Agent API ready — schema migration complete")
+    logger.info(
+        "Questions Agent API ready — schema status=%s current=%s head=%s",
+        schema_result.get("status"),
+        schema_result.get("current_revision"),
+        schema_result.get("head_revision"),
+    )
     yield
     logger.info("Questions Agent API shutting down")
 

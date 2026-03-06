@@ -1505,11 +1505,24 @@ def get_circle_snapshots(
     start = day - timedelta(days=max(1, int(window_days)) - 1)
     rows = session.execute(
         select(CircleSnapshot)
-        .where(and_(CircleSnapshot.user_id == user_id, CircleSnapshot.date >= start))
+        .where(
+            and_(
+                CircleSnapshot.user_id == user_id,
+                CircleSnapshot.date >= start,
+                CircleSnapshot.projection_version == CIRCLE_PROJECTION_VERSION,
+            )
+        )
         .order_by(CircleSnapshot.date.asc(), CircleSnapshot.created_at.asc())
     ).scalars().all()
+    if not rows:
+        rows = session.execute(
+            select(CircleSnapshot)
+            .where(and_(CircleSnapshot.user_id == user_id, CircleSnapshot.date >= start))
+            .order_by(CircleSnapshot.date.asc(), CircleSnapshot.created_at.asc())
+        ).scalars().all()
     out: List[Dict[str, Any]] = []
     for r in rows:
+        uncertainty = json.loads(str(r.uncertainty_json))
         score = (
             float(r.coherence_score)
             if r.coherence_score is not None
@@ -1541,7 +1554,11 @@ def get_circle_snapshots(
                     "score": float(score),
                     "tier": tier,
                 },
-                "uncertainty": json.loads(str(r.uncertainty_json)),
+                "theta_defined": bool(uncertainty.get("theta_defined", True)),
+                "semantic_axis_scores": uncertainty.get("semantic_axis_scores", {}),
+                "semantic_concentration": uncertainty.get("semantic_concentration"),
+                "projection_kind": uncertainty.get("projection_kind"),
+                "uncertainty": uncertainty,
                 "source": str(r.source),
             }
         )
@@ -2597,7 +2614,11 @@ def _upsert_daily_state_and_circle_snapshots_pg(
         x_uncertainty=dict(computed_state["x_uncertainty"]),
         previous_circle=prev_circle,
     )
-    coherence_score = coherence_score_from_radius(float(computed_circle.get("r") or 0.0))
+    coherence_score = float(
+        computed_circle.get("coherence")
+        if computed_circle.get("coherence") is not None
+        else coherence_score_from_radius(float(computed_circle.get("r") or 0.0))
+    )
     coherence_tier = coherence_tier_for_score(float(coherence_score))
     projection_version = CIRCLE_PROJECTION_VERSION
     circle_row = session.execute(
@@ -2683,9 +2704,22 @@ def _upsert_ews_and_drift_pg(
     start = day - timedelta(days=lookback_days - 1)
     rows = session.execute(
         select(CircleSnapshot.date, CircleSnapshot.r, CircleSnapshot.velocity, CircleSnapshot.acceleration)
-        .where(and_(CircleSnapshot.user_id == user_id, CircleSnapshot.date >= start, CircleSnapshot.date < day))
+        .where(
+            and_(
+                CircleSnapshot.user_id == user_id,
+                CircleSnapshot.date >= start,
+                CircleSnapshot.date < day,
+                CircleSnapshot.projection_version == CIRCLE_PROJECTION_VERSION,
+            )
+        )
         .order_by(CircleSnapshot.date.asc(), CircleSnapshot.created_at.asc())
     ).all()
+    if not rows:
+        rows = session.execute(
+            select(CircleSnapshot.date, CircleSnapshot.r, CircleSnapshot.velocity, CircleSnapshot.acceleration)
+            .where(and_(CircleSnapshot.user_id == user_id, CircleSnapshot.date >= start, CircleSnapshot.date < day))
+            .order_by(CircleSnapshot.date.asc(), CircleSnapshot.created_at.asc())
+        ).all()
 
     history: List[Dict[str, Any]] = [
         {
@@ -2744,7 +2778,11 @@ def _upsert_ews_and_drift_pg(
         ews_row.created_at = now_iso()
 
     radius = float(computed_circle.get("r") or 0.0)
-    coherence_score = coherence_score_from_radius(radius)
+    coherence_score = float(
+        computed_circle.get("coherence")
+        if computed_circle.get("coherence") is not None
+        else coherence_score_from_radius(radius)
+    )
     baseline_r_vals = [float(h["r"]) for h in history[:-1]]
     if baseline_r_vals:
         mu = sum(baseline_r_vals) / float(len(baseline_r_vals))
@@ -3171,10 +3209,23 @@ def _get_latest_circle_snapshot_before_pg(
 ) -> Optional[Dict[str, Any]]:
     row = session.execute(
         select(CircleSnapshot)
-        .where(and_(CircleSnapshot.user_id == user_id, CircleSnapshot.date < day))
+        .where(
+            and_(
+                CircleSnapshot.user_id == user_id,
+                CircleSnapshot.date < day,
+                CircleSnapshot.projection_version == CIRCLE_PROJECTION_VERSION,
+            )
+        )
         .order_by(CircleSnapshot.date.desc(), CircleSnapshot.created_at.desc())
         .limit(1)
     ).scalars().first()
+    if not row:
+        row = session.execute(
+            select(CircleSnapshot)
+            .where(and_(CircleSnapshot.user_id == user_id, CircleSnapshot.date < day))
+            .order_by(CircleSnapshot.date.desc(), CircleSnapshot.created_at.desc())
+            .limit(1)
+        ).scalars().first()
     if not row:
         return None
     try:
@@ -3186,7 +3237,9 @@ def _get_latest_circle_snapshot_before_pg(
             "date": row.date,
             "z": [float(z[0]), float(z[1])],
             "z_star": [float(z_star[0]), float(z_star[1])],
+            "r": float(row.r or 0.0),
             "velocity": float(row.velocity or 0.0),
+            "uncertainty": json.loads(str(row.uncertainty_json)) if row.uncertainty_json else {},
         }
     except Exception:
         return None

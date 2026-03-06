@@ -157,6 +157,29 @@ class TestAnifoldAdapterAndMock(unittest.TestCase):
                 }
             )
 
+    def test_context_normalization_and_request_builder_harden_string_flags(self) -> None:
+        context = normalize_context_payload(
+            {
+                "contract_name": CONTRACT_FUSION_TO_QUESTIONS_CONTEXT,
+                "schema_version": "1.0",
+                "safety_trigger_active": "false",
+                "allow_context_batches": "false",
+            }
+        )
+
+        client = AnifoldAdapterClient(AnifoldAdapterConfig(base_url="http://127.0.0.1:9999"))
+        request_payload = client.build_daily_select_request(
+            day="2026-02-16",
+            context_payload=context,
+            include_explanations="false",
+            allow_context_batches="false",
+        )
+
+        self.assertFalse(context["safety_trigger_active"])
+        self.assertFalse(context["allow_context_batches"])
+        self.assertFalse(request_payload["allow_context_batches"])
+        self.assertFalse(request_payload["include_explanations"])
+
 
 if __name__ == "__main__":
     unittest.main()

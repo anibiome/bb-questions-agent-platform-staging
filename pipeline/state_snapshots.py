@@ -6,12 +6,21 @@ from statistics import mean
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
 from questions_agent_platform.pipeline.registry import Registry
+from questions_agent_platform.pipeline.trajectory_metrics import (
+    CANONICAL_AXIS_LOADINGS,
+    build_personal_attractor,
+    canonical_coherence_score,
+    canonical_distance_from_state,
+    coherence_uncertainty_from_state,
+    semantic_axis_scores_from_state,
+    semantic_direction,
+)
 
 
 STATE_SCHEMA_VERSION_DEFAULT = "v1_state_schema"
 STATE_MODEL_VERSION = "state_service_v1"
-CIRCLE_PROJECTION_VERSION = "circle_projection_v1_fixed"
-CIRCLE_ANCHOR_VERSION = "personal_attractor_ema_v1"
+CIRCLE_PROJECTION_VERSION = "circle_projection_v2_canonical"
+CIRCLE_ANCHOR_VERSION = "personal_attractor_state_v2"
 
 STATE_DIMENSIONS: Tuple[str, ...] = (
     "energy_vitality",
@@ -145,49 +154,116 @@ def compute_circle_snapshot(
     x_uncertainty: Dict[str, float],
     previous_circle: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
-    z = _project_state_to_2d(x_hat)
     prev = previous_circle or {}
+    prev_attractor_state = prev.get("attractor_state")
+    prev_attractor_sigma_diag = prev.get("attractor_sigma_diag")
+    if not isinstance(prev_attractor_state, dict):
+        prev_uncertainty = prev.get("uncertainty")
+        if isinstance(prev_uncertainty, dict):
+            state_candidate = prev_uncertainty.get("attractor_state")
+            sigma_candidate = prev_uncertainty.get("attractor_sigma_diag")
+            if isinstance(state_candidate, dict):
+                prev_attractor_state = state_candidate
+            if isinstance(sigma_candidate, dict):
+                prev_attractor_sigma_diag = sigma_candidate
 
-    prev_z_star = prev.get("z_star")
-    if isinstance(prev_z_star, list) and len(prev_z_star) == 2:
-        z_star = [
-            0.85 * float(prev_z_star[0]) + 0.15 * float(z[0]),
-            0.85 * float(prev_z_star[1]) + 0.15 * float(z[1]),
-        ]
-    else:
-        z_star = [float(z[0]), float(z[1])]
-
-    r = _l2(z, z_star)
-    theta = float(math.atan2(float(z[1]), float(z[0])))
+    attractor_state, attractor_sigma_diag = build_personal_attractor(
+        current_mu=x_hat,
+        current_sigma_diag=x_uncertainty,
+        previous_attractor_mu=prev_attractor_state if isinstance(prev_attractor_state, dict) else None,
+        previous_attractor_sigma_diag=prev_attractor_sigma_diag if isinstance(prev_attractor_sigma_diag, dict) else None,
+        state_dimensions=STATE_DIMENSIONS,
+    )
+    r = canonical_distance_from_state(
+        mu=x_hat,
+        sigma_diag=x_uncertainty,
+        attractor_mu=attractor_state,
+        attractor_sigma_diag=attractor_sigma_diag,
+        state_dimensions=STATE_DIMENSIONS,
+    )
+    semantic_axis_scores = semantic_axis_scores_from_state(
+        mu=x_hat,
+        sigma_diag=x_uncertainty,
+        attractor_mu=attractor_state,
+        attractor_sigma_diag=attractor_sigma_diag,
+        axis_loadings=CANONICAL_AXIS_LOADINGS,
+    )
+    theta, theta_defined, semantic_concentration = semantic_direction(semantic_axis_scores)
+    z_star = _project_state_to_2d(attractor_state)
+    z = [
+        float(z_star[0]) + float(r) * math.cos(theta),
+        float(z_star[1]) + float(r) * math.sin(theta),
+    ]
 
     velocity = 0.0
     acceleration = 0.0
-    prev_z = prev.get("z")
-    if isinstance(prev_z, list) and len(prev_z) == 2:
-        prev_day = prev.get("date")
-        delta_days = 1.0
-        if isinstance(prev_day, date):
-            delta_days = max(1.0, float((day - prev_day).days))
-        velocity = _l2(z, prev_z) / delta_days
-        prev_v = float(prev.get("velocity", 0.0))
+    prev_r = prev.get("r")
+    observed_velocity: Optional[float] = None
+    if prev_r is not None:
+        prev_day = _coerce_date(prev.get("date"))
+        delta_days = max(1.0, float((day - prev_day).days)) if prev_day else 1.0
+        velocity = abs(float(r) - float(prev_r)) / delta_days
+        observed_velocity = float(velocity)
+        prev_v = float(prev.get("velocity", 0.0) or 0.0)
         acceleration = (float(velocity) - prev_v) / delta_days
 
     unc_vals = [float(x_uncertainty.get(dim, 1.0)) for dim in STATE_DIMENSIONS]
     unc_mean = float(sum(unc_vals) / max(1, len(unc_vals)))
     unc_max = float(max(unc_vals) if unc_vals else 1.0)
-    circle_unc = min(1.0, 0.7 * unc_mean + 0.3 * unc_max)
+    circle_unc = coherence_uncertainty_from_state(
+        sigma_diag=x_uncertainty,
+        attractor_sigma_diag=attractor_sigma_diag,
+        state_dimensions=STATE_DIMENSIONS,
+    )
+    coherence = canonical_coherence_score(
+        distance=r,
+        velocity=observed_velocity,
+        semantic_concentration=semantic_concentration if theta_defined else None,
+    )
+    coherence_components = {
+        "distance": round(float(math.exp(-max(0.0, float(r)) / 0.75)), 6),
+        "stability": (
+            round(float(math.exp(-abs(float(velocity)) / 0.15)), 6)
+            if observed_velocity is not None
+            else None
+        ),
+        "alignment": round(float(semantic_concentration), 6) if theta_defined else None,
+    }
+    rounded_axis_scores = {
+        key: round(float(value), 6) for key, value in semantic_axis_scores.items()
+    }
+    rounded_attractor_state = {
+        key: round(float(value), 6) for key, value in attractor_state.items()
+    }
+    rounded_attractor_sigma_diag = {
+        key: round(float(value), 6) for key, value in attractor_sigma_diag.items()
+    }
 
     return {
         "z": [round(float(z[0]), 6), round(float(z[1]), 6)],
         "z_star": [round(float(z_star[0]), 6), round(float(z_star[1]), 6)],
         "r": round(float(r), 6),
         "theta": round(float(theta), 6),
+        "theta_defined": bool(theta_defined),
+        "semantic_axis_scores": rounded_axis_scores,
+        "semantic_concentration": round(float(semantic_concentration), 6),
+        "coherence": round(float(coherence), 6),
+        "coherence_components": coherence_components,
+        "attractor_state": rounded_attractor_state,
+        "attractor_sigma_diag": rounded_attractor_sigma_diag,
         "velocity": round(float(velocity), 6),
         "acceleration": round(float(acceleration), 6),
         "uncertainty": {
             "mean_state_uncertainty": round(unc_mean, 6),
             "max_state_uncertainty": round(unc_max, 6),
             "circle_uncertainty": round(float(circle_unc), 6),
+            "projection_kind": "canonical_state_space",
+            "theta_defined": bool(theta_defined),
+            "semantic_axis_scores": rounded_axis_scores,
+            "semantic_concentration": round(float(semantic_concentration), 6),
+            "coherence_components": coherence_components,
+            "attractor_state": rounded_attractor_state,
+            "attractor_sigma_diag": rounded_attractor_sigma_diag,
         },
     }
 
@@ -219,6 +295,18 @@ def _clip01(v: float) -> float:
 
 def _l2(a: Sequence[float], b: Sequence[float]) -> float:
     return float(math.sqrt(sum((float(x) - float(y)) ** 2 for x, y in zip(a, b))))
+
+
+def _coerce_date(value: Any) -> Optional[date]:
+    if isinstance(value, date):
+        return value
+    s = str(value or "")
+    if len(s) < 10:
+        return None
+    try:
+        return date.fromisoformat(s[:10])
+    except Exception:
+        return None
 
 
 # ---------------------------------------------------------------------------

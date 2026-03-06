@@ -19,6 +19,24 @@ class RewardResult:
     weights: Dict[str, float]
 
 
+def _safe_float(value: Any, default: float = 0.0) -> float:
+    try:
+        if value in (None, ""):
+            return default
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _safe_int(value: Any, default: int = 0) -> int:
+    try:
+        if value in (None, ""):
+            return default
+        return int(float(value))
+    except (TypeError, ValueError):
+        return default
+
+
 def compute_reward(
     *,
     completion_rate: float,
@@ -44,26 +62,26 @@ def compute_reward(
     w = dict(DEFAULT_REWARD_WEIGHTS)
     if weights:
         for k, v in weights.items():
-            w[str(k)] = float(v)
+            w[str(k)] = _safe_float(v, w.get(str(k), 0.0))
 
     if isinstance(overrides, dict):
         ow = overrides.get("weights")
         if isinstance(ow, dict):
             for k, v in ow.items():
-                w[str(k)] = float(v)
+                w[str(k)] = _safe_float(v, w.get(str(k), 0.0))
 
-    completion = float(max(0.0, min(1.0, completion_rate)))
+    completion = float(max(0.0, min(1.0, _safe_float(completion_rate))))
 
     burden = 0.0
     if response_time_ms_median is not None:
         # Normalize to ~1 min median response time (cap at 1.0).
-        burden = min(1.0, max(0.0, float(response_time_ms_median)) / 60_000.0)
+        burden = min(1.0, max(0.0, _safe_float(response_time_ms_median)) / 60_000.0)
 
-    unlock_value = min(1.0, max(0.0, int(unlock_count)) / 3.0)
+    unlock_value = min(1.0, max(0.0, _safe_int(unlock_count)) / 3.0)
 
     uncertainty_reduction = 0.0
     if uncertainty_before_mean is not None and uncertainty_after_mean is not None:
-        uncertainty_reduction = max(0.0, float(uncertainty_before_mean) - float(uncertainty_after_mean))
+        uncertainty_reduction = max(0.0, _safe_float(uncertainty_before_mean) - _safe_float(uncertainty_after_mean))
 
     components = {
         "completion": completion,
@@ -88,4 +106,3 @@ def compute_reward(
     total += float(w.get("uncertainty_reduction", 0.3)) * components["uncertainty_reduction"]
 
     return RewardResult(components=components, total=float(total), weights=w)
-

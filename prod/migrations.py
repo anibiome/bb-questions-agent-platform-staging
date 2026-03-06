@@ -56,6 +56,14 @@ def ensure_schema_ready(
         current = state["current_revision"]
 
     if mode_norm == "auto":
+        if str(current or "") == head:
+            return {
+                "mode": mode_norm,
+                "status": "ok",
+                "head_revision": head,
+                "current_revision": str(current),
+                "stamped_legacy_schema": bool(was_stamped),
+            }
         from alembic import command
 
         command.upgrade(cfg, "head")

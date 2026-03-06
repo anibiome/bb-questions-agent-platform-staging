@@ -24,6 +24,23 @@ DEFAULT_OUTCOME_ENDPOINT = "/v1/outcomes/questions"
 DateLike = Union[date, str]
 
 
+def _boolish(value: Any, *, default: bool = False) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    if isinstance(value, (int, float)):
+        return value != 0
+    text = str(value).strip().lower()
+    if not text:
+        return default
+    if text in {"false", "0", "no", "n", "off", "none", "null"}:
+        return False
+    if text in {"true", "1", "yes", "y", "on"}:
+        return True
+    return default
+
+
 @dataclass(frozen=True)
 class AnifoldAdapterConfig:
     base_url: str
@@ -69,8 +86,8 @@ class AnifoldAdapterClient:
             "date": _day_iso(day),
             "selection_mode": str(selection_mode),
             "k_core": int(k_core),
-            "allow_context_batches": bool(allow_context_batches),
-            "include_explanations": bool(include_explanations),
+            "allow_context_batches": _boolish(allow_context_batches, default=True),
+            "include_explanations": _boolish(include_explanations, default=True),
             "context": context,
         }
         if identity_mask_id:
@@ -176,8 +193,8 @@ def normalize_context_payload(payload: Mapping[str, Any]) -> Dict[str, Any]:
         "completion_rate_14d": _float_or_none(obj.get("completion_rate_14d")),
         "completion_rate_30d": _float_or_none(obj.get("completion_rate_30d")),
         "burden_ms_median_14d": _float_or_none(obj.get("burden_ms_median_14d")),
-        "safety_trigger_active": bool(obj.get("safety_trigger_active", False)),
-        "allow_context_batches": bool(obj.get("allow_context_batches", True)),
+        "safety_trigger_active": _boolish(obj.get("safety_trigger_active", False), default=False),
+        "allow_context_batches": _boolish(obj.get("allow_context_batches", True), default=True),
     }
     return out
 
