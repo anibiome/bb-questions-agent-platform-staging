@@ -150,7 +150,7 @@ class ErrorMiddleware(BaseHTTPMiddleware):
             )
             response = JSONResponse(
                 status_code=500,
-                content={"detail": "Internal server error", "error_type": type(exc).__name__},
+                content={"detail": "Internal server error"},
             )
             response.headers["x-request-id"] = req_id
             return response
@@ -184,6 +184,25 @@ async def _lifespan(_: FastAPI):
 app = FastAPI(title="Questions Agent (Prod)", version="1.0", lifespan=_lifespan)
 app.add_middleware(ErrorMiddleware)
 
+# --- CORS ---
+import os as _os
+_cors_origins = [
+    o.strip()
+    for o in _os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+    if o.strip()
+]
+if _cors_origins:
+    from fastapi.middleware.cors import CORSMiddleware
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=_cors_origins,
+        allow_methods=["GET", "POST", "PATCH"],
+        allow_headers=["X-API-Key"],
+        allow_credentials=False,
+        max_age=600,
+    )
+
 
 def _auth(
     x_api_key: Optional[str] = Header(None),
@@ -208,7 +227,15 @@ def _parse_date_query_or_400(value: Optional[str], *, field_name: str = "date") 
 
 @app.get("/health")
 def health():
-    return {"ok": True, "ts": now_iso()}
+    from sqlalchemy import text
+
+    try:
+        with session_scope(SessionLocal) as session:
+            session.execute(text("SELECT 1"))
+        return {"ok": True, "ts": now_iso(), "db": "ok"}
+    except Exception:
+        logger.exception("Health check DB probe failed")
+        return JSONResponse(status_code=503, content={"ok": False, "ts": now_iso(), "db": "degraded"})
 
 
 @app.get("/v1/coherence/tier-contract")
@@ -280,7 +307,8 @@ def activate_policy(version: str, _: None = Depends(_auth)):
     try:
         set_active_policy_version(settings.policy_root, version)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to activate policy version: {e}")
+        logger.error("Failed to activate policy version %s: %s", version, e)
+        raise HTTPException(status_code=500, detail="Failed to activate policy version")
     return {"active_version": version}
 
 
