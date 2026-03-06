@@ -34,6 +34,10 @@ def serialize_context(context: PolicyContext, *, quantize: int = 3) -> Dict[str,
         "completion_rate_14d": round(float(context.completion_rate_14d or 0.0), 4) if context.completion_rate_14d is not None else None,
         "completion_rate_30d": round(float(context.completion_rate_30d or 0.0), 4) if context.completion_rate_30d is not None else None,
         "burden_ms_median_14d": round(float(context.burden_ms_median_14d or 0.0), 2) if context.burden_ms_median_14d is not None else None,
+        "response_validity_score": round(float(context.response_validity_score or 0.0), 4) if context.response_validity_score is not None else None,
+        "response_validity_tier": str(context.response_validity_tier) if context.response_validity_tier else None,
+        "biological_coherence_score": round(float(context.biological_coherence_score or 0.0), 4) if context.biological_coherence_score is not None else None,
+        "biological_decoherence_radius": round(float(context.biological_decoherence_radius or 0.0), 4) if context.biological_decoherence_radius is not None else None,
         "day_of_week": int(context.day_of_week) if context.day_of_week is not None else None,
         "safety_trigger_active": bool(context.safety_trigger_active),
         "allow_context_batches": bool(context.allow_context_batches),
@@ -70,6 +74,7 @@ def decision_row(
     identity_mask_id: Optional[str],
     context: Optional[PolicyContext] = None,
     candidate_set: Optional[CandidateSet] = None,
+    world_model: Optional[Dict[str, Any]] = None,
     include_context: bool = False,
     include_candidate_set: bool = False,
 ) -> Dict[str, Any]:
@@ -94,7 +99,10 @@ def decision_row(
         "counterfactuals_json": json.dumps([_as_json(c) for c in decision.counterfactuals], ensure_ascii=False),
     }
     if include_context and context is not None:
-        row["context_json"] = json.dumps(serialize_context(context), ensure_ascii=False)
+        context_payload = serialize_context(context)
+        if world_model:
+            context_payload["world_model"] = world_model
+        row["context_json"] = json.dumps(context_payload, ensure_ascii=False)
     else:
         row["context_json"] = None
     if include_candidate_set and candidate_set is not None:

@@ -529,9 +529,7 @@ class TestComputeQuestionsFoldDrifted:
     """Tests for compute_questions_fold with drifted (decoherent) states."""
 
     def test_single_dimension_drift_increases_minifold_radius(self) -> None:
-        """On first observation z_star = z, so main circle r = 0.
-        Decoherence is captured in the minifold sub-circles which
-        use the population origin (0,0) as attractor."""
+        """First-day drift should register on the main circle as well."""
         balanced = compute_questions_fold(
             x_hat=_balanced_x_hat(),
             x_uncertainty=_balanced_uncertainty(),
@@ -542,6 +540,7 @@ class TestComputeQuestionsFoldDrifted:
             x_uncertainty=_balanced_uncertainty(),
             day=date(2026, 1, 15),
         )
+        assert drifted.r > balanced.r
         # Affective minifold should show more decoherence
         assert drifted.minifolds["affective"].r > balanced.minifolds["affective"].r
 
@@ -698,6 +697,11 @@ class TestIdentityMaskSerialisation:
         assert "z_star" in circle and len(circle["z_star"]) == 2
         assert "r" in circle
         assert "theta" in circle
+        assert "theta_defined" in circle
+        assert "semantic_axis_scores" in circle
+        assert "semantic_concentration" in circle
+        assert "attractor_state" in circle
+        assert "attractor_sigma_diag" in circle
         assert "coherence" in circle
         assert "coherence_uncertainty" in circle
         assert "projection_version" in circle
@@ -810,18 +814,14 @@ class TestComputeQuestionsFoldEdgeCases:
     """Edge cases and boundary conditions."""
 
     def test_all_dimensions_at_zero(self) -> None:
-        """All dimensions at 0 — extreme decoherence in minifolds.
-
-        On first observation z_star = z, so main circle r = 0.
-        But minifold sub-circles use (0,0) origin and DO show
-        decoherence when dimensions are far from 0.5.
-        """
+        """All dimensions at 0 should be strongly decoherent on day one."""
         x = {d: 0.0 for d in STATE_DIMENSIONS}
         fold = compute_questions_fold(
             x_hat=x,
             x_uncertainty=_balanced_uncertainty(),
             day=date(2026, 1, 15),
         )
+        assert fold.r > 0.0
         # MiniFolds capture the per-mode decoherence
         total_mf_r = sum(mf.r for mf in fold.minifolds.values())
         assert total_mf_r > 0.0
@@ -978,7 +978,7 @@ class TestServiceLayerComputeUserFold:
                 """,
                 (
                     f"c{i}", "u1", d.isoformat(), now_iso(),
-                    "v1", "v1",
+                    CIRCLE_PROJECTION_VERSION, "v1",
                     json.dumps(z), json.dumps([0.0, 0.0]),
                     0.2 + 0.02 * i,  # increasing r
                     0.5, 0.01, 0.0,
@@ -1200,6 +1200,7 @@ class TestFoldChaining:
         # Day 2 should have a valid fold
         assert fold_d2.day == "2026-01-15"
         assert fold_d2.version == QUESTIONS_FOLD_VERSION
+        assert isinstance(fold_d2.attractor_state, dict)
 
     def test_three_day_chain_accumulates_history(self) -> None:
         """Day 1 → 2 → 3 chain: verify history grows."""

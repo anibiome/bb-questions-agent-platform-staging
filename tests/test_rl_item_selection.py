@@ -20,6 +20,8 @@ Validates:
   16. Selection result metadata
 """
 
+from __future__ import annotations
+
 import math
 import os
 import random
@@ -28,20 +30,27 @@ import unittest
 from collections import Counter
 from typing import Dict
 
-import torch
+try:
+    import torch
+except ModuleNotFoundError:
+    torch = None
+else:
+    from questions_agent_platform.pipeline.rl_item_selection import (
+        AdaptiveItemSelector,
+        CATState,
+        DeepCATConfig,
+        DeepCATSelector,
+        DuelingDQN,
+        ItemFeatureEncoder,
+        ReplayBuffer,
+        ResponseTimeModel,
+        SelectionResult,
+        Transition,
+    )
 
-from questions_agent_platform.pipeline.rl_item_selection import (
-    AdaptiveItemSelector,
-    CATState,
-    DeepCATConfig,
-    DeepCATSelector,
-    DuelingDQN,
-    ItemFeatureEncoder,
-    ReplayBuffer,
-    ResponseTimeModel,
-    SelectionResult,
-    Transition,
-)
+
+if torch is None:
+    raise unittest.SkipTest("torch not installed; skipping optional RL item-selection tests")
 
 
 # ---------------------------------------------------------------------------

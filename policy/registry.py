@@ -8,6 +8,10 @@ from questions_agent_platform.policy.bandit import PolicyParams
 from questions_agent_platform.policy.features import FeatureMapping, FEATURE_VERSION
 
 
+class PolicyArtifactError(RuntimeError):
+    """Raised when a configured policy artifact is missing or unreadable."""
+
+
 def list_policy_versions(policy_root: str) -> List[str]:
     root = Path(policy_root)
     versions = root / "versions"
@@ -96,3 +100,66 @@ def make_default_policy_params(*, policy_version: str, mapping: FeatureMapping, 
         feature_means=tuple(0.0 for _ in range(d)),
         feature_stds=tuple(1.0 for _ in range(d)),
     )
+
+
+def resolve_policy_params(
+    policy_root: str,
+    *,
+    requested_version: Optional[str] = None,
+    default_version: Optional[str] = None,
+    mapping: Optional[FeatureMapping] = None,
+    lambda_reg: float = 1.0,
+    allow_bootstrap_default: bool = False,
+) -> PolicyParams:
+    """Load a configured policy artifact or bootstrap a default only for an empty registry."""
+
+    root = Path(policy_root)
+    available_versions = list_policy_versions(policy_root)
+    available_set = set(available_versions)
+
+    requested = str(requested_version or "").strip() or None
+    active = str(get_active_policy_version(policy_root) or "").strip() or None
+    fallback = str(default_version or "").strip() or None
+
+    version = requested or active
+    if version is None:
+        if fallback and fallback in available_set:
+            version = fallback
+        elif len(available_versions) == 1:
+            version = available_versions[0]
+        elif len(available_versions) > 1:
+            raise PolicyArtifactError(
+                f"Multiple policy versions exist under '{root}' but no active version is configured."
+            )
+        elif allow_bootstrap_default:
+            if mapping is None:
+                raise ValueError("mapping is required when bootstrapping default policy params")
+            return make_default_policy_params(
+                policy_version=fallback or "v1",
+                mapping=mapping,
+                lambda_reg=lambda_reg,
+            )
+        else:
+            raise PolicyArtifactError(f"No policy artifacts found under '{root}'.")
+
+    artifact_path = root / "versions" / str(version) / "policy_params.json"
+    if not artifact_path.exists():
+        if allow_bootstrap_default and not available_versions and active is None:
+            if mapping is None:
+                raise ValueError("mapping is required when bootstrapping default policy params")
+            return make_default_policy_params(
+                policy_version=str(version),
+                mapping=mapping,
+                lambda_reg=lambda_reg,
+            )
+        known = ", ".join(available_versions) if available_versions else "none"
+        raise PolicyArtifactError(
+            f"Policy artifact for version '{version}' is missing under '{root}' (available: {known})."
+        )
+
+    try:
+        return load_policy_params(policy_root, str(version))
+    except (json.JSONDecodeError, OSError, TypeError, ValueError) as exc:
+        raise PolicyArtifactError(
+            f"Policy artifact for version '{version}' under '{root}' is unreadable: {exc}"
+        ) from exc

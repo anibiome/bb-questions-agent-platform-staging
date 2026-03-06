@@ -34,14 +34,45 @@ from collections import deque
 from dataclasses import asdict, dataclass, field
 from typing import Any, Deque, Dict, List, Optional, Sequence, Tuple
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
+try:
+    import torch
+    import torch.nn as nn
+    import torch.nn.functional as F
+    import torch.optim as optim
+except ModuleNotFoundError as exc:
+    torch = None
+    F = None
+    optim = None
+    _TORCH_IMPORT_ERROR: Exception | None = exc
+
+    class _TorchModule:
+        """Lightweight stand-in so optional RL classes can still be defined."""
+
+    class _TorchNNNamespace:
+        Module = _TorchModule
+
+    nn = _TorchNNNamespace()
+else:
+    _TORCH_IMPORT_ERROR = None
 
 logger = logging.getLogger("questions_agent.rl_item_selection")
 
 _ALLOW_UNSAFE_CHECKPOINT_LOAD_ENV = "QUESTIONS_AGENT_ALLOW_UNSAFE_CHECKPOINT_LOAD"
+
+
+def _require_torch(feature: str) -> None:
+    if torch is None:
+        raise ModuleNotFoundError(
+            f"torch is required for {feature}. Install the optional RL dependencies "
+            "to enable reinforcement-learning item selection."
+        ) from _TORCH_IMPORT_ERROR
+
+
+def _available_indices_from_mask(available_mask: Any) -> List[int]:
+    if torch is not None and isinstance(available_mask, torch.Tensor):
+        return torch.where(available_mask > 0.5)[0].tolist()
+    values = available_mask.tolist() if hasattr(available_mask, "tolist") else list(available_mask)
+    return [idx for idx, value in enumerate(values) if float(value) > 0.5]
 
 
 def _env_truthy(name: str) -> bool:
@@ -116,6 +147,7 @@ class CATState:
 
     def to_tensor(self) -> torch.Tensor:
         """Convert state to a 1D float tensor of shape (state_dim,)."""
+        _require_torch("CATState.to_tensor")
         return torch.tensor(
             [
                 self.theta_estimate,
@@ -157,6 +189,7 @@ class ItemFeatureEncoder(nn.Module):
     ITEM_FEATURE_DIM = 6
 
     def __init__(self, embed_dim: int = 32):
+        _require_torch("ItemFeatureEncoder")
         super().__init__()
         self.net = nn.Sequential(
             nn.Linear(self.ITEM_FEATURE_DIM, embed_dim),
@@ -199,6 +232,7 @@ class DuelingDQN(nn.Module):
         hidden_dim: int = 128,
         item_embed_dim: int = 32,
     ):
+        _require_torch("DuelingDQN")
         super().__init__()
         self.n_items = n_items
 
@@ -363,6 +397,7 @@ class DeepCATSelector:
         n_items: int,
         config: Optional[DeepCATConfig] = None,
     ):
+        _require_torch("DeepCATSelector")
         self.n_items = n_items
         self.config = config or DeepCATConfig()
         self.state_dim = CATState.state_dim()
@@ -421,7 +456,7 @@ class DeepCATSelector:
             (selected_item_index, metadata_dict)
         """
         eps = epsilon if epsilon is not None else self.epsilon
-        available_indices = torch.where(available_mask > 0.5)[0].tolist()
+        available_indices = _available_indices_from_mask(available_mask)
 
         if not available_indices:
             raise ValueError("No available items to select from")
@@ -832,7 +867,12 @@ class AdaptiveItemSelector:
         """
         self.n_items = n_items
         self.config = config or DeepCATConfig()
-        self.rl_selector = rl_selector or DeepCATSelector(n_items, self.config)
+        if rl_selector is not None:
+            self.rl_selector = rl_selector
+        elif torch is None:
+            self.rl_selector = None
+        else:
+            self.rl_selector = DeepCATSelector(n_items, self.config)
         self.rt_model = rt_model or ResponseTimeModel()
 
     def irt_weight(self, n_items_answered: int) -> float:
@@ -880,7 +920,7 @@ class AdaptiveItemSelector:
         w_irt = self.irt_weight(n)
         w_rl = 1.0 - w_irt
 
-        available_indices = torch.where(available_mask > 0.5)[0].tolist()
+        available_indices = _available_indices_from_mask(available_mask)
         if not available_indices:
             raise ValueError("No available items to select from")
 
@@ -893,7 +933,7 @@ class AdaptiveItemSelector:
         # RL component: get Q-values (pure IRT if w_rl ~ 0)
         rl_scores: Dict[int, float] = {}
         rl_metadata: Dict[str, Any] = {}
-        if w_rl > 0.01:
+        if w_rl > 0.01 and self.rl_selector is not None and torch is not None:
             # Use greedy (epsilon=0) for the blended score
             with torch.no_grad():
                 q_values = self.rl_selector.policy_net(
@@ -908,6 +948,13 @@ class AdaptiveItemSelector:
             rl_metadata = {
                 "q_min": round(q_min, 4),
                 "q_max": round(q_max, 4),
+            }
+        elif w_rl > 0.01:
+            w_irt = 1.0
+            w_rl = 0.0
+            rl_metadata = {
+                "rl_status": "unavailable",
+                "rl_unavailable_reason": "torch_not_installed",
             }
 
         # Blend scores

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import math
 from datetime import date
-from typing import Any, Dict, Mapping, Optional, Sequence
+from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
 
 COHERENCE_TIER_LADDER = (
@@ -53,12 +53,263 @@ COHERENCE_TIER_LADDER = (
     },
 )
 
+CANONICAL_STATE_DIMENSIONS: Tuple[str, ...] = (
+    "energy_vitality",
+    "sleep_quality",
+    "gut_gi",
+    "glycemic_risk",
+    "cardiovascular_load",
+    "mood_affect",
+    "cognitive_control",
+    "agency_purpose",
+    "social_connectedness",
+)
+
+CANONICAL_AXIS_LOADINGS: Dict[str, Dict[str, float]] = {
+    "metabolic": {
+        "energy_vitality": 0.20,
+        "glycemic_risk": 0.45,
+        "cardiovascular_load": 0.35,
+    },
+    "autonomic": {
+        "sleep_quality": 0.35,
+        "cardiovascular_load": 0.30,
+        "cognitive_control": 0.35,
+    },
+    "immune": {
+        "gut_gi": 0.65,
+        "energy_vitality": 0.20,
+        "cardiovascular_load": 0.15,
+    },
+    "affective": {
+        "mood_affect": 0.35,
+        "cognitive_control": 0.15,
+        "agency_purpose": 0.25,
+        "social_connectedness": 0.25,
+    },
+}
+
+CANONICAL_AXIS_ANGLES: Dict[str, float] = {
+    "metabolic": math.radians(45.0),
+    "autonomic": math.radians(135.0),
+    "immune": math.radians(225.0),
+    "affective": math.radians(315.0),
+}
+
+CANONICAL_COMPONENT_WEIGHTS: Dict[str, float] = {
+    "distance": 0.40,
+    "stability": 0.15,
+    "concordance": 0.20,
+    "recovery": 0.15,
+    "alignment": 0.10,
+}
+
+_EPS = 1e-9
+_CANONICAL_DISTANCE_SCALE = 0.75
+_CANONICAL_VELOCITY_SCALE = 0.15
+_CANONICAL_SIGMA_REFERENCE = 0.25
+
 
 def coherence_score_from_radius(radius: float, *, radius_at_zero: float = 1.25) -> float:
     r = max(0.0, float(radius))
     scale = max(0.25, float(radius_at_zero))
     score = 1.0 - (r / scale)
     return round(max(0.0, min(1.0, score)), 6)
+
+
+def canonical_prior_state(
+    *,
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+) -> Dict[str, float]:
+    return {str(dim): 0.5 for dim in state_dimensions}
+
+
+def canonical_prior_sigma_diag(
+    *,
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+    sigma: float = _CANONICAL_SIGMA_REFERENCE,
+) -> Dict[str, float]:
+    return {str(dim): float(sigma) for dim in state_dimensions}
+
+
+def build_personal_attractor(
+    *,
+    current_mu: Mapping[str, float],
+    current_sigma_diag: Mapping[str, float],
+    previous_attractor_mu: Optional[Mapping[str, float]] = None,
+    previous_attractor_sigma_diag: Optional[Mapping[str, float]] = None,
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+    prior_strength: float = 4.0,
+    base_alpha: float = 0.15,
+    stable_distance: float = 0.50,
+) -> Tuple[Dict[str, float], Dict[str, float]]:
+    prior_mu = canonical_prior_state(state_dimensions=state_dimensions)
+    prior_sigma = canonical_prior_sigma_diag(state_dimensions=state_dimensions)
+
+    if previous_attractor_mu and previous_attractor_sigma_diag:
+        distance = canonical_distance_from_state(
+            mu=current_mu,
+            sigma_diag=current_sigma_diag,
+            attractor_mu=previous_attractor_mu,
+            attractor_sigma_diag=previous_attractor_sigma_diag,
+            state_dimensions=state_dimensions,
+        )
+        stability_gate = math.exp(-((distance / max(stable_distance, _EPS)) ** 2))
+        alpha = float(base_alpha) * stability_gate
+        attractor_mu: Dict[str, float] = {}
+        attractor_sigma: Dict[str, float] = {}
+        for dim in state_dimensions:
+            key = str(dim)
+            prev_mu = float(previous_attractor_mu.get(key, prior_mu[key]))
+            prev_sigma = float(previous_attractor_sigma_diag.get(key, prior_sigma[key]))
+            cur_mu = float(current_mu.get(key, prev_mu))
+            cur_sigma = float(current_sigma_diag.get(key, prev_sigma))
+            attractor_mu[key] = (1.0 - alpha) * prev_mu + alpha * cur_mu
+            attractor_sigma[key] = (1.0 - alpha) * prev_sigma + alpha * cur_sigma
+        return attractor_mu, attractor_sigma
+
+    weight = 0.0 / max(_EPS, 0.0 + float(prior_strength))
+    attractor_mu = {}
+    attractor_sigma = {}
+    for dim in state_dimensions:
+        key = str(dim)
+        prior_mu_val = float(prior_mu[key])
+        prior_sigma_val = float(prior_sigma[key])
+        cur_mu = float(current_mu.get(key, prior_mu_val))
+        cur_sigma = float(current_sigma_diag.get(key, prior_sigma_val))
+        attractor_mu[key] = (1.0 - weight) * prior_mu_val + weight * cur_mu
+        attractor_sigma[key] = (1.0 - weight) * prior_sigma_val + weight * cur_sigma
+    return attractor_mu, attractor_sigma
+
+
+def canonical_distance_from_state(
+    *,
+    mu: Mapping[str, float],
+    sigma_diag: Mapping[str, float],
+    attractor_mu: Mapping[str, float],
+    attractor_sigma_diag: Mapping[str, float],
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+) -> float:
+    total = 0.0
+    count = 0
+    for dim in state_dimensions:
+        key = str(dim)
+        delta = float(mu.get(key, 0.0)) - float(attractor_mu.get(key, 0.0))
+        variance = (
+            float(sigma_diag.get(key, _CANONICAL_SIGMA_REFERENCE))
+            + float(attractor_sigma_diag.get(key, _CANONICAL_SIGMA_REFERENCE))
+            + _EPS
+        )
+        total += (delta * delta) / variance
+        count += 1
+    return math.sqrt(total / max(1, count))
+
+
+def semantic_axis_scores_from_state(
+    *,
+    mu: Mapping[str, float],
+    sigma_diag: Mapping[str, float],
+    attractor_mu: Mapping[str, float],
+    attractor_sigma_diag: Mapping[str, float],
+    axis_loadings: Mapping[str, Mapping[str, float]] = CANONICAL_AXIS_LOADINGS,
+) -> Dict[str, float]:
+    scores: Dict[str, float] = {}
+    for axis, loadings in axis_loadings.items():
+        weighted = 0.0
+        total_weight = 0.0
+        for dim, weight in loadings.items():
+            abs_weight = abs(float(weight))
+            if abs_weight <= 0.0:
+                continue
+            delta = float(mu.get(dim, 0.0)) - float(attractor_mu.get(dim, 0.0))
+            variance = (
+                float(sigma_diag.get(dim, _CANONICAL_SIGMA_REFERENCE))
+                + float(attractor_sigma_diag.get(dim, _CANONICAL_SIGMA_REFERENCE))
+                + _EPS
+            )
+            weighted += abs_weight * ((delta * delta) / variance)
+            total_weight += abs_weight
+        scores[str(axis)] = math.sqrt(weighted / max(total_weight, _EPS)) if total_weight > 0.0 else 0.0
+    return scores
+
+
+def semantic_direction(
+    axis_scores: Mapping[str, float],
+) -> Tuple[float, bool, float]:
+    total = sum(max(0.0, float(value)) for value in axis_scores.values())
+    if total <= _EPS:
+        return 0.0, False, 0.0
+
+    x = 0.0
+    y = 0.0
+    for axis, score in axis_scores.items():
+        angle = CANONICAL_AXIS_ANGLES.get(str(axis))
+        if angle is None:
+            continue
+        x += float(score) * math.cos(angle)
+        y += float(score) * math.sin(angle)
+
+    theta = math.atan2(y, x) if abs(x) > _EPS or abs(y) > _EPS else 0.0
+    concentration = max(0.0, min(1.0, math.sqrt(x * x + y * y) / total))
+    return theta, True, concentration
+
+
+def canonical_coherence_score(
+    *,
+    distance: float,
+    velocity: Optional[float] = None,
+    concordance: Optional[float] = None,
+    recovery: Optional[float] = None,
+    semantic_concentration: Optional[float] = None,
+) -> float:
+    components: Dict[str, Optional[float]] = {
+        "distance": _clamp01(math.exp(-max(0.0, float(distance)) / _CANONICAL_DISTANCE_SCALE)),
+        "stability": None if velocity is None else _clamp01(math.exp(-abs(float(velocity)) / _CANONICAL_VELOCITY_SCALE)),
+        "concordance": None if concordance is None else _clamp01(float(concordance)),
+        "recovery": None if recovery is None else _clamp01(float(recovery)),
+        "alignment": None if semantic_concentration is None else _clamp01(float(semantic_concentration)),
+    }
+
+    total_weight = 0.0
+    log_sum = 0.0
+    for name, value in components.items():
+        if value is None:
+            continue
+        weight = float(CANONICAL_COMPONENT_WEIGHTS.get(name, 0.0))
+        if weight <= 0.0:
+            continue
+        total_weight += weight
+        log_sum += weight * math.log(max(float(value), _EPS))
+    if total_weight <= _EPS:
+        return 0.0
+    return round(_clamp01(math.exp(log_sum / total_weight)), 6)
+
+
+def coherence_uncertainty_from_state(
+    *,
+    sigma_diag: Mapping[str, float],
+    attractor_sigma_diag: Mapping[str, float],
+    concordance: Optional[float] = None,
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+) -> float:
+    state_component = _scaled_uncertainty(sigma_diag, state_dimensions=state_dimensions)
+    attractor_component = _scaled_uncertainty(attractor_sigma_diag, state_dimensions=state_dimensions)
+    modality_component = None if concordance is None else _clamp01(1.0 - float(concordance))
+    weights = {"state": 0.50, "attractor": 0.25, "modality": 0.25}
+    total = 0.0
+    total_weight = 0.0
+    for name, value in (
+        ("state", state_component),
+        ("attractor", attractor_component),
+        ("modality", modality_component),
+    ):
+        if value is None:
+            continue
+        total += weights[name] * float(value)
+        total_weight += weights[name]
+    if total_weight <= _EPS:
+        return 1.0
+    return round(_clamp01(total / total_weight), 6)
 
 
 def coherence_tier_for_score(score: float) -> Dict[str, Any]:
@@ -338,3 +589,19 @@ def _normalize_vector(values: Sequence[float], target_len: int) -> Sequence[floa
     while len(padded) < int(target_len):
         padded.append(float(out[-1]))
     return [round(float(v), 6) for v in padded]
+
+
+def _scaled_uncertainty(
+    sigma_diag: Mapping[str, float],
+    *,
+    state_dimensions: Sequence[str],
+) -> float:
+    values = [
+        _clamp01(float(sigma_diag.get(str(dim), _CANONICAL_SIGMA_REFERENCE)) / _CANONICAL_SIGMA_REFERENCE)
+        for dim in state_dimensions
+    ]
+    return sum(values) / max(1, len(values))
+
+
+def _clamp01(value: float) -> float:
+    return max(0.0, min(1.0, float(value)))

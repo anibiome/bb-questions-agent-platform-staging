@@ -25,7 +25,7 @@ from questions_agent_platform.policy.offline_eval import (
     _ridge_fit,
     evaluate_sqlite,
 )
-from questions_agent_platform.policy.registry import get_active_policy_version, load_policy_params, make_default_policy_params
+from questions_agent_platform.policy.registry import resolve_policy_params
 
 MappingLike = Dict[str, Any]
 
@@ -206,11 +206,14 @@ def _compute_reward_calibration(
     include_shadow: bool,
 ) -> Dict[str, Any]:
     mapping = build_feature_mapping_v1()
-    ver = str(policy_version or get_active_policy_version(policy_root) or "v1")
-    try:
-        params = load_policy_params(policy_root, ver)
-    except Exception:
-        params = make_default_policy_params(policy_version=ver, mapping=mapping, lambda_reg=1.0)
+    params = resolve_policy_params(
+        policy_root,
+        requested_version=policy_version,
+        default_version="v1",
+        mapping=mapping,
+        lambda_reg=1.0,
+        allow_bootstrap_default=True,
+    )
 
     means, stds = _feature_stats_from_params(params.feature_means, params.feature_stds, dim=len(mapping.names))
 

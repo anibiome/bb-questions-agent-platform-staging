@@ -17,9 +17,8 @@ from questions_agent_platform.policy.features import (
     featurize_v1,
 )
 from questions_agent_platform.policy.registry import (
-    get_active_policy_version,
-    load_policy_params,
     make_default_policy_params,
+    resolve_policy_params,
     save_policy_params,
     set_active_policy_version,
 )
@@ -95,11 +94,15 @@ def _cmd_train_sqlite(
     max_date: Optional[str],
 ) -> None:
     mapping = build_feature_mapping_v1()
-    base_version = str(in_version or get_active_policy_version(policy_root) or "v1")
-    try:
-        params = load_policy_params(policy_root, base_version)
-    except Exception:
-        params = make_default_policy_params(policy_version=base_version, mapping=mapping, lambda_reg=1.0)
+    params = resolve_policy_params(
+        policy_root,
+        requested_version=in_version,
+        default_version="v1",
+        mapping=mapping,
+        lambda_reg=1.0,
+        allow_bootstrap_default=True,
+    )
+    base_version = str(params.policy_version or "v1")
 
     A, b = _ensure_dense_posterior(params, dim=len(mapping.names))
 
@@ -237,6 +240,62 @@ def _fetch_eval_rows(conn: sqlite3.Connection, *, min_date: Optional[str], max_d
     return conn.execute(sql, params).fetchall()
 
 
+def _boolish(value: Any, *, default: bool = False) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    if isinstance(value, (int, float)):
+        return value != 0
+    text = str(value).strip().lower()
+    if not text:
+        return default
+    if text in {"false", "0", "no", "n", "off", "none", "null"}:
+        return False
+    if text in {"true", "1", "yes", "y", "on"}:
+        return True
+    return default
+
+
+def _safe_float(value: Any, *, default: float = 0.0) -> float:
+    try:
+        if value in (None, ""):
+            return default
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _safe_int(value: Any, *, default: int = 0) -> int:
+    try:
+        if value in (None, ""):
+            return default
+        return int(value)
+    except (TypeError, ValueError):
+        try:
+            return int(float(value))
+        except (TypeError, ValueError):
+            return default
+
+
+def _normalize_string_list(value: Any) -> Tuple[str, ...]:
+    if isinstance(value, (list, tuple, set)):
+        items = value
+    elif value is None:
+        items = ()
+    else:
+        items = (value,)
+    return tuple(str(item).strip() for item in items if str(item).strip())
+
+
+def _normalize_dict_rows(value: Any) -> List[Dict[str, Any]]:
+    if isinstance(value, dict):
+        return [dict(value)]
+    if isinstance(value, (list, tuple)):
+        return [dict(item) for item in value if isinstance(item, dict)]
+    return []
+
+
 def _context_from_json(obj: Dict[str, Any]) -> PolicyContext:
     return PolicyContext(
         anifold_z=obj.get("anifold_z"),
@@ -248,23 +307,23 @@ def _context_from_json(obj: Dict[str, Any]) -> PolicyContext:
         completion_rate_30d=obj.get("completion_rate_30d"),
         burden_ms_median_14d=obj.get("burden_ms_median_14d"),
         day_of_week=obj.get("day_of_week"),
-        safety_trigger_active=bool(obj.get("safety_trigger_active", False)),
-        allow_context_batches=bool(obj.get("allow_context_batches", True)),
+        safety_trigger_active=_boolish(obj.get("safety_trigger_active", False), default=False),
+        allow_context_batches=_boolish(obj.get("allow_context_batches", True), default=True),
         identity_mask_id=obj.get("identity_mask_id"),
     )
 
 
 def _candidate_set_from_json(obj: Dict[str, Any]) -> CandidateSet:
     candidates = []
-    for c in obj.get("candidates") or []:
+    for c in _normalize_dict_rows(obj.get("candidates")):
         candidates.append(
             CandidateItem(
                 item_id=str(c.get("item_id")),
                 item_type=str(c.get("item_type")),
-                scale_ids=tuple(str(s) for s in (c.get("scale_ids") or [])),
-                deterministic_score=float(c.get("deterministic_score") or 0.0),
-                constraint_tags=tuple(str(t) for t in (c.get("constraint_tags") or [])),
-                reason_codes=tuple(str(r) for r in (c.get("reason_codes") or [])),
+                scale_ids=_normalize_string_list(c.get("scale_ids")),
+                deterministic_score=_safe_float(c.get("deterministic_score"), default=0.0),
+                constraint_tags=_normalize_string_list(c.get("constraint_tags")),
+                reason_codes=_normalize_string_list(c.get("reason_codes")),
                 features=dict(c.get("features") or {}),
             )
         )
@@ -272,10 +331,10 @@ def _candidate_set_from_json(obj: Dict[str, Any]) -> CandidateSet:
     return CandidateSet(
         user_id=str(obj.get("user_id") or ""),
         day=_parse_date(str(obj.get("day") or "1970-01-01")),
-        k_core=int(obj.get("k_core") or 5),
+        k_core=_safe_int(obj.get("k_core"), default=5),
         candidates=tuple(candidates),
-        mandatory_item_ids=tuple(str(i) for i in (obj.get("mandatory_item_ids") or [])),
-        deterministic_baseline_selected=tuple(str(i) for i in (obj.get("deterministic_baseline_selected") or [])),
+        mandatory_item_ids=_normalize_string_list(obj.get("mandatory_item_ids")),
+        deterministic_baseline_selected=_normalize_string_list(obj.get("deterministic_baseline_selected")),
     )
 
 

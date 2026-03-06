@@ -73,6 +73,8 @@ class TestPolicyRuntime(unittest.TestCase):
         self.assertEqual(result.served_core_item_ids, ("anchor_1", "opt_1"))
         self.assertEqual(result.summary["mode"], "shadow")
         self.assertEqual(result.decision_row_payload["selection_mode"], "policy_shadow")
+        self.assertIn("world_model", result.summary)
+        self.assertEqual(result.summary["world_model"]["measurement_actions"][0]["action_type"], "measurement")
 
     def test_execute_policy_live_serves_policy_selected_set(self) -> None:
         result = execute_policy_selection(
@@ -83,7 +85,13 @@ class TestPolicyRuntime(unittest.TestCase):
             selection_mode="policy_live",
             runtime_mode="live",
             identity_mask_id="mask-default",
-            context_obj={"allow_context_batches": True},
+            context_obj={
+                "allow_context_batches": True,
+                "response_validity_score": 0.91,
+                "response_validity_tier": "high",
+                "biological_coherence_score": 0.58,
+                "biological_decoherence_radius": 0.42,
+            },
             policy_root="",
             policy_default_version="v1",
             epsilon_explore=0.0,
@@ -95,6 +103,11 @@ class TestPolicyRuntime(unittest.TestCase):
         self.assertEqual(result.decision_row_payload["selection_mode"], "policy_live")
         self.assertIsNotNone(result.decision_row_payload["context_json"])
         self.assertIsNotNone(result.decision_row_payload["candidate_set_json"])
+        self.assertEqual(result.summary["world_model"]["response_validity"]["tier"], "high")
+        self.assertEqual(
+            result.summary["world_model"]["measurement_actions"][0]["provenance"]["response_validity"]["tier"],
+            "high",
+        )
 
 
 if __name__ == "__main__":

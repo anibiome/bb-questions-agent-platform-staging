@@ -24,6 +24,10 @@ class PolicyContext:
     completion_rate_14d: Optional[float] = None
     completion_rate_30d: Optional[float] = None
     burden_ms_median_14d: Optional[float] = None
+    response_validity_score: Optional[float] = None
+    response_validity_tier: Optional[str] = None
+    biological_coherence_score: Optional[float] = None
+    biological_decoherence_radius: Optional[float] = None
 
     # Time context
     day_of_week: Optional[int] = None  # 0=Mon .. 6=Sun

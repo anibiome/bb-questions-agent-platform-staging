@@ -114,6 +114,38 @@ from questions_agent_platform.pipeline.time_utils import date_to_start_iso, now_
 _efficiency_cache: Dict[str, Dict[str, float]] = {}
 
 
+def _boolish(value: Any, *, default: bool = False) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return default
+    if isinstance(value, (int, float)):
+        return value != 0
+    text = str(value).strip().lower()
+    if not text:
+        return default
+    if text in {"false", "0", "no", "n", "off", "none", "null"}:
+        return False
+    if text in {"true", "1", "yes", "y", "on"}:
+        return True
+    return default
+
+
+def _normalize_string_list(value: Any) -> List[str]:
+    if isinstance(value, (list, tuple, set)):
+        raw_items = value
+    elif value is None:
+        raw_items = ()
+    else:
+        raw_items = (value,)
+    out: List[str] = []
+    for item in raw_items:
+        token = str(item or "").strip()
+        if token:
+            out.append(token)
+    return out
+
+
 def _get_efficiency_scores(registry: "Registry", version: str) -> Optional[Dict[str, float]]:
     """Return item_id → efficiency_score map, cached per registry version."""
     if version in _efficiency_cache:
@@ -319,16 +351,16 @@ def upsert_user_profile(
     active_domains = profile.get("active_domains") or [CARDIOMETABOLIC_DOMAIN]
     queued_domains = profile.get("queued_domains") or []
     promoted_domains = profile.get("promoted_domains") or [CARDIOMETABOLIC_DOMAIN]
-    onboarding_complete = bool(profile.get("onboarding_complete", False))
+    onboarding_complete = _boolish(profile.get("onboarding_complete", False), default=False)
     if "onboarding_complete" in patch:
-        onboarding_complete = bool(patch.get("onboarding_complete"))
+        onboarding_complete = _boolish(patch.get("onboarding_complete"), default=False)
 
-    if isinstance(patch.get("active_domains"), list):
-        active_domains = [canonical_domain_id(str(x)) for x in patch.get("active_domains") or []]
-    if isinstance(patch.get("queued_domains"), list):
-        queued_domains = [canonical_domain_id(str(x)) for x in patch.get("queued_domains") or []]
-    if isinstance(patch.get("promoted_domains"), list):
-        promoted_domains = [canonical_domain_id(str(x)) for x in patch.get("promoted_domains") or []]
+    if "active_domains" in patch:
+        active_domains = [canonical_domain_id(str(x)) for x in _normalize_string_list(patch.get("active_domains"))]
+    if "queued_domains" in patch:
+        queued_domains = [canonical_domain_id(str(x)) for x in _normalize_string_list(patch.get("queued_domains"))]
+    if "promoted_domains" in patch:
+        promoted_domains = [canonical_domain_id(str(x)) for x in _normalize_string_list(patch.get("promoted_domains"))]
 
     conn.execute(
         """
@@ -716,9 +748,9 @@ def get_or_create_daily_session(
     )
     selection_mode_final = requested_selection_mode
     rollback_guard: Optional[Dict[str, Any]] = None
-    if requested_selection_mode == "policy_live" and bool(cfg.policy_auto_rollback_enabled):
+    if requested_selection_mode == "policy_live" and _boolish(cfg.policy_auto_rollback_enabled, default=True):
         rollback_guard = _evaluate_policy_live_rollback_guard(conn, cfg=cfg, day=day)
-        if bool(rollback_guard.get("rollback", False)):
+        if _boolish(rollback_guard.get("rollback", False), default=False):
             selection_mode_final = "deterministic"
 
     last_asked = _get_last_asked_dates(conn, user_id=user_id, day=day, lookback_days=max(30, cfg.item_repeat_cooldown_days + 2))
@@ -729,7 +761,7 @@ def get_or_create_daily_session(
     )
 
     ctx_obj = policy_context or {}
-    if bool(ctx_obj.get("safety_trigger_active", False)):
+    if _boolish(ctx_obj.get("safety_trigger_active", False), default=False):
         _create_safety_event(
             conn,
             user_id=user_id,
@@ -1499,10 +1531,10 @@ def submit_answers(
         if item_id not in registry.items:
             raise ValueError(f"Unknown item_id: {item_id}")
         raw_obj = a.get("raw")
-        if isinstance(raw_obj, dict) and bool(raw_obj.get("permanently_declined")):
+        if isinstance(raw_obj, dict) and _boolish(raw_obj.get("permanently_declined"), default=False):
             _mark_item_permanently_declined(conn, user_id=user_id, item_id=item_id)
             continue
-        if isinstance(raw_obj, dict) and bool(raw_obj.get("safety_trigger")):
+        if isinstance(raw_obj, dict) and _boolish(raw_obj.get("safety_trigger"), default=False):
             _create_safety_event(
                 conn,
                 user_id=user_id,
@@ -1572,8 +1604,8 @@ def submit_answers(
                     item_id=item_id,
                     response_latency_ms=float(meta_raw["response_latency_ms"]) if meta_raw.get("response_latency_ms") is not None else None,
                     edit_count=int(meta_raw.get("edit_count", 0)),
-                    was_skipped=bool(meta_raw.get("was_skipped", False)),
-                    was_declined=bool(meta_raw.get("was_declined", False)),
+                    was_skipped=_boolish(meta_raw.get("was_skipped", False), default=False),
+                    was_declined=_boolish(meta_raw.get("was_declined", False), default=False),
                     channel=str(meta_raw.get("channel", "tap")),
                     voice_hesitation_ms=float(meta_raw["voice_hesitation_ms"]) if meta_raw.get("voice_hesitation_ms") is not None else None,
                     time_of_day_hour=int(meta_raw["time_of_day_hour"]) if meta_raw.get("time_of_day_hour") is not None else None,
@@ -2368,12 +2400,25 @@ def get_circle_snapshots(
         FROM circle_snapshots
         WHERE user_id=?
           AND date>=?
+          AND projection_version=?
         ORDER BY date ASC, created_at ASC;
         """,
-        (user_id, start),
+        (user_id, start, CIRCLE_PROJECTION_VERSION),
     ).fetchall()
+    if not rows:
+        rows = conn.execute(
+            """
+            SELECT *
+            FROM circle_snapshots
+            WHERE user_id=?
+              AND date>=?
+            ORDER BY date ASC, created_at ASC;
+            """,
+            (user_id, start),
+        ).fetchall()
     out: List[Dict[str, Any]] = []
     for r in rows:
+        uncertainty = json.loads(str(r["uncertainty_json"]))
         score = (
             float(r["coherence_score"])
             if "coherence_score" in r.keys() and r["coherence_score"] is not None
@@ -2405,7 +2450,11 @@ def get_circle_snapshots(
                     "score": float(score),
                     "tier": tier,
                 },
-                "uncertainty": json.loads(str(r["uncertainty_json"])),
+                "theta_defined": bool(uncertainty.get("theta_defined", True)),
+                "semantic_axis_scores": uncertainty.get("semantic_axis_scores", {}),
+                "semantic_concentration": uncertainty.get("semantic_concentration"),
+                "projection_kind": uncertainty.get("projection_kind"),
+                "uncertainty": uncertainty,
                 "source": str(r["source"]),
             }
         )
@@ -3177,7 +3226,11 @@ def _upsert_daily_state_and_circle_snapshots(
         x_uncertainty=dict(computed_state["x_uncertainty"]),
         previous_circle=prev_circle,
     )
-    coherence_score = coherence_score_from_radius(float(computed_circle.get("r") or 0.0))
+    coherence_score = float(
+        computed_circle.get("coherence")
+        if computed_circle.get("coherence") is not None
+        else coherence_score_from_radius(float(computed_circle.get("r") or 0.0))
+    )
     coherence_tier = coherence_tier_for_score(float(coherence_score))
     projection_version = CIRCLE_PROJECTION_VERSION
     existing_circle = conn.execute(
@@ -3344,10 +3397,23 @@ def _upsert_ews_and_drift(
         WHERE user_id=?
           AND date>=?
           AND date<?
+          AND projection_version=?
         ORDER BY date ASC, created_at ASC;
         """,
-        (user_id, start, day.isoformat()),
+        (user_id, start, day.isoformat(), CIRCLE_PROJECTION_VERSION),
     ).fetchall()
+    if not rows:
+        rows = conn.execute(
+            """
+            SELECT date, r, velocity, acceleration
+            FROM circle_snapshots
+            WHERE user_id=?
+              AND date>=?
+              AND date<?
+            ORDER BY date ASC, created_at ASC;
+            """,
+            (user_id, start, day.isoformat()),
+        ).fetchall()
 
     history: List[Dict[str, Any]] = [
         {
@@ -3410,7 +3476,11 @@ def _upsert_ews_and_drift(
     )
 
     radius = float(computed_circle.get("r") or 0.0)
-    coherence_score = coherence_score_from_radius(radius)
+    coherence_score = float(
+        computed_circle.get("coherence")
+        if computed_circle.get("coherence") is not None
+        else coherence_score_from_radius(radius)
+    )
     baseline_r_vals = [float(h["r"]) for h in history[:-1]]
     if baseline_r_vals:
         mu = sum(baseline_r_vals) / float(len(baseline_r_vals))
@@ -3881,14 +3951,26 @@ def _get_latest_circle_snapshot_before(
 ) -> Optional[Dict[str, Any]]:
     row = conn.execute(
         """
-        SELECT date, z_json, z_star_json, velocity
+        SELECT date, z_json, z_star_json, r, velocity, uncertainty_json
         FROM circle_snapshots
         WHERE user_id=? AND date<?
+          AND projection_version=?
         ORDER BY date DESC, created_at DESC
         LIMIT 1;
         """,
-        (user_id, day.isoformat()),
+        (user_id, day.isoformat(), CIRCLE_PROJECTION_VERSION),
     ).fetchone()
+    if not row:
+        row = conn.execute(
+            """
+            SELECT date, z_json, z_star_json, r, velocity, uncertainty_json
+            FROM circle_snapshots
+            WHERE user_id=? AND date<?
+            ORDER BY date DESC, created_at DESC
+            LIMIT 1;
+            """,
+            (user_id, day.isoformat()),
+        ).fetchone()
     if not row:
         return None
     try:
@@ -3900,7 +3982,9 @@ def _get_latest_circle_snapshot_before(
             "date": parse_date(str(row["date"])),
             "z": [float(z[0]), float(z[1])],
             "z_star": [float(z_star[0]), float(z_star[1])],
+            "r": float(row["r"] or 0.0),
             "velocity": float(row["velocity"] or 0.0),
+            "uncertainty": json.loads(str(row["uncertainty_json"])) if row["uncertainty_json"] else {},
         }
     except Exception:
         return None
