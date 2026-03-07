@@ -31,7 +31,8 @@ class ArchitectureBoundaryTests(unittest.TestCase):
         banned_import = re.compile(
             r"(from\s+questions_agent_platform\.(pipeline\.(api_monolith|service_monolith)|prod\.service_pg_monolith)\s+import|"
             r"import\s+questions_agent_platform\.(pipeline\.(api_monolith|service_monolith)|prod\.service_pg_monolith)|"
-            r"from\s+\.\s+import\s+(api_monolith|service_monolith|service_pg_monolith))"
+            r"from\s+\.\s+import\s+(api_monolith|service_monolith|service_pg_monolith)|"
+            r"from\s+\.(api_monolith|service_monolith|service_pg_monolith)\s+import)"
         )
 
         allowlist = {

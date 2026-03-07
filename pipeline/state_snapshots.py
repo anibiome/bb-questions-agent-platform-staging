@@ -8,19 +8,16 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Set, Tuple
 from questions_agent_platform.pipeline.registry import Registry
 from questions_agent_platform.pipeline.trajectory_metrics import (
     CANONICAL_AXIS_LOADINGS,
-    build_personal_attractor,
     canonical_coherence_score,
-    canonical_distance_from_state,
     coherence_uncertainty_from_state,
-    semantic_axis_scores_from_state,
-    semantic_direction,
+    decompose_rejuvenation_geometry,
 )
 
 
 STATE_SCHEMA_VERSION_DEFAULT = "v1_state_schema"
 STATE_MODEL_VERSION = "state_service_v1"
 CIRCLE_PROJECTION_VERSION = "circle_projection_v2_canonical"
-CIRCLE_ANCHOR_VERSION = "personal_attractor_state_v2"
+CIRCLE_ANCHOR_VERSION = "feasible_reference_supercoherence_v1"
 
 STATE_DIMENSIONS: Tuple[str, ...] = (
     "energy_vitality",
@@ -155,44 +152,80 @@ def compute_circle_snapshot(
     previous_circle: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     prev = previous_circle or {}
-    prev_attractor_state = prev.get("attractor_state")
-    prev_attractor_sigma_diag = prev.get("attractor_sigma_diag")
-    if not isinstance(prev_attractor_state, dict):
+    prev_feasible_state = prev.get("feasible_state")
+    prev_feasible_sigma_diag = prev.get("feasible_sigma_diag")
+    if not isinstance(prev_feasible_state, dict):
+        prev_feasible_state = prev.get("attractor_state")
+    if not isinstance(prev_feasible_sigma_diag, dict):
+        prev_feasible_sigma_diag = prev.get("attractor_sigma_diag")
+    if not isinstance(prev_feasible_state, dict) or not isinstance(prev_feasible_sigma_diag, dict):
+        prev_reference = prev.get("feasible_reference")
+        if not isinstance(prev_reference, dict):
+            prev_reference = prev.get("rejuvenation_geometry")
+        if isinstance(prev_reference, dict):
+            if not isinstance(prev_feasible_state, dict):
+                state_candidate = prev_reference.get("state")
+                if isinstance(state_candidate, dict):
+                    prev_feasible_state = state_candidate
+            if not isinstance(prev_feasible_sigma_diag, dict):
+                sigma_candidate = prev_reference.get("sigma_diag")
+                if isinstance(sigma_candidate, dict):
+                    prev_feasible_sigma_diag = sigma_candidate
+            if not isinstance(prev_feasible_state, dict) or not isinstance(prev_feasible_sigma_diag, dict):
+                nested_reference = prev_reference.get("feasible_reference")
+                if isinstance(nested_reference, dict):
+                    if not isinstance(prev_feasible_state, dict):
+                        state_candidate = nested_reference.get("state")
+                        if isinstance(state_candidate, dict):
+                            prev_feasible_state = state_candidate
+                    if not isinstance(prev_feasible_sigma_diag, dict):
+                        sigma_candidate = nested_reference.get("sigma_diag")
+                        if isinstance(sigma_candidate, dict):
+                            prev_feasible_sigma_diag = sigma_candidate
+    if not isinstance(prev_feasible_state, dict):
         prev_uncertainty = prev.get("uncertainty")
         if isinstance(prev_uncertainty, dict):
-            state_candidate = prev_uncertainty.get("attractor_state")
-            sigma_candidate = prev_uncertainty.get("attractor_sigma_diag")
+            state_candidate = prev_uncertainty.get("feasible_state") or prev_uncertainty.get("attractor_state")
+            sigma_candidate = prev_uncertainty.get("feasible_sigma_diag") or prev_uncertainty.get("attractor_sigma_diag")
             if isinstance(state_candidate, dict):
-                prev_attractor_state = state_candidate
+                prev_feasible_state = state_candidate
             if isinstance(sigma_candidate, dict):
-                prev_attractor_sigma_diag = sigma_candidate
+                prev_feasible_sigma_diag = sigma_candidate
 
-    attractor_state, attractor_sigma_diag = build_personal_attractor(
+    geometry = decompose_rejuvenation_geometry(
         current_mu=x_hat,
         current_sigma_diag=x_uncertainty,
-        previous_attractor_mu=prev_attractor_state if isinstance(prev_attractor_state, dict) else None,
-        previous_attractor_sigma_diag=prev_attractor_sigma_diag if isinstance(prev_attractor_sigma_diag, dict) else None,
+        previous_feasible_mu=prev_feasible_state if isinstance(prev_feasible_state, dict) else None,
+        previous_feasible_sigma_diag=(
+            prev_feasible_sigma_diag if isinstance(prev_feasible_sigma_diag, dict) else None
+        ),
         state_dimensions=STATE_DIMENSIONS,
     )
-    r = canonical_distance_from_state(
-        mu=x_hat,
-        sigma_diag=x_uncertainty,
-        attractor_mu=attractor_state,
-        attractor_sigma_diag=attractor_sigma_diag,
-        state_dimensions=STATE_DIMENSIONS,
-    )
-    semantic_axis_scores = semantic_axis_scores_from_state(
-        mu=x_hat,
-        sigma_diag=x_uncertainty,
-        attractor_mu=attractor_state,
-        attractor_sigma_diag=attractor_sigma_diag,
-        axis_loadings=CANONICAL_AXIS_LOADINGS,
-    )
-    theta, theta_defined, semantic_concentration = semantic_direction(semantic_axis_scores)
-    z_star = _project_state_to_2d(attractor_state)
+
+    feasible_state = dict(geometry["feasible_state"])
+    feasible_sigma_diag = dict(geometry["feasible_sigma_diag"])
+    ideal_state = dict(geometry["ideal_state"])
+    ideal_sigma_diag = dict(geometry["ideal_sigma_diag"])
+
+    acute_distance = float(geometry["acute_distance"])
+    structural_distance = float(geometry["structural_distance"])
+    absolute_distance = float(geometry["absolute_distance"])
+
+    semantic_axis_scores = dict(geometry["local_axis_scores"])
+    theta = float(geometry["local_theta"])
+    theta_defined = bool(geometry["local_theta_defined"])
+    semantic_concentration = float(geometry["local_concentration"])
+
+    structural_axis_scores = dict(geometry["structural_axis_scores"])
+    structural_concentration = float(geometry["structural_concentration"])
+    absolute_axis_scores = dict(geometry["absolute_axis_scores"])
+    absolute_concentration = float(geometry["absolute_concentration"])
+
+    z_star = _project_state_to_2d(feasible_state)
+    z_dagger = _project_state_to_2d(ideal_state)
     z = [
-        float(z_star[0]) + float(r) * math.cos(theta),
-        float(z_star[1]) + float(r) * math.sin(theta),
+        float(z_star[0]) + float(acute_distance) * math.cos(theta),
+        float(z_star[1]) + float(acute_distance) * math.sin(theta),
     ]
 
     velocity = 0.0
@@ -202,7 +235,7 @@ def compute_circle_snapshot(
     if prev_r is not None:
         prev_day = _coerce_date(prev.get("date"))
         delta_days = max(1.0, float((day - prev_day).days)) if prev_day else 1.0
-        velocity = abs(float(r) - float(prev_r)) / delta_days
+        velocity = abs(float(acute_distance) - float(prev_r)) / delta_days
         observed_velocity = float(velocity)
         prev_v = float(prev.get("velocity", 0.0) or 0.0)
         acceleration = (float(velocity) - prev_v) / delta_days
@@ -210,18 +243,28 @@ def compute_circle_snapshot(
     unc_vals = [float(x_uncertainty.get(dim, 1.0)) for dim in STATE_DIMENSIONS]
     unc_mean = float(sum(unc_vals) / max(1, len(unc_vals)))
     unc_max = float(max(unc_vals) if unc_vals else 1.0)
-    circle_unc = coherence_uncertainty_from_state(
+    local_circle_unc = coherence_uncertainty_from_state(
         sigma_diag=x_uncertainty,
-        attractor_sigma_diag=attractor_sigma_diag,
+        attractor_sigma_diag=feasible_sigma_diag,
         state_dimensions=STATE_DIMENSIONS,
     )
-    coherence = canonical_coherence_score(
-        distance=r,
+    absolute_circle_unc = coherence_uncertainty_from_state(
+        sigma_diag=x_uncertainty,
+        attractor_sigma_diag=ideal_sigma_diag,
+        state_dimensions=STATE_DIMENSIONS,
+    )
+    local_coherence = canonical_coherence_score(
+        distance=acute_distance,
         velocity=observed_velocity,
         semantic_concentration=semantic_concentration if theta_defined else None,
     )
-    coherence_components = {
-        "distance": round(float(math.exp(-max(0.0, float(r)) / 0.75)), 6),
+    absolute_coherence = canonical_coherence_score(
+        distance=absolute_distance,
+        velocity=observed_velocity,
+        semantic_concentration=(absolute_concentration if geometry.get("absolute_theta_defined") else None),
+    )
+    local_components = {
+        "distance": round(float(math.exp(-max(0.0, float(acute_distance)) / 0.75)), 6),
         "stability": (
             round(float(math.exp(-abs(float(velocity)) / 0.15)), 6)
             if observed_velocity is not None
@@ -229,44 +272,111 @@ def compute_circle_snapshot(
         ),
         "alignment": round(float(semantic_concentration), 6) if theta_defined else None,
     }
-    rounded_axis_scores = {
-        key: round(float(value), 6) for key, value in semantic_axis_scores.items()
+    absolute_components = {
+        "distance": round(float(math.exp(-max(0.0, float(absolute_distance)) / 0.75)), 6),
+        "stability": local_components["stability"],
+        "alignment": (
+            round(float(absolute_concentration), 6)
+            if geometry.get("absolute_theta_defined")
+            else None
+        ),
     }
-    rounded_attractor_state = {
-        key: round(float(value), 6) for key, value in attractor_state.items()
+    rounded_feasible_state = {
+        key: round(float(value), 6) for key, value in feasible_state.items()
     }
-    rounded_attractor_sigma_diag = {
-        key: round(float(value), 6) for key, value in attractor_sigma_diag.items()
+    rounded_feasible_sigma_diag = {
+        key: round(float(value), 6) for key, value in feasible_sigma_diag.items()
+    }
+    rounded_ideal_state = {
+        key: round(float(value), 6) for key, value in ideal_state.items()
+    }
+    rounded_ideal_sigma_diag = {
+        key: round(float(value), 6) for key, value in ideal_sigma_diag.items()
+    }
+
+    rejuvenation_geometry = {
+        "acute_distance": round(float(acute_distance), 6),
+        "structural_distance": round(float(structural_distance), 6),
+        "absolute_distance": round(float(absolute_distance), 6),
+        "local_coherence": round(float(local_coherence), 6),
+        "absolute_coherence": round(float(absolute_coherence), 6),
+        "acute_vector": geometry.get("acute_vector", {}),
+        "structural_vector": geometry.get("structural_vector", {}),
+        "absolute_vector": geometry.get("absolute_vector", {}),
+        "viable_volume_log_proxy": geometry.get("viable_volume_log_proxy"),
+        "uncertainty_trace_proxy": geometry.get("uncertainty_trace_proxy"),
+        "feasible_reference": {
+            "z": [round(float(z_star[0]), 6), round(float(z_star[1]), 6)],
+            "state": rounded_feasible_state,
+            "sigma_diag": rounded_feasible_sigma_diag,
+        },
+        "supercoherence": {
+            "z": [round(float(z_dagger[0]), 6), round(float(z_dagger[1]), 6)],
+            "state": rounded_ideal_state,
+            "sigma_diag": rounded_ideal_sigma_diag,
+        },
     }
 
     return {
         "z": [round(float(z[0]), 6), round(float(z[1]), 6)],
         "z_star": [round(float(z_star[0]), 6), round(float(z_star[1]), 6)],
-        "r": round(float(r), 6),
+        "z_dagger": [round(float(z_dagger[0]), 6), round(float(z_dagger[1]), 6)],
+        "r": round(float(acute_distance), 6),
+        "r_struct": round(float(structural_distance), 6),
+        "r_abs": round(float(absolute_distance), 6),
+        "structural_distance": round(float(structural_distance), 6),
+        "absolute_distance": round(float(absolute_distance), 6),
         "theta": round(float(theta), 6),
         "theta_defined": bool(theta_defined),
-        "semantic_axis_scores": rounded_axis_scores,
+        "semantic_axis_scores": semantic_axis_scores,
         "semantic_concentration": round(float(semantic_concentration), 6),
-        "coherence": round(float(coherence), 6),
-        "coherence_components": coherence_components,
-        "attractor_state": rounded_attractor_state,
-        "attractor_sigma_diag": rounded_attractor_sigma_diag,
+        "structural_axis_scores": structural_axis_scores,
+        "structural_concentration": round(float(structural_concentration), 6),
+        "absolute_axis_scores": absolute_axis_scores,
+        "absolute_concentration": round(float(absolute_concentration), 6),
+        "coherence": round(float(local_coherence), 6),
+        "local_coherence": round(float(local_coherence), 6),
+        "absolute_coherence": round(float(absolute_coherence), 6),
+        "coherence_components": local_components,
+        "absolute_coherence_components": absolute_components,
+        "attractor_state": rounded_feasible_state,
+        "attractor_sigma_diag": rounded_feasible_sigma_diag,
+        "feasible_state": rounded_feasible_state,
+        "feasible_sigma_diag": rounded_feasible_sigma_diag,
+        "supercoherence_state": rounded_ideal_state,
+        "supercoherence_sigma_diag": rounded_ideal_sigma_diag,
+        "ideal_state": rounded_ideal_state,
+        "ideal_sigma_diag": rounded_ideal_sigma_diag,
+        "projection_kind": "canonical_rejuvenation_geometry",
+        "feasible_reference": rejuvenation_geometry["feasible_reference"],
+        "supercoherence": rejuvenation_geometry["supercoherence"],
+        "rejuvenation_geometry": rejuvenation_geometry,
         "velocity": round(float(velocity), 6),
         "acceleration": round(float(acceleration), 6),
         "uncertainty": {
             "mean_state_uncertainty": round(unc_mean, 6),
             "max_state_uncertainty": round(unc_max, 6),
-            "circle_uncertainty": round(float(circle_unc), 6),
-            "projection_kind": "canonical_state_space",
+            "circle_uncertainty": round(float(local_circle_unc), 6),
+            "absolute_circle_uncertainty": round(float(absolute_circle_unc), 6),
+            "projection_kind": "canonical_rejuvenation_geometry",
             "theta_defined": bool(theta_defined),
-            "semantic_axis_scores": rounded_axis_scores,
+            "semantic_axis_scores": semantic_axis_scores,
             "semantic_concentration": round(float(semantic_concentration), 6),
-            "coherence_components": coherence_components,
-            "attractor_state": rounded_attractor_state,
-            "attractor_sigma_diag": rounded_attractor_sigma_diag,
+            "structural_axis_scores": structural_axis_scores,
+            "absolute_axis_scores": absolute_axis_scores,
+            "coherence_components": local_components,
+            "absolute_coherence_components": absolute_components,
+            "attractor_state": rounded_feasible_state,
+            "attractor_sigma_diag": rounded_feasible_sigma_diag,
+            "feasible_state": rounded_feasible_state,
+            "feasible_sigma_diag": rounded_feasible_sigma_diag,
+            "supercoherence_state": rounded_ideal_state,
+            "supercoherence_sigma_diag": rounded_ideal_sigma_diag,
+            "ideal_state": rounded_ideal_state,
+            "ideal_sigma_diag": rounded_ideal_sigma_diag,
+            "rejuvenation_geometry": rejuvenation_geometry,
         },
     }
-
 
 def infer_state_dimensions_from_tags(tags: Sequence[str]) -> Set[str]:
     dims: Set[str] = set()
@@ -388,7 +498,10 @@ def compute_minifold_circles(
             # First observation: z_star = population prior (center)
             z_star = [0.0, 0.0]
 
+        z_dagger = [0.0, 0.0]
         r = _l2(z_mode, z_star)
+        r_struct = _l2(z_star, z_dagger)
+        r_abs = _l2(z_mode, z_dagger)
         theta = float(math.atan2(z_mode[1], z_mode[0]))
 
         # Velocity / acceleration
@@ -415,18 +528,26 @@ def compute_minifold_circles(
         dims_with_data = sum(1 for d in dims if x_hat.get(d) is not None and abs(x_hat.get(d, 0.5) - 0.5) > 1e-6)
         coverage_ratio = dims_with_data / max(1, len(dims))
 
-        # Coherence score for this mode (same formula as main circle)
+        # Local coherence stays feasibility-aware; absolute coherence measures gap to Supercoherence.
         mode_coherence = max(0.0, min(1.0, 1.0 - float(r)))
+        mode_absolute_coherence = max(0.0, min(1.0, 1.0 - float(r_abs)))
 
         result[mode] = {
             "mode": mode,
             "z": [round(z_mode[0], 6), round(z_mode[1], 6)],
             "z_star": [round(z_star[0], 6), round(z_star[1], 6)],
+            "z_dagger": [round(z_dagger[0], 6), round(z_dagger[1], 6)],
             "r": round(r, 6),
+            "r_struct": round(r_struct, 6),
+            "r_abs": round(r_abs, 6),
+            "structural_distance": round(r_struct, 6),
+            "absolute_distance": round(r_abs, 6),
             "theta": round(theta, 6),
             "velocity": round(velocity, 6),
             "acceleration": round(acceleration, 6),
             "coherence": round(mode_coherence, 6),
+            "local_coherence": round(mode_coherence, 6),
+            "absolute_coherence": round(mode_absolute_coherence, 6),
             "uncertainty": round(mode_unc, 6),
             "coverage_ratio": round(coverage_ratio, 4),
             "dimensions": list(dims),

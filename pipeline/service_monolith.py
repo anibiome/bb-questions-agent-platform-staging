@@ -3227,7 +3227,9 @@ def _upsert_daily_state_and_circle_snapshots(
         previous_circle=prev_circle,
     )
     coherence_score = float(
-        computed_circle.get("coherence")
+        computed_circle.get("local_coherence")
+        if computed_circle.get("local_coherence") is not None
+        else computed_circle.get("coherence")
         if computed_circle.get("coherence") is not None
         else coherence_score_from_radius(float(computed_circle.get("r") or 0.0))
     )
@@ -3368,7 +3370,7 @@ def _upsert_minifold_snapshots(
                 float(mf["theta"]),
                 float(mf["velocity"]),
                 float(mf["acceleration"]),
-                float(mf["coherence"]),
+                float(mf.get("local_coherence", mf.get("coherence", 0.0))),
                 float(mf["uncertainty"]),
                 float(mf["coverage_ratio"]),
                 json.dumps(mf["dimensions"], ensure_ascii=False),

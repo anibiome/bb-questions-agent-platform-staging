@@ -104,10 +104,23 @@ CANONICAL_COMPONENT_WEIGHTS: Dict[str, float] = {
     "alignment": 0.10,
 }
 
+CANONICAL_IDEAL_STATE: Dict[str, float] = {
+    "energy_vitality": 0.82,
+    "sleep_quality": 0.82,
+    "gut_gi": 0.78,
+    "glycemic_risk": 0.18,
+    "cardiovascular_load": 0.18,
+    "mood_affect": 0.82,
+    "cognitive_control": 0.80,
+    "agency_purpose": 0.78,
+    "social_connectedness": 0.76,
+}
+
 _EPS = 1e-9
 _CANONICAL_DISTANCE_SCALE = 0.75
 _CANONICAL_VELOCITY_SCALE = 0.15
 _CANONICAL_SIGMA_REFERENCE = 0.25
+_CANONICAL_IDEAL_SIGMA = 0.10
 
 
 def coherence_score_from_radius(radius: float, *, radius_at_zero: float = 1.25) -> float:
@@ -132,7 +145,25 @@ def canonical_prior_sigma_diag(
     return {str(dim): float(sigma) for dim in state_dimensions}
 
 
-def build_personal_attractor(
+def canonical_ideal_state(
+    *,
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+) -> Dict[str, float]:
+    return {
+        str(dim): float(CANONICAL_IDEAL_STATE.get(str(dim), 0.5))
+        for dim in state_dimensions
+    }
+
+
+def canonical_ideal_sigma_diag(
+    *,
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+    sigma: float = _CANONICAL_IDEAL_SIGMA,
+) -> Dict[str, float]:
+    return {str(dim): float(sigma) for dim in state_dimensions}
+
+
+def build_feasible_reference(
     *,
     current_mu: Mapping[str, float],
     current_sigma_diag: Mapping[str, float],
@@ -143,6 +174,11 @@ def build_personal_attractor(
     base_alpha: float = 0.15,
     stable_distance: float = 0.50,
 ) -> Tuple[Dict[str, float], Dict[str, float]]:
+    """Estimate the best currently reachable stable state.
+
+    This is the personalized feasible reference, not the final destination.
+    Supercoherence is handled separately by ``canonical_ideal_state``.
+    """
     prior_mu = canonical_prior_state(state_dimensions=state_dimensions)
     prior_sigma = canonical_prior_sigma_diag(state_dimensions=state_dimensions)
 
@@ -182,6 +218,59 @@ def build_personal_attractor(
     return attractor_mu, attractor_sigma
 
 
+def build_personal_attractor(
+    *,
+    current_mu: Mapping[str, float],
+    current_sigma_diag: Mapping[str, float],
+    previous_attractor_mu: Optional[Mapping[str, float]] = None,
+    previous_attractor_sigma_diag: Optional[Mapping[str, float]] = None,
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+    prior_strength: float = 4.0,
+    base_alpha: float = 0.15,
+    stable_distance: float = 0.50,
+) -> Tuple[Dict[str, float], Dict[str, float]]:
+    """Backward-compatible alias for the older personalized-attractor API."""
+    return build_feasible_reference(
+        current_mu=current_mu,
+        current_sigma_diag=current_sigma_diag,
+        previous_attractor_mu=previous_attractor_mu,
+        previous_attractor_sigma_diag=previous_attractor_sigma_diag,
+        state_dimensions=state_dimensions,
+        prior_strength=prior_strength,
+        base_alpha=base_alpha,
+        stable_distance=stable_distance,
+    )
+
+
+def build_feasible_optimum(
+    *,
+    current_mu: Mapping[str, float],
+    current_sigma_diag: Mapping[str, float],
+    previous_feasible_mu: Optional[Mapping[str, float]] = None,
+    previous_feasible_sigma_diag: Optional[Mapping[str, float]] = None,
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+    prior_strength: float = 4.0,
+    base_alpha: float = 0.15,
+    stable_distance: float = 0.50,
+) -> Tuple[Dict[str, float], Dict[str, float]]:
+    """Backward-compatible wrapper around the feasible-reference machinery.
+
+    The old attractor becomes the feasible optimum: the best state the person
+    can stably occupy right now. The absolute destination is handled separately
+    via ``canonical_ideal_state``.
+    """
+    return build_feasible_reference(
+        current_mu=current_mu,
+        current_sigma_diag=current_sigma_diag,
+        previous_attractor_mu=previous_feasible_mu,
+        previous_attractor_sigma_diag=previous_feasible_sigma_diag,
+        state_dimensions=state_dimensions,
+        prior_strength=prior_strength,
+        base_alpha=base_alpha,
+        stable_distance=stable_distance,
+    )
+
+
 def canonical_distance_from_state(
     *,
     mu: Mapping[str, float],
@@ -203,6 +292,133 @@ def canonical_distance_from_state(
         total += (delta * delta) / variance
         count += 1
     return math.sqrt(total / max(1, count))
+
+
+def decompose_rejuvenation_geometry(
+    *,
+    current_mu: Mapping[str, float],
+    current_sigma_diag: Mapping[str, float],
+    previous_feasible_mu: Optional[Mapping[str, float]] = None,
+    previous_feasible_sigma_diag: Optional[Mapping[str, float]] = None,
+    state_dimensions: Sequence[str] = CANONICAL_STATE_DIMENSIONS,
+    velocity: Optional[float] = None,
+    concordance: Optional[float] = None,
+    recovery: Optional[float] = None,
+) -> Dict[str, Any]:
+    """Split state error into acute dysregulation, structural gap, and total gap."""
+    feasible_mu, feasible_sigma = build_feasible_optimum(
+        current_mu=current_mu,
+        current_sigma_diag=current_sigma_diag,
+        previous_feasible_mu=previous_feasible_mu,
+        previous_feasible_sigma_diag=previous_feasible_sigma_diag,
+        state_dimensions=state_dimensions,
+    )
+    ideal_mu = canonical_ideal_state(state_dimensions=state_dimensions)
+    ideal_sigma = canonical_ideal_sigma_diag(state_dimensions=state_dimensions)
+
+    acute_distance = canonical_distance_from_state(
+        mu=current_mu,
+        sigma_diag=current_sigma_diag,
+        attractor_mu=feasible_mu,
+        attractor_sigma_diag=feasible_sigma,
+        state_dimensions=state_dimensions,
+    )
+    structural_distance = canonical_distance_from_state(
+        mu=feasible_mu,
+        sigma_diag=feasible_sigma,
+        attractor_mu=ideal_mu,
+        attractor_sigma_diag=ideal_sigma,
+        state_dimensions=state_dimensions,
+    )
+    absolute_distance = canonical_distance_from_state(
+        mu=current_mu,
+        sigma_diag=current_sigma_diag,
+        attractor_mu=ideal_mu,
+        attractor_sigma_diag=ideal_sigma,
+        state_dimensions=state_dimensions,
+    )
+
+    local_axis_scores = semantic_axis_scores_from_state(
+        mu=current_mu,
+        sigma_diag=current_sigma_diag,
+        attractor_mu=feasible_mu,
+        attractor_sigma_diag=feasible_sigma,
+        axis_loadings=CANONICAL_AXIS_LOADINGS,
+    )
+    structural_axis_scores = semantic_axis_scores_from_state(
+        mu=feasible_mu,
+        sigma_diag=feasible_sigma,
+        attractor_mu=ideal_mu,
+        attractor_sigma_diag=ideal_sigma,
+        axis_loadings=CANONICAL_AXIS_LOADINGS,
+    )
+    absolute_axis_scores = semantic_axis_scores_from_state(
+        mu=current_mu,
+        sigma_diag=current_sigma_diag,
+        attractor_mu=ideal_mu,
+        attractor_sigma_diag=ideal_sigma,
+        axis_loadings=CANONICAL_AXIS_LOADINGS,
+    )
+
+    local_theta, local_theta_defined, local_concentration = semantic_direction(local_axis_scores)
+    structural_theta, structural_theta_defined, structural_concentration = semantic_direction(structural_axis_scores)
+    absolute_theta, absolute_theta_defined, absolute_concentration = semantic_direction(absolute_axis_scores)
+
+    local_coherence = canonical_coherence_score(
+        distance=acute_distance,
+        velocity=velocity,
+        concordance=concordance,
+        recovery=recovery,
+        semantic_concentration=local_concentration if local_theta_defined else None,
+    )
+    absolute_coherence = canonical_coherence_score(
+        distance=absolute_distance,
+        velocity=velocity,
+        concordance=concordance,
+        recovery=recovery,
+        semantic_concentration=absolute_concentration if absolute_theta_defined else None,
+    )
+
+    return {
+        "feasible_state": feasible_mu,
+        "feasible_sigma_diag": feasible_sigma,
+        "ideal_state": ideal_mu,
+        "ideal_sigma_diag": ideal_sigma,
+        "acute_vector": _delta_map(current_mu, feasible_mu, state_dimensions=state_dimensions),
+        "structural_vector": _delta_map(feasible_mu, ideal_mu, state_dimensions=state_dimensions),
+        "absolute_vector": _delta_map(current_mu, ideal_mu, state_dimensions=state_dimensions),
+        "acute_distance": round(float(acute_distance), 6),
+        "structural_distance": round(float(structural_distance), 6),
+        "absolute_distance": round(float(absolute_distance), 6),
+        "local_coherence": round(float(local_coherence), 6),
+        "absolute_coherence": round(float(absolute_coherence), 6),
+        "local_axis_scores": {k: round(float(v), 6) for k, v in local_axis_scores.items()},
+        "structural_axis_scores": {k: round(float(v), 6) for k, v in structural_axis_scores.items()},
+        "absolute_axis_scores": {k: round(float(v), 6) for k, v in absolute_axis_scores.items()},
+        "local_theta": round(float(local_theta), 6),
+        "structural_theta": round(float(structural_theta), 6),
+        "absolute_theta": round(float(absolute_theta), 6),
+        "local_theta_defined": bool(local_theta_defined),
+        "structural_theta_defined": bool(structural_theta_defined),
+        "absolute_theta_defined": bool(absolute_theta_defined),
+        "local_concentration": round(float(local_concentration), 6),
+        "structural_concentration": round(float(structural_concentration), 6),
+        "absolute_concentration": round(float(absolute_concentration), 6),
+        "viable_volume_log_proxy": round(
+            sum(math.log(1.0 / max(float(feasible_sigma.get(str(dim), _CANONICAL_SIGMA_REFERENCE)), _EPS)) for dim in state_dimensions)
+            / max(1, len(state_dimensions)),
+            6,
+        ),
+        "uncertainty_trace_proxy": round(
+            (
+                sum(float(current_sigma_diag.get(str(dim), _CANONICAL_SIGMA_REFERENCE)) for dim in state_dimensions)
+                + sum(float(feasible_sigma.get(str(dim), _CANONICAL_SIGMA_REFERENCE)) for dim in state_dimensions)
+                + sum(float(ideal_sigma.get(str(dim), _CANONICAL_SIGMA_REFERENCE)) for dim in state_dimensions)
+            )
+            / max(1, len(state_dimensions)),
+            6,
+        ),
+    }
 
 
 def semantic_axis_scores_from_state(
@@ -605,3 +821,15 @@ def _scaled_uncertainty(
 
 def _clamp01(value: float) -> float:
     return max(0.0, min(1.0, float(value)))
+
+
+def _delta_map(
+    left: Mapping[str, float],
+    right: Mapping[str, float],
+    *,
+    state_dimensions: Sequence[str],
+) -> Dict[str, float]:
+    return {
+        str(dim): round(float(left.get(str(dim), 0.0)) - float(right.get(str(dim), 0.0)), 6)
+        for dim in state_dimensions
+    }

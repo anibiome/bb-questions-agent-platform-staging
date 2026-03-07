@@ -3,12 +3,19 @@
 Keeps stable import path while exposing bounded domain modules.
 """
 
-from . import service_analytics as _analytics
 from . import service_monolith as _legacy
+
+for _module in (_legacy,):
+    for _name in dir(_module):
+        if _name.startswith("__"):
+            continue
+        globals().setdefault(_name, getattr(_module, _name))
+
+from . import service_analytics as _analytics
 from . import service_registry as _registry
 from . import service_sessions as _sessions
 
-for _module in (_registry, _sessions, _analytics, _legacy):
+for _module in (_registry, _sessions, _analytics):
     for _name in dir(_module):
         if _name.startswith("__"):
             continue

@@ -119,7 +119,8 @@ class TestMiniFoldComputation:
         )
         required_fields = {
             "mode", "z", "z_star", "r", "theta",
-            "velocity", "acceleration", "coherence",
+            "velocity", "acceleration", "local_coherence", "absolute_coherence",
+            "structural_distance", "absolute_distance",
             "uncertainty", "coverage_ratio", "dimensions", "date", "version",
         }
         for mode, circle in mf.items():
@@ -156,7 +157,7 @@ class TestMiniFoldComputation:
             x_uncertainty=self._balanced_uncertainty(),
         )
         affective = mf["affective"]
-        assert affective["coherence"] == pytest.approx(
+        assert affective["local_coherence"] == pytest.approx(
             max(0.0, 1.0 - affective["r"]), abs=0.001
         )
 

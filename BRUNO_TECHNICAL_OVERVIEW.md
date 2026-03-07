@@ -138,12 +138,15 @@ Each dimension gets x_hat (estimate) and x_uncertainty (confidence). Updated dai
 
 ### 3.2 Coherence Circle (`questions_fold.py` — 636 lines)
 
-The 9D state projects to 2D via fixed projection weights:
+The 9D state now uses a two-level geometry:
 - z = (z1, z2) — current position
-- z* = (z1*, z2*) — personal attractor (baseline)
-- r = |z - z*| — decoherence radius (distance from your healthy baseline)
-- theta = angle(z - z*) — which direction you're drifting
-- coherence_score = nonlinear mapping from r to [0, 1]
+- z* = (z1*, z2*) — current feasible optimum (best state the person can stably reach now)
+- z† = (z1†, z2†) — Supercoherence reference (ideal coherent biology)
+- r = |z - z*| — acute dysregulation radius
+- r_struct = |z* - z†| — structural aging gap
+- r_abs = |z - z†| — absolute rejuvenation gap
+- theta = angle(z - z*) — which direction current dysregulation is drifting
+- local_coherence and absolute_coherence are computed separately so symptom control is not confused with rejuvenation
 
 4 MiniFold sub-circles: metabolic, mind, body, social — each covering a subset of the 9 dimensions.
 
@@ -168,16 +171,14 @@ This is what the Questions Agent exports — either for standalone use or for An
 
 ```python
 m_questions(t) = {
-    mu_t,        # 9D state vector
-    sigma_t,     # 9D diagonal uncertainty
-    z_t,         # 2D circle position
-    r_t,         # decoherence radius
-    theta_t,     # decoherence angle
-    kappa_t,     # coherence score [0, 1]
-    sigma_kappa, # coherence uncertainty
-    c_t,         # coverage vector
-    h_t,         # history envelope (velocity, accel, EWS)
-    minifolds,   # 4 sub-circles
+    mu_t, sigma_t,                    # 9D latent posterior
+    z_t, z*_t, z†_t,                  # current position, feasible reference, Supercoherence
+    r_t, s_t, q_t, theta_t,           # acute, structural, absolute distances + angle
+    kappa_local_t, kappa_abs_t,       # regulation score vs rejuvenation score
+    sigma_kappa_t,                    # coherence uncertainty
+    c_t,                              # coverage vector
+    h_t,                              # history envelope (velocity, accel, EWS)
+    minifolds,                        # 4 sub-circles
 }
 ```
 

@@ -21,6 +21,7 @@ from questions_agent_platform.pipeline.service import (
     get_state_snapshots,
     submit_answers,
 )
+from questions_agent_platform.pipeline.state_snapshots import CIRCLE_PROJECTION_VERSION
 from questions_agent_platform.pipeline.time_utils import now_iso
 
 
@@ -250,7 +251,7 @@ class TestP1FollowUpAndSnapshots(unittest.TestCase):
                 self.assertEqual(len(circles), 2)
                 self.assertEqual(states[0]["date"], day1.isoformat())
                 self.assertEqual(states[1]["date"], day2.isoformat())
-                self.assertEqual(circles[1]["projection_version"], "circle_projection_v1_fixed")
+                self.assertEqual(circles[1]["projection_version"], CIRCLE_PROJECTION_VERSION)
                 self.assertIn("x_hat", states[1])
                 self.assertIn("uncertainty", circles[1])
                 self.assertGreaterEqual(float(circles[1]["velocity"]), 0.0)

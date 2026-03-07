@@ -7,7 +7,7 @@ from questions_agent_platform.pipeline.config import QuestionsAgentConfig
 from questions_agent_platform.pipeline.db import connect, init_db
 from questions_agent_platform.pipeline.demo import seed_demo_registry
 from questions_agent_platform.pipeline.registry import load_registry
-from questions_agent_platform.pipeline.service_monolith import (
+from questions_agent_platform.pipeline.service import (
     ensure_registry_active,
     get_or_create_daily_session,
     get_user_profile,

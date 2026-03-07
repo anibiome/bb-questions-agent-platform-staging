@@ -33,16 +33,13 @@ The QuestionsFold produces an **Identity Mask fragment** for
 AniFold's Cross-Attention Fusion (Perceiver-like 1D) layer::
 
     m_questions(t) = {
-        μ_t,       # 9D state vector (x_hat)
-        Σ_t,       # 9D diagonal uncertainty (x_uncertainty)
-        z_t,       # 2D Coherence Circle position
-        r_t,       # Decoherence radius
-        θ_t,       # Decoherence angle
-        κ̂_t,       # Coherence score [0, 1]
-        σ_κ_t,     # Coherence uncertainty
-        c_t,       # Coverage vector (per-dimension scale counts)
-        h_t,       # History envelope (velocity, acceleration, EWS)
-        minifolds, # 4 per-mode sub-circles
+        μ_t, Σ_t,                      # 9D latent posterior
+        z_t, z*_t, z†_t,               # current position, feasible reference, Supercoherence
+        r_t, s_t, q_t, θ_t,            # acute, structural, absolute distances + angle
+        κ_local,t, κ_abs,t, σ_κ,t,     # local coherence, absolute coherence, uncertainty
+        c_t,                           # coverage vector (per-dimension scale counts)
+        h_t,                           # history envelope (velocity, acceleration, EWS)
+        minifolds,                     # 4 per-mode sub-circles
     }
 
 This fragment is self-contained: it can be used standalone for
@@ -127,6 +124,11 @@ class MiniFoldCircle:
     uncertainty: float
     coverage_ratio: float
     dimensions: Tuple[str, ...]
+    z_dagger: Optional[Tuple[float, float]] = None
+    r_struct: Optional[float] = None
+    r_abs: Optional[float] = None
+    local_coherence: Optional[float] = None
+    absolute_coherence: Optional[float] = None
 
 
 @dataclass(frozen=True)
@@ -162,17 +164,17 @@ class QuestionsFoldResult:
     mu: Dict[str, float]                    # 9D state vector x_hat
     sigma_diag: Dict[str, float]            # 9D uncertainty diagonal
 
-    # --- Coherence Circle (z, z*, r, θ) ---
-    z: Tuple[float, float]                  # 2D position
-    z_star: Tuple[float, float]             # 2D attractor (personal baseline)
-    r: float                                # decoherence radius
+    # --- Rejuvenation Geometry (z, z*, z†, r, s, q, θ) ---
+    z: Tuple[float, float]                  # 2D current position
+    z_star: Tuple[float, float]             # 2D feasible reference (best currently reachable stable state)
+    r: float                                # acute dysregulation radius
     theta: float                            # decoherence angle (radians)
     theta_defined: bool                     # semantic angle validity
     semantic_axis_scores: Dict[str, float]  # anchored mode magnitudes
     semantic_concentration: float           # how directional the drift is
-    attractor_state: Dict[str, float]       # attractor in state space
-    attractor_sigma_diag: Dict[str, float]  # attractor uncertainty
-    coherence: float                        # coherence score κ̂ ∈ [0, 1]
+    attractor_state: Dict[str, float]       # legacy alias for feasible_state
+    attractor_sigma_diag: Dict[str, float]  # legacy alias for feasible_sigma_diag
+    coherence: float                        # legacy alias for local_coherence
     coherence_uncertainty: float            # σ_κ from state uncertainty
 
     # --- Coverage ---
@@ -192,6 +194,21 @@ class QuestionsFoldResult:
     version: str = QUESTIONS_FOLD_VERSION
     circle_projection_version: str = CIRCLE_PROJECTION_VERSION
     minifold_version: str = MINIFOLD_VERSION
+    z_dagger: Optional[Tuple[float, float]] = None
+    r_struct: Optional[float] = None
+    r_abs: Optional[float] = None
+    structural_axis_scores: Dict[str, float] = field(default_factory=dict)
+    structural_concentration: float = 0.0
+    absolute_axis_scores: Dict[str, float] = field(default_factory=dict)
+    absolute_concentration: float = 0.0
+    feasible_state: Dict[str, float] = field(default_factory=dict)
+    feasible_sigma_diag: Dict[str, float] = field(default_factory=dict)
+    ideal_state: Dict[str, float] = field(default_factory=dict)
+    ideal_sigma_diag: Dict[str, float] = field(default_factory=dict)
+    supercoherence_state: Dict[str, float] = field(default_factory=dict)
+    supercoherence_sigma_diag: Dict[str, float] = field(default_factory=dict)
+    local_coherence: Optional[float] = None
+    absolute_coherence: Optional[float] = None
 
     def to_identity_mask(self) -> Dict[str, Any]:
         """Serialise to Identity Mask fragment for API / PoE fusion.
@@ -199,11 +216,22 @@ class QuestionsFoldResult:
         The output follows the Identity Mask schema from the
         AAAI 2026 position paper (Balen et al.):
 
-            m_t = {μ_t, Σ_t; z_t, r_t, θ_t; κ̂_t, σ_κ_t; c_t; h_t}
+            m_t = {μ_t, Σ_t; z_t, z*_t, z†_t; r_t, s_t, q_t, θ_t; κ_local,t, κ_abs,t, σ_κ,t; c_t; h_t}
 
         All numeric values are rounded to 6 decimal places for
         deterministic JSON serialisation.
         """
+        z_dagger = self.z_dagger if self.z_dagger is not None else (0.0, 0.0)
+        r_struct = float(self.r_struct if self.r_struct is not None else 0.0)
+        r_abs = float(self.r_abs if self.r_abs is not None else self.r)
+        local_coherence = float(self.local_coherence if self.local_coherence is not None else self.coherence)
+        absolute_coherence = float(self.absolute_coherence if self.absolute_coherence is not None else self.coherence)
+        feasible_state = self.feasible_state or self.attractor_state
+        feasible_sigma_diag = self.feasible_sigma_diag or self.attractor_sigma_diag
+        ideal_state = self.ideal_state or self.supercoherence_state
+        ideal_sigma_diag = self.ideal_sigma_diag or self.supercoherence_sigma_diag
+        supercoherence_state = self.supercoherence_state or ideal_state
+        supercoherence_sigma_diag = self.supercoherence_sigma_diag or ideal_sigma_diag
         return {
             "schema": "identity_mask_fragment",
             "version": self.version,
@@ -218,22 +246,85 @@ class QuestionsFoldResult:
             "circle": {
                 "z": [round(self.z[0], 6), round(self.z[1], 6)],
                 "z_star": [round(self.z_star[0], 6), round(self.z_star[1], 6)],
+                "z_dagger": [round(z_dagger[0], 6), round(z_dagger[1], 6)],
                 "r": round(self.r, 6),
+                "structural_distance": round(r_struct, 6),
+                "absolute_distance": round(r_abs, 6),
                 "theta": round(self.theta, 6),
+                "velocity": round(self.history.velocity, 6),
+                "acceleration": round(self.history.acceleration, 6),
                 "theta_defined": self.theta_defined,
                 "semantic_axis_scores": {
                     k: round(v, 6) for k, v in self.semantic_axis_scores.items()
                 },
                 "semantic_concentration": round(self.semantic_concentration, 6),
-                "attractor_state": {
-                    k: round(v, 6) for k, v in self.attractor_state.items()
+                "structural_axis_scores": {
+                    k: round(v, 6) for k, v in self.structural_axis_scores.items()
                 },
-                "attractor_sigma_diag": {
-                    k: round(v, 6) for k, v in self.attractor_sigma_diag.items()
+                "structural_concentration": round(self.structural_concentration, 6),
+                "absolute_axis_scores": {
+                    k: round(v, 6) for k, v in self.absolute_axis_scores.items()
                 },
-                "coherence": round(self.coherence, 6),
+                "absolute_concentration": round(self.absolute_concentration, 6),
+                "feasible_state": {
+                    k: round(v, 6) for k, v in feasible_state.items()
+                },
+                "feasible_sigma_diag": {
+                    k: round(v, 6) for k, v in feasible_sigma_diag.items()
+                },
+                "ideal_state": {
+                    k: round(v, 6) for k, v in ideal_state.items()
+                },
+                "ideal_sigma_diag": {
+                    k: round(v, 6) for k, v in ideal_sigma_diag.items()
+                },
+                "local_coherence": round(local_coherence, 6),
+                "absolute_coherence": round(absolute_coherence, 6),
                 "coherence_uncertainty": round(self.coherence_uncertainty, 6),
                 "projection_version": self.circle_projection_version,
+                "feasible_reference": {
+                    "z": [round(self.z_star[0], 6), round(self.z_star[1], 6)],
+                    "state": {
+                        k: round(v, 6) for k, v in feasible_state.items()
+                    },
+                    "sigma_diag": {
+                        k: round(v, 6) for k, v in feasible_sigma_diag.items()
+                    },
+                },
+                "supercoherence": {
+                    "z": [round(z_dagger[0], 6), round(z_dagger[1], 6)],
+                    "state": {
+                        k: round(v, 6) for k, v in supercoherence_state.items()
+                    },
+                    "sigma_diag": {
+                        k: round(v, 6) for k, v in supercoherence_sigma_diag.items()
+                    },
+                },
+                "rejuvenation_geometry": {
+                    "acute_distance": round(self.r, 6),
+                    "structural_distance": round(r_struct, 6),
+                    "absolute_distance": round(r_abs, 6),
+                    "local_coherence": round(local_coherence, 6),
+                    "absolute_coherence": round(absolute_coherence, 6),
+                    "feasible_reference": {
+                        "z": [round(self.z_star[0], 6), round(self.z_star[1], 6)],
+                        "state": {
+                            k: round(v, 6) for k, v in feasible_state.items()
+                        },
+                        "sigma_diag": {
+                            k: round(v, 6) for k, v in feasible_sigma_diag.items()
+                        },
+                    },
+                    "supercoherence": {
+                        "z": [round(z_dagger[0], 6), round(z_dagger[1], 6)],
+                        "state": {
+                            k: round(v, 6) for k, v in supercoherence_state.items()
+                        },
+                        "sigma_diag": {
+                            k: round(v, 6) for k, v in supercoherence_sigma_diag.items()
+                        },
+                    },
+                },
             },
 
             # Coverage quality
@@ -262,9 +353,15 @@ class QuestionsFoldResult:
                 mode: {
                     "z": [round(mf.z[0], 6), round(mf.z[1], 6)],
                     "z_star": [round(mf.z_star[0], 6), round(mf.z_star[1], 6)],
+                    "z_dagger": [round((mf.z_dagger or (0.0, 0.0))[0], 6), round((mf.z_dagger or (0.0, 0.0))[1], 6)],
                     "r": round(mf.r, 6),
+                    "structural_distance": round(float(mf.r_struct if mf.r_struct is not None else 0.0), 6),
+                    "absolute_distance": round(float(mf.r_abs if mf.r_abs is not None else mf.r), 6),
                     "theta": round(mf.theta, 6),
-                    "coherence": round(mf.coherence, 6),
+                    "velocity": round(mf.velocity, 6),
+                    "acceleration": round(mf.acceleration, 6),
+                    "local_coherence": round(float(mf.local_coherence if mf.local_coherence is not None else mf.coherence), 6),
+                    "absolute_coherence": round(float(mf.absolute_coherence if mf.absolute_coherence is not None else mf.coherence), 6),
                     "uncertainty": round(mf.uncertainty, 6),
                     "coverage_ratio": round(mf.coverage_ratio, 4),
                     "dimensions": list(mf.dimensions),
@@ -292,11 +389,18 @@ class QuestionsFoldResult:
             s = max(0.001, sigma)
             precision[dim] = round(1.0 / (s * s), 6)
 
+        local_coherence = float(self.local_coherence if self.local_coherence is not None else self.coherence)
+        absolute_coherence = float(self.absolute_coherence if self.absolute_coherence is not None else self.coherence)
+        r_struct = float(self.r_struct if self.r_struct is not None else 0.0)
+        r_abs = float(self.r_abs if self.r_abs is not None else self.r)
         return {
             "modality": "questionnaire",
             "mu": {k: round(v, 6) for k, v in self.mu.items()},
             "precision": precision,
-            "coherence": round(self.coherence, 6),
+            "local_coherence": round(local_coherence, 6),
+            "absolute_coherence": round(absolute_coherence, 6),
+            "structural_distance": round(r_struct, 6),
+            "absolute_distance": round(r_abs, 6),
             "coverage_ratio": round(self.coverage_ratio, 4),
             "day": self.day,
         }
@@ -359,7 +463,9 @@ def compute_questions_fold(
     )
 
     # 4. Coherence score: prefer canonical circle score when available
-    coherence = float(circle.get("coherence", _coherence_from_radius(circle["r"])))
+    coherence = float(circle.get("local_coherence", circle.get("coherence", _coherence_from_radius(circle["r"]))))
+    local_coherence = float(circle.get("local_coherence", coherence))
+    absolute_coherence = float(circle.get("absolute_coherence", local_coherence))
 
     # 5. Coherence uncertainty: propagated from state uncertainty
     coherence_unc = _coherence_uncertainty(x_uncertainty, circle)
@@ -374,6 +480,8 @@ def compute_questions_fold(
     minifolds = {}
     for mode in MINIFOLD_MODES:
         mf = minifold_raw[mode]
+        z_dagger = mf.get("z_dagger")
+        local_mode_coherence = float(mf.get("local_coherence", mf.get("coherence", _coherence_from_radius(mf["r"]))))
         minifolds[mode] = MiniFoldCircle(
             mode=mode,
             z=(mf["z"][0], mf["z"][1]),
@@ -382,10 +490,15 @@ def compute_questions_fold(
             theta=mf["theta"],
             velocity=mf["velocity"],
             acceleration=mf["acceleration"],
-            coherence=mf["coherence"],
+            coherence=local_mode_coherence,
             uncertainty=mf["uncertainty"],
             coverage_ratio=mf["coverage_ratio"],
             dimensions=tuple(mf["dimensions"]),
+            z_dagger=(z_dagger[0], z_dagger[1]) if isinstance(z_dagger, list) and len(z_dagger) == 2 else None,
+            r_struct=float(mf.get("structural_distance", mf.get("r_struct", 0.0))),
+            r_abs=float(mf.get("absolute_distance", mf.get("r_abs", mf["r"]))),
+            local_coherence=local_mode_coherence,
+            absolute_coherence=float(mf.get("absolute_coherence", mf.get("coherence", local_mode_coherence))),
         )
 
     # 9. Dominant decoherence mode
@@ -401,8 +514,8 @@ def compute_questions_fold(
         theta_defined=bool(circle.get("theta_defined", True)),
         semantic_axis_scores=dict(circle.get("semantic_axis_scores", {})),
         semantic_concentration=float(circle.get("semantic_concentration", 0.0)),
-        attractor_state=dict(circle.get("attractor_state", {})),
-        attractor_sigma_diag=dict(circle.get("attractor_sigma_diag", {})),
+        attractor_state=dict(circle.get("feasible_state", circle.get("attractor_state", {}))),
+        attractor_sigma_diag=dict(circle.get("feasible_sigma_diag", circle.get("attractor_sigma_diag", {}))),
         coherence=coherence,
         coherence_uncertainty=coherence_unc,
         coverage=cov_info["per_dimension"],
@@ -412,6 +525,21 @@ def compute_questions_fold(
         minifolds=minifolds,
         dominant_mode=dominant,
         day=today.isoformat(),
+        z_dagger=(circle["z_dagger"][0], circle["z_dagger"][1]) if isinstance(circle.get("z_dagger"), list) and len(circle.get("z_dagger", [])) == 2 else None,
+        r_struct=float(circle.get("structural_distance", circle.get("r_struct", 0.0))),
+        r_abs=float(circle.get("absolute_distance", circle.get("r_abs", circle["r"]))),
+        structural_axis_scores=dict(circle.get("structural_axis_scores", {})),
+        structural_concentration=float(circle.get("structural_concentration", 0.0)),
+        absolute_axis_scores=dict(circle.get("absolute_axis_scores", {})),
+        absolute_concentration=float(circle.get("absolute_concentration", 0.0)),
+        feasible_state=dict(circle.get("feasible_state", circle.get("attractor_state", {}))),
+        feasible_sigma_diag=dict(circle.get("feasible_sigma_diag", circle.get("attractor_sigma_diag", {}))),
+        ideal_state=dict(circle.get("ideal_state", circle.get("supercoherence_state", {}))),
+        ideal_sigma_diag=dict(circle.get("ideal_sigma_diag", circle.get("supercoherence_sigma_diag", {}))),
+        supercoherence_state=dict(circle.get("supercoherence_state", circle.get("ideal_state", (circle.get("supercoherence") or {}).get("state", {})))),
+        supercoherence_sigma_diag=dict(circle.get("supercoherence_sigma_diag", circle.get("ideal_sigma_diag", (circle.get("supercoherence") or {}).get("sigma_diag", {})))),
+        local_coherence=local_coherence,
+        absolute_coherence=absolute_coherence,
     )
 
 
@@ -631,14 +759,31 @@ def _extract_previous_circle(
     # and raw circle snapshot dicts
     circle = previous_fold.get("circle")
     if circle and isinstance(circle, dict):
+        geometry = circle.get("rejuvenation_geometry") if isinstance(circle.get("rejuvenation_geometry"), dict) else {}
+        feasible_reference = circle.get("feasible_reference") if isinstance(circle.get("feasible_reference"), dict) else {}
+        if not feasible_reference and isinstance(geometry.get("feasible_reference"), dict):
+            feasible_reference = dict(geometry.get("feasible_reference") or {})
+        supercoherence = circle.get("supercoherence") if isinstance(circle.get("supercoherence"), dict) else {}
+        if not supercoherence and isinstance(geometry.get("supercoherence"), dict):
+            supercoherence = dict(geometry.get("supercoherence") or {})
         return {
             "z": circle.get("z"),
             "z_star": circle.get("z_star"),
+            "z_dagger": circle.get("z_dagger"),
             "r": float(circle.get("r", 0.0)),
+            "r_struct": float(circle.get("structural_distance", circle.get("r_struct", geometry.get("structural_distance", 0.0)))),
+            "r_abs": float(circle.get("absolute_distance", circle.get("r_abs", geometry.get("absolute_distance", circle.get("r", 0.0))))),
             "velocity": float(circle.get("velocity", 0.0)),
+            "acceleration": float(circle.get("acceleration", 0.0)),
             "date": previous_fold.get("day"),
-            "attractor_state": circle.get("attractor_state"),
-            "attractor_sigma_diag": circle.get("attractor_sigma_diag"),
+            "attractor_state": circle.get("attractor_state") or circle.get("feasible_state") or feasible_reference.get("state"),
+            "attractor_sigma_diag": circle.get("attractor_sigma_diag") or circle.get("feasible_sigma_diag") or feasible_reference.get("sigma_diag"),
+            "feasible_state": circle.get("feasible_state") or feasible_reference.get("state"),
+            "feasible_sigma_diag": circle.get("feasible_sigma_diag") or feasible_reference.get("sigma_diag"),
+            "ideal_state": circle.get("ideal_state") or supercoherence.get("state"),
+            "ideal_sigma_diag": circle.get("ideal_sigma_diag") or supercoherence.get("sigma_diag"),
+            "supercoherence_state": circle.get("supercoherence_state") or circle.get("ideal_state") or supercoherence.get("state"),
+            "supercoherence_sigma_diag": circle.get("supercoherence_sigma_diag") or circle.get("ideal_sigma_diag") or supercoherence.get("sigma_diag"),
         }
     # Raw circle snapshot format
     if "z" in previous_fold and "z_star" in previous_fold:
@@ -660,9 +805,13 @@ def _extract_previous_minifolds(
                 result[mode] = {
                     "z": data["z"],
                     "z_star": data["z_star"],
+                    "z_dagger": data.get("z_dagger"),
                     "r": float(data.get("r", 0.0)),
+                    "r_struct": float(data.get("structural_distance", data.get("r_struct", 0.0))),
+                    "r_abs": float(data.get("absolute_distance", data.get("r_abs", data.get("r", 0.0)))),
                     "theta": float(data.get("theta", 0.0)),
                     "velocity": float(data.get("velocity", 0.0)),
+                    "acceleration": float(data.get("acceleration", 0.0)),
                     "date": previous_fold.get("day"),
                 }
         return result if result else None

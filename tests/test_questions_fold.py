@@ -695,17 +695,29 @@ class TestIdentityMaskSerialisation:
         circle = mask["circle"]
         assert "z" in circle and len(circle["z"]) == 2
         assert "z_star" in circle and len(circle["z_star"]) == 2
+        assert "z_dagger" in circle and len(circle["z_dagger"]) == 2
         assert "r" in circle
+        assert "structural_distance" in circle["rejuvenation_geometry"]
+        assert "absolute_distance" in circle["rejuvenation_geometry"]
         assert "theta" in circle
         assert "theta_defined" in circle
         assert "semantic_axis_scores" in circle
         assert "semantic_concentration" in circle
-        assert "attractor_state" in circle
-        assert "attractor_sigma_diag" in circle
-        assert "coherence" in circle
+        assert "feasible_reference" in circle["rejuvenation_geometry"]
+        assert "supercoherence" in circle["rejuvenation_geometry"]
+        assert "rejuvenation_geometry" in circle
+        assert circle["rejuvenation_geometry"]["feasible_reference"]["state"] == fold.feasible_state
+        assert circle["rejuvenation_geometry"]["supercoherence"]["state"] == fold.supercoherence_state
+        assert "local_coherence" in circle
+        assert "absolute_coherence" in circle
+        assert "coherence" not in circle
+        assert "r_struct" not in circle
+        assert "r_abs" not in circle
+        assert "attractor_state" not in circle
+        assert "supercoherence_state" not in circle
         assert "coherence_uncertainty" in circle
         assert "projection_version" in circle
-        assert 0.0 <= circle["coherence"] <= 1.0
+        assert 0.0 <= circle["local_coherence"] <= 1.0
 
     def test_coverage_fields(self, fold: QuestionsFoldResult) -> None:
         mask = fold.to_identity_mask()
@@ -733,9 +745,13 @@ class TestIdentityMaskSerialisation:
         assert set(mask["minifolds"].keys()) == set(MINIFOLD_MODES)
         for mode, mf_data in mask["minifolds"].items():
             assert "z" in mf_data and len(mf_data["z"]) == 2
+            assert "z_dagger" in mf_data and len(mf_data["z_dagger"]) == 2
             assert "r" in mf_data
             assert "theta" in mf_data
-            assert "coherence" in mf_data
+            assert "local_coherence" in mf_data
+            assert "coherence" not in mf_data
+            assert "structural_distance" in mf_data
+            assert "absolute_distance" in mf_data
             assert "dimensions" in mf_data
 
     def test_json_serialisable(self, fold: QuestionsFoldResult) -> None:
@@ -774,7 +790,7 @@ class TestPoEFusionPayload:
         assert poe["modality"] == "questionnaire"
         assert "mu" in poe
         assert "precision" in poe
-        assert "coherence" in poe
+        assert "local_coherence" in poe
         assert "coverage_ratio" in poe
         assert "day" in poe
 
@@ -801,7 +817,7 @@ class TestPoEFusionPayload:
 
     def test_poe_coherence_matches_fold(self, fold: QuestionsFoldResult) -> None:
         poe = fold.for_anifold_fusion()
-        assert poe["coherence"] == pytest.approx(fold.coherence, abs=1e-5)
+        assert poe["local_coherence"] == pytest.approx(fold.local_coherence, abs=1e-5)
 
     def test_poe_json_serialisable(self, fold: QuestionsFoldResult) -> None:
         poe = fold.for_anifold_fusion()
@@ -1061,7 +1077,7 @@ class TestRoundTripConsistency:
         assert len(roundtrip["sigma_diag"]) == len(STATE_DIMENSIONS)
         assert len(roundtrip["minifolds"]) == len(MINIFOLD_MODES)
         assert roundtrip["circle"]["r"] == pytest.approx(fold.r, abs=1e-5)
-        assert roundtrip["circle"]["coherence"] == pytest.approx(fold.coherence, abs=1e-5)
+        assert roundtrip["circle"]["local_coherence"] == pytest.approx(fold.local_coherence, abs=1e-5)
 
     def test_poe_roundtrip(self) -> None:
         fold = compute_questions_fold(

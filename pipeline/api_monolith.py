@@ -1020,7 +1020,7 @@ def _extract_poe_from_fold(fold: Dict[str, Any]) -> Dict[str, Any]:
         "modality": "questionnaire",
         "mu": mu,
         "precision": precision,
-        "coherence": circle.get("coherence", 0.0),
+        "local_coherence": circle.get("local_coherence", circle.get("coherence", 0.0)),
         "coverage_ratio": coverage.get("coverage_ratio", 0.0),
         "day": fold.get("day", ""),
     }
