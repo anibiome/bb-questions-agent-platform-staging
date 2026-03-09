@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os as _os
 import time
 from contextlib import asynccontextmanager
 from datetime import date, timedelta
@@ -54,7 +55,6 @@ from questions_agent_platform.prod.service_pg import (
     compute_user_scale_progress,
     evaluate_policy_live_rollback_guard_pg,
     ensure_registry_active,
-    format_score_for_user,
     get_cardio_risk_history,
     get_coherence_history,
     get_experiment,
@@ -185,7 +185,6 @@ app = FastAPI(title="Questions Agent (Prod)", version="1.0", lifespan=_lifespan)
 app.add_middleware(ErrorMiddleware)
 
 # --- CORS ---
-import os as _os
 _cors_origins = [
     o.strip()
     for o in _os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")

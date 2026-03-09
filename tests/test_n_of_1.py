@@ -12,12 +12,9 @@ Reference values are derived from:
 
 import math
 import unittest
-from typing import Optional
 
 from questions_agent_platform.pipeline.n_of_1 import (
     PersonalCalibration,
-    ReliableChangeResult,
-    MeasurementSufficiency,
     initial_calibration,
     update_calibration,
     assess_reliable_change,
@@ -33,8 +30,6 @@ from questions_agent_platform.pipeline.n_of_1 import (
     CALIBRATED_MIN_OBS,
     MAX_TRAJECTORY_LENGTH,
     MIN_OBS_FOR_WITHIN_SD,
-    DEFAULT_PROCESS_NOISE_SD,
-    DEFAULT_MID,
 )
 
 

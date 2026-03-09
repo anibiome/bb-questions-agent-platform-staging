@@ -16,8 +16,6 @@ from typing import List
 
 from questions_agent_platform.pipeline.coherence import (
     ItemResponse,
-    CoherenceSignal,
-    CoherenceAssessment,
     assess_coherence,
     coherence_to_dict,
     coherence_from_dict,
@@ -31,13 +29,9 @@ from questions_agent_platform.pipeline.coherence import (
     _ramp_severity_inverse,
     COHERENCE_VERSION,
     FAST_RT_MS,
-    SPEED_INDEX_THRESHOLD,
-    LONGSTRING_THRESHOLD,
-    LONGSTRING_RATIO_THRESHOLD,
     RT_CV_THRESHOLD,
     INTRA_SCALE_VAR_THRESHOLD,
     FATIGUE_SLOPE_THRESHOLD,
-    SKIP_RATE_THRESHOLD,
     SUSPECT_MIN_FLAGS,
     INVALID_MIN_FLAGS,
     SIGNAL_WEIGHTS,

@@ -2,7 +2,18 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from .service import (
+        DailySession,
+        get_or_create_daily_session,
+        get_scale_history,
+        list_users,
+        submit_answers,
+        submit_observations,
+        take_next_extra_batch,
+    )
 
 __all__ = [
     "DailySession",

@@ -2,7 +2,17 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from .service_pg import (
+        activate_registry_version,
+        ensure_registry_active,
+        ensure_user_profile,
+        get_user_profile,
+        upload_registry_bundle,
+        upsert_user_profile,
+    )
 
 __all__ = [
     "activate_registry_version",

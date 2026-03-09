@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict, is_dataclass
-from datetime import date
 from typing import Any, Dict, Optional, Sequence
 
 from questions_agent_platform.policy.types import CandidateSet, PolicyContext, PolicyDecision

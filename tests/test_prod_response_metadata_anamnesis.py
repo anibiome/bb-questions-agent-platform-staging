@@ -13,14 +13,11 @@ imports rather than full service-level integration which requires the DB).
 """
 
 import json
-import math
 import unittest
-from datetime import date, timedelta
-from typing import Any, Dict, List, Optional
+from datetime import date
 
 from questions_agent_platform.pipeline.response_metadata import (
     ResponseMetadata,
-    UncertaintyModifier,
     SessionUncertaintyProfile,
     compute_uncertainty_modifier,
     compute_session_uncertainty_profile,
@@ -32,9 +29,7 @@ from questions_agent_platform.pipeline.anamnesis import (
     create_anamnesis_episode,
     evaluate_drift_triggers,
     evaluate_episode_resolution,
-    run_anamnesis_check,
 )
-from questions_agent_platform.pipeline.baseline import BaselineState
 
 
 # ---------------------------------------------------------------------------
@@ -60,7 +55,7 @@ class TestResponseMetadataSchemas(unittest.TestCase):
 
     def test_submit_answers_out_with_engagement(self):
         """SubmitAnswersOut should include optional session_engagement."""
-        from questions_agent_platform.prod.schemas import SubmitAnswersOut, SessionUncertaintyProfileOut
+        from questions_agent_platform.prod.schemas import SubmitAnswersOut
         out = SubmitAnswersOut(
             inserted_answer_events=3,
             new_scale_scores=[],
@@ -614,10 +609,6 @@ class TestImportIntegrity(unittest.TestCase):
         from questions_agent_platform.prod.schemas import (
             AnamnesisEpisodeOut,
             AnamnesisEpisodeListOut,
-            SessionUncertaintyProfileOut,
-            ResponseMetadataOut,
-            ConcordanceReportOut,
-            ConcordanceSummaryOut,
         )
         self.assertTrue(AnamnesisEpisodeOut)
         self.assertTrue(AnamnesisEpisodeListOut)

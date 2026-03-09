@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 import html
-from dataclasses import dataclass
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Optional, Sequence
 
 
 def render_layout(title: str, body_html: str) -> str:

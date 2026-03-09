@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Consolidated offline scientific evaluation (full replay + ablations + calibration)."""
+
+from __future__ import annotations
 
 import argparse
 import json

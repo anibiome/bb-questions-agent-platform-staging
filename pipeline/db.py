@@ -1,9 +1,7 @@
-import json
 import sqlite3
 from contextlib import contextmanager
-from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, Generator, Iterable, List, Optional, Tuple
+from typing import Generator, Optional
 
 
 def init_db(database_path: str) -> None:

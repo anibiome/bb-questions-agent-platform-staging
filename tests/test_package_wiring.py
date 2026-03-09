@@ -19,25 +19,17 @@ Test coverage:
 """
 from __future__ import annotations
 
-import json
 import sqlite3
 import uuid
 from datetime import date, timedelta
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import pytest
 
 from questions_agent_platform.pipeline.config import QuestionsAgentConfig
-from questions_agent_platform.pipeline.baseline import BaselineState
 from questions_agent_platform.pipeline.measurement_packages import (
     ALL_PACKAGES,
-    AXIS_PACKAGES,
-    CORE_SCREENER,
-    DEEP_PACKAGES,
     DecoherenceMode,
-    MeasurementPackage,
-    PackageTier,
-    ProgressivePlan,
     evaluate_package_completion,
     get_package_scale_ids,
     get_package_scale_priorities,

@@ -20,20 +20,17 @@ Personas:
     Should unlock all scales, all confidence=high.
 """
 
-import json
-import math
 import tempfile
 import unittest
-from collections import Counter, defaultdict
+from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, Set
 
 from questions_agent_platform.pipeline.config import QuestionsAgentConfig
 from questions_agent_platform.pipeline.db import connect, init_db
 from questions_agent_platform.pipeline.demo import seed_demo_registry
 from questions_agent_platform.pipeline.registry import load_registry
-from questions_agent_platform.pipeline.scoring import ScaleScoreResult, confidence_tier
 from questions_agent_platform.pipeline.service import (
     compute_user_scale_progress,
     ensure_registry_active,
@@ -208,10 +205,6 @@ class TestFullSystemStress(unittest.TestCase):
             self.assertEqual(stats["sessions"], self.DAYS)
 
             # 2. Should have drift follow-ups AFTER the spike (not before)
-            late_followups = conn.execute(
-                "SELECT COUNT(*) FROM follow_up_queue "
-                "WHERE user_id='crisis-carla' AND created_at >= '2026-01-21'"
-            ).fetchone()[0]
             # Drift may or may not fire depending on Bonferroni threshold,
             # but the system must NOT crash during the transition
             # (This is the key test — the transition itself is safe)
@@ -276,9 +269,9 @@ class TestFullSystemStress(unittest.TestCase):
             # It's OK to have no scores if everything was declined
             # But if scores exist, confidence distribution should reflect limited data
             if score_rows:
-                tiers = Counter(row["confidence_tier"] for row in score_rows)
-                # At least some non-high confidence expected with heavy declining
-                # (not a hard requirement — depends on which items declined)
+                # At least some non-high confidence may be expected with heavy declining,
+                # but this test only verifies the pipeline remains stable under depletion.
+                self.assertGreater(len(score_rows), 0)
 
     def test_perfect_pat(self):
         """Answers everything optimally for 60 days. Maximum unlocks, all high confidence."""

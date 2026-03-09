@@ -4,12 +4,11 @@ import hashlib
 import json
 import math
 import sqlite3
-from dataclasses import dataclass
-from datetime import date, timedelta
+from datetime import date
 from typing import Any, Dict, List, Optional, Tuple
 
-from questions_agent_platform.pipeline.baseline import BaselineState, baseline_std
-from questions_agent_platform.pipeline.time_utils import date_to_start_iso, now_iso, parse_date
+from questions_agent_platform.pipeline.baseline import BaselineState
+from questions_agent_platform.pipeline.time_utils import date_to_start_iso, now_iso
 from questions_agent_platform.contracts import (
     CONTRACT_QUESTIONS_TO_FUSION_EVIDENCE,
     build_contract_header,

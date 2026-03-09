@@ -5,16 +5,13 @@ benchmark score for comparison with AniFold latent-space findings.
 """
 
 import unittest
-from typing import Dict
 
 from questions_agent_platform.pipeline.scoring import ScaleScoreResult
 from questions_agent_platform.pipeline.cardio_risk_index import (
-    CardioRiskIndex,
     compute_cardio_risk_index,
     cardio_risk_to_dict,
     _composite_tier,
     _coverage_confidence,
-    _INSTRUMENT_WEIGHTS,
     _INVERTED_INSTRUMENTS,
     ALL_CARDIO_METHODS,
     CARDIO_RISK_INDEX_VERSION,

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import logging
-import math as _math
 from dataclasses import dataclass
-from datetime import date, timedelta
+from datetime import date
 from statistics import NormalDist as _NormalDist
-from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 from questions_agent_platform.pipeline.baseline import BaselineState, baseline_std
 from questions_agent_platform.pipeline.config import QuestionsAgentConfig
@@ -15,7 +14,7 @@ from questions_agent_platform.pipeline.irt import (
     default_item_params,
     grm_item_information,
 )
-from questions_agent_platform.pipeline.registry import Item, Registry, Scale
+from questions_agent_platform.pipeline.registry import Item, Registry
 
 logger = logging.getLogger("questions_agent.selection")
 

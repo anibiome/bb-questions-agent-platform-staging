@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Sequence
+from typing import Any, Dict
 
 from questions_agent_platform.policy.types import CandidateItem, CandidateSet, PolicyContext, PolicyDecision
 

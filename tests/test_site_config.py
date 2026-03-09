@@ -114,7 +114,7 @@ class TestRegulatoryConstraints(unittest.TestCase):
             concordance_mode=False,  # VIOLATION!
         )
         registry = SiteConfigRegistry()
-        with self.assertRaises(ConfigValidationError) as ctx:
+        with self.assertRaises(ConfigValidationError):
             registry.register(bad_cfg)
 
 

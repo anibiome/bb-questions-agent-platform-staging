@@ -13,25 +13,19 @@ Covers scenarios that the 30-day simulation can't reliably trigger:
 9. Extra batches draw from remaining pool (no duplicates)
 """
 
-import tempfile
 import unittest
 from datetime import date, timedelta
-from pathlib import Path
-from typing import Dict, Set
 
 from questions_agent_platform.pipeline.config import QuestionsAgentConfig
 from questions_agent_platform.pipeline.baseline import BaselineState
-from questions_agent_platform.pipeline.demo import seed_demo_registry
 from questions_agent_platform.pipeline.registry import (
     Item,
     Questionnaire,
     Registry,
     Scale,
     ScaleItem,
-    load_registry,
 )
 from questions_agent_platform.pipeline.selection import (
-    build_candidate_set,
     build_selection_plan,
 )
 

@@ -18,7 +18,6 @@ Tests cover:
 from __future__ import annotations
 
 import json
-import math
 import os
 
 import numpy as np
@@ -469,8 +468,6 @@ class TestMultiplexing:
         report = analyzer.analyze(semantic=False, correlation=False, irt_discrimination=False)
 
         shared_eff = next(e for e in report.items if e.item_id == "shared1")
-        unique_eff = next(e for e in report.items if e.item_id == "ax1")
-
         # Shared items participate in more scales → higher tag overlap
         assert shared_eff.tag_overlap_score >= 0.0
 

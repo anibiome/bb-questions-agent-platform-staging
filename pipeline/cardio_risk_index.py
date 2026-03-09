@@ -23,9 +23,8 @@ representation from the Coherence Circle metabolic MiniFold.
 
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from questions_agent_platform.pipeline.scoring import (
     CARDIO_METHOD_FINDRISC,

@@ -32,7 +32,7 @@ import os
 import random
 from collections import deque
 from dataclasses import asdict, dataclass, field
-from typing import Any, Deque, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Deque, Dict, List, Optional, Tuple
 
 try:
     import torch
@@ -286,7 +286,6 @@ class DuelingDQN(nn.Module):
                 available_mask = available_mask.unsqueeze(0)
             squeeze = True
 
-        batch_size = state.shape[0]
         n_items = item_features.shape[1]
 
         # Encode state
@@ -975,7 +974,7 @@ class AdaptiveItemSelector:
         best_idx = max(blended, key=lambda k: blended[k])
 
         # Determine selection source label
-        if w_irl_is_one := (w_irt >= 0.99):
+        if w_irt >= 0.99:
             source = "irt"
         elif w_rl >= 0.99:
             source = "rl"

@@ -3,9 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import sqlite3
-from dataclasses import dataclass
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from questions_agent_platform.policy.bandit import PolicyParams
@@ -430,7 +428,6 @@ def _phi_sum(
 def _ridge_fit(X: List[List[float]], y: List[float], *, lambda_reg: float) -> List[float]:
     if not X:
         return []
-    n = len(X)
     d = len(X[0])
     A = [[0.0] * d for _ in range(d)]
     b = [0.0] * d

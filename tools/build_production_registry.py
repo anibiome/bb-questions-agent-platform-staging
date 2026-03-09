@@ -18,7 +18,7 @@ import os
 import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Set, Tuple
 
 import openpyxl  # type: ignore
 
@@ -640,12 +640,8 @@ def parse_items(ws: Any) -> Tuple[List[dict], Dict[str, List[dict]]]:
         qid = ws.cell(r, 1).value
         text = ws.cell(r, 2).value
         source = ws.cell(r, 3).value
-        main_cat = str(ws.cell(r, 4).value or "")
-        cat = str(ws.cell(r, 5).value or "")
         sub_cat = str(ws.cell(r, 6).value or "")
-        gender = str(ws.cell(r, 7).value or "male , female").strip()
         reversed_flag = str(ws.cell(r, 8).value or "").strip().lower() == "true"
-        priority = ws.cell(r, 10).value
 
         if not qid or not text or not source:
             continue
@@ -934,7 +930,7 @@ def main() -> None:
         json.dump(mux, f, indent=2, ensure_ascii=False)
 
     # 9. Summary stats
-    print(f"\n=== v3 PRODUCTION REGISTRY ===")
+    print("\n=== v3 PRODUCTION REGISTRY ===")
     print(f"  Items:          {len(items_json)}")
     print(f"  Scales:         {len(scales_json)}")
     print(f"  Questionnaires: {len(questionnaires)}")
@@ -943,7 +939,7 @@ def main() -> None:
     print(f"  Written to:     {OUT_DIR}")
 
     # 10. Instrument audit summary
-    print(f"\n=== AUDIT FLAGS ===")
+    print("\n=== AUDIT FLAGS ===")
     for sc in scales_json:
         tags = sc.get("tags", [])
         audit_tags = [t for t in tags if str(t).startswith("audit:")]

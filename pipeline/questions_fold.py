@@ -69,18 +69,15 @@ Usage::
 """
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
 from datetime import date
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Dict, Optional, Sequence, Tuple
 
 from questions_agent_platform.pipeline.state_snapshots import (
-    CIRCLE_ANCHOR_VERSION,
     CIRCLE_PROJECTION_VERSION,
     MINIFOLD_MODES,
     MINIFOLD_VERSION,
     STATE_DIMENSIONS,
-    STATE_MODEL_VERSION,
     compute_circle_snapshot,
     compute_minifold_circles,
     dominant_decoherence_mode,

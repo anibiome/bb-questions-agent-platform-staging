@@ -11,7 +11,6 @@ Validates:
 """
 
 import unittest
-import math
 import random
 from typing import List
 
@@ -33,7 +32,9 @@ def _make_pairs(
 ) -> List[PairedScore]:
     """Helper to create paired scores."""
     if tier_func is None:
-        tier_func = lambda x: "low" if x < 5 else ("moderate" if x < 10 else "high")
+        def tier_func(x: float) -> str:
+            return "low" if x < 5 else ("moderate" if x < 10 else "high")
+
     return [
         PairedScore(
             participant_id=f"p{i}",
@@ -153,8 +154,6 @@ class TestKappa(unittest.TestCase):
 
     def test_perfect_agreement(self):
         """Identical tiers should give kappa = 1.0."""
-        tiers = ["low", "moderate", "high", "low", "moderate", "high",
-                 "low", "low", "high", "moderate"]
         scores = [2.0, 7.0, 12.0, 3.0, 8.0, 15.0, 1.0, 4.0, 18.0, 6.0]
         pairs = _make_pairs(scores, scores)
         result = compute_kappa(pairs)

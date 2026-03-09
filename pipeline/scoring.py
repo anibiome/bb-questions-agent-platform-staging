@@ -1,9 +1,8 @@
 import logging
 from dataclasses import dataclass
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Callable, Dict, Optional, Tuple
 
 from questions_agent_platform.pipeline.irt import (
-    GRMItemParams,
     IRTScoreResult,
     categories_for_response_type,
     default_scale_params,

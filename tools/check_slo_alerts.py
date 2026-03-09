@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from datetime import date
 
 from questions_agent_platform.prod.db import make_engine, make_session_factory, session_scope

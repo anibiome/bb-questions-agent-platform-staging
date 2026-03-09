@@ -18,10 +18,9 @@ Scenario 3: Mid-stream registry swap — 10 days on v1, then switch to v2.
 
 import tempfile
 import unittest
-from collections import Counter, defaultdict
 from datetime import date, timedelta
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Set
 
 from questions_agent_platform.pipeline.config import QuestionsAgentConfig
 from questions_agent_platform.pipeline.db import connect, init_db
@@ -157,8 +156,6 @@ class TestScenarioAggressiveDecliner(unittest.TestCase):
             with connect(db_path) as conn:
                 reg_v = ensure_registry_active(conn, reg_root)
                 registry = load_registry(reg_root, reg_v)
-                total_items = len(registry.items)
-
                 for day_idx in range(30):
                     day = date(2026, 1, 1) + timedelta(days=day_idx)
 

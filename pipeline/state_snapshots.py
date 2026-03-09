@@ -3,11 +3,10 @@ from __future__ import annotations
 import math
 from datetime import date
 from statistics import mean
-from typing import Any, Dict, Iterable, List, Optional, Sequence, Set, Tuple
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
 from questions_agent_platform.pipeline.registry import Registry
 from questions_agent_platform.pipeline.trajectory_metrics import (
-    CANONICAL_AXIS_LOADINGS,
     canonical_coherence_score,
     coherence_uncertainty_from_state,
     decompose_rejuvenation_geometry,

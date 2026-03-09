@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-import os
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
-from typing import Iterable, List, Sequence, Tuple
+from typing import List, Sequence, Tuple
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -47,11 +46,9 @@ def render_tech_specs_pdf() -> List[Image.Image]:
     # Letter @ 150 dpi -> 1275 x 1650
     page_w, page_h = 1275, 1650
     margin = 96
-    gutter = 16
     content_w = page_w - 2 * margin
 
     fonts = load_fonts()
-    title_font = fonts.title
     h1_font = fonts.h1
     h2_font = fonts.h2
     body_font = fonts.body
@@ -69,7 +66,7 @@ def render_tech_specs_pdf() -> List[Image.Image]:
         w=content_w,
         title="Questions Agent Platform",
         subtitle="Adaptive daily validated questionnaires -> scale evidence -> structured fusion evidence",
-        meta=[f"Tech Specs v1 (Prod + Reference)", f"Date: {today}"],
+        meta=["Tech Specs v1 (Prod + Reference)", f"Date: {today}"],
         fonts=fonts,
     )
     draw_callout(

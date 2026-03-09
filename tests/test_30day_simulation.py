@@ -14,13 +14,11 @@ Validates ALL core invariants from the spec over a full simulated onboarding + p
 10. Sessions marked abandoned are not re-prompted
 """
 
-import json
 import tempfile
 import unittest
-from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Set
 
 from questions_agent_platform.pipeline.config import QuestionsAgentConfig
 from questions_agent_platform.pipeline.db import connect, init_db
@@ -28,11 +26,9 @@ from questions_agent_platform.pipeline.demo import seed_demo_registry
 from questions_agent_platform.pipeline.demo_signals import demo_value_for_item
 from questions_agent_platform.pipeline.registry import load_registry
 from questions_agent_platform.pipeline.service import (
-    compute_user_scale_progress,
     ensure_registry_active,
     get_or_create_daily_session,
     submit_answers,
-    take_next_extra_batch,
 )
 
 
@@ -100,7 +96,6 @@ class Test30DaySimulation(unittest.TestCase):
                         )
 
                 # --- INVARIANT 3: No repeat violations ---
-                cooldown = self.cfg.item_repeat_cooldown_days
                 for item_id in core_ids:
                     if item_id in item_last_served_day:
                         gap = day_idx - item_last_served_day[item_id]
@@ -236,7 +231,7 @@ class Test30DaySimulation(unittest.TestCase):
 
             # Print summary for manual inspection
             print(f"\n{'='*60}")
-            print(f"30-DAY SIMULATION SUMMARY")
+            print("30-DAY SIMULATION SUMMARY")
             print(f"{'='*60}")
             print(f"Days simulated:        {self.DAYS}")
             print(f"Total questions:       {total_questions_served}")
@@ -261,7 +256,7 @@ class Test30DayPermanentDecline(unittest.TestCase):
 
             with connect(db_path) as conn:
                 reg_v = ensure_registry_active(conn, registry_root)
-                registry = load_registry(registry_root, reg_v)
+                load_registry(registry_root, reg_v)
                 start_day = date(2026, 1, 1)
 
                 # First day: get items and decline first 2

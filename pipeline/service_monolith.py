@@ -4,18 +4,14 @@ import json
 import logging
 import sqlite3
 import uuid
-from statistics import median
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
+from statistics import median
 from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
-logger = logging.getLogger("questions_agent.service")
-
 from questions_agent_platform.pipeline.anamnesis import (
-    AnamnesisAction,
     AnamnesisEpisode,
     create_anamnesis_episode,
-    evaluate_drift_triggers,
     evaluate_episode_resolution,
     run_anamnesis_check,
 )
@@ -51,7 +47,6 @@ from questions_agent_platform.pipeline.response_metadata import (
     adjust_se_with_metadata,
     compute_session_uncertainty_profile,
     compute_uncertainty_modifier,
-    engagement_selection_bonus,
 )
 from questions_agent_platform.pipeline.response_types import get_response_type
 from questions_agent_platform.pipeline.scoring import (
@@ -69,7 +64,6 @@ from questions_agent_platform.pipeline.measurement_packages import (
     get_package_scale_ids,
     get_package_scale_priorities,
     get_progressive_plan,
-    get_scale_modes,
     resolve_current_package,
 )
 from questions_agent_platform.pipeline.session_helpers import (
@@ -104,6 +98,8 @@ from questions_agent_platform.pipeline.trajectory_metrics import (
     compute_ews_features,
 )
 from questions_agent_platform.pipeline.time_utils import date_to_start_iso, now_iso, parse_date
+
+logger = logging.getLogger("questions_agent.service")
 
 
 # ── Shadow Efficiency Cache ──────────────────────────────────────────────

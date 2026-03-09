@@ -26,15 +26,11 @@ Reference design:
 import math
 import random
 import unittest
-from collections import defaultdict
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Set, Tuple
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Set
 
 from questions_agent_platform.pipeline.irt import (
     GRMItemParams,
-    categories_for_response_type,
-    default_scale_params,
-    estimate_theta_eap,
     grm_category_probs,
     grm_item_information,
     score_scale_irt,
@@ -382,7 +378,6 @@ class TestSimulationFramework(unittest.TestCase):
             person_id="test",
             true_theta={sc.scale_id: 0.5 for sc in scales},
         )
-        rng = random.Random(42)
 
         for strategy in ("random", "fixed_form", "single_cat", "multiplexed"):
             result = run_simulation(

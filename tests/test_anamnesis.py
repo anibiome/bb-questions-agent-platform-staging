@@ -10,11 +10,9 @@ Validates:
 """
 
 import unittest
-from datetime import date, timedelta
+from datetime import date
 
 from questions_agent_platform.pipeline.anamnesis import (
-    AnamnesisEpisode,
-    AnamnesisAction,
     evaluate_drift_triggers,
     create_anamnesis_episode,
     evaluate_episode_resolution,

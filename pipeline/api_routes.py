@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from .api import _make_handler, run_server
 
 __all__ = ["_make_handler", "run_server"]
 

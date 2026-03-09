@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from typing import Any, Dict, List, Sequence
+from typing import Any, Sequence
 
 
 def _safe_nonnegative_int(value: Any, default: int = 4) -> int:

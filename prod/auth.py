@@ -1,6 +1,6 @@
 import hmac
 
-from fastapi import Header, HTTPException
+from fastapi import HTTPException
 from typing import Optional
 
 

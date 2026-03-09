@@ -14,7 +14,7 @@ Validates:
 
 import math
 import unittest
-from typing import Dict, List
+from typing import List
 
 from questions_agent_platform.pipeline.irt import (
     GRMItemParams,

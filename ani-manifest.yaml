@@ -1,0 +1,110 @@
+schema_version: ani.manifest.v1
+kind: repo_manifest
+manifest_id: anifesto/questions-agent-platform
+repo_id: questions-agent-platform
+name: Questions Agent Platform
+repo_path: questions-agent-platform
+role: interaction_authority
+tier: core
+source_of_truth: true
+summary: Adaptive questioning runtime that serves production APIs, emits runtime bridges, and converts behavioral observations into structured coherence inputs.
+paths:
+  repo_root: .
+  code:
+    - pipeline
+    - prod
+    - questions_agent_platform
+  tests:
+    - tests
+  docs:
+    - README.md
+    - CLAUDE.md
+    - SCHEMA_CONTRACTS_V1.md
+    - docs
+  scripts:
+    - tools
+  data:
+    - data
+  outputs:
+    - output
+owned_artifacts:
+  - artifact_id: runtime_bridge
+    kind: runtime_bridge
+    paths:
+      - output/runtime_bridge/latest.json
+    sensitivity: restricted
+  - artifact_id: production_questions_api
+    kind: service_surface
+    paths:
+      - prod/app.py
+      - pipeline/api.py
+    sensitivity: internal
+  - artifact_id: coherence_contract
+    kind: contract_reference
+    paths:
+      - SCHEMA_CONTRACTS_V1.md
+    sensitivity: internal
+dependencies:
+  reads_from:
+    - repo_id: ani-vault
+      relationship: consumes_canonical_runtime_for_selection_and_followup_routing
+      artifacts:
+        - runtime_snapshot
+        - coherence_snapshot
+    - repo_id: ani-medical-platform
+      relationship: consumes_statistical_context_for_question_routing
+      artifacts:
+        - statistician_to_questions
+  writes_to:
+    - repo_id: ani-control-plane
+      relationship: emits_behavioral_contracts_for_core_chain_validation
+      artifacts:
+        - questions_to_coherence
+    - repo_id: ani-frontend-dev
+      relationship: serves_behavioral_api_and_runtime_bridge_to_product_surfaces
+      artifacts:
+        - runtime_bridge
+commands:
+  bootstrap:
+    - PYTHONPYCACHEPREFIX=/tmp/pycache python3 -m pipeline.cli --config config.example.json init-db
+  test:
+    - PYTHONPATH=. PYTHONPYCACHEPREFIX=/tmp/pycache python3 -m unittest -q
+  smoke:
+    - PYTHONPYCACHEPREFIX=/tmp/pycache python3 -m pipeline.cli --config config.example.json policy-gate --min-eval-rows 100
+  release_gate:
+    - ./tools/quality_gate.sh
+contracts:
+  inputs:
+    - statistician_to_questions
+    - runtime_snapshot
+  outputs:
+    - questions_to_coherence
+    - runtime_bridge
+policy:
+  sensitivity: restricted
+  contains_pii: true
+  export_allowed: true
+  secret_handles:
+    - user_response_history
+    - follow_up_queue
+    - behavioral_latent_state
+quality:
+  test_framework: unittest
+  observed_test_file_count: 54
+  required_ci_files:
+    - .github/workflows/ci.yml
+    - README.md
+    - prod/app.py
+public_surfaces:
+  - surface_id: runtime_bridge_feed
+    type: runtime_json
+    path: output/runtime_bridge/latest.json
+    audience: internal_surfaces
+  - surface_id: production_api
+    type: service
+    path: prod/app.py
+    audience: internal_surfaces
+  - surface_id: contract_reference
+    type: contract
+    path: SCHEMA_CONTRACTS_V1.md
+    audience: internal_agents

@@ -4,8 +4,7 @@ import math
 import random
 import uuid
 from dataclasses import dataclass
-from datetime import date
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 from questions_agent_platform.policy.features import FeatureMapping, FEATURE_VERSION, default_stats, featurize_v1, top_contributions
 from questions_agent_platform.policy.hashing import stable_hash_hex, stable_hash_floats

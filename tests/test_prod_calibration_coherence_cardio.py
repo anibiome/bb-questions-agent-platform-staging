@@ -6,10 +6,7 @@ Tests the Pydantic schemas, ORM models, and service functions added in v15.
 from __future__ import annotations
 
 import json
-import tempfile
 import unittest
-from datetime import date
-from pathlib import Path
 
 from questions_agent_platform.prod.schemas import (
     CalibrationListOut,
@@ -199,7 +196,6 @@ class TestCalibrationPipelineIntegration(unittest.TestCase):
             update_calibration,
             calibration_to_dict,
             calibration_from_dict,
-            assess_reliable_change,
             assess_measurement_sufficiency,
         )
 

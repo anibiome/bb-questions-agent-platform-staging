@@ -27,16 +27,13 @@ from questions_agent_platform.pipeline.registry import (
 )
 from questions_agent_platform.pipeline.service import (
     get_or_create_daily_session,
-    get_user_profile,
     submit_answers,
     _resolve_site_config,
     _get_latest_session_uncertainty_profile,
 )
 from questions_agent_platform.pipeline.site_config import (
     SiteConfig,
-    SiteConfigRegistry,
     config_consumer_wellness,
-    config_clinician_cds,
 )
 from questions_agent_platform.pipeline.time_utils import now_iso
 
@@ -183,7 +180,7 @@ class TestMetadataCaptureAndSEAdjustment(unittest.TestCase):
                 })
 
             site_config = config_consumer_wellness()
-            result = submit_answers(
+            submit_answers(
                 conn,
                 registry_root=registry_root,
                 user_id="u1",

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
-from typing import Dict, Optional, Sequence, Tuple
+from typing import Sequence
 
 from questions_agent_platform.pipeline.selection import Candidate as PipelineCandidate, CandidateSet as PipelineCandidateSet
 from questions_agent_platform.policy.types import CandidateItem, CandidateSet

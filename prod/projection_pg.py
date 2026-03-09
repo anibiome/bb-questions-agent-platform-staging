@@ -10,7 +10,6 @@ from sqlalchemy.orm import Session
 from questions_agent_platform.pipeline.baseline import BaselineState
 from questions_agent_platform.pipeline.projection import (
     VECTOR_DIM,
-    build_questions_projection_payload,
 )
 from questions_agent_platform.pipeline.time_utils import date_to_start_iso
 from questions_agent_platform.contracts import (

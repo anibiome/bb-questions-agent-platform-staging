@@ -27,8 +27,6 @@ import os
 import random
 import tempfile
 import unittest
-from collections import Counter
-from typing import Dict
 
 try:
     import torch
@@ -353,7 +351,6 @@ class TestDeepCATSelector(unittest.TestCase):
         self.assertGreater(len(losses), 0, "Should have at least some training losses")
         # Check that loss generally trends downward (compare first vs last third)
         if len(losses) >= 6:
-            first_third = sum(losses[:len(losses)//3]) / (len(losses)//3)
             last_third = sum(losses[-len(losses)//3:]) / (len(losses)//3)
             # Not a hard assertion (RL is noisy), but loss should not explode
             self.assertTrue(

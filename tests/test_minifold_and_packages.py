@@ -10,11 +10,9 @@ v8 integration tests verifying:
 """
 from __future__ import annotations
 
-import json
-import math
 import sqlite3
 import uuid
-from datetime import date, timedelta
+from datetime import date
 from typing import Any, Dict
 
 import pytest
@@ -26,17 +24,12 @@ from questions_agent_platform.pipeline.state_snapshots import (
 )
 from questions_agent_platform.pipeline.measurement_packages import (
     ALL_PACKAGES,
-    AXIS_PACKAGES,
-    CORE_SCREENER,
-    DEEP_PACKAGES,
     DecoherenceMode,
-    MeasurementPackage,
     PackageTier,
     get_axis_package,
     get_core_screener,
     get_deep_package,
     get_progressive_plan,
-    get_scale_modes,
     get_scales_for_mode,
     get_multiplex_value,
 )

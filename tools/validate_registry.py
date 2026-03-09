@@ -18,10 +18,9 @@ Checks performed:
 """
 
 import json
-import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set
 
 
 @dataclass
@@ -288,7 +287,7 @@ def validate_registry_dir(registry_root: str, version: str) -> ValidationResult:
 def print_validation_result(result: ValidationResult) -> None:
     """Print validation result in a structured format."""
     print(f"\n{'='*60}")
-    print(f"REGISTRY VALIDATION REPORT")
+    print("REGISTRY VALIDATION REPORT")
     print(f"{'='*60}")
 
     if result.info:

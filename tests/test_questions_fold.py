@@ -15,10 +15,9 @@ Tests cover:
 from __future__ import annotations
 
 import json
-import math
 import sqlite3
 from datetime import date, timedelta
-from typing import Any, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Dict, List
 
 import pytest
 
@@ -48,8 +47,6 @@ from questions_agent_platform.pipeline.state_snapshots import (
     MINIFOLD_MODES,
     MINIFOLD_VERSION,
     STATE_DIMENSIONS,
-    compute_circle_snapshot,
-    compute_minifold_circles,
 )
 
 

@@ -13,31 +13,23 @@ Covers:
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 from typing import Any, Dict, List, Set
 
 import pytest
 
 from questions_agent_platform.pipeline.registry import (
-    Item,
-    Questionnaire,
-    Registry,
     Scale,
     ScaleItem,
-    validate_registry_bundle,
 )
 from questions_agent_platform.pipeline.response_types import RESPONSE_TYPES, get_response_type
 from questions_agent_platform.pipeline.measurement_packages import (
     ALL_PACKAGES,
     AXIS_PACKAGES,
     CORE_SCREENER,
-    DEEP_PACKAGES,
     DECOHERENCE_MODES,
     DecoherenceMode,
-    MeasurementPackage,
     PackageTier,
-    ProgressivePlan,
     REPEAT_BASELINE,
     SCALE_MODE_MAP,
     get_axis_package,

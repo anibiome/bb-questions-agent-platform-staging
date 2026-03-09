@@ -15,7 +15,6 @@ from questions_agent_platform.pipeline.anamnesis import (
     create_anamnesis_episode,
     evaluate_drift_triggers,
     evaluate_episode_resolution,
-    run_anamnesis_check,
 )
 from questions_agent_platform.pipeline.baseline import BaselineState, baseline_std, update_ewma_baseline
 from questions_agent_platform.pipeline.drift_routing import load_drift_routes, resolve_drift_route, route_contract
@@ -3774,7 +3773,6 @@ def _upsert_session_uncertainty_profile_pg(
     profile: "SessionUncertaintyProfile",
 ) -> None:
     """Insert or update the session-level uncertainty profile."""
-    from questions_agent_platform.pipeline.response_metadata import SessionUncertaintyProfile as _SUP
     existing = session.execute(
         select(SessionUncertaintyProfileRow).where(
             and_(
@@ -4451,7 +4449,6 @@ def resolve_site_config(
     Falls back to 'consumer' if the user has no profile or an unknown config_id.
     """
     from questions_agent_platform.pipeline.site_config import (
-        SiteConfig,
         default_site_registry,
     )
 
