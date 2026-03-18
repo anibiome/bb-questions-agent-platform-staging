@@ -197,7 +197,7 @@ if _cors_origins:
         CORSMiddleware,
         allow_origins=_cors_origins,
         allow_methods=["GET", "POST", "PATCH"],
-        allow_headers=["X-API-Key"],
+        allow_headers=["X-API-Key", "Authorization"],
         allow_credentials=False,
         max_age=600,
     )

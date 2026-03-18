@@ -23,7 +23,7 @@ services:
       context: ..
       dockerfile: prod/Dockerfile
     env_file:
-      - .env.example
+      - .env
     ports:
       - "8080:8080"
     depends_on:
