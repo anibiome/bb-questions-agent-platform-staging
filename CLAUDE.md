@@ -1,5 +1,11 @@
 # Questions Agent Platform v17
 
+## 2026-04-05 Ani Alignment
+
+This repo provides one contextual modality for Ani, not Ani's identity.
+Questionnaire signals should enrich state, response tracking, and context; they should
+not force ontology-heavy or scan-heavy public explanations by default.
+
 > Part of **ANI BIOME** — the behavioral signal encoder of the organism.
 > For the full picture, read [`ani-vault/00_BOOTSTRAP.md`](https://github.com/anibiome/ani-vault/blob/main/00_BOOTSTRAP.md).
 
