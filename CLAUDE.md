@@ -16,7 +16,7 @@ IRT-driven adaptive questionnaire engine that encodes behavioral, psychological,
 **47,760 lines Python. 781 tests. 52+ FastAPI endpoints. 5 patent claim families.**
 
 **Input**: User responses to adaptively selected questions
-**Output**: Behavioral latent features → feeds into Identity Mask and Coherence Circle
+**Output**: Behavioral latent features → feed into shared state, memory, and response tracking
 
 ## Where It Fits
 
@@ -29,9 +29,9 @@ User answers adaptive questions (IRT-driven selection)
        ↓
   Identity Mask: h_t (memory/trajectory slot)
        ↓
-  → UniFold (behavioral signal fused with omics)
-  → Coherence Circle (behavioral coherence component)
-  → ani-scan (QA is final step of video scan flow)
+  → UniFold / shared latent-state packet
+  → optional trajectory and advanced geometry views when the runtime uses them
+  → ani-scan or other downstream surfaces when that path is active
 ```
 
 ## Connections
@@ -39,7 +39,7 @@ User answers adaptive questions (IRT-driven selection)
 | Repo | How it connects |
 |------|----------------|
 | `ani-vault` | Source of truth: coherence definition, Identity Mask spec |
-| `ani-scan` | Questions run as final step of the video scan experience |
+| `ani-scan` | Questions may compose with the scan flow, but are not a mandatory final step in every runtime |
 | `ani-medical-platform` | Shared statistical infrastructure (IRT, Bayesian) |
 | `ani-proteomics` / `ani-metabolomics` | Behavioral signals correlate with molecular state — cross-modal coherence |
 
