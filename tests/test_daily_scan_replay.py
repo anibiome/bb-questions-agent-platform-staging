@@ -4,6 +4,8 @@ import csv
 import json
 from pathlib import Path
 
+import pytest
+
 from questions_agent_platform.pipeline.config import QuestionsAgentConfig
 from questions_agent_platform.pipeline.registry import (
     Item,
@@ -54,6 +56,91 @@ def test_validate_registry_bundle_preserves_zero_day_windows() -> None:
     scale = registry.scales["scale_daily_scan"]
     assert scale.unlock_window_days == 0
     assert scale.retest_interval_days == 0
+
+
+def test_validate_registry_bundle_dedupes_identical_duplicate_items_and_scale_refs() -> None:
+    registry = validate_registry_bundle(
+        {
+            "version": "v1",
+            "items": [
+                {
+                    "id": "proto_q_1",
+                    "text": "How steady do you feel today?",
+                    "response_type": "likert_0_4",
+                },
+                {
+                    "id": "proto_q_1",
+                    "text": "How steady do you feel today?",
+                    "response_type": "likert_0_4",
+                },
+            ],
+            "questionnaires": [
+                {"id": "q1", "version": "1", "name": "Daily Scan"}
+            ],
+            "scales": [
+                {
+                    "id": "scale_daily_scan",
+                    "questionnaire_id": "q1",
+                    "version": "1",
+                    "name": "Daily Scan Scale",
+                    "response_type": "likert_0_4",
+                    "min_items_required": 1,
+                    "scoring": {
+                        "method": "sum",
+                        "normalize_min": 0.0,
+                        "normalize_max": 4.0,
+                    },
+                    "items": [
+                        {"item_id": "proto_q_1"},
+                        {"item_id": "proto_q_1"},
+                    ],
+                }
+            ],
+        }
+    )
+
+    assert list(registry.items) == ["proto_q_1"]
+    assert len(registry.scales["scale_daily_scan"].items) == 1
+
+
+def test_validate_registry_bundle_rejects_conflicting_duplicate_items() -> None:
+    with pytest.raises(ValueError, match="Conflicting duplicate item definition"):
+        validate_registry_bundle(
+            {
+                "version": "v1",
+                "items": [
+                    {
+                        "id": "proto_q_1",
+                        "text": "How steady do you feel today?",
+                        "response_type": "likert_0_4",
+                    },
+                    {
+                        "id": "proto_q_1",
+                        "text": "How stable do you feel today?",
+                        "response_type": "likert_0_4",
+                    },
+                ],
+                "questionnaires": [
+                    {"id": "q1", "version": "1", "name": "Daily Scan"}
+                ],
+                "scales": [
+                    {
+                        "id": "scale_daily_scan",
+                        "questionnaire_id": "q1",
+                        "version": "1",
+                        "name": "Daily Scan Scale",
+                        "response_type": "likert_0_4",
+                        "min_items_required": 1,
+                        "scoring": {
+                            "method": "sum",
+                            "normalize_min": 0.0,
+                            "normalize_max": 4.0,
+                        },
+                        "items": [{"item_id": "proto_q_1"}],
+                    }
+                ],
+            }
+        )
 
 
 def test_run_daily_scan_replay_exports_scale_scores_and_projections(tmp_path: Path) -> None:

@@ -10190,22 +10190,6 @@
     "onboarding_order": null
   },
   {
-    "id": "wKifZrOrVBCr0YdTWJRQ",
-    "text": "In the past week, how much were you bothered by heavy feelings in your arms or legs?",
-    "response_type": "scl_0_4",
-    "tags": [
-      "affective",
-      "somatization"
-    ],
-    "sensitivity": "medium",
-    "timeframes_allowed": [
-      "last_7_days"
-    ],
-    "intrusiveness": "medium",
-    "declinable": true,
-    "onboarding_order": null
-  },
-  {
     "id": "kFPLe0cbXuw03gicqLCB",
     "text": "In the past week, how much were you bothered by nausea or upset stomach?",
     "response_type": "scl_0_4",

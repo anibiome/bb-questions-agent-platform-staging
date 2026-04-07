@@ -135,25 +135,31 @@ def list_versions(registry_root: str) -> List[str]:
 def _parse_items(raw: Any) -> List[Item]:
     if not isinstance(raw, list):
         raise ValueError("items.json must be a list")
+    seen: Dict[str, Item] = {}
     out: List[Item] = []
     for obj in raw:
         if not isinstance(obj, dict):
             raise ValueError("Each item must be an object")
-        out.append(
-            Item(
-                id=_require_str(obj, "id"),
-                text=_require_str(obj, "text"),
-                response_type=_require_str(obj, "response_type"),
-                tags=tuple(_optional_str_list(obj.get("tags"))),
-                sensitivity=str(obj.get("sensitivity", "low")),
-                timeframes_allowed=tuple(
-                    _optional_str_list(obj.get("timeframes_allowed")) or ["last_7_days"]
-                ),
-                intrusiveness=str(obj.get("intrusiveness", "low")),
-                declinable=bool(obj.get("declinable", True)),
-                onboarding_order=_optional_int(obj.get("onboarding_order")),
-            )
+        item = Item(
+            id=_require_str(obj, "id"),
+            text=_require_str(obj, "text"),
+            response_type=_require_str(obj, "response_type"),
+            tags=tuple(_optional_str_list(obj.get("tags"))),
+            sensitivity=str(obj.get("sensitivity", "low")),
+            timeframes_allowed=tuple(
+                _optional_str_list(obj.get("timeframes_allowed")) or ["last_7_days"]
+            ),
+            intrusiveness=str(obj.get("intrusiveness", "low")),
+            declinable=bool(obj.get("declinable", True)),
+            onboarding_order=_optional_int(obj.get("onboarding_order")),
         )
+        existing = seen.get(item.id)
+        if existing is not None:
+            if existing != item:
+                raise ValueError(f"Conflicting duplicate item definition for {item.id}")
+            continue
+        seen[item.id] = item
+        out.append(item)
     return out
 
 
@@ -184,6 +190,7 @@ def _parse_scales(raw: Any) -> List[Scale]:
     for obj in raw:
         if not isinstance(obj, dict):
             raise ValueError("Each scale must be an object")
+        scale_id = _require_str(obj, "id")
         scoring = obj.get("scoring", {})
         if not isinstance(scoring, dict):
             raise ValueError("scale.scoring must be an object")
@@ -191,20 +198,28 @@ def _parse_scales(raw: Any) -> List[Scale]:
         if not isinstance(items_raw, list) or not items_raw:
             raise ValueError("scale.items must be a non-empty list")
         items: List[ScaleItem] = []
+        seen_scale_items: Dict[str, ScaleItem] = {}
         for it in items_raw:
             if not isinstance(it, dict):
                 raise ValueError("scale.items[] must be an object")
-            items.append(
-                ScaleItem(
-                    item_id=_require_str(it, "item_id"),
-                    reverse=bool(it.get("reverse", False)),
-                    weight=float(it.get("weight", 1.0)),
-                )
+            scale_item = ScaleItem(
+                item_id=_require_str(it, "item_id"),
+                reverse=bool(it.get("reverse", False)),
+                weight=float(it.get("weight", 1.0)),
             )
+            existing = seen_scale_items.get(scale_item.item_id)
+            if existing is not None:
+                if existing != scale_item:
+                    raise ValueError(
+                        f"Scale {scale_id} has conflicting duplicate item {scale_item.item_id}"
+                    )
+                continue
+            seen_scale_items[scale_item.item_id] = scale_item
+            items.append(scale_item)
 
         out.append(
             Scale(
-                id=_require_str(obj, "id"),
+                id=scale_id,
                 questionnaire_id=_require_str(obj, "questionnaire_id"),
                 version=_require_str(obj, "version"),
                 name=_require_str(obj, "name"),
