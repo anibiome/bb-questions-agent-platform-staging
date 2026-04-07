@@ -208,3 +208,56 @@ def test_build_questionnaire_replay_csv_writes_supported_rows_and_reports_missin
     assert summary["rows_written"] == 1
     assert summary["source_questionnaires"]["DASS-21"]["matched_rows"] == 1
     assert summary["source_questionnaires"]["CASP-19"]["unmatched_rows"] == 1
+
+
+def test_build_questionnaire_replay_csv_dedupes_repeated_questionnaire_documents(
+    tmp_path: Path,
+) -> None:
+    registry_root = tmp_path / "registry"
+    save_registry(str(registry_root), _build_registry())
+    registry_source = registry_root / "versions" / "v1"
+
+    repeated_doc = {
+        "_docId": "doc-1",
+        "userId": "user-1",
+        "questionnaireId": "DASS-21",
+        "date": "2026-04-05T10:00:00Z",
+        "answers": [
+            {
+                "questionId": "src-1",
+                "questionString": "I found it hard to wind down.",
+                "intensity": 2.0,
+                "scaleInverted": False,
+                "textAnswer": "Applied to me a good part of the time",
+            }
+        ],
+    }
+    input_json = tmp_path / "access.json"
+    input_json.write_text(
+        json.dumps(
+            {
+                "user": {"id": "user-1"},
+                "sample_blocks": [
+                    {"digital_data": {"questionnaireAnswers": [repeated_doc]}},
+                    {"digital_data": {"questionnaireAnswers": [dict(repeated_doc)]}},
+                ],
+            },
+            ensure_ascii=False,
+        ) + "\n",
+        encoding="utf-8",
+    )
+
+    out_dir = tmp_path / "out"
+    summary = build_questionnaire_replay_csv(
+        input_json=str(input_json),
+        registry_source=str(registry_source),
+        out_dir=str(out_dir),
+        access_code="AC1",
+    )
+
+    with (out_dir / "questionnaire_answers_replay.csv").open("r", encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    assert len(rows) == 1
+    assert summary["documents_seen"] == 2
+    assert summary["documents_processed"] == 1
+    assert summary["source_questionnaires"]["DASS-21"]["duplicate_source_documents"] == 1

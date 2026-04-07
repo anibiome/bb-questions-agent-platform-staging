@@ -141,12 +141,21 @@ def build_questionnaire_replay_csv(
     unmatched_rows: List[Dict[str, Any]] = []
     per_questionnaire = _init_questionnaire_summary()
     total_docs = 0
+    processed_docs = 0
+    seen_doc_signatures: set[str] = set()
 
     for block in export.get("sample_blocks", []):
         sample = block.get("sample") or {}
         digital_data = block.get("digital_data") or {}
         for questionnaire_doc in digital_data.get("questionnaireAnswers", []):
             total_docs += 1
+            doc_signature = _questionnaire_doc_signature(questionnaire_doc)
+            source_qid = str(questionnaire_doc.get("questionnaireId") or "").strip()
+            if doc_signature in seen_doc_signatures:
+                per_questionnaire[source_qid]["duplicate_source_documents"] += 1
+                continue
+            seen_doc_signatures.add(doc_signature)
+            processed_docs += 1
             pending_rows = _build_pending_rows(
                 questionnaire_doc=questionnaire_doc,
                 sample=sample,
@@ -194,6 +203,7 @@ def build_questionnaire_replay_csv(
         rows_written=len(rows),
         unmatched_rows=len(unmatched_rows),
         total_docs=total_docs,
+        processed_docs=processed_docs,
         per_questionnaire=per_questionnaire,
     )
     coverage_json = out_root / "questionnaire_answers_coverage.json"
@@ -492,6 +502,31 @@ def _load_registry_bundle(source_dir: Path) -> Registry:
     return validate_registry_bundle(bundle)
 
 
+def _questionnaire_doc_signature(questionnaire_doc: Mapping[str, Any]) -> str:
+    doc_id = str(questionnaire_doc.get("_docId") or "").strip()
+    if doc_id:
+        return f"doc::{questionnaire_doc.get('questionnaireId') or ''}::{doc_id}"
+    answers = questionnaire_doc.get("answers") or []
+    fingerprint = [
+        {
+            "questionId": answer.get("questionId"),
+            "questionString": answer.get("questionString"),
+            "intensity": answer.get("intensity"),
+        }
+        for answer in answers
+    ]
+    return json.dumps(
+        {
+            "questionnaireId": questionnaire_doc.get("questionnaireId"),
+            "userId": questionnaire_doc.get("userId"),
+            "date": questionnaire_doc.get("date"),
+            "answers": fingerprint,
+        },
+        ensure_ascii=False,
+        sort_keys=True,
+    )
+
+
 def _init_questionnaire_summary() -> Dict[str, Counter[str]]:
     summary: Dict[str, Counter[str]] = {}
     for source_qid in _SOURCE_TO_TARGET_QUESTIONNAIRES:
@@ -499,6 +534,7 @@ def _init_questionnaire_summary() -> Dict[str, Counter[str]]:
             {
                 "documents": 0,
                 "supported_documents": 0,
+                "duplicate_source_documents": 0,
                 "answers_seen": 0,
                 "supported_rows_seen": 0,
                 "matched_rows": 0,
@@ -519,6 +555,7 @@ def _build_summary(
     rows_written: int,
     unmatched_rows: int,
     total_docs: int,
+    processed_docs: int,
     per_questionnaire: Dict[str, Counter[str]],
 ) -> Dict[str, Any]:
     return {
@@ -526,6 +563,7 @@ def _build_summary(
         "output_csv": output_csv,
         "unmatched_csv": unmatched_csv,
         "documents_seen": total_docs,
+        "documents_processed": processed_docs,
         "rows_written": rows_written,
         "unmatched_rows": unmatched_rows,
         "source_questionnaires": {
