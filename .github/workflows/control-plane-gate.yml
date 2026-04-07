@@ -19,12 +19,12 @@ jobs:
     timeout-minutes: 25
     steps:
       - name: Checkout current repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: _system/questions-agent-platform
 
       - name: Checkout control plane
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: anibiome/ani-control-plane
           ref: main
@@ -32,7 +32,7 @@ jobs:
           path: _control_plane
 
       - name: Checkout ani-proteomics
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: anibiome/ani-proteomics
           ref: main
@@ -40,7 +40,7 @@ jobs:
           path: _system/ani-proteomics
 
       - name: Checkout ani-medical-platform
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: anibiome/ani-medical-platform
           ref: main
@@ -48,7 +48,7 @@ jobs:
           path: _system/ani-medical-platform
 
       - name: Checkout ani-vault
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: anibiome/ani-vault
           ref: main
