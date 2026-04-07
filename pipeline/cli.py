@@ -65,6 +65,40 @@ def main() -> None:
     cl_p.add_argument("--epsilon", type=float, default=0.25, help="Policy exploration epsilon override")
     cl_p.add_argument("--reset-db", action="store_true", help="Reinitialize DB before running replay")
 
+    replay_p = sub.add_parser(
+        "replay-daily-scan-answers",
+        help="Replay exported daily scan answers into Questions Agent state and export scale/projection artifacts",
+    )
+    replay_p.add_argument("--input-csv", required=True, help="Path to daily_scan_answers.csv")
+    replay_p.add_argument(
+        "--out-dir",
+        default="questions_agent_platform/output/daily_scan_replay",
+        help="Directory for exported replay artifacts",
+    )
+    replay_p.add_argument(
+        "--registry-source",
+        default="questions_agent_platform/data/registry_production/v3",
+        help="Directory containing items.json/questionnaires.json/scales.json for the registry bundle",
+    )
+    replay_p.add_argument("--registry-version", default="v3", help="Registry version label to activate")
+    replay_p.add_argument(
+        "--date-column",
+        default="scan_date_local",
+        choices=["scan_date_local", "scan_date_utc"],
+        help="Which export date column should define the replay session day",
+    )
+    replay_p.add_argument(
+        "--selection-mode",
+        default="deterministic",
+        choices=["deterministic", "policy_live", "policy_shadow", "policy_offline_replay"],
+        help="Session creation mode used while replaying answers",
+    )
+    replay_p.add_argument(
+        "--skip-projections",
+        action="store_true",
+        help="Do not build AniFold-facing question projection payloads during replay",
+    )
+
     args = parser.parse_args()
     cfg = load_config(args.config)
     ensure_paths(cfg)
@@ -189,6 +223,22 @@ def main() -> None:
         )
         print(f"Wrote JSON: {result.json_path}")
         print(f"Wrote HTML: {result.html_path}")
+        return
+
+    if args.cmd == "replay-daily-scan-answers":
+        from questions_agent_platform.tools.replay_daily_scan_answers import run_daily_scan_replay
+
+        summary = run_daily_scan_replay(
+            cfg=cfg,
+            input_csv=str(args.input_csv),
+            out_dir=str(args.out_dir),
+            registry_source=str(args.registry_source),
+            registry_version=str(args.registry_version),
+            date_column=str(args.date_column),
+            selection_mode=str(args.selection_mode),
+            build_projections=not bool(args.skip_projections),
+        )
+        print(json.dumps(summary, indent=2, ensure_ascii=False))
         return
 
 

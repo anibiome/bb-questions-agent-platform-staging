@@ -210,8 +210,8 @@ def _parse_scales(raw: Any) -> List[Scale]:
                 name=_require_str(obj, "name"),
                 method=str(scoring.get("method", "sum")),
                 min_items_required=int(obj.get("min_items_required") or len(items)),
-                unlock_window_days=int(obj.get("unlock_window_days") or 14),
-                retest_interval_days=int(obj.get("retest_interval_days") or 90),
+                unlock_window_days=_int_with_default(obj.get("unlock_window_days"), default=14),
+                retest_interval_days=_int_with_default(obj.get("retest_interval_days"), default=90),
                 response_type=_require_str(obj, "response_type"),
                 normalize_min=float(scoring.get("normalize_min", 0.0)),
                 normalize_max=float(scoring.get("normalize_max", 100.0)),
@@ -330,6 +330,15 @@ def _optional_int(val: Any) -> Optional[int]:
         return int(val)
     except Exception as e:
         raise ValueError("Expected int or null") from e
+
+
+def _int_with_default(val: Any, *, default: int) -> int:
+    if val in (None, ""):
+        return int(default)
+    try:
+        return int(val)
+    except Exception as e:
+        raise ValueError("Expected int-compatible value") from e
 
 
 def _optional_str_list(val: Any) -> List[str]:

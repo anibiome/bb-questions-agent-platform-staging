@@ -4130,7 +4130,8 @@ def _compute_scale_windows(
     end_iso = date_to_start_iso(day + timedelta(days=1))
 
     for scale in registry.scales.values():
-        start_day = day - timedelta(days=int(scale.unlock_window_days) - 1)
+        window_days = max(1, int(scale.unlock_window_days))
+        start_day = day - timedelta(days=window_days - 1)
         start_iso = date_to_start_iso(start_day)
         item_ids = [si.item_id for si in scale.items]
         latest = _fetch_latest_answers_for_items(
@@ -4244,7 +4245,8 @@ def _compute_and_store_scores(
             if (day - last_end).days < int(scale.retest_interval_days):
                 continue
 
-        start_day = day - timedelta(days=int(scale.unlock_window_days) - 1)
+        window_days = max(1, int(scale.unlock_window_days))
+        start_day = day - timedelta(days=window_days - 1)
         start_iso = date_to_start_iso(start_day)
         item_ids = [si.item_id for si in scale.items]
         latest = _fetch_latest_answers_for_items(
