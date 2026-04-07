@@ -15045,5 +15045,309 @@
       "anxiety"
     ],
     "text": "In the last 24 hours, I worried a lot."
+  },
+  {
+    "id": "item_casp_19_01_age_prevents",
+    "text": "My age prevents me from doing the things I would like to.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_02_out_of_control",
+    "text": "I feel that what happens to me is out of my control.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_03_free_plan_future",
+    "text": "I feel free to plan for the future.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_04_left_out",
+    "text": "I feel left out of things.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_05_do_things_want",
+    "text": "I can do the things that I want to do.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_06_family_responsibilities",
+    "text": "Family responsibilities prevent me from doing what I want to do.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_07_please_myself",
+    "text": "I feel I can please myself what I do.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_08_health_stops",
+    "text": "My health stops me from doing things I want to do.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_09_money_stops",
+    "text": "Shortage of money stops me from doing the things I want to do.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_10_look_forward_each_day",
+    "text": "I look forward to each day.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_11_life_has_meaning",
+    "text": "I feel that my life has meaning.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_12_enjoy_things",
+    "text": "I enjoy the things that I do.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_13_enjoy_company_others",
+    "text": "I enjoy being in the company of others.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_14_happiness_back_on_life",
+    "text": "On balance, I look back on my life with a sense of happiness.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_15_full_of_energy",
+    "text": "I feel full of energy these days.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_16_choose_new_things",
+    "text": "I choose to do things that I have never done before.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_17_life_turnout_satisfied",
+    "text": "I feel satisfied with the way my life has turned out.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_18_life_full_of_opportunities",
+    "text": "I feel that life is full of opportunities.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
+  },
+  {
+    "id": "item_casp_19_19_future_looks_good",
+    "text": "I feel that the future looks good for me.",
+    "response_type": "casp_0_3",
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "sensitivity": "low",
+    "timeframes_allowed": [
+      "last_7_days"
+    ],
+    "intrusiveness": "low",
+    "declinable": true,
+    "onboarding_order": null
   }
 ]

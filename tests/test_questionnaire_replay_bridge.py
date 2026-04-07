@@ -32,11 +32,17 @@ def _build_registry() -> Registry:
                     "text": "How satisfied are you with your health - being physically fit and vigorous?",
                     "response_type": "satisfaction_0_6",
                 },
+                {
+                    "id": "casp_free_plan_future",
+                    "text": "I feel free to plan for the future.",
+                    "response_type": "casp_0_3",
+                },
             ],
             "questionnaires": [
                 {"id": "q_dass_21_stress", "version": "1", "name": "DASS-21-stress"},
                 {"id": "q_panas_sf_positive", "version": "1", "name": "PANAS-SF-positive"},
                 {"id": "q_qols_flanagan", "version": "1", "name": "QOLS Flanagan"},
+                {"id": "q_casp_19", "version": "1", "name": "CASP-19"},
             ],
             "scales": [
                 {
@@ -87,6 +93,22 @@ def _build_registry() -> Registry:
                     },
                     "items": [{"item_id": "qols_health"}],
                 },
+                {
+                    "id": "scale_casp_19",
+                    "questionnaire_id": "q_casp_19",
+                    "version": "1",
+                    "name": "CASP-19",
+                    "response_type": "casp_0_3",
+                    "min_items_required": 1,
+                    "unlock_window_days": 0,
+                    "retest_interval_days": 90,
+                    "scoring": {
+                        "method": "sum",
+                        "normalize_min": 0.0,
+                        "normalize_max": 57.0,
+                    },
+                    "items": [{"item_id": "casp_free_plan_future", "reverse": True}],
+                },
             ],
         }
     )
@@ -124,8 +146,9 @@ def test_match_source_question_handles_questionnaire_text_variants() -> None:
         source_questionnaire_id="CASP-19",
         question_text="I feel free to plan for the future.",
     )
-    assert casp.candidate is None
-    assert casp.reason == "unsupported_source_questionnaire"
+    assert casp.candidate is not None
+    assert casp.candidate.item_id == "casp_free_plan_future"
+    assert casp.strategy == "exact_normalized"
 
 
 def test_build_questionnaire_replay_csv_writes_supported_rows_and_reports_missing_questionnaire(
@@ -195,19 +218,19 @@ def test_build_questionnaire_replay_csv_writes_supported_rows_and_reports_missin
 
     with (out_dir / "questionnaire_answers_replay.csv").open("r", encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
-    assert len(rows) == 1
+    assert len(rows) == 2
     assert rows[0]["question_id"] == "dass_wind_down"
     assert rows[0]["source_questionnaire_id"] == "DASS-21"
+    assert rows[1]["question_id"] == "casp_free_plan_future"
+    assert rows[1]["source_questionnaire_id"] == "CASP-19"
 
     with (out_dir / "questionnaire_answers_unmatched.csv").open("r", encoding="utf-8", newline="") as handle:
         unmatched = list(csv.DictReader(handle))
-    assert len(unmatched) == 1
-    assert unmatched[0]["source_questionnaire_id"] == "CASP-19"
-    assert unmatched[0]["reason"] == "unsupported_source_questionnaire"
+    assert len(unmatched) == 0
 
-    assert summary["rows_written"] == 1
+    assert summary["rows_written"] == 2
     assert summary["source_questionnaires"]["DASS-21"]["matched_rows"] == 1
-    assert summary["source_questionnaires"]["CASP-19"]["unmatched_rows"] == 1
+    assert summary["source_questionnaires"]["CASP-19"]["matched_rows"] == 1
 
 
 def test_build_questionnaire_replay_csv_dedupes_repeated_questionnaire_documents(

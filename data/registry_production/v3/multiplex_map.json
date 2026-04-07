@@ -2843,5 +2843,62 @@
   ],
   "item_irritable": [
     "scale_demo_stress"
+  ],
+  "item_casp_19_01_age_prevents": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_02_out_of_control": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_03_free_plan_future": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_04_left_out": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_05_do_things_want": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_06_family_responsibilities": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_07_please_myself": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_08_health_stops": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_09_money_stops": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_10_look_forward_each_day": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_11_life_has_meaning": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_12_enjoy_things": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_13_enjoy_company_others": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_14_happiness_back_on_life": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_15_full_of_energy": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_16_choose_new_things": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_17_life_turnout_satisfied": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_18_life_full_of_opportunities": [
+    "scale_casp_19"
+  ],
+  "item_casp_19_19_future_looks_good": [
+    "scale_casp_19"
   ]
 }

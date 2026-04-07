@@ -19,7 +19,7 @@ _SOURCE_TO_TARGET_QUESTIONNAIRES: Mapping[str, Tuple[str, ...]] = {
     "DASS-21": ("q_dass_21_depression", "q_dass_21_stress"),
     "PANAS-SF": ("q_panas_sf_positive", "q_panas_sf_negative"),
     "QOLS": ("q_qols_flanagan",),
-    "CASP-19": (),
+    "CASP-19": ("q_casp_19",),
 }
 _FIELDNAMES: Tuple[str, ...] = (
     "access_code",

@@ -83,6 +83,15 @@ RESPONSE_TYPE_MAP: Dict[str, dict] = {
         ],
         "match_keywords": ["Several Days", "More than half"],
     },
+    # --- CASP-19 (0-3 quality of life) ---
+    "casp_0_3": {
+        "id": "casp_0_3", "min": 0.0, "max": 3.0,
+        "options": [
+            (0, "Never"), (1, "Not often"),
+            (2, "Sometimes"), (3, "Always"),
+        ],
+        "match_keywords": ["Never", "Not often", "Sometimes", "Always"],
+    },
     # --- AAQ (1-7 frequency) ---
     "likert_freq_1_7": {
         "id": "likert_freq_1_7", "min": 1.0, "max": 7.0,
@@ -460,6 +469,7 @@ INSTRUMENT_RESPONSE_TYPE: Dict[str, str] = {
     "DASS-21-depression": "dass_0_3",
     "FMI": "fmi_0_3",
     "GAD-7": "likert_0_3",
+    "CASP-19": "casp_0_3",
     "GSRS-IBS": "discomfort_0_6",
     "PANAS-SF-positive": "affect_0_4",
     "PANAS-SF-negative": "affect_0_4",
@@ -515,6 +525,7 @@ QUESTIONNAIRE_META: Dict[str, Dict[str, Any]] = {
     "DASS-21-depression": {"module": "mental_health", "domains": ("depression",), "license": "open_access"},
     "FMI": {"module": "cognitive_health", "domains": ("mindfulness",), "license": "open_access"},
     "GAD-7": {"module": "mental_health", "domains": ("anxiety",), "license": "open_access", "citation": "Spitzer RL et al. Arch Intern Med. 2006;166(10):1092-7"},
+    "CASP-19": {"module": "wellbeing", "domains": ("quality_of_life",), "license": "open_access"},
     "GSRS-IBS": {"module": "gi_health", "domains": ("gi_symptoms",), "license": "academic"},
     "PANAS-SF-positive": {"module": "emotional_health", "domains": ("positive_affect",), "license": "open_access"},
     "PANAS-SF-negative": {"module": "emotional_health", "domains": ("negative_affect",), "license": "open_access"},
@@ -568,6 +579,7 @@ INSTRUMENT_SCORING: Dict[str, Dict[str, Any]] = {
     "DASS-21-depression": {"method": "sum", "min": 0, "max": 42},
     "FMI": {"method": "sum", "min": 0, "max": 42},
     "GAD-7": {"method": "sum", "min": 0, "max": 21},
+    "CASP-19": {"method": "sum", "min": 0, "max": 57},
     "GSRS-IBS": {"method": "mean", "min": 0, "max": 6},
     "PANAS-SF-positive": {"method": "sum", "min": 9, "max": 45},
     "PANAS-SF-negative": {"method": "sum", "min": 10, "max": 50},
@@ -626,6 +638,90 @@ DOMAIN_TAGS: Dict[str, Tuple[str, ...]] = {
     "mind_age": ("affective", "autonomic"),
     "initial_scan": ("screening",),
 }
+
+CASP19_SOURCE = "CASP-19"
+CASP19_QUESTIONNAIRE_ID = "q_casp_19"
+CASP19_SCALE_ID = "scale_casp_19"
+CASP19_RESPONSE_TYPE = "casp_0_3"
+CASP19_ITEM_SPECS: Tuple[Tuple[str, str, bool], ...] = (
+    ("item_casp_19_01_age_prevents", "My age prevents me from doing the things I would like to.", False),
+    ("item_casp_19_02_out_of_control", "I feel that what happens to me is out of my control.", False),
+    ("item_casp_19_03_free_plan_future", "I feel free to plan for the future.", True),
+    ("item_casp_19_04_left_out", "I feel left out of things.", False),
+    ("item_casp_19_05_do_things_want", "I can do the things that I want to do.", True),
+    ("item_casp_19_06_family_responsibilities", "Family responsibilities prevent me from doing what I want to do.", False),
+    ("item_casp_19_07_please_myself", "I feel I can please myself what I do.", True),
+    ("item_casp_19_08_health_stops", "My health stops me from doing things I want to do.", False),
+    ("item_casp_19_09_money_stops", "Shortage of money stops me from doing the things I want to do.", False),
+    ("item_casp_19_10_look_forward_each_day", "I look forward to each day.", True),
+    ("item_casp_19_11_life_has_meaning", "I feel that my life has meaning.", True),
+    ("item_casp_19_12_enjoy_things", "I enjoy the things that I do.", True),
+    ("item_casp_19_13_enjoy_company_others", "I enjoy being in the company of others.", True),
+    ("item_casp_19_14_happiness_back_on_life", "On balance, I look back on my life with a sense of happiness.", True),
+    ("item_casp_19_15_full_of_energy", "I feel full of energy these days.", True),
+    ("item_casp_19_16_choose_new_things", "I choose to do things that I have never done before.", True),
+    ("item_casp_19_17_life_turnout_satisfied", "I feel satisfied with the way my life has turned out.", True),
+    ("item_casp_19_18_life_full_of_opportunities", "I feel that life is full of opportunities.", True),
+    ("item_casp_19_19_future_looks_good", "I feel that the future looks good for me.", True),
+)
+CASP19_REVERSE_ITEM_IDS = {item_id for item_id, _, reverse in CASP19_ITEM_SPECS if reverse}
+
+
+def build_casp19_items() -> List[dict]:
+    items: List[dict] = []
+    for item_id, text, _reverse in CASP19_ITEM_SPECS:
+        items.append(
+            {
+                "id": item_id,
+                "text": text,
+                "response_type": CASP19_RESPONSE_TYPE,
+                "tags": ["affective", "quality_of_life"],
+                "sensitivity": "low",
+                "timeframes_allowed": ["last_7_days"],
+                "intrusiveness": "low",
+                "declinable": True,
+                "onboarding_order": None,
+            }
+        )
+    return items
+
+
+def build_casp19_scale() -> dict:
+    return {
+        "id": CASP19_SCALE_ID,
+        "questionnaire_id": CASP19_QUESTIONNAIRE_ID,
+        "version": "1",
+        "name": CASP19_SOURCE,
+        "method": "sum",
+        "min_items_required": 14,
+        "unlock_window_days": 0,
+        "retest_interval_days": 90,
+        "response_type": CASP19_RESPONSE_TYPE,
+        "normalize_min": 0.0,
+        "normalize_max": 57.0,
+        "items": [
+            {
+                "item_id": item_id,
+                "reverse": reverse,
+                "weight": 1.0,
+            }
+            for item_id, _text, reverse in CASP19_ITEM_SPECS
+        ],
+        "tags": ["affective", "quality_of_life"],
+        "ewma_alpha": 0.2,
+        "citation": "",
+    }
+
+
+def build_casp19_questionnaire() -> dict:
+    return {
+        "id": CASP19_QUESTIONNAIRE_ID,
+        "version": "1",
+        "name": CASP19_SOURCE,
+        "domains": ["quality_of_life"],
+        "license": "open_access",
+        "source": None,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -812,6 +908,37 @@ def merge_v2_cardiometabolic(
     print(f"  Merged {added} cardiometabolic items, {len(v2_scales)} scales, {len(v2_quests)} questionnaires from v2")
 
 
+def merge_casp19(
+    items: List[dict],
+    scales: List[dict],
+    questionnaires: List[dict],
+    existing_item_ids: Set[str],
+) -> None:
+    """Add CASP-19 definitions to the registry if not already present."""
+    existing_scale_ids = {s["id"] for s in scales}
+    existing_q_ids = {q["id"] for q in questionnaires}
+
+    added_items = 0
+    for item in build_casp19_items():
+        if item["id"] in existing_item_ids:
+            continue
+        items.append(item)
+        existing_item_ids.add(item["id"])
+        added_items += 1
+
+    if CASP19_SCALE_ID not in existing_scale_ids:
+        scales.append(build_casp19_scale())
+
+    if CASP19_QUESTIONNAIRE_ID not in existing_q_ids:
+        questionnaires.append(build_casp19_questionnaire())
+
+    print(
+        f"  Added CASP-19 registry bundle: {added_items} items, "
+        f"{1 if CASP19_SCALE_ID not in existing_scale_ids else 0} scales, "
+        f"{1 if CASP19_QUESTIONNAIRE_ID not in existing_q_ids else 0} questionnaires"
+    )
+
+
 def build_response_types_json() -> List[dict]:
     """Build the new response types for the production registry."""
     rts = []
@@ -911,12 +1038,15 @@ def main() -> None:
     # 6. Merge v2 cardiometabolic
     merge_v2_cardiometabolic(items_json, scales_json, questionnaires, existing_ids)
 
-    # 7. Build multiplex map
+    # 7. Add CASP-19 bundle
+    merge_casp19(items_json, scales_json, questionnaires, existing_ids)
+
+    # 8. Build multiplex map
     mux = compute_multiplex_map(scales_json)
     shared = {k: v for k, v in mux.items() if len(v) > 1}
     print(f"  Multiplex map: {len(mux)} items total, {len(shared)} shared across scales")
 
-    # 8. Write output
+    # 9. Write output
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     with open(OUT_DIR / "items.json", "w") as f:
         json.dump(items_json, f, indent=2, ensure_ascii=False)
@@ -929,7 +1059,7 @@ def main() -> None:
     with open(OUT_DIR / "multiplex_map.json", "w") as f:
         json.dump(mux, f, indent=2, ensure_ascii=False)
 
-    # 9. Summary stats
+    # 10. Summary stats
     print("\n=== v3 PRODUCTION REGISTRY ===")
     print(f"  Items:          {len(items_json)}")
     print(f"  Scales:         {len(scales_json)}")
@@ -938,7 +1068,7 @@ def main() -> None:
     print(f"  Shared items:   {len(shared)} (multiplex)")
     print(f"  Written to:     {OUT_DIR}")
 
-    # 10. Instrument audit summary
+    # 11. Instrument audit summary
     print("\n=== AUDIT FLAGS ===")
     for sc in scales_json:
         tags = sc.get("tags", [])

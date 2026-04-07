@@ -1206,5 +1206,28 @@
         "Strongly agree"
       ]
     ]
+  },
+  {
+    "id": "casp_0_3",
+    "min_value": 0.0,
+    "max_value": 3.0,
+    "options": [
+      [
+        0.0,
+        "Never"
+      ],
+      [
+        1.0,
+        "Not often"
+      ],
+      [
+        2.0,
+        "Sometimes"
+      ],
+      [
+        3.0,
+        "Always"
+      ]
+    ]
   }
 ]

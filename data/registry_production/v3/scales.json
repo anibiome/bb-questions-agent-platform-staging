@@ -6325,5 +6325,123 @@
     ],
     "unlock_window_days": 14,
     "version": "1"
+  },
+  {
+    "id": "scale_casp_19",
+    "questionnaire_id": "q_casp_19",
+    "version": "1",
+    "name": "CASP-19",
+    "response_type": "casp_0_3",
+    "min_items_required": 14,
+    "unlock_window_days": 0,
+    "retest_interval_days": 90,
+    "tags": [
+      "affective",
+      "quality_of_life"
+    ],
+    "scoring": {
+      "method": "sum",
+      "normalize_min": 0.0,
+      "normalize_max": 57.0
+    },
+    "items": [
+      {
+        "item_id": "item_casp_19_01_age_prevents",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_02_out_of_control",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_03_free_plan_future",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_04_left_out",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_05_do_things_want",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_06_family_responsibilities",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_07_please_myself",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_08_health_stops",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_09_money_stops",
+        "reverse": false,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_10_look_forward_each_day",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_11_life_has_meaning",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_12_enjoy_things",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_13_enjoy_company_others",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_14_happiness_back_on_life",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_15_full_of_energy",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_16_choose_new_things",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_17_life_turnout_satisfied",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_18_life_full_of_opportunities",
+        "reverse": true,
+        "weight": 1.0
+      },
+      {
+        "item_id": "item_casp_19_19_future_looks_good",
+        "reverse": true,
+        "weight": 1.0
+      }
+    ],
+    "ewma_alpha": 0.2,
+    "citation": ""
   }
 ]

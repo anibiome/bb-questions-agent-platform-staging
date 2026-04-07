@@ -657,5 +657,15 @@
     "name": "Stress (Demo)",
     "source": null,
     "version": "1"
+  },
+  {
+    "id": "q_casp_19",
+    "version": "1",
+    "name": "CASP-19",
+    "domains": [
+      "quality_of_life"
+    ],
+    "license": "open_access",
+    "source": null
   }
 ]

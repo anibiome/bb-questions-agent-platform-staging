@@ -130,6 +130,13 @@ class TestResponseTypesCoverage:
         with pytest.raises(ValueError):
             get_response_type("nonexistent_type_xyz")
 
+    def test_casp_response_type_is_registered(self) -> None:
+        rt = get_response_type("casp_0_3")
+        assert rt.id == "casp_0_3"
+        assert rt.min_value == 0.0
+        assert rt.max_value == 3.0
+        assert [label for _, label in rt.options] == ["Never", "Not often", "Sometimes", "Always"]
+
 
 # ---------------------------------------------------------------------------
 # Test: Scale → item cross-references are valid
@@ -167,6 +174,50 @@ class TestScaleItemCrossReferences:
         ids = [sc["id"] for sc in prod_scales]
         dupes = [x for x in ids if ids.count(x) > 1]
         assert not dupes, f"Duplicate scale IDs: {set(dupes)}"
+
+
+class TestCASP19Registry:
+    def test_casp_questionnaire_scale_and_items_exist(
+        self,
+        prod_items: List[dict],
+        prod_scales: List[dict],
+        prod_questionnaires: List[dict],
+    ) -> None:
+        casp_items = [item for item in prod_items if item["id"].startswith("item_casp_19_")]
+        assert len(casp_items) == 19
+        assert all(item["response_type"] == "casp_0_3" for item in casp_items)
+
+        questionnaire = next((q for q in prod_questionnaires if q["id"] == "q_casp_19"), None)
+        assert questionnaire is not None
+        assert questionnaire["name"] == "CASP-19"
+        assert questionnaire["domains"] == ["quality_of_life"]
+
+        scale = next((sc for sc in prod_scales if sc["id"] == "scale_casp_19"), None)
+        assert scale is not None
+        assert scale["questionnaire_id"] == "q_casp_19"
+        assert scale["response_type"] == "casp_0_3"
+        assert len(scale["items"]) == 19
+
+        reverse_ids = {
+            si["item_id"]
+            for si in scale["items"]
+            if isinstance(si, dict) and si.get("reverse")
+        }
+        assert reverse_ids == {
+            "item_casp_19_03_free_plan_future",
+            "item_casp_19_05_do_things_want",
+            "item_casp_19_07_please_myself",
+            "item_casp_19_10_look_forward_each_day",
+            "item_casp_19_11_life_has_meaning",
+            "item_casp_19_12_enjoy_things",
+            "item_casp_19_13_enjoy_company_others",
+            "item_casp_19_14_happiness_back_on_life",
+            "item_casp_19_15_full_of_energy",
+            "item_casp_19_16_choose_new_things",
+            "item_casp_19_17_life_turnout_satisfied",
+            "item_casp_19_18_life_full_of_opportunities",
+            "item_casp_19_19_future_looks_good",
+        }
 
 
 # ---------------------------------------------------------------------------

@@ -34,6 +34,17 @@ RESPONSE_TYPES: Dict[str, ResponseType] = {
             (3.0, "Nearly every day"),
         ),
     ),
+    "casp_0_3": ResponseType(
+        id="casp_0_3",
+        min_value=0.0,
+        max_value=3.0,
+        options=(
+            (0.0, "Never"),
+            (1.0, "Not often"),
+            (2.0, "Sometimes"),
+            (3.0, "Always"),
+        ),
+    ),
     "bool_0_1": ResponseType(
         id="bool_0_1",
         min_value=0.0,
