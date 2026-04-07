@@ -32,6 +32,26 @@ P1 runtime state loop implemented:
 
 The reference engine uses **SQLite + a minimal Python dependency set**. Current runtime requirements are pinned in `prod/requirements.txt` (including `numpy` for the item-efficiency analyzer) to keep behavior reproducible across environments.
 
+## 2026-04-07 Validated Benchmark Update
+
+The questions lane is no longer just a plausible modality. Formal mixed-model
+results from SHEBA or ELITE scored through the questions agent show:
+
+- BAI is the current strongest robust longitudinal improvement signal
+- improvement is about `0.98` points per `30` days
+- arm-adjusted mixed model `95% CI [0.34, 1.61]`, `q=0.011`
+- paired standardized effect is about `d=0.41`
+- BDI and WHO-5 move in a favorable direction but remain suggestive after correction
+
+Downstream implication for AniFold and related model families:
+
+- validated scales and baselines are a benchmark input, not an optional add-on
+- raw answers alone are not the canonical questionnaire surface when scored
+  outputs already exist
+- questionnaire outputs should stay time-resolved with session or date
+  provenance and should not be flattened into one static user-average feature
+  bundle for longitudinal biology work unless that loss is explicit
+
 ## Quick start (demo)
 
 Engineering quality gate:
