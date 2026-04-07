@@ -46,6 +46,15 @@ Process docs:
 - `docs/observability-baseline.md`
 - `docs/adr/0000-template.md`
 
+Historical backfill utility:
+
+- `tools/backfill_historical_answers.py` imports historical answer rows, resolves
+  them against the registry, and writes retroactive daily sessions so validated
+  scales and baselines can be recomputed from legacy exports such as
+  `daily_scan_answers.csv`.
+- It supports explicit item-id columns, mapping JSON, exact text matching,
+  `--dry-run`, and optional registry bootstrap for fresh scratch environments.
+
 1) Initialize DB and seed demo registry:
 
 ```bash
