@@ -6,11 +6,12 @@ cd "$ROOT_DIR"
 
 TARGET="${1:-all}"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
+RUFF_BIN="${RUFF_BIN:-ruff}"
 export PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-/tmp/pycache}"
 
 run_lint() {
-  "$PYTHON_BIN" -m compileall -q pipeline policy prod tools tests
-  "$PYTHON_BIN" -m ruff check pipeline policy prod tools tests --exclude .git,.venv,.audit_venv,.audit_venv312,node_modules,output,data
+  "$PYTHON_BIN" -m compileall -q pipeline policy prod tools scripts tests sitecustomize.py
+  "$RUFF_BIN" check pipeline policy prod tools scripts tests sitecustomize.py --exclude .git,.venv,.audit_venv,.audit_venv312,node_modules,output,data
 }
 
 run_type_check() {

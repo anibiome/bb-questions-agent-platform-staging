@@ -1,0 +1,46 @@
+name: ci-baseline
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+      - "codex/**"
+
+jobs:
+  foundation-health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.lock.txt
+
+      - name: Install pinned dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.lock.txt
+
+      - name: Compile source and tests
+        run: python -m compileall -q pipeline policy prod tools scripts tests sitecustomize.py
+
+      - name: Lint source and tests
+        run: ruff check pipeline policy prod tools scripts tests sitecustomize.py --exclude .git,.venv,.audit_venv,.audit_venv312,node_modules,output,data
+
+      - name: Run unit test contract
+        env:
+          PYTHONPATH: .
+        run: python -m unittest -q
+
+      - name: Verify repository compliance baseline
+        run: python tools/repo_compliance_check.py
+
+      - name: Audit pinned dependencies
+        run: |
+          python -m pip install pip-audit
+          pip-audit

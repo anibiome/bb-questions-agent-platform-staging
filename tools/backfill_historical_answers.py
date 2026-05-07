@@ -48,10 +48,10 @@ def _install_repo_package_alias() -> None:
 
 _install_repo_package_alias()
 
-from pipeline.config import QuestionsAgentConfig, ensure_paths, load_config
-from pipeline.db import connect, init_db
-from pipeline.registry import list_versions, load_registry
-from pipeline.service import get_or_create_daily_session, submit_answers
+from pipeline.config import ensure_paths, load_config  # noqa: E402
+from pipeline.db import connect, init_db  # noqa: E402
+from pipeline.registry import list_versions, load_registry  # noqa: E402
+from pipeline.service import get_or_create_daily_session, submit_answers  # noqa: E402
 
 
 @dataclass(frozen=True)
