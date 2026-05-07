@@ -1,0 +1,21 @@
+name: Code Room Readiness
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+      - "codex/**"
+
+jobs:
+  front-door:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify code-room front door
+        run: |
+          test -f CODE_ROOM_README.md
+          grep -q "## Role In ANI.AI" CODE_ROOM_README.md
+          grep -q "## Current Audit Posture" CODE_ROOM_README.md
+          grep -q "## Claim Boundary" CODE_ROOM_README.md
