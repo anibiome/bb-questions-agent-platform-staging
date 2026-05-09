@@ -18,3 +18,7 @@ jobs:
           python-version: "3.12"
       - name: Verify repository review baseline
         run: python3 tools/repo_compliance_check.py
+      - name: Verify manifest claim controls
+        env:
+          PYTHONPATH: .
+        run: python3 -m unittest tests.test_manifest_controls -v

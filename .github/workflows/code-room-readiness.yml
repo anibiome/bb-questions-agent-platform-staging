@@ -16,6 +16,15 @@ jobs:
       - name: Verify code-room front door
         run: |
           test -f CODE_ROOM_README.md
+          test -f ani-manifest.yaml
+          test -f anifesto.yaml
           grep -q "## Role In ANI.AI" CODE_ROOM_README.md
           grep -q "## Current Audit Posture" CODE_ROOM_README.md
           grep -q "## Claim Boundary" CODE_ROOM_README.md
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify manifest claim controls
+        run: |
+          python3 tools/repo_compliance_check.py
+          PYTHONPATH=. python3 -m unittest tests.test_manifest_controls -v

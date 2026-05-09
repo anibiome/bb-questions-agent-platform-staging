@@ -1,0 +1,43 @@
+schema_version: anifesto.repo.v1
+repo: bb-questions-agent-platform
+category: product_runtime_conversation
+role: behavioral_question_runtime_and_bridge_contract_surface
+status: active
+evidence_class: behavioral_or_derived_evidence_not_raw_biological_or_clinical_truth
+owns:
+  - adaptive_question_selection
+  - questionnaire_registry_contracts
+  - response_history_handling
+  - follow_up_queue
+  - behavioral_evidence_payloads
+  - runtime_bridge_packets
+  - policy_selection_artifacts
+  - coherence_input_contracts
+does_not_own:
+  - participant_source_truth
+  - raw_biological_truth
+  - raw_omics_truth
+  - measured_molecular_truth
+  - clinical_diagnosis
+  - treatment_recommendation
+  - treatment_efficacy
+  - public_clinical_claims
+  - public_science_claims
+  - collaborator_proof
+  - investor_proof
+  - patent_ready_proof
+  - regulatory_clearance
+  - regulated_software
+promotion_requires:
+  - questionnaire_registry_identity
+  - response_provenance
+  - runtime_bridge_identity
+  - backend_runtime_identity
+  - calibration_or_validation_trace
+  - evidence_class_on_exported_packets
+  - privacy_security_review
+  - clinical_or_protocol_review_for_action_claims
+  - explicit_promotion_approval
+verification:
+  - python3 tools/repo_compliance_check.py
+  - python3 -m unittest tests.test_manifest_controls -v

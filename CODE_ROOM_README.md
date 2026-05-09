@@ -10,10 +10,12 @@ system, not as a standalone product. It belongs to route `product_runtime_conver
 ## Why It Matters
 
 ANI.AI reconstructs biological state from sparse, messy observations.
-This repo contributes to that engine by owning one or more of: capture,
-observer inference, omics linkage, state reconstruction, intervention
-response, runtime answer generation, clinical/trial execution, or
-evidence hygiene.
+This repo contributes to that engine by owning adaptive question selection,
+questionnaire registry contracts, response-history handling, follow-up queues,
+behavioral evidence payloads, and runtime bridges for downstream state
+reconstruction. It consumes runtime/statistical context from source repos; it is
+not the raw source of participant, biological, omics, clinical, diagnosis,
+treatment, or regulatory truth.
 
 ## Current Audit Posture
 
@@ -40,5 +42,13 @@ evidence hygiene.
 
 This repo supports code-room technical diligence. It does not by itself
 convert exploratory, proxy, synthetic, or model-inferred outputs into
-public clinical claims. Claims must be tied to measured source artifacts,
-validation traces, model checkpoints, or repo-backed reports.
+public clinical claims. It does not by itself establish participant source truth,
+raw biological truth, raw omics truth, clinical diagnosis, treatment
+recommendation, treatment efficacy, public science claims, collaborator proof,
+investor proof, patent-ready proof, regulatory clearance, or regulated software.
+
+Promotion requires questionnaire registry identity, response provenance,
+runtime bridge identity, calibration or validation trace, evidence class on
+exported packets, privacy/security review, clinical/protocol review for
+action-facing claims, and explicit promotion approval
+(`explicit_promotion_approval`).
