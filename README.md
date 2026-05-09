@@ -7,6 +7,25 @@ This folder is a runnable blueprint for a **Questions Agent** that:
 - outputs **structured evidence for Anifold fusion** (projection + uncertainty + attractor + velocity),
 - includes a minimal **dashboard** for sanity-checking unlocks/scores over time.
 
+## Evidence Boundary
+
+The Questions Agent is a behavioral-question runtime and contract surface. It
+serves adaptive question APIs, stores response history, emits behavioral
+evidence, and publishes runtime bridge packets for downstream ANI state
+reconstruction. It is not the raw biological, clinical, omics, participant, or
+treatment source of truth.
+
+Questionnaire scores, daily sessions, state/circle snapshots, drift events,
+policy decisions, follow-up queues, runtime bridges, closed-loop truth demos,
+and Anifold evidence payloads are behavioral or derived evidence until the
+questionnaire registry, response provenance, backend runtime identity,
+calibration/validation trace, privacy/security review, clinical/protocol review
+for action-facing claims, and explicit promotion approval are attached. This
+repo does not by itself establish clinical diagnosis, treatment recommendation,
+treatment efficacy, public clinical claims, public science claims,
+collaborator proof, investor proof, patent-ready proof, regulatory clearance, or
+regulated software.
+
 P0 production-readiness invariants implemented:
 - one timeframe per session (`timeframe` persisted on `daily_sessions`)
 - session lifecycle (`created|started|completed|abandoned`)
@@ -218,6 +237,11 @@ These files are refreshed on vault `runtime_snapshot_ready` and include:
 - anchor signals
 - counterfactual probes
 - recommended follow-up prompts/domains for the question engine
+
+Use this bridge as a backend-published behavioral context contract for question
+selection. It is not raw biological source truth, clinical diagnosis, treatment
+guidance, treatment efficacy evidence, public science proof, investor proof, or
+patent-ready proof.
 
 Contract spec:
 - `questions_agent_platform/SCHEMA_CONTRACTS_V1.md`

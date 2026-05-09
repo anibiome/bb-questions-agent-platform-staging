@@ -6,8 +6,10 @@ name: Questions Agent Platform
 repo_path: questions-agent-platform
 role: interaction_authority
 tier: core
-source_of_truth: true
-summary: Adaptive questioning runtime that serves production APIs, emits runtime bridges, and converts behavioral observations into structured coherence inputs.
+source_of_truth: false
+source_of_truth_scope: behavioral_question_runtime_and_runtime_bridge_contracts_only
+evidence_class: behavioral_or_derived_evidence_not_raw_biological_or_clinical_truth
+summary: Adaptive questioning runtime that serves production APIs, emits runtime bridges, and converts behavioral observations into structured coherence inputs without claiming raw biological or clinical truth.
 paths:
   repo_root: .
   code:
@@ -88,6 +90,30 @@ policy:
     - user_response_history
     - follow_up_queue
     - behavioral_latent_state
+claim_boundaries:
+  participant_source_truth: false
+  raw_biological_truth: false
+  raw_omics_truth: false
+  clinical_diagnosis: false
+  treatment_recommendation: false
+  treatment_efficacy: false
+  public_clinical_claims: false
+  public_science_claims: false
+  collaborator_proof: false
+  investor_proof: false
+  patent_ready_proof: false
+  regulatory_clearance: false
+  regulated_software: false
+promotion_requires:
+  - questionnaire_registry_identity
+  - response_provenance
+  - runtime_bridge_identity
+  - backend_runtime_identity
+  - calibration_or_validation_trace
+  - evidence_class_on_exported_packets
+  - privacy_security_review
+  - clinical_or_protocol_review_for_action_claims
+  - explicit_promotion_approval
 quality:
   test_framework: unittest
   observed_test_file_count: 54
