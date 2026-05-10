@@ -90,8 +90,10 @@ from questions_agent_platform.pipeline.state_snapshots import (
     dominant_decoherence_mode,
 )
 from questions_agent_platform.pipeline.trajectory_metrics import (
+    COHERENCE_CIRCLE_GEOMETRY_CONTRACT,
     build_uncertainty_coupling,
     coherence_tier_contract,
+    coherence_tier_for_radius,
     coherence_tier_for_score,
     coherence_score_from_radius,
     confidence_to_quality,
@@ -2439,9 +2441,15 @@ def get_circle_snapshots(
                 "z": json.loads(str(r["z_json"])),
                 "z_star": json.loads(str(r["z_star_json"])),
                 "r": float(r["r"]),
+                "geometry_contract": COHERENCE_CIRCLE_GEOMETRY_CONTRACT,
+                "decoherence_radius": float(r["r"]),
                 "theta": float(r["theta"]),
                 "velocity": float(r["velocity"]),
                 "acceleration": float(r["acceleration"]),
+                "coherence_scalar": float(score),
+                "coordination_score": float(score),
+                "tier": coherence_tier_for_radius(float(r["r"])),
+                "edge_guard_reasons": [],
                 "coherence": {
                     "score": float(score),
                     "tier": tier,

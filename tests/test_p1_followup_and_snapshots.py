@@ -22,6 +22,9 @@ from questions_agent_platform.pipeline.service import (
     submit_answers,
 )
 from questions_agent_platform.pipeline.state_snapshots import CIRCLE_PROJECTION_VERSION
+from questions_agent_platform.pipeline.trajectory_metrics import (
+    COHERENCE_CIRCLE_GEOMETRY_CONTRACT,
+)
 from questions_agent_platform.pipeline.time_utils import now_iso
 
 
@@ -252,6 +255,12 @@ class TestP1FollowUpAndSnapshots(unittest.TestCase):
                 self.assertEqual(states[0]["date"], day1.isoformat())
                 self.assertEqual(states[1]["date"], day2.isoformat())
                 self.assertEqual(circles[1]["projection_version"], CIRCLE_PROJECTION_VERSION)
+                self.assertEqual(
+                    circles[1]["geometry_contract"],
+                    COHERENCE_CIRCLE_GEOMETRY_CONTRACT,
+                )
+                self.assertEqual(circles[1]["decoherence_radius"], circles[1]["r"])
+                self.assertEqual(circles[1]["edge_guard_reasons"], [])
                 self.assertIn("x_hat", states[1])
                 self.assertIn("uncertainty", circles[1])
                 self.assertGreaterEqual(float(circles[1]["velocity"]), 0.0)

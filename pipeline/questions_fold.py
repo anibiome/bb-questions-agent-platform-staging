@@ -82,6 +82,10 @@ from questions_agent_platform.pipeline.state_snapshots import (
     compute_minifold_circles,
     dominant_decoherence_mode,
 )
+from questions_agent_platform.pipeline.trajectory_metrics import (
+    COHERENCE_CIRCLE_GEOMETRY_CONTRACT,
+    coherence_tier_for_radius,
+)
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -241,10 +245,12 @@ class QuestionsFoldResult:
 
             # Coherence Circle geometry
             "circle": {
+                "geometry_contract": COHERENCE_CIRCLE_GEOMETRY_CONTRACT,
                 "z": [round(self.z[0], 6), round(self.z[1], 6)],
                 "z_star": [round(self.z_star[0], 6), round(self.z_star[1], 6)],
                 "z_dagger": [round(z_dagger[0], 6), round(z_dagger[1], 6)],
                 "r": round(self.r, 6),
+                "decoherence_radius": round(self.r, 6),
                 "structural_distance": round(r_struct, 6),
                 "absolute_distance": round(r_abs, 6),
                 "theta": round(self.theta, 6),
@@ -276,6 +282,10 @@ class QuestionsFoldResult:
                     k: round(v, 6) for k, v in ideal_sigma_diag.items()
                 },
                 "local_coherence": round(local_coherence, 6),
+                "coherence_scalar": round(local_coherence, 6),
+                "coordination_score": round(local_coherence, 6),
+                "tier": coherence_tier_for_radius(float(self.r)),
+                "edge_guard_reasons": [],
                 "absolute_coherence": round(absolute_coherence, 6),
                 "coherence_uncertainty": round(self.coherence_uncertainty, 6),
                 "projection_version": self.circle_projection_version,

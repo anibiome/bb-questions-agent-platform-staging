@@ -7,7 +7,9 @@ from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
 from questions_agent_platform.pipeline.registry import Registry
 from questions_agent_platform.pipeline.trajectory_metrics import (
+    COHERENCE_CIRCLE_GEOMETRY_CONTRACT,
     canonical_coherence_score,
+    coherence_tier_for_radius,
     coherence_uncertainty_from_state,
     decompose_rejuvenation_geometry,
 )
@@ -317,10 +319,12 @@ def compute_circle_snapshot(
     }
 
     return {
+        "geometry_contract": COHERENCE_CIRCLE_GEOMETRY_CONTRACT,
         "z": [round(float(z[0]), 6), round(float(z[1]), 6)],
         "z_star": [round(float(z_star[0]), 6), round(float(z_star[1]), 6)],
         "z_dagger": [round(float(z_dagger[0]), 6), round(float(z_dagger[1]), 6)],
         "r": round(float(acute_distance), 6),
+        "decoherence_radius": round(float(acute_distance), 6),
         "r_struct": round(float(structural_distance), 6),
         "r_abs": round(float(absolute_distance), 6),
         "structural_distance": round(float(structural_distance), 6),
@@ -334,6 +338,10 @@ def compute_circle_snapshot(
         "absolute_axis_scores": absolute_axis_scores,
         "absolute_concentration": round(float(absolute_concentration), 6),
         "coherence": round(float(local_coherence), 6),
+        "coherence_scalar": round(float(local_coherence), 6),
+        "coordination_score": round(float(local_coherence), 6),
+        "tier": coherence_tier_for_radius(float(acute_distance)),
+        "edge_guard_reasons": [],
         "local_coherence": round(float(local_coherence), 6),
         "absolute_coherence": round(float(absolute_coherence), 6),
         "coherence_components": local_components,

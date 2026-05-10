@@ -48,6 +48,10 @@ from questions_agent_platform.pipeline.state_snapshots import (
     MINIFOLD_VERSION,
     STATE_DIMENSIONS,
 )
+from questions_agent_platform.pipeline.trajectory_metrics import (
+    COHERENCE_CIRCLE_GEOMETRY_CONTRACT,
+    coherence_tier_for_radius,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -693,7 +697,13 @@ class TestIdentityMaskSerialisation:
         assert "z" in circle and len(circle["z"]) == 2
         assert "z_star" in circle and len(circle["z_star"]) == 2
         assert "z_dagger" in circle and len(circle["z_dagger"]) == 2
+        assert circle["geometry_contract"] == COHERENCE_CIRCLE_GEOMETRY_CONTRACT
         assert "r" in circle
+        assert circle["decoherence_radius"] == circle["r"]
+        assert circle["tier"] == coherence_tier_for_radius(circle["r"])
+        assert circle["coordination_score"] == circle["local_coherence"]
+        assert circle["coherence_scalar"] == circle["local_coherence"]
+        assert circle["edge_guard_reasons"] == []
         assert "structural_distance" in circle["rejuvenation_geometry"]
         assert "absolute_distance" in circle["rejuvenation_geometry"]
         assert "theta" in circle

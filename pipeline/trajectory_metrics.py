@@ -53,6 +53,22 @@ COHERENCE_TIER_LADDER = (
     },
 )
 
+COHERENCE_CIRCLE_GEOMETRY_CONTRACT = "ani.coherence_circle_geometry.v1"
+
+
+def coherence_tier_for_radius(radius: float) -> str:
+    r = max(0.0, float(radius))
+    if r >= 0.85:
+        return "critical"
+    if r >= 0.65:
+        return "elevated"
+    if r >= 0.35:
+        return "moderate"
+    if r >= 0.15:
+        return "good"
+    return "optimal"
+
+
 CANONICAL_STATE_DIMENSIONS: Tuple[str, ...] = (
     "energy_vitality",
     "sleep_quality",
