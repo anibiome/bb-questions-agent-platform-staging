@@ -19,44 +19,44 @@ jobs:
     timeout-minutes: 25
     steps:
       - name: Checkout current repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: _system/questions-agent-platform
 
       - name: Checkout control plane
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
-          repository: anibiome/ani-control-plane
+          repository: anibiome/bb-ani-control-plane
           ref: main
           token: ${{ secrets.ANIBIOME_CI_TOKEN || github.token }}
           path: _control_plane
 
       - name: Checkout ani-proteomics
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
-          repository: anibiome/ani-proteomics
+          repository: anibiome/bb-ani-proteomics
           ref: main
           token: ${{ secrets.ANIBIOME_CI_TOKEN || github.token }}
           path: _system/ani-proteomics
 
       - name: Checkout ani-medical-platform
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
-          repository: anibiome/ani-medical-platform
+          repository: anibiome/bb-ani-medical-platform
           ref: main
           token: ${{ secrets.ANIBIOME_CI_TOKEN || github.token }}
           path: _system/ani-medical-platform
 
       - name: Checkout ani-vault
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
-          repository: anibiome/ani-vault
+          repository: anibiome/bb-ani-vault
           ref: main
           token: ${{ secrets.ANIBIOME_CI_TOKEN || github.token }}
           path: _system/ani-vault
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: pip
@@ -77,7 +77,7 @@ jobs:
 
       - name: Upload gate report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: control-plane-report
           path: _control_plane/output/core_chain_report.json
