@@ -3,7 +3,11 @@ import threading
 import unittest
 import urllib.request
 
-from questions_agent_platform.contracts import CONTRACT_FUSION_TO_QUESTIONS_CONTEXT
+from questions_agent_platform.contracts import (
+    CONTRACT_FUSION_TO_QUESTIONS_CONTEXT,
+    QUESTION_EVIDENCE_CLASS,
+    build_behavioral_evidence_boundary,
+)
 from questions_agent_platform.pipeline.anifold_adapter import (
     AnifoldAdapterClient,
     AnifoldAdapterConfig,
@@ -25,7 +29,9 @@ def _http_json(method: str, url: str, payload=None):
     return json.loads(raw)
 
 
-def _sample_projection_payload(user_id: str, day: str, session_id: str, decision_id: str):
+def _sample_projection_payload(
+    user_id: str, day: str, session_id: str, decision_id: str
+):
     vector = [round(float(i) / 1000.0, 6) for i in range(128)]
     return {
         "contract": {
@@ -40,8 +46,11 @@ def _sample_projection_payload(user_id: str, day: str, session_id: str, decision
                 "decision_id": decision_id,
             },
         },
+        "schema_version": "1.0",
         "subject_id": user_id,
         "timestamp": f"{day}T12:00:00Z",
+        "evidence_class": QUESTION_EVIDENCE_CLASS,
+        "claim_boundary": build_behavioral_evidence_boundary(),
         "modality_projections": {
             "questionnaires": {
                 "projection": vector,
@@ -66,7 +75,9 @@ class TestAnifoldAdapterAndMock(unittest.TestCase):
                 day="2026-02-16",
                 identity_mask_id="identity_mask_default",
             )
-            self.assertEqual(context["contract_name"], CONTRACT_FUSION_TO_QUESTIONS_CONTEXT)
+            self.assertEqual(
+                context["contract_name"], CONTRACT_FUSION_TO_QUESTIONS_CONTEXT
+            )
             self.assertEqual(context["schema_version"], "1.0")
             self.assertEqual(len(context["anifold_z"]), 3)
             self.assertEqual(len(context["z_uncertainty_diag"]), 3)
@@ -85,7 +96,9 @@ class TestAnifoldAdapterAndMock(unittest.TestCase):
             self.assertEqual(req["selection_mode"], "policy_shadow")
             self.assertEqual(req["k_core"], 5)
             self.assertIn("context", req)
-            self.assertEqual(req["context"]["contract_name"], CONTRACT_FUSION_TO_QUESTIONS_CONTEXT)
+            self.assertEqual(
+                req["context"]["contract_name"], CONTRACT_FUSION_TO_QUESTIONS_CONTEXT
+            )
         finally:
             server.shutdown()
             server.server_close()
@@ -113,7 +126,9 @@ class TestAnifoldAdapterAndMock(unittest.TestCase):
                 decision_id="dec-1",
             )
             self.assertEqual(evidence_result["status"], "accepted")
-            self.assertEqual(evidence_result["contract_name"], "questions_to_fusion_evidence")
+            self.assertEqual(
+                evidence_result["contract_name"], "questions_to_fusion_evidence"
+            )
 
             outcome_result = client.submit_questions_outcome(
                 user_id="u_adapter_2",
@@ -126,7 +141,9 @@ class TestAnifoldAdapterAndMock(unittest.TestCase):
                 },
             )
             self.assertEqual(outcome_result["status"], "accepted")
-            self.assertEqual(outcome_result["contract_name"], "fusion_to_questions_outcome")
+            self.assertEqual(
+                outcome_result["contract_name"], "fusion_to_questions_outcome"
+            )
 
             logs = _http_json("GET", f"{base_url}/v1/logs")
             self.assertEqual(int(logs["evidence_count"]), 1)
@@ -157,7 +174,9 @@ class TestAnifoldAdapterAndMock(unittest.TestCase):
                 }
             )
 
-    def test_context_normalization_and_request_builder_harden_string_flags(self) -> None:
+    def test_context_normalization_and_request_builder_harden_string_flags(
+        self,
+    ) -> None:
         context = normalize_context_payload(
             {
                 "contract_name": CONTRACT_FUSION_TO_QUESTIONS_CONTEXT,
@@ -167,7 +186,9 @@ class TestAnifoldAdapterAndMock(unittest.TestCase):
             }
         )
 
-        client = AnifoldAdapterClient(AnifoldAdapterConfig(base_url="http://127.0.0.1:9999"))
+        client = AnifoldAdapterClient(
+            AnifoldAdapterConfig(base_url="http://127.0.0.1:9999")
+        )
         request_payload = client.build_daily_select_request(
             day="2026-02-16",
             context_payload=context,

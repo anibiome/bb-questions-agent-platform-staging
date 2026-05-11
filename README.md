@@ -2,7 +2,7 @@
 
 This folder is a runnable blueprint for a **Questions Agent** that:
 - serves **5 daily questions** (plus optional one-by-one “Ask Ani more” probes, up to 3/day),
-- scores **validated scale structures** with **within-person baselines**,
+- scores **registry-backed scale structures** with **within-person baselines**,
 - supports **item multiplexing** (one item can feed multiple scales),
 - outputs **structured evidence for Anifold fusion** (projection + uncertainty + attractor + velocity),
 - includes a minimal **dashboard** for sanity-checking unlocks/scores over time.
@@ -261,9 +261,9 @@ Admin:
 
 ---
 
-## Production deployment (FastAPI + Postgres)
+## Internal Deployment Surface (FastAPI + Postgres)
 
-We also shipped a **production‑grade FastAPI service** in:
+The repo includes a deployment-oriented internal FastAPI service in:
 - `questions_agent_platform/prod/`
 
 It includes:
@@ -274,7 +274,7 @@ It includes:
 - API key auth
 - Same selection/scoring logic as the reference engine
 
-### Local production run (Docker)
+### Local Deployment Run (Docker)
 
 ```bash
 cd questions_agent_platform/prod

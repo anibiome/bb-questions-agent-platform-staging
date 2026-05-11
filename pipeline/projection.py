@@ -11,6 +11,8 @@ from questions_agent_platform.pipeline.baseline import BaselineState
 from questions_agent_platform.pipeline.time_utils import date_to_start_iso, now_iso
 from questions_agent_platform.contracts import (
     CONTRACT_QUESTIONS_TO_FUSION_EVIDENCE,
+    QUESTION_EVIDENCE_CLASS,
+    build_behavioral_evidence_boundary,
     build_contract_header,
     build_integration_anchor,
     validate_projection_payload_contract,
@@ -41,8 +43,12 @@ def build_questions_projection_payload(
     latest_scores = _get_latest_scale_scores(conn, user_id=user_id, day=day)
     baselines = _get_baselines(conn, user_id=user_id)
 
-    current_vec, current_counts = _hash_vector_from_scores(latest_scores, dim=VECTOR_DIM)
-    attractor_vec, attractor_counts = _hash_vector_from_baselines(baselines, dim=VECTOR_DIM)
+    current_vec, current_counts = _hash_vector_from_scores(
+        latest_scores, dim=VECTOR_DIM
+    )
+    attractor_vec, attractor_counts = _hash_vector_from_baselines(
+        baselines, dim=VECTOR_DIM
+    )
 
     uncertainty = _diag_uncertainty(current_counts, baselines)
 
@@ -70,6 +76,8 @@ def build_questions_projection_payload(
         "schema_version": SCHEMA_VERSION,
         "subject_id": user_id,
         "timestamp": timestamp,
+        "evidence_class": QUESTION_EVIDENCE_CLASS,
+        "claim_boundary": build_behavioral_evidence_boundary(),
         "modality_projections": {
             "questionnaires": {
                 "projection": current_vec,
@@ -83,7 +91,9 @@ def build_questions_projection_payload(
             }
         },
         "derived_features": {
-            "scale_scores": {sid: _score_summary(s) for sid, s in latest_scores.items()},
+            "scale_scores": {
+                sid: _score_summary(s) for sid, s in latest_scores.items()
+            },
         },
         "event_log": [],
         "provenance": {
@@ -113,7 +123,9 @@ def _stable_bucket(feature: str, dim: int) -> Tuple[int, float]:
     return idx, sign
 
 
-def _hash_vector_from_scores(scores: Dict[str, Dict[str, Any]], *, dim: int) -> Tuple[List[float], List[int]]:
+def _hash_vector_from_scores(
+    scores: Dict[str, Dict[str, Any]], *, dim: int
+) -> Tuple[List[float], List[int]]:
     vec = [0.0] * int(dim)
     counts = [0] * int(dim)
 
@@ -136,7 +148,9 @@ def _hash_vector_from_scores(scores: Dict[str, Dict[str, Any]], *, dim: int) -> 
     return vec, counts
 
 
-def _hash_vector_from_baselines(baselines: Dict[str, BaselineState], *, dim: int) -> Tuple[List[float], List[int]]:
+def _hash_vector_from_baselines(
+    baselines: Dict[str, BaselineState], *, dim: int
+) -> Tuple[List[float], List[int]]:
     vec = [0.0] * int(dim)
     counts = [0] * int(dim)
 
@@ -149,11 +163,15 @@ def _hash_vector_from_baselines(baselines: Dict[str, BaselineState], *, dim: int
     return vec, counts
 
 
-def _diag_uncertainty(counts: List[int], baselines: Dict[str, BaselineState]) -> List[float]:
+def _diag_uncertainty(
+    counts: List[int], baselines: Dict[str, BaselineState]
+) -> List[float]:
     # v1 heuristic: fewer contributions => higher uncertainty. Baseline variance increases uncertainty slightly.
     baseline_var = 0.0
     if baselines:
-        baseline_var = sum(float(b.var) for b in baselines.values()) / max(1, len(baselines))
+        baseline_var = sum(float(b.var) for b in baselines.values()) / max(
+            1, len(baselines)
+        )
 
     out = []
     for c in counts:
@@ -195,7 +213,9 @@ def _score_summary(score: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def _get_latest_scale_scores(conn: sqlite3.Connection, *, user_id: str, day: date) -> Dict[str, Dict[str, Any]]:
+def _get_latest_scale_scores(
+    conn: sqlite3.Connection, *, user_id: str, day: date
+) -> Dict[str, Dict[str, Any]]:
     rows = conn.execute(
         """
         SELECT * FROM scale_scores
@@ -211,24 +231,34 @@ def _get_latest_scale_scores(conn: sqlite3.Connection, *, user_id: str, day: dat
             "window_end": str(r["window_end"]),
             "normalized_score": float(r["normalized_score"]),
             "confidence_tier": str(r["confidence_tier"]),
-            "personal_z": float(r["personal_z"]) if r["personal_z"] is not None else None,
-            "delta_vs_prev": float(r["delta_vs_prev"]) if r["delta_vs_prev"] is not None else None,
+            "personal_z": float(r["personal_z"])
+            if r["personal_z"] is not None
+            else None,
+            "delta_vs_prev": float(r["delta_vs_prev"])
+            if r["delta_vs_prev"] is not None
+            else None,
         }
     return latest
 
 
-def _get_baselines(conn: sqlite3.Connection, *, user_id: str) -> Dict[str, BaselineState]:
+def _get_baselines(
+    conn: sqlite3.Connection, *, user_id: str
+) -> Dict[str, BaselineState]:
     rows = conn.execute(
         "SELECT scale_id, mean, var, n FROM scale_baselines WHERE user_id=?;",
         (user_id,),
     ).fetchall()
     out: Dict[str, BaselineState] = {}
     for r in rows:
-        out[str(r["scale_id"])] = BaselineState(mean=float(r["mean"]), var=float(r["var"]), n=int(r["n"]))
+        out[str(r["scale_id"])] = BaselineState(
+            mean=float(r["mean"]), var=float(r["var"]), n=int(r["n"])
+        )
     return out
 
 
-def _get_latest_projection_before(conn: sqlite3.Connection, *, user_id: str, timestamp: str) -> Optional[Dict[str, Any]]:
+def _get_latest_projection_before(
+    conn: sqlite3.Connection, *, user_id: str, timestamp: str
+) -> Optional[Dict[str, Any]]:
     row = conn.execute(
         """
         SELECT timestamp, payload_json
@@ -246,7 +276,9 @@ def _get_latest_projection_before(conn: sqlite3.Connection, *, user_id: str, tim
     return {"timestamp": str(row["timestamp"]), "projection": proj.get("projection")}
 
 
-def _get_integration_anchor(conn: sqlite3.Connection, *, user_id: str, day: date) -> Dict[str, Any]:
+def _get_integration_anchor(
+    conn: sqlite3.Connection, *, user_id: str, day: date
+) -> Dict[str, Any]:
     row = conn.execute(
         """
         SELECT session_id, policy_decision_id
@@ -260,6 +292,12 @@ def _get_integration_anchor(conn: sqlite3.Connection, *, user_id: str, day: date
     return build_integration_anchor(
         user_id=user_id,
         day=day,
-        session_id=(str(row["session_id"]) if row and row["session_id"] is not None else None),
-        decision_id=(str(row["policy_decision_id"]) if row and row["policy_decision_id"] is not None else None),
+        session_id=(
+            str(row["session_id"]) if row and row["session_id"] is not None else None
+        ),
+        decision_id=(
+            str(row["policy_decision_id"])
+            if row and row["policy_decision_id"] is not None
+            else None
+        ),
     )

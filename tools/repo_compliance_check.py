@@ -57,6 +57,50 @@ REQUIRED_TOKENS = {
     ".github/workflows/regulated-review.yml": [
         "tests.test_manifest_controls",
     ],
+    "contracts.py": [
+        "QUESTION_EVIDENCE_CLASS",
+        "QUESTION_CLAIM_BOUNDARY",
+        "build_behavioral_evidence_boundary",
+        "raw_biological_truth",
+        "clinical_diagnosis",
+        "explicit_promotion_approval",
+    ],
+    "pipeline/projection.py": [
+        "QUESTION_EVIDENCE_CLASS",
+        "build_behavioral_evidence_boundary",
+        '"evidence_class": QUESTION_EVIDENCE_CLASS',
+        '"claim_boundary": build_behavioral_evidence_boundary()',
+    ],
+    "prod/projection_pg.py": [
+        "QUESTION_EVIDENCE_CLASS",
+        "build_behavioral_evidence_boundary",
+        '"evidence_class": QUESTION_EVIDENCE_CLASS',
+        '"claim_boundary": build_behavioral_evidence_boundary()',
+    ],
+    "tests/test_contracts.py": [
+        "QUESTION_EVIDENCE_CLASS",
+        "raw_biological_truth",
+        "clinical_diagnosis",
+        "explicit_promotion_approval",
+    ],
+}
+
+FORBIDDEN_PHRASES = {
+    "CLAUDE.md": [
+        "5 patent claim families",
+        "Patent claims cover",
+        "Behavioral signals correlate with molecular state",
+        "47,760 lines Python. 781 tests. 52+ FastAPI endpoints",
+    ],
+    "README.md": [
+        "production-grade FastAPI service",
+        "Production deployment",
+        "Local production run",
+        "5 patent claim families",
+    ],
+    "BRUNO_TECHNICAL_OVERVIEW.md": [
+        "5 patent claim families",
+    ],
 }
 
 
@@ -72,7 +116,11 @@ def main() -> int:
     code_room = repo_root / "CODE_ROOM_README.md"
     if code_room.exists():
         text = code_room.read_text(encoding="utf-8")
-        for section in ("## Role In ANI.AI", "## Current Audit Posture", "## Claim Boundary"):
+        for section in (
+            "## Role In ANI.AI",
+            "## Current Audit Posture",
+            "## Claim Boundary",
+        ):
             if section not in text:
                 failures.append(f"CODE_ROOM_README.md missing section: {section}")
 
@@ -86,8 +134,19 @@ def main() -> int:
             if token not in text:
                 failures.append(f"missing claim-control token in {rel_path}: {token}")
 
+    for rel_path, phrases in FORBIDDEN_PHRASES.items():
+        path = repo_root / rel_path
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        for phrase in phrases:
+            if phrase in text:
+                failures.append(f"forbidden stale claim phrase in {rel_path}: {phrase}")
+
     workflow_dir = repo_root / ".github" / "workflows"
-    workflow_files = sorted(workflow_dir.glob("*.yml")) + sorted(workflow_dir.glob("*.yaml"))
+    workflow_files = sorted(workflow_dir.glob("*.yml")) + sorted(
+        workflow_dir.glob("*.yaml")
+    )
     if not workflow_files:
         failures.append("missing GitHub Actions workflow")
 
@@ -95,7 +154,9 @@ def main() -> int:
     if env_example.exists():
         text = env_example.read_text(encoding="utf-8")
         if "API_KEY=change_me" in text:
-            warnings.append("prod/.env.example contains placeholder API key and must not be promoted unchanged")
+            warnings.append(
+                "prod/.env.example contains placeholder API key and must not be promoted unchanged"
+            )
 
     if (repo_root / "output").exists():
         warnings.append("review committed `output/` artifacts before release packaging")

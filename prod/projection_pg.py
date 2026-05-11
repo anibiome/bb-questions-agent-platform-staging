@@ -14,12 +14,19 @@ from questions_agent_platform.pipeline.projection import (
 from questions_agent_platform.pipeline.time_utils import date_to_start_iso
 from questions_agent_platform.contracts import (
     CONTRACT_QUESTIONS_TO_FUSION_EVIDENCE,
+    QUESTION_EVIDENCE_CLASS,
+    build_behavioral_evidence_boundary,
     build_contract_header,
     build_integration_anchor,
     validate_projection_payload_contract,
 )
 
-from questions_agent_platform.prod.models import DailySession, QuestionsProjection, ScaleBaseline, ScaleScore
+from questions_agent_platform.prod.models import (
+    DailySession,
+    QuestionsProjection,
+    ScaleBaseline,
+    ScaleScore,
+)
 
 
 def build_projection_payload_pg(
@@ -52,14 +59,22 @@ def build_projection_payload_pg(
         user_id=user_id,
         before_timestamp=date_to_start_iso(day),
     )
-    if previous_projection is not None and len(previous_projection) == len(current_projection):
+    if previous_projection is not None and len(previous_projection) == len(
+        current_projection
+    ):
         payload["modality_projections"]["questionnaires"]["velocity"] = [
             float(c) - float(p) for c, p in zip(current_projection, previous_projection)
         ]
 
     ts = payload["timestamp"]
     validate_projection_payload_contract(payload, vector_dim=VECTOR_DIM)
-    session.merge(QuestionsProjection(user_id=user_id, timestamp=ts, payload_json=json.dumps(payload, ensure_ascii=False)))
+    session.merge(
+        QuestionsProjection(
+            user_id=user_id,
+            timestamp=ts,
+            payload_json=json.dumps(payload, ensure_ascii=False),
+        )
+    )
     return payload
 
 
@@ -85,10 +100,16 @@ def _build_payload_from_state(
         PIPELINE_VERSION,
     )
 
-    current_vec, current_counts = _hash_vector_from_scores(latest_scores, dim=VECTOR_DIM)
-    attractor_vec, attractor_counts = _hash_vector_from_baselines(baselines, dim=VECTOR_DIM)
+    current_vec, current_counts = _hash_vector_from_scores(
+        latest_scores, dim=VECTOR_DIM
+    )
+    attractor_vec, attractor_counts = _hash_vector_from_baselines(
+        baselines, dim=VECTOR_DIM
+    )
     uncertainty = _diag_uncertainty(current_counts, baselines)
-    velocity = [0.0] * VECTOR_DIM  # default; replaced in build_projection_payload_pg when previous projection exists
+    velocity = (
+        [0.0] * VECTOR_DIM
+    )  # default; replaced in build_projection_payload_pg when previous projection exists
     distance = _l2_distance(current_vec, attractor_vec)
 
     timestamp = date_to_start_iso(day)
@@ -104,6 +125,8 @@ def _build_payload_from_state(
         "schema_version": SCHEMA_VERSION,
         "subject_id": user_id,
         "timestamp": timestamp,
+        "evidence_class": QUESTION_EVIDENCE_CLASS,
+        "claim_boundary": build_behavioral_evidence_boundary(),
         "modality_projections": {
             "questionnaires": {
                 "projection": current_vec,
@@ -117,7 +140,9 @@ def _build_payload_from_state(
             }
         },
         "derived_features": {
-            "scale_scores": {sid: _score_summary(s) for sid, s in latest_scores.items()},
+            "scale_scores": {
+                sid: _score_summary(s) for sid, s in latest_scores.items()
+            },
         },
         "event_log": [],
         "provenance": {
@@ -129,37 +154,57 @@ def _build_payload_from_state(
     return payload
 
 
-def _get_integration_anchor(session: Session, *, user_id: str, day: date) -> Dict[str, Any]:
-    row = session.execute(
-        select(DailySession)
-        .where(and_(DailySession.user_id == user_id, DailySession.date == day))
-        .order_by(desc(DailySession.created_at))
-        .limit(1)
-    ).scalars().first()
+def _get_integration_anchor(
+    session: Session, *, user_id: str, day: date
+) -> Dict[str, Any]:
+    row = (
+        session.execute(
+            select(DailySession)
+            .where(and_(DailySession.user_id == user_id, DailySession.date == day))
+            .order_by(desc(DailySession.created_at))
+            .limit(1)
+        )
+        .scalars()
+        .first()
+    )
     return build_integration_anchor(
         user_id=user_id,
         day=day,
         session_id=(str(row.session_id) if row is not None else None),
-        decision_id=(str(row.policy_decision_id) if row is not None and row.policy_decision_id else None),
+        decision_id=(
+            str(row.policy_decision_id)
+            if row is not None and row.policy_decision_id
+            else None
+        ),
     )
 
 
 def _get_baselines(session: Session, *, user_id: str) -> Dict[str, BaselineState]:
-    rows = session.execute(
-        select(ScaleBaseline).where(ScaleBaseline.user_id == user_id)
-    ).scalars().all()
+    rows = (
+        session.execute(select(ScaleBaseline).where(ScaleBaseline.user_id == user_id))
+        .scalars()
+        .all()
+    )
     out: Dict[str, BaselineState] = {}
     for r in rows:
-        out[str(r.scale_id)] = BaselineState(mean=float(r.mean), var=float(r.var), n=int(r.n))
+        out[str(r.scale_id)] = BaselineState(
+            mean=float(r.mean), var=float(r.var), n=int(r.n)
+        )
     return out
 
 
-def _get_latest_scores(session: Session, *, user_id: str, day: date) -> Dict[str, Dict[str, Any]]:
-    rows = session.execute(
-        select(ScaleScore)
-        .where(and_(ScaleScore.user_id == user_id, ScaleScore.window_end <= day))
-        .order_by(ScaleScore.window_end.asc(), ScaleScore.computed_at.asc())
-    ).scalars().all()
+def _get_latest_scores(
+    session: Session, *, user_id: str, day: date
+) -> Dict[str, Dict[str, Any]]:
+    rows = (
+        session.execute(
+            select(ScaleScore)
+            .where(and_(ScaleScore.user_id == user_id, ScaleScore.window_end <= day))
+            .order_by(ScaleScore.window_end.asc(), ScaleScore.computed_at.asc())
+        )
+        .scalars()
+        .all()
+    )
     latest: Dict[str, Dict[str, Any]] = {}
     for r in rows:
         latest[str(r.scale_id)] = {
@@ -168,7 +213,9 @@ def _get_latest_scores(session: Session, *, user_id: str, day: date) -> Dict[str
             "normalized_score": float(r.normalized_score),
             "confidence_tier": str(r.confidence_tier),
             "personal_z": float(r.personal_z) if r.personal_z is not None else None,
-            "delta_vs_prev": float(r.delta_vs_prev) if r.delta_vs_prev is not None else None,
+            "delta_vs_prev": float(r.delta_vs_prev)
+            if r.delta_vs_prev is not None
+            else None,
         }
     return latest
 
@@ -179,12 +226,21 @@ def _get_previous_projection_vector(
     user_id: str,
     before_timestamp: str,
 ) -> Optional[List[float]]:
-    row = session.execute(
-        select(QuestionsProjection)
-        .where(and_(QuestionsProjection.user_id == user_id, QuestionsProjection.timestamp < before_timestamp))
-        .order_by(desc(QuestionsProjection.timestamp))
-        .limit(1)
-    ).scalars().first()
+    row = (
+        session.execute(
+            select(QuestionsProjection)
+            .where(
+                and_(
+                    QuestionsProjection.user_id == user_id,
+                    QuestionsProjection.timestamp < before_timestamp,
+                )
+            )
+            .order_by(desc(QuestionsProjection.timestamp))
+            .limit(1)
+        )
+        .scalars()
+        .first()
+    )
     if row is None:
         return None
     try:

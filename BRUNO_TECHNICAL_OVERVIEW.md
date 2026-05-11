@@ -330,7 +330,7 @@ The loop closes: omics detect biochemical change -> Questions Agent validates su
 - **721 tests** all passing
 - **9** health dimensions
 - **9** validated instruments (6 cardio + 3 vitality)
-- **5** patent claim families
+- **5** patent-intake candidate families requiring source-linked review
 - **23** database tables
 - **40+** API endpoints
 - **6** coherence detection signals
