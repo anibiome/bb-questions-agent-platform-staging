@@ -53,9 +53,19 @@ REQUIRED_TOKENS = {
     ],
     ".github/workflows/code-room-readiness.yml": [
         "tests.test_manifest_controls",
+        "workflow_dispatch",
+        "permissions:",
+        "contents: read",
+        "actions/checkout@v6",
+        "actions/setup-python@v6",
     ],
     ".github/workflows/regulated-review.yml": [
         "tests.test_manifest_controls",
+        "workflow_dispatch",
+        "permissions:",
+        "contents: read",
+        "actions/checkout@v6",
+        "actions/setup-python@v6",
     ],
     "contracts.py": [
         "QUESTION_EVIDENCE_CLASS",
@@ -97,9 +107,54 @@ FORBIDDEN_PHRASES = {
         "Production deployment",
         "Local production run",
         "5 patent claim families",
+        "questions_agent_platform/SCHEMA_CONTRACTS_V1.md",
+        "questions_agent_platform/DEV_EXECUTION_ORDER_INTEGRATION.md",
+        "questions_agent_platform/DEV_HANDOFF_QUICKSTART.md",
+        "questions_agent_platform/ARCHITECTURE_MAP_V2.md",
     ],
     "BRUNO_TECHNICAL_OVERVIEW.md": [
         "5 patent claim families",
+        "721 tests",
+        "16,454 lines",
+        "5,642 lines",
+    ],
+    "ARCHITECTURE_MAP_V2.md": [
+        "production-ready baseline",
+    ],
+    "PRODUCTION_READINESS_CHECKLIST_V2.md": [
+        "production-ready v2 baseline",
+    ],
+    "CHANGE_CONTROL_PLAN.md": [
+        "production-ready runtime surfaces",
+    ],
+    "DEV_HANDOFF_QUICKSTART.md": [
+        "53 API endpoints",
+        "production FastAPI/Postgres stack",
+        "781 tests",
+        "deployable reference implementation",
+        "You are production-ready for this scope",
+    ],
+    "DEV_IMPLEMENTATION_GUIDE.md": [
+        "Production deployment (FastAPI",
+        "all production endpoints",
+        "721 tests",
+        "for production)",
+    ],
+    "CURRENT_STATE_AND_DEEPTECH_ROADMAP_2026-02-07.md": [
+        "questions_agent_platform/SCHEMA_CONTRACTS_V1.md",
+    ],
+    "AGENTS.md": [
+        "questions_agent_platform/SCHEMA_CONTRACTS_V1.md",
+        "questions_agent_platform/DEV_EXECUTION_ORDER_INTEGRATION.md",
+        "/Users/brunobalen/Documents/ANI_DEEP_LATENT_RECONSTRUCTION_PROTOCOL.md",
+        "/Users/brunobalen/Documents/ANI_DATA_TRUTH_PROTOCOL.md",
+    ],
+    "tools/generate_collateral.py": [
+        "deliver a production-ready Questions Agent",
+        "Production deployment stack",
+        "We shipped a production service",
+        "This is deployable as a standalone service",
+        "This v1 is deployable",
     ],
 }
 

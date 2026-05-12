@@ -76,7 +76,7 @@ Current contract surfaces:
 
 ## 6) Practical implementation status
 
-- This repo is a **production-ready baseline** for the Questions Agent side.
+- This repo is an **implementation baseline** for the Questions Agent side.
 - Remaining product integration work is mostly:
   - loading your full registry content,
   - wiring real AniFold endpoints,

@@ -1,6 +1,7 @@
 name: Code Room Readiness
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -8,11 +9,14 @@ on:
       - master
       - "codex/**"
 
+permissions:
+  contents: read
+
 jobs:
   front-door:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Verify code-room front door
         run: |
           test -f CODE_ROOM_README.md
@@ -21,7 +25,7 @@ jobs:
           grep -q "## Role In ANI.AI" CODE_ROOM_README.md
           grep -q "## Current Audit Posture" CODE_ROOM_README.md
           grep -q "## Claim Boundary" CODE_ROOM_README.md
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
       - name: Verify manifest claim controls

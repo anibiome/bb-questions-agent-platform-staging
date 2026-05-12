@@ -8,8 +8,7 @@ from questions_agent_platform.tools.build_questionnaire_replay_csv import (
     build_questionnaire_replay_csv,
     match_source_question,
 )
-from questions_agent_platform.tools.replay_daily_scan_answers import _stage_registry_bundle
-from questions_agent_platform.pipeline.registry import Registry, Item, Questionnaire, Scale, ScaleItem, save_registry, validate_registry_bundle
+from questions_agent_platform.pipeline.registry import Registry, save_registry, validate_registry_bundle
 
 
 def _build_registry() -> Registry:

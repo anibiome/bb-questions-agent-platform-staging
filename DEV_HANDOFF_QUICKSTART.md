@@ -15,12 +15,12 @@ This repository is not a starter skeleton; it is a working backend baseline with
 - **drift-triggered anamnesis episodes** (Claim Family 4) — automatic clinical probing when EWS detects drift,
 - **session engagement profiling** — focused/normal/distracted/fatigued classification feeds back into selection,
 - **N-of-1 calibration**, **coherence detection**, **cardiometabolic risk index**,
-- **53 API endpoints** across user, admin, and operational domains,
+- API endpoints across user, admin, and operational domains; run the current contract gate before quoting endpoint counts,
 - **SiteConfig regulatory separation** — consumer/cds_default/trial_trial/samd_full with feature gates,
-- production FastAPI/Postgres stack with 7 Alembic migrations and ops tools,
-- **781 tests**, 0 failures.
+- staged FastAPI/Postgres reference stack with Alembic migrations and ops tools,
+- current test count must come from the latest `./tools/quality_gate.sh` run.
 
-You can treat it as a deployable reference implementation and integration contract.
+You can treat it as an integration reference implementation and contract surface.
 
 ## 2) What your team still needs to plug in
 
@@ -91,7 +91,7 @@ python3 -m questions_agent_platform.tools.run_anifold_roundtrip_smoke \
 
 ## 6) “Done” definition for your dev team
 
-You are production-ready for this scope when all are true:
+You are promotion-ready for this scope when all are true:
 - migrations are controlled by Alembic in your deployment path,
 - roundtrip contracts pass against real AniFold,
 - load + SLO + rollback + retention drills pass in staging,

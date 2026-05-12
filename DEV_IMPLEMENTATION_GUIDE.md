@@ -2,7 +2,7 @@
 
 **For:** New developer joining the project
 **Date:** 2026-02-27
-**Test suite:** 721 tests, all passing
+**Test suite:** run `./tools/quality_gate.sh` before quoting current counts
 
 ---
 
@@ -57,8 +57,8 @@ questions_agent_platform/
     adapter.py            # Policy adapter
     logging.py            # Policy audit logging
     cli.py                # Policy CLI tools
-  prod/                   # Production deployment (FastAPI + PostgreSQL + Alembic)
-    app.py                # FastAPI application — all production endpoints
+  prod/                   # Governed service path (FastAPI + PostgreSQL + Alembic)
+    app.py                # FastAPI application — promoted endpoints require release review
     service_pg.py         # PostgreSQL service layer (mirrors pipeline/service.py)
     models.py             # SQLAlchemy ORM models (26 tables)
     schemas.py            # Pydantic request/response schemas
@@ -71,7 +71,7 @@ questions_agent_platform/
     Dockerfile            # Container image
     docker-compose.yml    # Local dev stack (Postgres + API)
     alembic/              # Database migrations
-  tests/                  # 721 tests
+  tests/                  # Test suite; run the current gate before quoting counts
   tools/                  # Operational scripts (backup, audit, load test, policy tools)
   data/                   # Registry bundles (items, scales, questionnaires)
   contracts.py            # Integration contracts with AniFold
@@ -87,8 +87,8 @@ All core pipeline modules use frozen dataclasses, no side effects, no global sta
 
 ### Rule 3: Two Service Layers
 - `pipeline/service.py` + `pipeline/db.py` — SQLite (for testing, demos, local dev)
-- `prod/service_pg.py` + `prod/models.py` — PostgreSQL (for production)
-They implement the same logic. The SQLite layer is the reference implementation with 721 tests. The Postgres layer mirrors it for production.
+- `prod/service_pg.py` + `prod/models.py` — PostgreSQL path for promoted deployments
+They implement the same logic. The SQLite layer is the reference implementation; the Postgres layer mirrors it for promoted deployments.
 
 ### Rule 4: SiteConfig Enforces Regulatory Boundaries
 Config A (consumer) must NEVER show clinical thresholds. Config B (CDS) shows transparent scoring. Config C (SaMD) enables AniFold. The `anifold_enabled` flag is a hard regulatory gate. Do not bypass this.

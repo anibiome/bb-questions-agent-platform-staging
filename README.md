@@ -244,14 +244,14 @@ guidance, treatment efficacy evidence, public science proof, investor proof, or
 patent-ready proof.
 
 Contract spec:
-- `questions_agent_platform/SCHEMA_CONTRACTS_V1.md`
+- `SCHEMA_CONTRACTS_V1.md`
 - Includes canonical versioning, compatibility aliases, strict validation rules, and join-key chain.
 - Integration execution order:
-  - `questions_agent_platform/DEV_EXECUTION_ORDER_INTEGRATION.md`
+  - `DEV_EXECUTION_ORDER_INTEGRATION.md`
 - Dev handoff quickstart:
-  - `questions_agent_platform/DEV_HANDOFF_QUICKSTART.md`
+  - `DEV_HANDOFF_QUICKSTART.md`
 - Architecture map:
-  - `questions_agent_platform/ARCHITECTURE_MAP_V2.md`
+  - `ARCHITECTURE_MAP_V2.md`
 
 Admin:
 - List versions: `GET /v1/admin/registry/versions`

@@ -5,10 +5,10 @@ These rules apply to any agent working in this repo.
 ## Read First
 
 - `README.md`
-- `questions_agent_platform/SCHEMA_CONTRACTS_V1.md`
-- `questions_agent_platform/DEV_EXECUTION_ORDER_INTEGRATION.md`
-- `/Users/brunobalen/Documents/ANI_DEEP_LATENT_RECONSTRUCTION_PROTOCOL.md`
-- `/Users/brunobalen/Documents/ANI_DATA_TRUTH_PROTOCOL.md`
+- `SCHEMA_CONTRACTS_V1.md`
+- `DEV_EXECUTION_ORDER_INTEGRATION.md`
+- System-level ANI standards in `bb-ani-vault/anifesto/production_ops/` before
+  broad ANI, evidence, product, or collaborator-facing claims.
 
 ## Core Rules
 

@@ -69,6 +69,63 @@ class ManifestControlsTest(unittest.TestCase):
 
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn("tests.test_manifest_controls", workflow_text)
+        self.assertIn("workflow_dispatch", workflow_text)
+        self.assertIn("permissions:", workflow_text)
+        self.assertIn("contents: read", workflow_text)
+        self.assertIn("actions/checkout@v6", workflow_text)
+        self.assertIn("actions/setup-python@v6", workflow_text)
+
+    def test_stale_readiness_language_is_not_active(self) -> None:
+        active_docs = {
+            "ARCHITECTURE_MAP_V2.md": ["production-ready baseline"],
+            "PRODUCTION_READINESS_CHECKLIST_V2.md": ["production-ready v2 baseline"],
+            "CHANGE_CONTROL_PLAN.md": ["production-ready runtime surfaces"],
+            "DEV_HANDOFF_QUICKSTART.md": [
+                "53 API endpoints",
+                "production FastAPI/Postgres stack",
+                "781 tests",
+                "deployable reference implementation",
+                "You are production-ready for this scope",
+            ],
+            "DEV_IMPLEMENTATION_GUIDE.md": [
+                "Production deployment (FastAPI",
+                "all production endpoints",
+                "721 tests",
+                "for production)",
+            ],
+            "BRUNO_TECHNICAL_OVERVIEW.md": [
+                "721 tests",
+                "16,454 lines",
+                "5,642 lines",
+            ],
+            "README.md": [
+                "questions_agent_platform/SCHEMA_CONTRACTS_V1.md",
+                "questions_agent_platform/DEV_EXECUTION_ORDER_INTEGRATION.md",
+                "questions_agent_platform/DEV_HANDOFF_QUICKSTART.md",
+                "questions_agent_platform/ARCHITECTURE_MAP_V2.md",
+            ],
+            "CURRENT_STATE_AND_DEEPTECH_ROADMAP_2026-02-07.md": [
+                "questions_agent_platform/SCHEMA_CONTRACTS_V1.md",
+            ],
+            "AGENTS.md": [
+                "questions_agent_platform/SCHEMA_CONTRACTS_V1.md",
+                "questions_agent_platform/DEV_EXECUTION_ORDER_INTEGRATION.md",
+                "/Users/brunobalen/Documents/ANI_DEEP_LATENT_RECONSTRUCTION_PROTOCOL.md",
+                "/Users/brunobalen/Documents/ANI_DATA_TRUTH_PROTOCOL.md",
+            ],
+            "tools/generate_collateral.py": [
+                "deliver a production-ready Questions Agent",
+                "Production deployment stack",
+                "We shipped a production service",
+                "This is deployable as a standalone service",
+                "This v1 is deployable",
+            ],
+        }
+
+        for rel_path, phrases in active_docs.items():
+            text = read(rel_path)
+            for phrase in phrases:
+                self.assertNotIn(phrase, text, rel_path)
 
 
 if __name__ == "__main__":
