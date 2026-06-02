@@ -1,6 +1,6 @@
 # Change Control Plan
 
-This repository contains the ANI questions agent reference and production-ready runtime surfaces, including policy logic, state tracking, and API behavior.
+This repository contains the ANI questions agent reference and governed runtime surfaces, including policy logic, state tracking, and API behavior.
 
 ## Scope
 

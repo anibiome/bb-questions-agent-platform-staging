@@ -565,7 +565,7 @@ def build_spec_sections() -> List[Tuple[str, List[str]]]:
         (
             "1. Purpose and vision alignment",
             [
-                "Goal: deliver a production-ready Questions Agent that uses validated questionnaire items to produce daily adaptive questions, unlock and retest validated scales, and emit geometry-ready evidence that can be fused in Anifold/Unifold latent space.",
+                "Goal: deliver a governed Questions Agent that uses validated questionnaire items to produce daily adaptive questions, unlock and retest validated scales, and emit geometry-ready evidence that can be fused in Anifold/Unifold latent space after promotion review.",
                 "- 5 questions per day, always.",
                 "- Optional: user can request more context up to 3 times/day (each batch adds 5 questions).",
                 "- Scales are not treated as population thresholds; we track within-person baselines and change patterns.",
@@ -640,14 +640,14 @@ def build_spec_sections() -> List[Tuple[str, List[str]]]:
             ],
         ),
         (
-            "7. Production deployment stack (2026 baseline)",
+            "7. Governed deployment stack (2026 baseline)",
             [
-                "We shipped a production service in questions_agent_platform/prod:",
+                "The repository includes a governed service path in questions_agent_platform/prod:",
                 "- FastAPI + Pydantic validation",
                 "- Postgres schema (SQLAlchemy ORM + SQL init script)",
                 "- Dockerfile + docker-compose",
                 "- API key auth (X-API-Key header)",
-                "This is deployable as a standalone service behind your main app backend or gateway.",
+                "This can be deployed behind your main app backend or gateway after environment, security, and promotion gates pass.",
             ],
         ),
         (
@@ -669,7 +669,7 @@ def build_spec_sections() -> List[Tuple[str, List[str]]]:
         (
             "9. What is still needed to match the full long-term vision",
             [
-                "This v1 is deployable and aligned with your docs. Remaining (optional) work to reach the full long-term vision:",
+                "This v1 is aligned with the current integration contract. Remaining work to reach the full long-term vision:",
                 "- Plug in your real questionnaire bank content (licensed text) via the registry upload process.",
                 "- Replace API-key auth with your production auth (JWT, gateway headers, RBAC).",
                 "- Add ML-based selection (bandits/RL) and multimodal triggers using ObservationEvents.",

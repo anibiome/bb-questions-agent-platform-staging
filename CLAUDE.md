@@ -11,9 +11,9 @@ not force ontology-heavy or scan-heavy public explanations by default.
 
 ## What This Repo Does
 
-IRT-driven adaptive questionnaire engine that encodes behavioral, psychological, and lifestyle signals into structured latent features. 941 items across 65 validated clinical instruments, selected adaptively using Item Response Theory.
+IRT-oriented adaptive questionnaire engine that turns authorized behavioral responses into derived evidence packets. Instrument, scoring, and scale claims remain registry-, license-, provenance-, calibration-, and release-review bound.
 
-**47,760 lines Python. 781 tests. 52+ FastAPI endpoints. 5 patent claim families.**
+**Internal runtime surface: Python reference engine, FastAPI-compatible service layer, tests, and patent-intake ideas remain gated by current source, permissions, validation, and release review.**
 
 **Input**: User responses to adaptively selected questions
 **Output**: Behavioral latent features → feed into shared state, memory, and response tracking
@@ -25,7 +25,7 @@ User answers adaptive questions (IRT-driven selection)
        ↓
   [questions-agent-platform]  ← YOU ARE HERE
        ↓
-  65 clinical instruments → behavioral latent encoding
+  registry-backed instruments → behavioral latent encoding
        ↓
   Identity Mask: h_t (memory/trajectory slot)
        ↓
@@ -41,11 +41,11 @@ User answers adaptive questions (IRT-driven selection)
 | `ani-vault` | Source of truth: coherence definition, Identity Mask spec |
 | `ani-scan` | Questions may compose with the scan flow, but are not a mandatory final step in every runtime |
 | `ani-medical-platform` | Shared statistical infrastructure (IRT, Bayesian) |
-| `ani-proteomics` / `ani-metabolomics` | Behavioral signals correlate with molecular state — cross-modal coherence |
+| `ani-proteomics` / `ani-metabolomics` | Behavioral signals can be calibrated against molecular-state observers after paired validation |
 
 ## For AI Agents
 
 - IRT adaptive selection minimizes question burden while maximizing information
-- 65 instruments cover: sleep, stress, diet, exercise, mood, cognition, pain, social, environmental
+- Registry-backed instruments cover: sleep, stress, diet, exercise, mood, cognition, pain, social, environmental
 - Latent features are non-reconstructive (can't recover individual answers)
-- Patent claims cover: adaptive selection, coherence scoring, cross-modal fusion, trajectory analysis, early warning
+- Patent-intake candidates require source-linked review; do not treat repo text as patent-ready proof

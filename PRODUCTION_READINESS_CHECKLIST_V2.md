@@ -5,7 +5,7 @@ Scope: `questions_agent_platform`
 Source of truth: your “QUESTIONS AGENT The Complete Specification v2.0”
 
 ## Goal
-Bridge the current implementation to a production-ready v2 baseline with strict clinical/engineering constraints:
+Bridge the current implementation to a release-reviewable v2 baseline with strict clinical/engineering constraints:
 - 5 questions/day (except safety override)
 - one timeframe per session
 - item-level multiplexing with auditable evidence rows

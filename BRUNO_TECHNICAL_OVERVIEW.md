@@ -2,7 +2,7 @@
 
 **For:** Bruno Balen (Founder)
 **Date:** 2026-02-27
-**State:** 721 tests passing, 16,454 lines pipeline + 5,642 lines production
+**State:** historical February implementation snapshot; run the current quality gate before quoting test counts or line counts
 
 ---
 
@@ -325,12 +325,10 @@ The loop closes: omics detect biochemical change -> Questions Agent validates su
 
 ## Numbers
 
-- **16,454 lines** pipeline code
-- **5,642 lines** production code
-- **721 tests** all passing
+- Historical line and test counts require refresh from the current branch before use
 - **9** health dimensions
 - **9** validated instruments (6 cardio + 3 vitality)
-- **5** patent claim families
+- **5** patent-intake candidate families requiring source-linked review
 - **23** database tables
 - **40+** API endpoints
 - **6** coherence detection signals

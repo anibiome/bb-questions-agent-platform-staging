@@ -1,10 +1,18 @@
 name: CI
 
 on:
+  workflow_dispatch:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - "codex/**"
   push:
-    branches: [main]
+    branches:
+      - main
+      - "codex/**"
+
+permissions:
+  contents: read
 
 jobs:
   quality-gates:
@@ -34,6 +42,9 @@ jobs:
               ./tools/ci_contract.sh type-check
               ./tools/ci_contract.sh unit
               ./tools/ci_contract.sh integration-smoke
-              ./tools/ci_contract.sh generated-guard
-              ./tools/ci_contract.sh clean-tree
             '
+
+      - name: Run git-backed repository guards
+        run: |
+          ./tools/ci_contract.sh generated-guard
+          ./tools/ci_contract.sh clean-tree

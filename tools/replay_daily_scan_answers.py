@@ -16,7 +16,7 @@ from questions_agent_platform.pipeline.config import QuestionsAgentConfig
 from questions_agent_platform.pipeline.db import connect, init_db, set_registry_version_active, upsert_registry_version
 from questions_agent_platform.pipeline.projection import build_questions_projection_payload
 from questions_agent_platform.pipeline.registry import load_registry
-from questions_agent_platform.pipeline.service_monolith import get_or_create_daily_session, submit_answers
+from questions_agent_platform.pipeline.service import get_or_create_daily_session, submit_answers
 
 _REGISTRY_FILES: Tuple[str, ...] = ("items.json", "questionnaires.json", "scales.json")
 _DATE_COLUMNS: Tuple[str, ...] = ("scan_date_local", "scan_date_utc")

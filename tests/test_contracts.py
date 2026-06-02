@@ -5,14 +5,24 @@ from pathlib import Path
 
 from questions_agent_platform.contracts import (
     CANONICAL_CONTRACT_VERSION,
+    QUESTION_EVIDENCE_CLASS,
     canonical_contract_version,
+    validate_projection_payload_contract,
 )
 from questions_agent_platform.pipeline.config import QuestionsAgentConfig
 from questions_agent_platform.pipeline.db import connect, init_db
 from questions_agent_platform.pipeline.demo import seed_demo_registry
-from questions_agent_platform.pipeline.projection import VECTOR_DIM, build_questions_projection_payload
+from questions_agent_platform.pipeline.projection import (
+    VECTOR_DIM,
+    build_questions_projection_payload,
+)
 from questions_agent_platform.pipeline.service import get_or_create_daily_session
-from questions_agent_platform.prod.schemas import AnswerIn, DailyQuestionsSelectIn, PolicyContextIn, PolicyOutcomeUpdateIn
+from questions_agent_platform.prod.schemas import (
+    AnswerIn,
+    DailyQuestionsSelectIn,
+    PolicyContextIn,
+    PolicyOutcomeUpdateIn,
+)
 
 
 class TestContracts(unittest.TestCase):
@@ -25,10 +35,17 @@ class TestContracts(unittest.TestCase):
             canonical_contract_version("2.0")
 
     def test_policy_context_legacy_and_alias_versions(self) -> None:
-        legacy = PolicyContextIn(anifold_z=[0.1, 0.2], z_uncertainty_diag=[0.3, 0.4], z_velocity=[0.0, 0.1])
+        legacy = PolicyContextIn(
+            anifold_z=[0.1, 0.2], z_uncertainty_diag=[0.3, 0.4], z_velocity=[0.0, 0.1]
+        )
         self.assertEqual(legacy.schema_version, CANONICAL_CONTRACT_VERSION)
 
-        alias = PolicyContextIn(schema_version="1", anifold_z=[0.1], z_uncertainty_diag=[0.2], z_velocity=[0.3])
+        alias = PolicyContextIn(
+            schema_version="1",
+            anifold_z=[0.1],
+            z_uncertainty_diag=[0.2],
+            z_velocity=[0.3],
+        )
         self.assertEqual(alias.schema_version, CANONICAL_CONTRACT_VERSION)
 
         with self.assertRaises(Exception):
@@ -80,7 +97,9 @@ class TestContracts(unittest.TestCase):
         with tempfile.TemporaryDirectory() as td:
             db_path = str(Path(td) / "qa.sqlite")
             registry_root = str(Path(td) / "registry")
-            cfg = QuestionsAgentConfig(database_path=db_path, registry_root=registry_root)
+            cfg = QuestionsAgentConfig(
+                database_path=db_path, registry_root=registry_root
+            )
 
             init_db(db_path)
             seed_demo_registry(registry_root)
@@ -102,14 +121,40 @@ class TestContracts(unittest.TestCase):
 
             contract = payload.get("contract") or {}
             join_keys = contract.get("join_keys") or {}
-            self.assertEqual(str(contract.get("schema_version")), CANONICAL_CONTRACT_VERSION)
+            self.assertEqual(
+                str(contract.get("schema_version")), CANONICAL_CONTRACT_VERSION
+            )
             self.assertEqual(str(join_keys.get("subject_id")), "u_contract")
             self.assertEqual(str(join_keys.get("session_id")), session.session_id)
+            self.assertEqual(payload["evidence_class"], QUESTION_EVIDENCE_CLASS)
+            self.assertIn(
+                "behavioral_question_runtime", payload["claim_boundary"]["allowed_use"]
+            )
+            self.assertFalse(
+                payload["claim_boundary"]["blocked_claims"]["raw_biological_truth"]
+            )
+            self.assertFalse(
+                payload["claim_boundary"]["blocked_claims"]["clinical_diagnosis"]
+            )
+            self.assertFalse(
+                payload["claim_boundary"]["blocked_claims"]["treatment_recommendation"]
+            )
+            self.assertIn(
+                "explicit_promotion_approval",
+                payload["claim_boundary"]["promotion_required_gates"],
+            )
             q = payload["modality_projections"]["questionnaires"]
             self.assertEqual(len(q["projection"]), VECTOR_DIM)
             self.assertEqual(len(q["uncertainty"]["diag"]), VECTOR_DIM)
             self.assertEqual(len(q["velocity"]), VECTOR_DIM)
             self.assertEqual(len(q["attractor_candidate"]), VECTOR_DIM)
+
+            missing_boundary = dict(payload)
+            missing_boundary.pop("claim_boundary")
+            with self.assertRaises(ValueError):
+                validate_projection_payload_contract(
+                    missing_boundary, vector_dim=VECTOR_DIM
+                )
 
 
 if __name__ == "__main__":

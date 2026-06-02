@@ -47,7 +47,7 @@ What is still missing is the full external fusion/anifold runtime and full ident
 
 ### D) Contract hardening for fusion/anifold
 - Contract helpers: `questions_agent_platform/contracts.py`
-- Exact schema doc: `questions_agent_platform/SCHEMA_CONTRACTS_V1.md`
+- Exact schema doc: `SCHEMA_CONTRACTS_V1.md`
 - Projection payload integration:
   - reference path: `questions_agent_platform/pipeline/projection.py`
   - prod path: `questions_agent_platform/prod/projection_pg.py`

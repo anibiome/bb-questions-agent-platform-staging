@@ -8,7 +8,7 @@ import json
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence, Tuple
+from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Sequence, Tuple
 
 from questions_agent_platform.pipeline.registry import Registry, validate_registry_bundle
 from questions_agent_platform.pipeline.scoring import compute_scale_score
