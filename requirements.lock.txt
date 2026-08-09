@@ -1,7 +1,7 @@
 # Reproducible lock for CI and local verification.
 # Runtime
 fastapi==0.111.0
-uvicorn[standard]==0.41.0
+uvicorn[standard]==0.46.0
 SQLAlchemy==2.0.30
 psycopg2-binary==2.9.9
 pydantic==2.7.1
