@@ -6,7 +6,7 @@ SQLAlchemy==2.0.30
 psycopg2-binary==2.9.9
 pydantic==2.7.1
 alembic==1.18.4
-numpy==2.0.2
+numpy==2.4.4
 
 # Test/quality
 pytest==8.4.2
